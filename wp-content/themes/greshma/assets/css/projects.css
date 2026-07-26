@@ -1,0 +1,3303 @@
+/* ==========================================================
+   PROJECTS PAGE
+========================================================== */
+
+.projects-page {
+    background: #fffdf9;
+}
+
+
+/* ==========================================================
+   PROJECTS HERO
+========================================================== */
+
+.projects-hero {
+    position: relative;
+
+    margin-top: 50px;
+
+    padding: 72px 0 58px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fffdf9 0%,
+            #fffdf9 55%,
+            #fbf8f0 100%
+        );
+}
+
+
+/* ==========================================================
+   MAIN LAYOUT
+========================================================== */
+
+.projects-hero__layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, .78fr)
+        minmax(680px, 1.55fr);
+
+    gap: 65px;
+
+    align-items: center;
+}
+
+
+/* ==========================================================
+   LEFT CONTENT
+========================================================== */
+
+.projects-hero__content {
+    max-width: 380px;
+}
+
+
+.projects-hero__eyebrow {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+
+    color: var(--primary);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .11em;
+
+    text-transform: uppercase;
+}
+
+
+.projects-hero__leaf {
+    color: #718b7b;
+
+    font-size: 15px;
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.projects-hero__title {
+    margin: 0;
+
+    color: #17211d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 48px;
+
+    font-weight: 400;
+
+    line-height: 1.05;
+
+    letter-spacing: -.035em;
+}
+
+
+.projects-hero__title em {
+    display: block;
+
+    color: var(--primary);
+
+    font-weight: 400;
+
+    font-style: italic;
+}
+
+
+/* ==========================================================
+   DIVIDER
+========================================================== */
+
+.projects-hero__divider {
+    width: 62px;
+    height: 1px;
+
+    margin: 21px 0 18px;
+
+    background: var(--secondary);
+}
+
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.projects-hero__text {
+    max-width: 355px;
+
+    margin: 0;
+
+    color: #53615b;
+
+    font-size: 12px;
+
+    line-height: 1.75;
+}
+
+
+/* ==========================================================
+   RIGHT VISUAL
+========================================================== */
+
+.projects-hero__visual {
+    position: relative;
+
+    min-height: 385px;
+}
+
+
+/* ==========================================================
+   SHARED IMAGE STYLE
+========================================================== */
+
+.projects-hero__photo {
+    position: absolute;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #7d927e;
+
+    border-radius: 9px;
+
+    box-shadow:
+        0 14px 32px rgba(12, 59, 46, .08);
+}
+
+
+.projects-hero__photo span {
+    max-width: 85%;
+
+    padding: 6px 9px;
+
+    color: #ffffff;
+
+    background: rgba(12,59,46,.64);
+
+    border-radius: 999px;
+
+    font-size: 8px;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   IMAGE 01 — LARGE TOP LEFT
+========================================================== */
+
+.projects-hero__photo--1 {
+    top: 0;
+    left: 0;
+
+    width: 355px;
+    height: 175px;
+
+    background: #718b77;
+}
+
+
+/* ==========================================================
+   IMAGE 02 — TOP RIGHT
+========================================================== */
+
+.projects-hero__photo--2 {
+    top: 0;
+    right: 0;
+
+    width: 335px;
+    height: 175px;
+
+    background: #647d68;
+}
+
+
+/* ==========================================================
+   IMAGE 03 — LOWER LEFT
+========================================================== */
+
+.projects-hero__photo--3 {
+    left: 0;
+    bottom: 0;
+
+    width: 355px;
+    height: 170px;
+
+    background: #8b9c86;
+}
+
+
+/* ==========================================================
+   QUOTE CARD — LOWER RIGHT
+========================================================== */
+
+.projects-hero__quote {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 335px;
+    min-height: 170px;
+
+    display: grid;
+
+    grid-template-columns:
+        32px
+        1fr;
+
+    gap: 12px;
+
+    margin: 0;
+
+    padding: 26px 27px;
+
+    overflow: hidden;
+
+    background: #fbf8f1;
+
+    border:
+        1px solid rgba(12,59,46,.08);
+
+    border-radius: 9px;
+}
+
+
+.projects-hero__quote-mark {
+    color: #b1832d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 42px;
+
+    font-weight: 700;
+
+    line-height: .8;
+}
+
+
+.projects-hero__quote p {
+    margin: 0;
+
+    color: #34483f;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 16px;
+
+    font-style: italic;
+
+    line-height: 1.5;
+}
+
+
+.projects-hero__quote cite {
+    display: block;
+
+    margin-top: 12px;
+
+    color: #59665f;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 10px;
+
+    font-style: italic;
+}
+
+
+.projects-hero__quote-leaf {
+    position: absolute;
+
+    right: 10px;
+    bottom: -6px;
+
+    color: rgba(73,106,83,.20);
+
+    font-size: 83px;
+
+    transform: rotate(-28deg);
+}
+
+
+/* ==========================================================
+   LEFT BOTANICAL DECORATION
+========================================================== */
+
+.projects-hero__botanical {
+    position: absolute;
+
+    left: -30px;
+    top: 90px;
+
+    color: rgba(67,101,77,.14);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 150px;
+
+    line-height: 1;
+
+    transform: rotate(25deg);
+
+    pointer-events: none;
+}
+
+/* ==========================================================
+   PROJECTS — MY INITIATIVE
+========================================================== */
+
+.projects-initiative {
+    position: relative;
+
+    padding: 0 0 28px;
+
+    background: #fffdf9;
+}
+
+
+/* ==========================================================
+   OUTER PANEL
+========================================================== */
+
+.projects-initiative__panel {
+    position: relative;
+
+    padding:
+        35px
+        18px
+        20px;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12,59,46,.10);
+
+    border-radius: 8px;
+}
+
+
+/* ==========================================================
+   SECTION LABEL
+========================================================== */
+
+.projects-section-label {
+    position: absolute;
+
+    top: -14px;
+    left: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 28px;
+
+    padding:
+        6px
+        16px;
+
+    color: #ffffff;
+
+    background: #10483a;
+
+    border-radius:
+        4px
+        4px
+        4px
+        0;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: .05em;
+
+    text-transform: uppercase;
+}
+
+
+/* ==========================================================
+   TOP GRID
+========================================================== */
+
+.projects-initiative__top {
+    display: grid;
+
+    grid-template-columns:
+        minmax(230px, .78fr)
+        minmax(240px, .78fr)
+        minmax(390px, 1.35fr);
+
+    gap: 30px;
+
+    align-items: start;
+}
+
+
+/* ==========================================================
+   INTRO / BRAND
+========================================================== */
+
+.projects-initiative__brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 14px;
+}
+
+
+.projects-initiative__logo-placeholder {
+    width: 58px;
+    height: 58px;
+
+    flex: 0 0 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #386957;
+
+    background: #f3f1e9;
+
+    border:
+        1px solid rgba(12,59,46,.08);
+
+    border-radius: 6px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.projects-initiative__brand h2 {
+    margin: 0;
+
+    color: #194638;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 28px;
+
+    font-weight: 400;
+
+    line-height: 1.08;
+}
+
+
+.projects-initiative__founder {
+    margin: 0 0 15px;
+
+    color: #6a746f;
+
+    font-size: 9px;
+
+    line-height: 1.4;
+}
+
+
+.projects-initiative__founder strong {
+    color: #34473f;
+}
+
+
+.projects-initiative__description {
+    margin: 0;
+
+    color: #56635d;
+
+    font-size: 10px;
+
+    line-height: 1.75;
+}
+
+
+.projects-initiative__button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 18px;
+
+    padding:
+        9px
+        13px;
+
+    color: #ffffff;
+
+    background: #10483a;
+
+    border-radius: 5px;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   SUBHEADINGS
+========================================================== */
+
+.projects-initiative__subheading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 15px;
+}
+
+
+.projects-initiative__subheading h3,
+.projects-initiative__programs > h3 {
+    margin: 0;
+
+    color: #21463a;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 17px;
+
+    font-weight: 400;
+}
+
+
+.projects-initiative__subheading span {
+    color: #7b927f;
+
+    font-size: 13px;
+}
+
+
+/* ==========================================================
+   STORY TIMELINE
+========================================================== */
+
+.projects-initiative__story-timeline {
+    position: relative;
+
+    padding-left: 27px;
+}
+
+
+.projects-initiative__story-timeline::before {
+    content: "";
+
+    position: absolute;
+
+    top: 6px;
+    bottom: 6px;
+
+    left: 7px;
+
+    width: 1px;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            #bba36d 0,
+            #bba36d 2px,
+            transparent 2px,
+            transparent 6px
+        );
+}
+
+
+.projects-story-item {
+    position: relative;
+
+    padding-bottom: 14px;
+}
+
+
+.projects-story-item:last-child {
+    padding-bottom: 0;
+}
+
+
+.projects-story-item__dot {
+    position: absolute;
+
+    top: 4px;
+    left: -24px;
+
+    width: 7px;
+    height: 7px;
+
+    background: #17483b;
+
+    border: 2px solid #fff;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 1px #b78f3b;
+}
+
+
+.projects-story-item__year {
+    display: inline-block;
+
+    margin-right: 4px;
+
+    color: #b47d28;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.projects-story-item h4 {
+    display: inline;
+
+    margin: 0;
+
+    color: #34483f;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.projects-story-item p {
+    margin: 3px 0 0;
+
+    color: #66716c;
+
+    font-size: 8px;
+
+    line-height: 1.45;
+}
+
+
+/* ==========================================================
+   PROGRAMS
+========================================================== */
+
+.projects-initiative__programs {
+    padding:
+        20px
+        18px;
+
+    background: #f7f4ed;
+
+    border-radius: 10px;
+}
+
+
+.projects-initiative__programs > h3 {
+    margin-bottom: 14px;
+}
+
+
+.projects-programs-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
+}
+
+
+.projects-program-card {
+    display: grid;
+
+    grid-template-columns:
+        34px
+        1fr;
+
+    gap: 9px;
+
+    align-items: start;
+
+    padding:
+        12px
+        10px;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12,59,46,.06);
+
+    border-radius: 6px;
+}
+
+
+.projects-program-card__icon {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #17483b;
+
+    background: #f0f3ec;
+
+    border-radius: 50%;
+
+    font-size: 15px;
+}
+
+
+.projects-program-card h4 {
+    margin: 0 0 3px;
+
+    color: #28483d;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.projects-program-card p {
+    margin: 0;
+
+    color: #6b756f;
+
+    font-size: 7.5px;
+
+    line-height: 1.45;
+}
+
+
+/* ==========================================================
+   SECOND ROW
+========================================================== */
+
+.projects-initiative__middle {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.25fr)
+        minmax(330px, .95fr);
+
+    gap: 18px;
+
+    margin-top: 20px;
+}
+
+
+/* ==========================================================
+   IMPACT SO FAR
+========================================================== */
+
+.projects-initiative__impact {
+    padding:
+        16px
+        18px;
+
+    background: #f7f4ed;
+
+    border-radius: 8px;
+}
+
+
+.projects-initiative__impact-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 5px;
+}
+
+
+.projects-initiative__impact-item {
+    text-align: center;
+}
+
+
+.projects-initiative__impact-icon {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #17483b;
+
+    font-size: 16px;
+}
+
+
+.projects-initiative__impact-item strong {
+    display: block;
+
+    color: #21483b;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 16px;
+
+    font-weight: 400;
+}
+
+
+.projects-initiative__impact-item p {
+    margin: 4px 0 0;
+
+    color: #68736d;
+
+    font-size: 7px;
+
+    line-height: 1.4;
+}
+
+
+/* ==========================================================
+   FEATURED STORY
+========================================================== */
+
+.projects-featured-story {
+    display: grid;
+
+    grid-template-columns:
+        .85fr
+        1.15fr;
+
+    min-height: 150px;
+
+    overflow: hidden;
+
+    background: #164d3e;
+
+    border-radius: 8px;
+}
+
+
+.projects-featured-story__content {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding:
+        20px
+        16px;
+
+    color: #ffffff;
+}
+
+
+.projects-featured-story__content h3 {
+    margin: 0 0 8px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 16px;
+
+    font-weight: 400;
+}
+
+
+.projects-featured-story__content p {
+    margin: 0;
+
+    color: rgba(255,255,255,.83);
+
+    font-size: 8px;
+
+    line-height: 1.5;
+}
+
+
+.projects-featured-story__content a {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    width: fit-content;
+
+    margin-top: 12px;
+
+    padding:
+        6px
+        9px;
+
+    color: #ffffff;
+
+    border:
+        1px solid rgba(255,255,255,.35);
+
+    border-radius: 4px;
+
+    font-size: 7px;
+}
+
+
+.projects-featured-story__image {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #869988;
+
+    color: #ffffff;
+
+    font-size: 8px;
+}
+
+
+/* ==========================================================
+   MOMENTS
+========================================================== */
+
+.projects-initiative__moments {
+    margin-top: 17px;
+}
+
+
+.projects-initiative__moments-heading {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-bottom: 10px;
+}
+
+
+.projects-initiative__moments-heading h3 {
+    margin: 0;
+
+    color: #26483c;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 15px;
+
+    font-weight: 400;
+}
+
+
+.projects-initiative__moments-heading > span:first-child {
+    width: 26px;
+    height: 1px;
+
+    background: #c7a257;
+}
+
+
+.projects-initiative__moments-heading > span:last-child {
+    color: #708978;
+
+    font-size: 12px;
+}
+
+
+.projects-initiative__moments-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 7px;
+}
+
+
+.projects-initiative__moment {
+    min-height: 105px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    background: #829682;
+
+    border-radius: 7px;
+}
+
+
+.projects-initiative__moment:nth-child(2) {
+    background: #718772;
+}
+
+
+.projects-initiative__moment:nth-child(3) {
+    background: #607b6a;
+}
+
+
+.projects-initiative__moment:nth-child(4) {
+    background: #8a9986;
+}
+
+
+.projects-initiative__moment:nth-child(5) {
+    background: #6c826c;
+}
+
+
+.projects-initiative__moment span {
+    max-width: 90%;
+
+    padding: 5px 7px;
+
+    background: rgba(12,59,46,.58);
+
+    border-radius: 999px;
+
+    font-size: 7px;
+
+    text-align: center;
+}
+
+/* ==========================================================
+   PROJECTS — ORGANIZATIONS + COLLABORATIONS ROW
+========================================================== */
+
+.projects-work-grid {
+    position: relative;
+
+    padding: 0 0 26px;
+
+    background: #fffdf9;
+}
+
+
+.projects-work-grid__layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, .88fr)
+        minmax(0, 1.12fr);
+
+    gap: 16px;
+
+    align-items: stretch;
+}
+
+
+/* ==========================================================
+   SHARED SECTION BOX
+========================================================== */
+
+.projects-organizations,
+.projects-collaborations {
+    position: relative;
+
+    padding:
+        34px
+        14px
+        14px;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12,59,46,.10);
+
+    border-radius: 8px;
+}
+
+
+/* ==========================================================
+   GREEN SECTION LABEL
+========================================================== */
+
+.projects-subsection-label {
+    position: absolute;
+
+    top: -13px;
+    left: 0;
+
+    min-height: 27px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding:
+        6px
+        14px;
+
+    color: #ffffff;
+
+    background: #10483a;
+
+    border-radius:
+        4px
+        4px
+        4px
+        0;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .05em;
+
+    text-transform: uppercase;
+}
+
+
+/* ==========================================================
+   ORGANIZATION LIST
+========================================================== */
+
+.projects-organizations__list {
+    display: grid;
+
+    gap: 8px;
+}
+
+
+/* ==========================================================
+   ORGANIZATION CARD
+========================================================== */
+
+.projects-organization-card {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        125px;
+
+    gap: 10px;
+
+    min-height: 135px;
+
+    padding:
+        10px
+        10px
+        10px
+        12px;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12,59,46,.08);
+
+    border-radius: 6px;
+}
+
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.projects-organization-card__content {
+    min-width: 0;
+
+    align-self: center;
+}
+
+
+.projects-organization-card__header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 8px;
+}
+
+
+/* ==========================================================
+   LOGO
+========================================================== */
+
+.projects-organization-card__logo {
+    width: 44px;
+    height: 38px;
+
+    flex: 0 0 44px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #39705d;
+
+    background: #f6f3ec;
+
+    border-radius: 4px;
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+
+/* ==========================================================
+   ORGANIZATION NAME
+========================================================== */
+
+.projects-organization-card__heading h3 {
+    margin: 0 0 2px;
+
+    color: #23483b;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 14px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+
+.projects-organization-card__heading span {
+    display: block;
+
+    color: #557168;
+
+    font-size: 7px;
+
+    font-weight: 600;
+
+    line-height: 1.3;
+}
+
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.projects-organization-card__content > p {
+    margin: 0;
+
+    color: #64706a;
+
+    font-size: 7.5px;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================================
+   LINK
+========================================================== */
+
+.projects-organization-card__content > a {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-top: 7px;
+
+    color: #17483b;
+
+    font-size: 7.5px;
+
+    font-weight: 700;
+}
+
+
+/* ==========================================================
+   IMAGE
+========================================================== */
+
+.projects-organization-card__image {
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    background: #849986;
+
+    border-radius: 6px;
+}
+
+
+.projects-organization-card:nth-child(2)
+.projects-organization-card__image {
+    background: #718675;
+}
+
+
+.projects-organization-card:nth-child(3)
+.projects-organization-card__image {
+    background: #667e70;
+}
+
+
+.projects-organization-card__image span {
+    max-width: 90%;
+
+    padding: 4px 6px;
+
+    background: rgba(12,59,46,.60);
+
+    border-radius: 999px;
+
+    font-size: 6px;
+
+    line-height: 1.2;
+
+    text-align: center;
+}
+
+/* ==========================================================
+   PROJECTS — PROJECTS & COLLABORATIONS
+========================================================== */
+
+.projects-collaborations {
+    position: relative;
+
+    min-width: 0;
+
+    padding:
+        34px
+        12px
+        14px;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12,59,46,.10);
+
+    border-radius: 8px;
+}
+
+
+/* ==========================================================
+   FILTER PILLS
+========================================================== */
+
+.projects-collaborations__filters {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 12px;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+}
+
+
+.projects-collaborations__filters::-webkit-scrollbar {
+    display: none;
+}
+
+
+.projects-filter {
+    flex: 0 0 auto;
+
+    min-height: 24px;
+
+    padding:
+        5px
+        12px;
+
+    color: #4e625a;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12,59,46,.12);
+
+    border-radius: 999px;
+
+    font-family: inherit;
+
+    font-size: 7px;
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+.projects-filter.is-active {
+    color: #ffffff;
+
+    background: #15493b;
+
+    border-color: #15493b;
+}
+
+
+.projects-filter:hover {
+    color: #ffffff;
+
+    background: #15493b;
+
+    border-color: #15493b;
+}
+
+
+/* ==========================================================
+   PROJECT GRID
+========================================================== */
+
+.projects-collaborations__grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 9px;
+}
+
+
+/* ==========================================================
+   PROJECT CARD
+========================================================== */
+
+.projects-collaboration-card {
+    min-width: 0;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12,59,46,.09);
+
+    border-radius: 6px;
+}
+
+
+/* ==========================================================
+   IMAGE
+========================================================== */
+
+.projects-collaboration-card__image {
+    min-height: 92px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    background: #728773;
+}
+
+
+.projects-collaboration-card:nth-child(2)
+.projects-collaboration-card__image {
+    background: #657b68;
+}
+
+
+.projects-collaboration-card:nth-child(3)
+.projects-collaboration-card__image {
+    background: #829582;
+}
+
+
+.projects-collaboration-card:nth-child(4)
+.projects-collaboration-card__image {
+    background: #6d826f;
+}
+
+
+.projects-collaboration-card:nth-child(5)
+.projects-collaboration-card__image {
+    background: #7c8f81;
+}
+
+
+.projects-collaboration-card:nth-child(6)
+.projects-collaboration-card__image {
+    background: #637a69;
+}
+
+
+.projects-collaboration-card__image span {
+    max-width: 90%;
+
+    padding:
+        4px
+        6px;
+
+    background: rgba(12,59,46,.58);
+
+    border-radius: 999px;
+
+    font-size: 6px;
+
+    line-height: 1.2;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   CARD CONTENT
+========================================================== */
+
+.projects-collaboration-card__content {
+    padding:
+        9px
+        9px
+        10px;
+}
+
+
+.projects-collaboration-card__content h3 {
+    min-height: 30px;
+
+    margin: 0 0 6px;
+
+    color: #28483d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 11px;
+
+    font-weight: 400;
+
+    line-height: 1.25;
+}
+
+
+/* ==========================================================
+   META
+========================================================== */
+
+.projects-collaboration-card__meta {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 7px;
+
+    margin-bottom: 10px;
+
+    color: #78827d;
+
+    font-size: 7px;
+
+    line-height: 1.2;
+}
+
+
+/* ==========================================================
+   LINK
+========================================================== */
+
+.projects-collaboration-card__content > a {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: #17483b;
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+
+.projects-collaboration-card__content > a:hover {
+    color: #ae7e2d;
+}
+
+/* ==========================================================
+   PROJECTS — CASE STUDY + MEDIA ROW
+========================================================== */
+
+.projects-bottom-grid {
+    position: relative;
+
+    padding: 0 0 28px;
+
+    background: #fffdf9;
+}
+
+
+.projects-bottom-grid__layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.08fr)
+        minmax(0, .92fr);
+
+    gap: 16px;
+
+    align-items: stretch;
+}
+
+
+/* ==========================================================
+   CASE STUDY PANEL
+========================================================== */
+
+.projects-case-study {
+    position: relative;
+
+    padding:
+        35px
+        16px
+        16px;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12,59,46,.10);
+
+    border-radius: 8px;
+}
+
+
+/* ==========================================================
+   CASE STUDY LAYOUT
+========================================================== */
+
+.projects-case-study__layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        190px;
+
+    gap: 18px;
+
+    align-items: stretch;
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.projects-case-study__content h2 {
+    margin: 0 0 16px;
+
+    color: #22473b;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 20px;
+
+    font-weight: 400;
+
+    line-height: 1.18;
+}
+
+
+/* ==========================================================
+   DETAILS
+========================================================== */
+
+.projects-case-study__details {
+    display: grid;
+
+    gap: 9px;
+}
+
+
+.projects-case-study__detail {
+    display: grid;
+
+    grid-template-columns:
+        74px
+        1fr;
+
+    gap: 10px;
+
+    align-items: start;
+}
+
+
+.projects-case-study__detail span {
+    color: #29493f;
+
+    font-size: 7.5px;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+
+.projects-case-study__detail p {
+    margin: 0;
+
+    color: #68736e;
+
+    font-size: 7.5px;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================================
+   BUTTON
+========================================================== */
+
+.projects-case-study__button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 16px;
+
+    padding:
+        8px
+        12px;
+
+    color: #ffffff;
+
+    background: #10483a;
+
+    border-radius: 5px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+/* ==========================================================
+   IMAGE
+========================================================== */
+
+.projects-case-study__image {
+    min-height: 230px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    background: #7b907d;
+
+    border-radius: 7px;
+}
+
+
+.projects-case-study__image span {
+    max-width: 85%;
+
+    padding:
+        5px
+        7px;
+
+    background: rgba(12,59,46,.60);
+
+    border-radius: 999px;
+
+    font-size: 7px;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   PROJECTS — MEDIA RECOGNITION
+========================================================== */
+
+.projects-media {
+    position: relative;
+
+    min-width: 0;
+
+    padding:
+        35px
+        16px
+        16px;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12,59,46,.10);
+
+    border-radius: 8px;
+}
+
+
+/* ==========================================================
+   INTRO
+========================================================== */
+
+.projects-media__intro {
+    margin-bottom: 18px;
+}
+
+
+.projects-media__intro p {
+    max-width: 350px;
+
+    margin: 0;
+
+    color: #53615b;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+
+/* ==========================================================
+   LOGO GRID
+========================================================== */
+
+.projects-media__grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 9px;
+}
+
+
+/* ==========================================================
+   LOGO ITEM
+========================================================== */
+
+.projects-media__item {
+    min-width: 0;
+
+    min-height: 75px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12,59,46,.09);
+
+    border-radius: 6px;
+}
+
+
+/* ==========================================================
+   PLACEHOLDER
+========================================================== */
+
+.projects-media__logo-placeholder {
+    width: 100%;
+
+    min-height: 53px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        7px
+        5px;
+
+    color: #275346;
+
+    background: #faf9f5;
+
+    border-radius: 4px;
+
+    text-align: center;
+}
+
+
+.projects-media__logo-placeholder span {
+    max-width: 95%;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    line-height: 1.25;
+}
+
+
+/* Slight variation in placeholder backgrounds */
+
+.projects-media__item:nth-child(2)
+.projects-media__logo-placeholder {
+    background: #f5f7f2;
+}
+
+
+.projects-media__item:nth-child(3)
+.projects-media__logo-placeholder {
+    background: #f6f8f6;
+}
+
+
+.projects-media__item:nth-child(4)
+.projects-media__logo-placeholder {
+    background: #f5f6f9;
+}
+
+
+.projects-media__item:nth-child(5)
+.projects-media__logo-placeholder {
+    background: #f7f7f5;
+}
+
+
+.projects-media__item:nth-child(6)
+.projects-media__logo-placeholder {
+    background: #f3f7ef;
+}
+
+/* ==========================================================
+   PROJECTS — BOTTOM CTA
+   Matches approved Projects reference
+========================================================== */
+
+.projects-cta {
+    position: relative;
+
+    min-height: 300px;
+
+    overflow: hidden;
+
+    background: #f7f3e9;
+}
+
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.projects-cta__background {
+    position: absolute;
+
+    inset: 0;
+}
+
+
+/*
+FINAL IMAGE:
+assets/images/projects/projects-cta-bg.png
+*/
+
+.projects-cta__background-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #d6ddd2 0%,
+            #9caf9a 40%,
+            #58715d 100%
+        );
+}
+
+
+.projects-cta__background-placeholder span {
+    padding:
+        6px
+        10px;
+
+    color: rgba(255,255,255,.75);
+
+    background: rgba(13,57,47,.50);
+
+    border-radius: 999px;
+
+    font-size: 8px;
+
+    letter-spacing: .06em;
+}
+
+
+/* ==========================================================
+   LIGHT LEFT OVERLAY
+========================================================== */
+
+.projects-cta__overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,253,249,.98) 0%,
+            rgba(255,253,249,.96) 27%,
+            rgba(255,253,249,.78) 42%,
+            rgba(255,253,249,.20) 65%,
+            rgba(255,253,249,.02) 100%
+        );
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   LAYOUT
+========================================================== */
+
+.projects-cta__layout {
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 300px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(320px, .85fr)
+        minmax(500px, 1.15fr);
+
+    gap: 30px;
+
+    align-items: stretch;
+}
+
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.projects-cta__content {
+    align-self: center;
+
+    max-width: 420px;
+
+    padding:
+        45px
+        0;
+}
+
+
+.projects-cta__content h2 {
+    margin: 0;
+
+    color: #1b2923;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 31px;
+
+    font-weight: 400;
+
+    line-height: 1.14;
+
+    letter-spacing: -.025em;
+}
+
+
+.projects-cta__content h2 em,
+.projects-cta__content h2 span {
+    color: #17483b;
+
+    font-weight: 400;
+
+    font-style: italic;
+}
+
+
+/* ==========================================================
+   BUTTON
+========================================================== */
+
+.projects-cta__button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 20px;
+
+    padding:
+        9px
+        14px;
+
+    color: #ffffff;
+
+    background: #10483a;
+
+    border-radius: 5px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        background-color .25s ease,
+        transform .25s ease;
+}
+
+
+.projects-cta__button:hover {
+    color: #ffffff;
+
+    background: #0c382e;
+
+    transform: translateY(-2px);
+}
+
+
+.projects-cta__button-icon {
+    font-size: 12px;
+}
+
+
+/* ==========================================================
+   RIGHT VISUAL
+========================================================== */
+
+.projects-cta__visual {
+    position: relative;
+
+    min-height: 300px;
+}
+
+
+/* ==========================================================
+   PERSON PLACEHOLDER
+
+   FINAL IMAGE:
+   assets/images/projects/projects-cta-person.png
+========================================================== */
+
+.projects-cta__person-placeholder {
+    position: absolute;
+
+    right: 50px;
+    bottom: 0;
+
+    width: 290px;
+    height: 285px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255,255,255,.18);
+
+    border:
+        1px dashed rgba(255,255,255,.65);
+
+    border-radius:
+        48%
+        48%
+        0
+        0;
+}
+
+
+.projects-cta__person-placeholder span {
+    padding:
+        6px
+        9px;
+
+    color: #ffffff;
+
+    background: rgba(12,59,46,.65);
+
+    border-radius: 999px;
+
+    font-size: 7px;
+}
+
+.projects-page + .site-footer {
+    margin-top: 35px;
+}
+
+
+/* ==========================================================
+   PROJECTS PAGE — RESPONSIVE
+   Add this entire block at the END of projects.css
+========================================================== */
+
+
+/* ==========================================================
+   SMALL LAPTOP / LARGE TABLET
+   1200px
+========================================================== */
+
+@media (max-width: 1200px) {
+
+    /* HERO */
+
+    .projects-hero {
+        padding: 60px 0 50px;
+    }
+
+    .projects-hero__layout {
+        grid-template-columns:
+            minmax(280px, .8fr)
+            minmax(0, 1.2fr);
+
+        gap: 40px;
+    }
+
+    .projects-hero__title {
+        font-size: 43px;
+    }
+
+    .projects-hero__visual {
+        min-height: 350px;
+    }
+
+    .projects-hero__photo--1,
+    .projects-hero__photo--3 {
+        width: calc(52% - 8px);
+    }
+
+    .projects-hero__photo--2,
+    .projects-hero__quote {
+        width: calc(48% - 8px);
+    }
+
+    .projects-hero__photo--1,
+    .projects-hero__photo--2 {
+        height: 160px;
+    }
+
+    .projects-hero__photo--3,
+    .projects-hero__quote {
+        min-height: 155px;
+        height: 155px;
+    }
+
+
+    /* INITIATIVE */
+
+    .projects-initiative__top {
+        grid-template-columns:
+            minmax(190px, .72fr)
+            minmax(200px, .72fr)
+            minmax(330px, 1.25fr);
+
+        gap: 20px;
+    }
+
+    .projects-initiative__middle {
+        grid-template-columns:
+            minmax(0, 1.15fr)
+            minmax(300px, .85fr);
+    }
+
+
+    /* ORGANIZATIONS + COLLABORATIONS */
+
+    .projects-work-grid__layout {
+        grid-template-columns:
+            minmax(0, .9fr)
+            minmax(0, 1.1fr);
+    }
+
+    .projects-organization-card {
+        grid-template-columns:
+            minmax(0, 1fr)
+            105px;
+    }
+
+
+    /* CASE STUDY */
+
+    .projects-case-study__layout {
+        grid-template-columns:
+            minmax(0, 1fr)
+            160px;
+    }
+
+
+    /* CTA */
+
+    .projects-cta__layout {
+        grid-template-columns:
+            minmax(280px, .85fr)
+            minmax(0, 1.15fr);
+    }
+
+    .projects-cta__person-placeholder {
+        right: 20px;
+    }
+}
+
+
+/* ==========================================================
+   TABLET
+   900px
+========================================================== */
+
+@media (max-width: 900px) {
+
+    /* ======================================================
+       HERO
+    ====================================================== */
+
+    .projects-hero {
+        margin-top: 35px;
+        padding: 50px 0 45px;
+    }
+
+    .projects-hero__layout {
+        grid-template-columns: 1fr;
+        gap: 38px;
+    }
+
+    .projects-hero__content {
+        max-width: 600px;
+    }
+
+    .projects-hero__title {
+        font-size: 42px;
+    }
+
+    .projects-hero__text {
+        max-width: 540px;
+        font-size: 13px;
+    }
+
+    .projects-hero__visual {
+        width: 100%;
+        min-height: 390px;
+    }
+
+    .projects-hero__photo--1 {
+        width: calc(52% - 8px);
+        height: 180px;
+    }
+
+    .projects-hero__photo--2 {
+        width: calc(48% - 8px);
+        height: 180px;
+    }
+
+    .projects-hero__photo--3 {
+        width: calc(52% - 8px);
+        height: 175px;
+    }
+
+    .projects-hero__quote {
+        width: calc(48% - 8px);
+        height: 175px;
+        min-height: 175px;
+    }
+
+
+    /* ======================================================
+       INITIATIVE TOP
+    ====================================================== */
+
+    .projects-initiative__panel {
+        padding:
+            40px
+            20px
+            22px;
+    }
+
+    .projects-initiative__top {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 28px;
+    }
+
+    .projects-initiative__programs {
+        grid-column: 1 / -1;
+    }
+
+    .projects-programs-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .projects-initiative__description {
+        font-size: 11px;
+    }
+
+    .projects-story-item p {
+        font-size: 9px;
+    }
+
+
+    /* ======================================================
+       INITIATIVE SECOND ROW
+    ====================================================== */
+
+    .projects-initiative__middle {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .projects-featured-story {
+        grid-template-columns:
+            1fr
+            1.2fr;
+    }
+
+    .projects-featured-story__content p {
+        font-size: 9px;
+    }
+
+
+    /* ======================================================
+       MOMENTS
+    ====================================================== */
+
+    .projects-initiative__moments-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .projects-initiative__moment {
+        min-height: 130px;
+    }
+
+
+    /* ======================================================
+       ORGANIZATIONS + COLLABORATIONS
+       Stack the two major panels
+    ====================================================== */
+
+    .projects-work-grid__layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .projects-organizations,
+    .projects-collaborations {
+        padding:
+            38px
+            16px
+            16px;
+    }
+
+    .projects-organization-card {
+        grid-template-columns:
+            minmax(0, 1fr)
+            180px;
+
+        min-height: 150px;
+    }
+
+    .projects-organization-card__content > p {
+        font-size: 9px;
+    }
+
+    .projects-organization-card__heading span {
+        font-size: 8px;
+    }
+
+
+    /* COLLABORATIONS */
+
+    .projects-collaborations__grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .projects-collaboration-card__image {
+        min-height: 125px;
+    }
+
+    .projects-collaboration-card__content h3 {
+        font-size: 12px;
+    }
+
+
+    /* ======================================================
+       CASE STUDY + MEDIA
+    ====================================================== */
+
+    .projects-bottom-grid__layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .projects-case-study,
+    .projects-media {
+        padding:
+            38px
+            18px
+            18px;
+    }
+
+    .projects-case-study__layout {
+        grid-template-columns:
+            minmax(0, 1fr)
+            250px;
+    }
+
+    .projects-case-study__detail span,
+    .projects-case-study__detail p {
+        font-size: 9px;
+    }
+
+    .projects-media__item {
+        min-height: 90px;
+    }
+
+
+    /* ======================================================
+       CTA
+    ====================================================== */
+
+    .projects-cta,
+    .projects-cta__layout {
+        min-height: 330px;
+    }
+
+    .projects-cta__layout {
+        grid-template-columns:
+            minmax(270px, .9fr)
+            minmax(0, 1.1fr);
+
+        gap: 15px;
+    }
+
+    .projects-cta__content h2 {
+        font-size: 28px;
+    }
+
+    .projects-cta__person-placeholder {
+        right: 0;
+
+        width: 250px;
+        height: 300px;
+    }
+}
+
+
+/* ==========================================================
+   MOBILE
+   700px
+========================================================== */
+
+@media (max-width: 700px) {
+
+    /* ======================================================
+       GENERAL SECTION SPACING
+    ====================================================== */
+
+    .projects-initiative,
+    .projects-work-grid,
+    .projects-bottom-grid {
+        padding-bottom: 38px;
+    }
+
+
+    /* ======================================================
+       HERO
+    ====================================================== */
+
+    .projects-hero {
+        margin-top: 20px;
+
+        padding:
+            42px
+            0
+            40px;
+    }
+
+    .projects-hero__layout {
+        gap: 30px;
+    }
+
+    .projects-hero__eyebrow {
+        font-size: 10px;
+    }
+
+    .projects-hero__title {
+        font-size: clamp(35px, 10vw, 43px);
+
+        line-height: 1.08;
+    }
+
+    .projects-hero__divider {
+        margin:
+            18px
+            0
+            16px;
+    }
+
+    .projects-hero__text {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+
+    /* Hero collage becomes normal grid */
+
+    .projects-hero__visual {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+
+        min-height: 0;
+    }
+
+    .projects-hero__photo,
+    .projects-hero__quote {
+        position: relative;
+
+        inset: auto;
+
+        width: 100%;
+        height: auto;
+    }
+
+    .projects-hero__photo {
+        min-height: 150px;
+    }
+
+    .projects-hero__quote {
+        min-height: 150px;
+
+        padding:
+            20px
+            18px;
+
+        grid-template-columns:
+            25px
+            1fr;
+    }
+
+    .projects-hero__quote p {
+        font-size: 14px;
+    }
+
+    .projects-hero__quote-mark {
+        font-size: 34px;
+    }
+
+    .projects-hero__botanical {
+        display: none;
+    }
+
+
+    /* ======================================================
+       SECTION LABELS
+    ====================================================== */
+
+    .projects-section-label,
+    .projects-subsection-label {
+        font-size: 9px;
+
+        padding:
+            7px
+            13px;
+    }
+
+
+    /* ======================================================
+       INITIATIVE
+    ====================================================== */
+
+    .projects-initiative__panel {
+        padding:
+            40px
+            16px
+            18px;
+    }
+
+    .projects-initiative__top {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .projects-initiative__programs {
+        grid-column: auto;
+    }
+
+    .projects-initiative__brand h2 {
+        font-size: 26px;
+    }
+
+    .projects-initiative__description {
+        font-size: 11px;
+    }
+
+    .projects-initiative__founder {
+        font-size: 10px;
+    }
+
+    .projects-initiative__button {
+        font-size: 10px;
+    }
+
+
+    /* STORY */
+
+    .projects-story-item__year,
+    .projects-story-item h4 {
+        font-size: 10px;
+    }
+
+    .projects-story-item p {
+        font-size: 9px;
+    }
+
+
+    /* PROGRAMS */
+
+    .projects-programs-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .projects-program-card h4 {
+        font-size: 10px;
+    }
+
+    .projects-program-card p {
+        font-size: 8.5px;
+    }
+
+
+    /* ======================================================
+       IMPACT
+    ====================================================== */
+
+    .projects-initiative__impact-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        row-gap: 18px;
+    }
+
+    .projects-initiative__impact-item strong {
+        font-size: 18px;
+    }
+
+    .projects-initiative__impact-item p {
+        font-size: 8px;
+    }
+
+
+    /* FEATURED STORY */
+
+    .projects-featured-story {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-featured-story__content {
+        padding:
+            22px
+            18px;
+    }
+
+    .projects-featured-story__content p {
+        font-size: 10px;
+    }
+
+    .projects-featured-story__image {
+        min-height: 180px;
+    }
+
+
+    /* ======================================================
+       MOMENTS
+    ====================================================== */
+
+    .projects-initiative__moments-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .projects-initiative__moment {
+        min-height: 130px;
+    }
+
+    .projects-initiative__moments-heading h3 {
+        font-size: 14px;
+        text-align: center;
+    }
+
+
+    /* ======================================================
+       ORGANIZATIONS
+    ====================================================== */
+
+    .projects-work-grid__layout {
+        gap: 36px;
+    }
+
+    .projects-organization-card {
+        grid-template-columns:
+            minmax(0, 1fr)
+            125px;
+
+        min-height: 145px;
+    }
+
+    .projects-organization-card__heading h3 {
+        font-size: 14px;
+    }
+
+    .projects-organization-card__content > p {
+        font-size: 8.5px;
+    }
+
+
+    /* ======================================================
+       COLLABORATIONS
+    ====================================================== */
+
+    .projects-collaborations__filters {
+        padding-bottom: 3px;
+    }
+
+    .projects-filter {
+        min-height: 29px;
+
+        padding:
+            7px
+            13px;
+
+        font-size: 8px;
+    }
+
+    .projects-collaborations__grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+    .projects-collaboration-card__image {
+        min-height: 125px;
+    }
+
+    .projects-collaboration-card__content h3 {
+        min-height: auto;
+
+        font-size: 12px;
+    }
+
+    .projects-collaboration-card__meta,
+    .projects-collaboration-card__content > a {
+        font-size: 8px;
+    }
+
+
+    /* ======================================================
+       CASE STUDY
+    ====================================================== */
+
+    .projects-bottom-grid__layout {
+        gap: 36px;
+    }
+
+    .projects-case-study__layout {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-case-study__content h2 {
+        font-size: 23px;
+    }
+
+    .projects-case-study__detail {
+        grid-template-columns:
+            90px
+            1fr;
+    }
+
+    .projects-case-study__detail span,
+    .projects-case-study__detail p {
+        font-size: 9px;
+    }
+
+    .projects-case-study__image {
+        min-height: 230px;
+    }
+
+
+    /* ======================================================
+       MEDIA
+    ====================================================== */
+
+    .projects-media__intro p {
+        font-size: 11px;
+    }
+
+    .projects-media__grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .projects-media__item {
+        min-height: 90px;
+    }
+
+    .projects-media__logo-placeholder span {
+        font-size: 9px;
+    }
+
+
+    /* ======================================================
+       CTA
+    ====================================================== */
+
+    .projects-cta {
+        min-height: auto;
+    }
+
+    .projects-cta__layout {
+        min-height: 500px;
+
+        grid-template-columns: 1fr;
+
+        align-content: space-between;
+    }
+
+    .projects-cta__content {
+        position: relative;
+
+        z-index: 3;
+
+        max-width: 390px;
+
+        padding:
+            45px
+            0
+            20px;
+    }
+
+    .projects-cta__content h2 {
+        font-size: 28px;
+    }
+
+    .projects-cta__visual {
+        min-height: 250px;
+    }
+
+    .projects-cta__person-placeholder {
+        right: 50%;
+
+        width: 240px;
+        height: 245px;
+
+        transform: translateX(50%);
+    }
+
+    .projects-cta__overlay {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(255,253,249,.98) 0%,
+                rgba(255,253,249,.92) 40%,
+                rgba(255,253,249,.40) 70%,
+                rgba(255,253,249,.10) 100%
+            );
+    }
+
+    .projects-page + .site-footer {
+        margin-top: 30px;
+    }
+}
+
+
+/* ==========================================================
+   SMALL MOBILE
+   480px
+========================================================== */
+
+@media (max-width: 480px) {
+
+    /* HERO */
+
+    .projects-hero {
+        padding-top: 34px;
+    }
+
+    .projects-hero__title {
+        font-size: 36px;
+    }
+
+    .projects-hero__visual {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-hero__photo {
+        min-height: 190px;
+    }
+
+    .projects-hero__quote {
+        min-height: auto;
+    }
+
+
+    /* INITIATIVE */
+
+    .projects-initiative__panel {
+        padding:
+            40px
+            13px
+            15px;
+    }
+
+    .projects-initiative__brand {
+        align-items: flex-start;
+    }
+
+    .projects-initiative__brand h2 {
+        font-size: 24px;
+    }
+
+
+    /* PROGRAMS */
+
+    .projects-programs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-program-card {
+        grid-template-columns:
+            38px
+            1fr;
+
+        padding:
+            13px
+            11px;
+    }
+
+    .projects-program-card h4 {
+        font-size: 11px;
+    }
+
+    .projects-program-card p {
+        font-size: 9px;
+    }
+
+
+    /* IMPACT */
+
+    .projects-initiative__impact-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    /* MOMENTS */
+
+    .projects-initiative__moments-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-initiative__moment {
+        min-height: 190px;
+    }
+
+
+    /* ORGANIZATIONS */
+
+    .projects-organizations,
+    .projects-collaborations,
+    .projects-case-study,
+    .projects-media {
+        padding:
+            40px
+            12px
+            14px;
+    }
+
+    .projects-organization-card {
+        grid-template-columns: 1fr;
+
+        padding: 11px;
+    }
+
+    .projects-organization-card__image {
+        min-height: 175px;
+    }
+
+    .projects-organization-card__content > p {
+        font-size: 9px;
+    }
+
+
+    /* COLLABORATIONS */
+
+    .projects-collaborations__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-collaboration-card__image {
+        min-height: 190px;
+    }
+
+    .projects-collaboration-card__content {
+        padding:
+            12px
+            11px;
+    }
+
+    .projects-collaboration-card__content h3 {
+        font-size: 14px;
+    }
+
+
+    /* CASE STUDY */
+
+    .projects-case-study__detail {
+        grid-template-columns: 1fr;
+
+        gap: 3px;
+    }
+
+    .projects-case-study__detail span {
+        font-size: 9px;
+    }
+
+    .projects-case-study__detail p {
+        font-size: 9px;
+    }
+
+    .projects-case-study__image {
+        min-height: 200px;
+    }
+
+
+    /* MEDIA */
+
+    .projects-media__grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    /* CTA */
+
+    .projects-cta__layout {
+        min-height: 475px;
+    }
+
+    .projects-cta__content {
+        padding-top: 40px;
+    }
+
+    .projects-cta__content h2 {
+        font-size: 25px;
+    }
+
+    .projects-cta__button {
+        padding:
+            10px
+            15px;
+
+        font-size: 10px;
+    }
+
+    .projects-cta__visual {
+        min-height: 230px;
+    }
+
+    .projects-cta__person-placeholder {
+        width: 215px;
+        height: 225px;
+    }
+}

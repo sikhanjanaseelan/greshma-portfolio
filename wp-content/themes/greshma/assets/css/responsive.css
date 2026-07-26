@@ -1,0 +1,113 @@
+@media (max-width: 1500px) {
+
+    .site-header .container {
+        width: 96%;
+    }
+
+    .header-wrapper {
+        gap: 24px;
+    }
+
+    .site-logo {
+        min-width: 220px;
+    }
+
+    .site-logo .custom-logo {
+        height: 67px;
+        max-width: 230px;
+    }
+
+    .main-menu {
+        gap: 17px;
+    }
+
+    .main-menu > li > a {
+        font-size: 14px;
+    }
+
+    .header-cta {
+        padding-inline: 20px;
+    }
+}
+
+@media (max-width: 1240px) {
+
+    .main-navigation {
+        display: none;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .header-action {
+        margin-left: auto;
+    }
+
+    .site-logo {
+        min-width: 0;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .site-header .container {
+        width: 92%;
+    }
+
+    .header-wrapper {
+        min-height: 78px;
+        gap: 13px;
+    }
+
+    .site-header.is-scrolled .header-wrapper {
+        min-height: 70px;
+    }
+
+    .site-logo .custom-logo,
+    .site-header.is-scrolled .site-logo .custom-logo {
+        height: 53px;
+        max-width: 190px;
+    }
+
+    .header-cta {
+        min-height: 44px;
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+
+    .header-cta-icon {
+        display: none;
+    }
+
+    .mobile-menu-toggle {
+        width: 43px;
+        height: 43px;
+    }
+}
+
+@media (max-width: 520px) {
+
+    .site-logo .custom-logo,
+    .site-header.is-scrolled .site-logo .custom-logo {
+        height: 46px;
+        max-width: 155px;
+    }
+
+    .header-cta {
+        display: none;
+    }
+
+    .mobile-menu-toggle {
+        margin-left: auto;
+    }
+
+    .mobile-navigation-header {
+        padding-inline: 20px;
+    }
+
+    .mobile-navigation-content {
+        padding-inline: 22px;
+    }
+}
+

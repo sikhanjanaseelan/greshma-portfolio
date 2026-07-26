@@ -1,0 +1,364 @@
+<?php
+/**
+ * Greshma Portfolio theme functions.
+ *
+ * @package GreshmaPortfolio
+ */
+
+if (! defined('ABSPATH')) {
+    exit;
+}
+
+define('GRESHMA_THEME_VERSION', '1.0.0');
+define('GRESHMA_THEME_DIR', get_template_directory());
+define('GRESHMA_THEME_URI', get_template_directory_uri());
+
+function greshma_theme_setup(): void
+{
+    load_theme_textdomain(
+        'greshma-portfolio',
+        GRESHMA_THEME_DIR . '/languages'
+    );
+
+    add_theme_support('title-tag');
+    add_theme_support('post-thumbnails');
+   add_theme_support('custom-logo', [
+        'height'      => 120,
+        'width'       => 320,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ]);
+    add_theme_support('responsive-embeds');
+    add_theme_support('align-wide');
+    add_theme_support('editor-styles');
+    add_theme_support('html5', [
+        'search-form',
+        'comment-form',
+        'comment-list',
+        'gallery',
+        'caption',
+        'style',
+        'script',
+    ]);
+
+    register_nav_menus([
+        'primary' => __('Primary Menu', 'greshma-portfolio'),
+        'footer'  => __('Footer Menu', 'greshma-portfolio'),
+        'social'  => __('Social Links', 'greshma-portfolio'),
+    ]);
+}
+add_action('after_setup_theme', 'greshma_theme_setup');
+
+function greshma_enqueue_assets() {
+
+$theme = wp_get_theme()->get('Version');
+
+wp_enqueue_style(
+'variables',
+get_template_directory_uri().'/assets/css/variables.css',
+[],
+$theme
+);
+
+wp_enqueue_style(
+'style',
+get_template_directory_uri().'/assets/css/style.css',
+['variables'],
+$theme
+);
+
+wp_enqueue_style(
+'header',
+get_template_directory_uri().'/assets/css/header.css',
+['style'],
+$theme
+);
+
+wp_enqueue_style(
+'footer',
+get_template_directory_uri().'/assets/css/footer.css',
+['style'],
+$theme
+);
+
+wp_enqueue_style(
+'components',
+get_template_directory_uri().'/assets/css/components.css',
+['style'],
+$theme
+);
+
+wp_enqueue_style(
+'home',
+get_template_directory_uri().'/assets/css/home.css',
+['style'],
+$theme
+);
+
+wp_enqueue_style(
+'pages',
+get_template_directory_uri().'/assets/css/pages.css',
+['style'],
+$theme
+);
+wp_enqueue_style(
+    'greshma-about',
+    get_template_directory_uri() . '/assets/css/about.css',
+    array( 'style' ),
+    filemtime(
+        get_template_directory() . '/assets/css/about.css'
+    )
+);
+wp_enqueue_style(
+    'greshma-my-paths',
+    get_template_directory_uri() . '/assets/css/my-paths.css',
+    array( 'style' ),
+    filemtime(
+        get_template_directory() . '/assets/css/my-paths.css'
+    )
+);
+wp_enqueue_style(
+    'greshma-projects',
+    get_template_directory_uri() . '/assets/css/projects.css',
+    array( 'style' ),
+    filemtime(
+        get_template_directory() . '/assets/css/projects.css'
+    )
+);
+
+wp_enqueue_style(
+    'greshma-impacts',
+    get_template_directory_uri() . '/assets/css/impacts.css',
+    array( 'style' ),
+    filemtime(
+        get_template_directory() . '/assets/css/impacts.css'
+    )
+);
+wp_enqueue_script(
+    'greshma-services-testimonials',
+    get_template_directory_uri()
+        . '/assets/js/services-testimonials.js',
+    array(),
+    filemtime(
+        get_template_directory()
+            . '/assets/js/services-testimonials.js'
+    ),
+    true
+);
+wp_enqueue_style(
+    'greshma-services',
+    get_template_directory_uri() . '/assets/css/services.css',
+    array( 'style' ),
+    filemtime(
+        get_template_directory() . '/assets/css/services.css'
+    )
+);
+wp_enqueue_style(
+    'greshma-contact',
+    get_template_directory_uri() . '/assets/css/contact.css',
+    array( 'style' ),
+    filemtime(
+        get_template_directory() . '/assets/css/contact.css'
+    )
+);
+
+wp_enqueue_style(
+    'greshma-gallery',
+    get_template_directory_uri() . '/assets/css/gallery.css',
+    array( 'style' ),
+    filemtime(
+        get_template_directory() . '/assets/css/gallery.css'
+    )
+);
+wp_enqueue_script(
+    'greshma-gallery',
+    get_template_directory_uri() . '/assets/js/gallery.js',
+    array(),
+    filemtime(
+        get_template_directory() . '/assets/js/gallery.js'
+    ),
+    true
+);
+wp_enqueue_style(
+    'greshma-speaking',
+    get_template_directory_uri() . '/assets/css/speaking.css',
+    array( 'style' ),
+    filemtime(
+        get_template_directory() . '/assets/css/speaking.css'
+    )
+);
+wp_enqueue_script(
+    'greshma-speaking',
+    get_template_directory_uri()
+        . '/assets/js/speaking.js',
+    array(),
+    filemtime(
+        get_template_directory()
+            . '/assets/js/speaking.js'
+    ),
+    true
+);
+
+wp_enqueue_style(
+    'greshma-journal',
+    get_template_directory_uri() . '/assets/css/journal.css',
+    array( 'style' ),
+    filemtime(
+        get_template_directory() . '/assets/css/journal.css'
+    )
+);
+
+if ( is_page( 'resources' ) ) {
+
+    $resources_css = get_template_directory() . '/assets/css/resources.css';
+
+    if ( file_exists( $resources_css ) ) {
+
+        wp_enqueue_style(
+            'greshma-resources',
+            get_template_directory_uri() . '/assets/css/resources.css',
+            array(),
+            filemtime( $resources_css )
+        );
+
+    }
+
+}
+
+if ( is_page( 'resources' ) ) {
+
+    $resources_js =
+        get_template_directory()
+        . '/assets/js/resources.js';
+
+
+    if ( file_exists( $resources_js ) ) {
+
+        wp_enqueue_script(
+            'greshma-resources',
+            get_template_directory_uri()
+            . '/assets/js/resources.js',
+            array(),
+            filemtime( $resources_js ),
+            true
+        );
+
+    }
+
+}
+
+if ( is_page( 'events' ) ) {
+
+    $events_css =
+        get_template_directory()
+        . '/assets/css/events.css';
+
+    if ( file_exists( $events_css ) ) {
+
+        wp_enqueue_style(
+            'greshma-events',
+            get_template_directory_uri()
+            . '/assets/css/events.css',
+            array(),
+            filemtime( $events_css )
+        );
+
+    }
+
+}
+if ( is_page( 'events' ) ) {
+
+    $events_js =
+        get_template_directory()
+        . '/assets/js/events.js';
+
+
+    if ( file_exists( $events_js ) ) {
+
+        wp_enqueue_script(
+            'greshma-events',
+            get_template_directory_uri()
+            . '/assets/js/events.js',
+            array(),
+            filemtime( $events_js ),
+            true
+        );
+
+    }
+
+}
+
+
+if ( is_page( 'workshops' ) ) {
+
+    $workshops_css =
+        get_template_directory()
+        . '/assets/css/workshops.css';
+
+    if ( file_exists( $workshops_css ) ) {
+
+        wp_enqueue_style(
+            'greshma-workshops',
+            get_template_directory_uri()
+            . '/assets/css/workshops.css',
+            array(),
+            filemtime( $workshops_css )
+        );
+
+    }
+
+
+    $workshops_js =
+        get_template_directory()
+        . '/assets/js/workshops.js';
+
+    if ( file_exists( $workshops_js ) ) {
+
+        wp_enqueue_script(
+            'greshma-workshops',
+            get_template_directory_uri()
+            . '/assets/js/workshops.js',
+            array(),
+            filemtime( $workshops_js ),
+            true
+        );
+
+    }
+
+} 
+wp_enqueue_style(
+'responsive',
+get_template_directory_uri().'/assets/css/responsive.css',
+['style'],
+$theme
+);
+
+wp_enqueue_script(
+'main',
+get_template_directory_uri().'/assets/js/main.js',
+[],
+$theme,
+true
+);
+
+wp_enqueue_script(
+'menu',
+get_template_directory_uri().'/assets/js/menu.js',
+[],
+$theme,
+true
+);
+wp_enqueue_style(
+    'greshma-hero',
+    get_template_directory_uri() . '/assets/css/hero.css',
+    array( 'style', 'header' ),
+    $theme
+);
+}
+add_action('wp_enqueue_scripts','greshma_enqueue_assets');
+
+
+
+
+
+require get_template_directory() . '/inc/template-functions.php';

@@ -1,0 +1,3672 @@
+/* ==========================================================
+   IMPACTS PAGE
+========================================================== */
+
+.impacts-page {
+    background: #fffdf9;
+}
+
+
+/* ==========================================================
+   IMPACTS HERO
+========================================================== */
+
+.impacts-hero {
+    position: relative;
+
+    margin-top: 50px;
+
+    padding: 58px 0 34px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fffdf9 0%,
+            #fffdf9 42%,
+            #faf7ef 100%
+        );
+}
+
+
+/* ==========================================================
+   MAIN LAYOUT
+========================================================== */
+
+.impacts-hero__layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, .72fr)
+        minmax(650px, 1.55fr);
+
+    gap: 55px;
+
+    align-items: center;
+}
+
+
+/* ==========================================================
+   LEFT CONTENT
+========================================================== */
+
+.impacts-hero__content {
+    max-width: 390px;
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.impacts-hero__title {
+    margin: 0;
+
+    color: #17211d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 58px;
+
+    font-weight: 400;
+
+    line-height: 1;
+
+    letter-spacing: -.04em;
+}
+
+
+/* ==========================================================
+   SCRIPT TITLE
+========================================================== */
+
+.impacts-hero__script {
+    margin-top: 4px;
+
+    color: #e06d3c;
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size: 36px;
+
+    font-style: italic;
+
+    line-height: 1.1;
+}
+
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.impacts-hero__text {
+    max-width: 355px;
+
+    margin: 18px 0 0;
+
+    color: #4e5c56;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* ==========================================================
+   SIGNATURE
+========================================================== */
+
+.impacts-hero__signature {
+    margin-top: 20px;
+
+    color: #214a3e;
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size: 27px;
+
+    font-style: italic;
+}
+
+
+/* ==========================================================
+   RIGHT VISUAL
+========================================================== */
+
+.impacts-hero__visual {
+    position: relative;
+
+    min-height: 355px;
+}
+
+
+/* ==========================================================
+   IMAGE PLACEHOLDER
+========================================================== */
+
+.impacts-hero__image-placeholder {
+    width: 100%;
+    height: 355px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #b8c3ad,
+            #789077
+        );
+
+    border-radius:
+        48%
+        6px
+        6px
+        48%;
+
+    box-shadow:
+        0 18px 40px rgba(12,59,46,.08);
+}
+
+
+.impacts-hero__image-placeholder span {
+    padding: 7px 10px;
+
+    color: #ffffff;
+
+    background: rgba(12,59,46,.60);
+
+    border-radius: 999px;
+
+    font-size: 8px;
+}
+
+/* ==========================================================
+   IMPACTS — RECOGNITION & HONORS
+========================================================== */
+
+.impacts-recognition {
+    position: relative;
+
+    padding: 34px 0 42px;
+
+    background: #fffdf9;
+}
+
+
+/* ==========================================================
+   HEADING
+========================================================== */
+
+.impacts-recognition__heading {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    margin-bottom: 20px;
+}
+
+
+.impacts-recognition__heading h2 {
+    margin: 0;
+
+    color: #23483c;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 22px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+
+.impacts-recognition__line {
+    width: 34px;
+    height: 1px;
+
+    background: #c7a257;
+}
+
+
+.impacts-recognition__leaf {
+    color: #738b7c;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.impacts-recognition__grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, .9fr)
+        minmax(0, .9fr)
+        minmax(0, 1.15fr)
+        minmax(190px, .75fr);
+
+    gap: 9px;
+
+    align-items: stretch;
+}
+
+
+/* ==========================================================
+   RECOGNITION CARDS
+========================================================== */
+
+.impacts-recognition__card {
+    min-width: 0;
+
+    min-height: 165px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 18px 16px;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12,59,46,.09);
+
+    border-radius: 8px;
+}
+
+
+.impacts-recognition__logo-placeholder {
+    width: 48px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 11px;
+
+    color: #3f715f;
+
+    background: #f4f2eb;
+
+    border-radius: 5px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.impacts-recognition__eyebrow {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #b1812f;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: .05em;
+
+    text-transform: uppercase;
+}
+
+
+.impacts-recognition__card h3 {
+    margin: 0 0 7px;
+
+    color: #24483c;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 14px;
+
+    font-weight: 400;
+
+    line-height: 1.25;
+}
+
+
+.impacts-recognition__card p {
+    margin: 0;
+
+    color: #68736d;
+
+    font-size: 8px;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================================
+   MAIN IMAGE
+========================================================== */
+
+.impacts-recognition__image {
+    min-height: 165px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    background: #7c907c;
+
+    border-radius: 8px;
+}
+
+
+.impacts-recognition__image span {
+    max-width: 85%;
+
+    padding: 5px 7px;
+
+    background: rgba(12,59,46,.60);
+
+    border-radius: 999px;
+
+    font-size: 7px;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   QUOTE CARD
+========================================================== */
+
+.impacts-recognition__quote {
+    position: relative;
+
+    min-width: 0;
+
+    min-height: 165px;
+
+    margin: 0;
+
+    padding:
+        23px
+        20px
+        20px
+        38px;
+
+    overflow: hidden;
+
+    background: #f6f2e8;
+
+    border:
+        1px solid rgba(12,59,46,.07);
+
+    border-radius: 8px;
+}
+
+
+.impacts-recognition__quote-mark {
+    position: absolute;
+
+    top: 18px;
+    left: 15px;
+
+    color: #b1832e;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 34px;
+
+    font-weight: 700;
+
+    line-height: .8;
+}
+
+
+.impacts-recognition__quote p {
+    margin: 0;
+
+    color: #27483d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 11px;
+
+    font-style: italic;
+
+    line-height: 1.55;
+}
+
+
+.impacts-recognition__quote cite {
+    display: block;
+
+    margin-top: 11px;
+
+    color: #67736d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 8px;
+
+    font-style: italic;
+}
+
+
+.impacts-recognition__quote-leaf {
+    position: absolute;
+
+    right: 6px;
+    bottom: -9px;
+
+    color: rgba(77,107,84,.18);
+
+    font-size: 70px;
+
+    transform: rotate(-25deg);
+}
+
+
+/* ==========================================================
+   IMPACTS — IMPACT AT A GLANCE
+========================================================== */
+
+.impacts-stats {
+    position: relative;
+
+    min-height: 230px;
+
+    overflow: hidden;
+
+    background: #103c31;
+
+    color: #ffffff;
+}
+
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.impacts-stats__background {
+    position: absolute;
+
+    inset: 0;
+}
+
+
+/*
+FINAL IMAGE:
+assets/images/impacts/impacts-stats-bg.png
+*/
+
+.impacts-stats__background-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #607966 0%,
+            #345846 48%,
+            #153d32 100%
+        );
+}
+
+
+.impacts-stats__background-placeholder span {
+    padding:
+        6px
+        10px;
+
+    color: rgba(255,255,255,.58);
+
+    background: rgba(7,44,35,.48);
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    border-radius: 999px;
+
+    font-size: 8px;
+
+    letter-spacing: .07em;
+}
+
+
+/* ==========================================================
+   DARK OVERLAY
+========================================================== */
+
+.impacts-stats__overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(9,48,38,.90) 0%,
+            rgba(9,48,38,.82) 50%,
+            rgba(9,48,38,.75) 100%
+        );
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   INNER
+========================================================== */
+
+.impacts-stats__inner {
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 230px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding:
+        34px
+        0
+        38px;
+}
+
+
+/* ==========================================================
+   HEADING
+========================================================== */
+
+.impacts-stats__heading {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 26px;
+}
+
+
+.impacts-stats__heading h2 {
+    margin: 0;
+
+    color: #fffaf0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 21px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+
+.impacts-stats__heading-line {
+    width: 31px;
+    height: 1px;
+
+    background: #d3b163;
+}
+
+
+.impacts-stats__heading-leaf {
+    color: #d3b163;
+
+    font-size: 13px;
+}
+
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.impacts-stats__grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, minmax(0, 1fr));
+
+    align-items: stretch;
+
+    width: 100%;
+}
+
+
+/* ==========================================================
+   ITEM
+========================================================== */
+
+.impacts-stats__item {
+    position: relative;
+
+    min-width: 0;
+
+    padding:
+        4px
+        14px;
+
+    text-align: center;
+}
+
+
+/* Vertical separators */
+
+.impacts-stats__item:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    top: 3px;
+    right: 0;
+    bottom: 3px;
+
+    width: 1px;
+
+    background:
+        rgba(255,255,255,.18);
+}
+
+
+/* ==========================================================
+   NUMBER
+========================================================== */
+
+.impacts-stats__item strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 34px;
+
+    font-weight: 400;
+
+    line-height: 1;
+}
+
+
+.impacts-stats__item strong span {
+    color: #dfba67;
+
+    font-size: .58em;
+
+    vertical-align: top;
+}
+
+
+/* ==========================================================
+   LABEL
+========================================================== */
+
+.impacts-stats__item p {
+    max-width: 100px;
+
+    margin:
+        7px
+        auto
+        0;
+
+    color: rgba(255,255,255,.72);
+
+    font-size: 8px;
+
+    font-weight: 500;
+
+    line-height: 1.4;
+
+    text-transform: uppercase;
+
+    letter-spacing: .04em;
+}
+
+
+/* ==========================================================
+   IMPACTS — STORIES OF TRANSFORMATION
+========================================================== */
+
+.impacts-stories {
+    position: relative;
+
+    padding:
+        48px
+        0
+        52px;
+
+    background: #fffdf9;
+}
+
+
+/* ==========================================================
+   MAIN LAYOUT
+========================================================== */
+
+.impacts-stories__layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(250px, .72fr)
+        minmax(0, 1.65fr);
+
+    gap: 38px;
+
+    align-items: center;
+}
+
+
+/* ==========================================================
+   INTRO
+========================================================== */
+
+.impacts-stories__intro {
+    max-width: 310px;
+}
+
+
+.impacts-stories__eyebrow {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 13px;
+
+    color: #a57b2e;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: .1em;
+
+    text-transform: uppercase;
+}
+
+
+.impacts-stories__leaf {
+    color: #6f8878;
+
+    font-size: 14px;
+}
+
+
+.impacts-stories__intro h2 {
+    margin: 0 0 17px;
+
+    color: #1d4639;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 32px;
+
+    font-weight: 400;
+
+    line-height: 1.08;
+
+    letter-spacing: -.025em;
+}
+
+
+.impacts-stories__intro p {
+    margin: 0;
+
+    color: #59655f;
+
+    font-size: 10px;
+
+    line-height: 1.7;
+}
+
+
+/* ==========================================================
+   BUTTON
+========================================================== */
+
+.impacts-stories__button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 19px;
+
+    padding:
+        8px
+        12px;
+
+    color: #ffffff;
+
+    background: #17483b;
+
+    border-radius: 5px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+/* ==========================================================
+   STORY GRID
+========================================================== */
+
+.impacts-stories__grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+
+/* ==========================================================
+   STORY CARD
+========================================================== */
+
+.impacts-story-card {
+    min-width: 0;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12,59,46,.09);
+
+    border-radius: 8px;
+}
+
+
+/* ==========================================================
+   IMAGE
+========================================================== */
+
+.impacts-story-card__image {
+    min-height: 150px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    background: #809381;
+}
+
+
+.impacts-story-card:nth-child(2)
+.impacts-story-card__image {
+    background: #6c826f;
+}
+
+
+.impacts-story-card:nth-child(3)
+.impacts-story-card__image {
+    background: #8b9b88;
+}
+
+
+.impacts-story-card__image span {
+    max-width: 88%;
+
+    padding:
+        5px
+        7px;
+
+    background: rgba(12,59,46,.60);
+
+    border-radius: 999px;
+
+    font-size: 7px;
+
+    line-height: 1.25;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.impacts-story-card__content {
+    padding:
+        13px
+        13px
+        14px;
+}
+
+
+.impacts-story-card__content h3 {
+    margin: 0 0 7px;
+
+    color: #24483b;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 15px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+
+.impacts-story-card__content p {
+    margin: 0;
+
+    color: #66716b;
+
+    font-size: 8px;
+
+    line-height: 1.55;
+}
+
+
+.impacts-story-card__content a {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-top: 11px;
+
+    color: #17483b;
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+
+.impacts-story-card__content a:hover {
+    color: #b1812f;
+}
+
+/* ==========================================================
+   IMPACTS — WHERE WE WORK
+   Approved reference layout
+========================================================== */
+
+.impacts-map {
+    position: relative;
+
+    padding:
+        26px
+        0
+        36px;
+
+    background: #fffdf9;
+
+    overflow: hidden;
+}
+
+
+/* ==========================================================
+   TWO COLUMN LAYOUT
+========================================================== */
+
+.impacts-map__layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(520px, 1.18fr)
+        minmax(430px, .82fr);
+
+    gap: 38px;
+
+    align-items: center;
+
+    padding-bottom: 28px;
+
+    border-bottom:
+        1px solid rgba(176, 139, 64, .28);
+}
+
+
+/* ==========================================================
+   MAP SIDE
+========================================================== */
+
+.impacts-map__visual {
+    min-width: 0;
+}
+
+
+.impacts-map__map {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 1.9 / 1;
+
+    min-height: 300px;
+}
+
+
+/* ==========================================================
+   WORLD MAP SVG
+========================================================== */
+
+.impacts-map__map-image {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    opacity: .94;
+}
+
+
+/* ==========================================================
+   CONNECTION ROUTES
+========================================================== */
+
+.impacts-map__routes {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+}
+
+
+.impacts-map__routes path {
+    fill: none;
+
+    stroke: #c78335;
+
+    stroke-width: 1.8;
+
+    stroke-dasharray:
+        7
+        7;
+
+    opacity: .72;
+}
+
+
+/* ==========================================================
+   MAP PINS
+========================================================== */
+
+.impacts-map__pin {
+    position: absolute;
+
+    z-index: 3;
+
+    width: 14px;
+    height: 14px;
+
+    border: 3px solid #fffdf9;
+
+    border-radius:
+        50%
+        50%
+        50%
+        0;
+
+    box-shadow:
+        0
+        2px
+        7px
+        rgba(27, 63, 52, .20);
+
+    transform:
+        rotate(-45deg);
+}
+
+
+/* center dot */
+
+.impacts-map__pin::after {
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 4px;
+    height: 4px;
+
+    background: rgba(255,255,255,.9);
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+
+.impacts-map__pin--green {
+    background: #16513f;
+}
+
+
+.impacts-map__pin--orange {
+    background: #eb7628;
+}
+
+
+.impacts-map__pin--gold {
+    background: #c89332;
+}
+
+
+/* ==========================================================
+   PIN POSITIONS
+========================================================== */
+
+.impacts-map__pin--north-america {
+    top: 24%;
+    left: 21%;
+}
+
+
+.impacts-map__pin--latin-america {
+    top: 61%;
+    left: 31%;
+}
+
+
+.impacts-map__pin--europe {
+    top: 20%;
+    left: 50%;
+}
+
+
+.impacts-map__pin--africa {
+    top: 58%;
+    left: 54%;
+}
+
+
+.impacts-map__pin--asia {
+    top: 35%;
+    left: 76%;
+}
+
+
+.impacts-map__pin--south-asia {
+    top: 48%;
+    left: 70%;
+}
+
+
+.impacts-map__pin--australia {
+    top: 71%;
+    left: 87%;
+}
+
+
+/* ==========================================================
+   HANDWRITTEN MAP LABELS
+========================================================== */
+
+.impacts-map__map-label {
+    position: absolute;
+
+    z-index: 4;
+
+    color: #263b34;
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size: 14px;
+
+    font-style: italic;
+
+    line-height: 1;
+
+    white-space: nowrap;
+}
+
+
+.impacts-map__map-label--north {
+    top: 39%;
+    left: 6%;
+}
+
+
+.impacts-map__map-label--latin {
+    top: 72%;
+    left: 5%;
+}
+
+
+.impacts-map__map-label--europe {
+    top: 10%;
+    left: 47%;
+}
+
+
+.impacts-map__map-label--africa {
+    top: 73%;
+    left: 53%;
+}
+
+
+.impacts-map__map-label--asia {
+    top: 42%;
+    left: 84%;
+}
+
+
+.impacts-map__map-label--australia {
+    right: 1%;
+    bottom: 11%;
+}
+
+
+/* ==========================================================
+   RIGHT CONTENT
+========================================================== */
+
+.impacts-map__content {
+    min-width: 0;
+}
+
+
+/* ==========================================================
+   HEADING
+========================================================== */
+
+.impacts-map__heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.impacts-map__heading h2 {
+    margin: 0;
+
+    color: #173f34;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 28px;
+
+    font-weight: 400;
+
+    line-height: 1.1;
+
+    letter-spacing: -.02em;
+}
+
+
+.impacts-map__heading-leaf {
+    color: #648373;
+
+    font-size: 15px;
+}
+
+
+.impacts-map__heading-line {
+    display: block;
+
+    width: 30px;
+    height: 1px;
+
+    margin:
+        10px
+        0
+        23px;
+
+    background: #d1a34c;
+}
+
+
+/* ==========================================================
+   REGION GRID
+========================================================== */
+
+.impacts-map__regions {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    column-gap: 0;
+
+    row-gap: 24px;
+}
+
+
+/* ==========================================================
+   REGION
+========================================================== */
+
+.impacts-map__region {
+    position: relative;
+
+    min-width: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        12px
+        minmax(0, 1fr);
+
+    gap: 8px;
+
+    padding:
+        1px
+        16px
+        2px
+        0;
+}
+
+
+/* vertical dividers */
+
+.impacts-map__region:not(:nth-child(3n))::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    bottom: 0;
+
+    width: 1px;
+
+    background:
+        rgba(12,59,46,.14);
+}
+
+
+/* add left spacing after divider */
+
+.impacts-map__region:nth-child(3n + 2),
+.impacts-map__region:nth-child(3n + 3) {
+    padding-left: 16px;
+}
+
+
+/* ==========================================================
+   REGION DOT
+========================================================== */
+
+.impacts-map__region-dot {
+    width: 7px;
+    height: 7px;
+
+    margin-top: 5px;
+
+    border-radius: 50%;
+}
+
+
+.impacts-map__region-dot--green {
+    background: #5c9766;
+}
+
+
+.impacts-map__region-dot--gold {
+    background: #d2a648;
+}
+
+
+.impacts-map__region-dot--orange {
+    background: #ee7426;
+}
+
+
+/* ==========================================================
+   REGION TYPOGRAPHY
+========================================================== */
+
+.impacts-map__region h3 {
+    margin: 0 0 5px;
+
+    color: #1b2824;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    line-height: 1.25;
+}
+
+
+.impacts-map__region p {
+    margin: 0;
+
+    color: #515d58;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+/* ==========================================================
+   IMPACTS — FEATURED IN & PARTNERS / SDGs
+========================================================== */
+
+.impacts-partners {
+    position: relative;
+
+    padding:
+        0
+        0
+        30px;
+
+    background: #fffdf9;
+}
+
+
+/* ==========================================================
+   PANEL
+========================================================== */
+
+.impacts-partners__panel {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7f3e9,
+            #fbf9f4
+        );
+
+    border:
+        1px solid rgba(12,59,46,.07);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+/* ==========================================================
+   BOTH SIDES
+========================================================== */
+
+.impacts-partners__featured,
+.impacts-partners__sdgs {
+    position: relative;
+
+    min-width: 0;
+
+    padding:
+        22px
+        28px
+        20px;
+}
+
+
+/* divider between sides */
+
+.impacts-partners__featured::after {
+    content: "";
+
+    position: absolute;
+
+    top: 18px;
+    right: 0;
+    bottom: 18px;
+
+    width: 1px;
+
+    background:
+        rgba(12,59,46,.12);
+}
+
+
+/* ==========================================================
+   HEADING
+========================================================== */
+
+.impacts-partners__heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.impacts-partners__heading h2 {
+    margin: 0;
+
+    color: #23483c;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 20px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+
+.impacts-partners__heading span {
+    color: #6d8878;
+
+    font-size: 13px;
+}
+
+
+.impacts-partners__heading-line {
+    display: block;
+
+    width: 28px;
+    height: 1px;
+
+    margin:
+        8px
+        0
+        18px;
+
+    background: #cda34e;
+}
+
+
+/* ==========================================================
+   PARTNER LOGOS
+========================================================== */
+
+.impacts-partners__logos {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 10px;
+
+    align-items: start;
+}
+
+
+.impacts-partners__logo {
+    min-width: 0;
+
+    text-align: center;
+}
+
+
+/* placeholder */
+
+.impacts-partners__logo-placeholder {
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 6px;
+
+    color: #2b6654;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12,59,46,.08);
+
+    border-radius: 5px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+.impacts-partners__logo > span {
+    display: block;
+
+    color: #3e4d47;
+
+    font-size: 7px;
+
+    line-height: 1.3;
+}
+
+
+/* ==========================================================
+   PARTNER NOTE
+========================================================== */
+
+.impacts-partners__note {
+    margin:
+        16px
+        0
+        0;
+
+    color: #5f6964;
+
+    font-size: 8px;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   SDG GRID
+========================================================== */
+
+.impacts-partners__sdg-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 9px;
+}
+
+
+/* ==========================================================
+   SDG PLACEHOLDER
+========================================================== */
+
+.impacts-partners__sdg-placeholder {
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px;
+
+    color: #ffffff;
+
+    border-radius: 5px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    text-align: center;
+}
+
+
+/* SDG colours */
+
+.impacts-partners__sdg-placeholder--4 {
+    background: #c5192d;
+}
+
+
+.impacts-partners__sdg-placeholder--5 {
+    background: #ff3a21;
+}
+
+
+.impacts-partners__sdg-placeholder--13 {
+    background: #3f7e44;
+}
+
+
+.impacts-partners__sdg-placeholder--16 {
+    background: #00689d;
+}
+
+
+.impacts-partners__sdg-placeholder--17 {
+    background: #19486a;
+}
+
+
+/* ==========================================================
+   SDG NOTE
+========================================================== */
+
+.impacts-partners__sdg-note {
+    margin:
+        14px
+        0
+        0;
+
+    color: #5f6964;
+
+    font-size: 8px;
+
+    text-align: center;
+}
+
+/* ==========================================================
+   IMPACTS — VOICES + JOURNEY
+========================================================== */
+
+.impacts-voices {
+    position: relative;
+
+    padding: 0 0 28px;
+
+    background: #fffdf9;
+}
+
+
+/* ==========================================================
+   SHARED PANEL
+========================================================== */
+
+.impacts-voices__panel {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, .95fr)
+        minmax(0, 1.05fr);
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8f4eb,
+            #fbf9f4
+        );
+
+    border:
+        1px solid rgba(12,59,46,.07);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+/* ==========================================================
+   BOTH SIDES
+========================================================== */
+
+.impacts-voices__community,
+.impacts-voices__journey {
+    position: relative;
+
+    min-width: 0;
+
+    padding:
+        22px
+        26px
+        20px;
+}
+
+
+.impacts-voices__community::after {
+    content: "";
+
+    position: absolute;
+
+    top: 18px;
+    right: 0;
+    bottom: 18px;
+
+    width: 1px;
+
+    background:
+        rgba(12,59,46,.12);
+}
+
+
+/* ==========================================================
+   HEADING
+========================================================== */
+
+.impacts-voices__heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 16px;
+}
+
+
+.impacts-voices__heading h2 {
+    margin: 0;
+
+    color: #22483c;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 20px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+
+.impacts-voices__heading span {
+    color: #6d8878;
+
+    font-size: 13px;
+}
+
+
+/* ==========================================================
+   COMMUNITY LAYOUT
+========================================================== */
+
+.impacts-voices__community-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, .9fr)
+        minmax(180px, 1.1fr);
+
+    gap: 18px;
+
+    align-items: stretch;
+}
+
+
+/* ==========================================================
+   QUOTE
+========================================================== */
+
+.impacts-voices__quote {
+    position: relative;
+
+    margin: 0;
+
+    padding:
+        14px
+        5px
+        10px
+        38px;
+}
+
+
+.impacts-voices__quote-mark {
+    position: absolute;
+
+    top: 5px;
+    left: 0;
+
+    color: #88a087;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 48px;
+
+    font-weight: 700;
+
+    line-height: .8;
+}
+
+
+.impacts-voices__quote p {
+    margin: 0;
+
+    color: #33483f;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 15px;
+
+    font-style: italic;
+
+    line-height: 1.5;
+}
+
+
+.impacts-voices__quote cite {
+    display: block;
+
+    margin-top: 13px;
+
+    color: #68736d;
+
+    font-size: 8px;
+
+    font-style: normal;
+}
+
+
+/* ==========================================================
+   IMAGE
+========================================================== */
+
+.impacts-voices__image {
+    min-height: 155px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    background: #7d917f;
+
+    border-radius: 8px;
+}
+
+
+.impacts-voices__image span {
+    padding:
+        5px
+        7px;
+
+    background: rgba(12,59,46,.58);
+
+    border-radius: 999px;
+
+    font-size: 7px;
+}
+
+
+/* ==========================================================
+   DOTS
+========================================================== */
+
+.impacts-voices__dots {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    margin-top: 9px;
+}
+
+
+.impacts-voices__dots span {
+    width: 6px;
+    height: 6px;
+
+    background: #c8c5b9;
+
+    border-radius: 50%;
+}
+
+
+.impacts-voices__dots .is-active {
+    background: #2c715b;
+}
+
+
+/* ==========================================================
+   JOURNEY TIMELINE
+========================================================== */
+
+.impacts-voices__timeline {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, minmax(0, 1fr));
+
+    gap: 8px;
+
+    margin-top: 28px;
+}
+
+
+/* connecting line */
+
+.impacts-voices__timeline-line {
+    position: absolute;
+
+    top: 23px;
+    left: 7%;
+    right: 7%;
+
+    height: 1px;
+
+    background:
+        repeating-linear-gradient(
+            to right,
+            #b9ad77 0,
+            #b9ad77 4px,
+            transparent 4px,
+            transparent 8px
+        );
+}
+
+
+/* ==========================================================
+   ITEM
+========================================================== */
+
+.impacts-voices__timeline-item {
+    position: relative;
+
+    z-index: 2;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   ICON
+========================================================== */
+
+.impacts-voices__timeline-icon {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin:
+        0
+        auto
+        9px;
+
+    color: #507360;
+
+    background: #dce6d7;
+
+    border:
+        5px solid #f8f4eb;
+
+    border-radius: 50%;
+
+    font-size: 14px;
+}
+
+
+.impacts-voices__timeline-item:nth-child(2)
+.impacts-voices__timeline-icon {
+    background: #cce0ca;
+}
+
+
+.impacts-voices__timeline-item:nth-child(3)
+.impacts-voices__timeline-icon {
+    background: #f2c5a8;
+}
+
+
+.impacts-voices__timeline-item:nth-child(4)
+.impacts-voices__timeline-icon {
+    background: #eed181;
+}
+
+
+.impacts-voices__timeline-item:nth-child(5)
+.impacts-voices__timeline-icon {
+    background: #c4dfe7;
+}
+
+
+.impacts-voices__timeline-item:nth-child(6)
+.impacts-voices__timeline-icon {
+    background: #efb28f;
+}
+
+
+/* ==========================================================
+   YEAR
+========================================================== */
+
+.impacts-voices__timeline-item strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #223b32;
+
+    font-size: 10px;
+}
+
+
+/* ==========================================================
+   LABEL
+========================================================== */
+
+.impacts-voices__timeline-item > span {
+    display: block;
+
+    color: #59655f;
+
+    font-size: 7px;
+
+    line-height: 1.35;
+}
+
+/* ==========================================================
+   IMPACTS — BOTTOM CTA
+========================================================== */
+
+.impacts-cta {
+    position: relative;
+
+    min-height: 260px;
+
+    overflow: hidden;
+
+    background: #173f35;
+}
+
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.impacts-cta__background {
+    position: absolute;
+
+    inset: 0;
+}
+
+
+/*
+FINAL IMAGE:
+assets/images/impacts/impacts-cta-bg.png
+*/
+
+.impacts-cta__background-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #e5b270 0%,
+            #9b8a64 35%,
+            #476551 70%,
+            #173f35 100%
+        );
+}
+
+
+.impacts-cta__background-placeholder span {
+    padding:
+        6px
+        10px;
+
+    color: rgba(255,255,255,.75);
+
+    background: rgba(12,59,46,.48);
+
+    border-radius: 999px;
+
+    font-size: 8px;
+}
+
+
+/* ==========================================================
+   OVERLAY
+========================================================== */
+
+.impacts-cta__overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,253,249,.78) 0%,
+            rgba(255,253,249,.60) 26%,
+            rgba(255,253,249,.20) 48%,
+            rgba(14,57,47,.20) 74%,
+            rgba(14,57,47,.46) 100%
+        );
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   LAYOUT
+========================================================== */
+
+.impacts-cta__layout {
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 260px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(320px, .85fr)
+        minmax(480px, 1.15fr);
+
+    gap: 35px;
+
+    align-items: stretch;
+}
+
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.impacts-cta__content {
+    align-self: center;
+
+    max-width: 420px;
+
+    padding:
+        42px
+        0;
+}
+
+
+.impacts-cta__content h2 {
+    margin: 0;
+
+    color: #19332b;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 32px;
+
+    font-weight: 400;
+
+    line-height: 1.08;
+
+    letter-spacing: -.025em;
+}
+
+
+.impacts-cta__content p {
+    margin:
+        10px
+        0
+        0;
+
+    color: #4d5f57;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================================
+   BUTTON
+========================================================== */
+
+.impacts-cta__button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 17px;
+
+    padding:
+        9px
+        14px;
+
+    color: #ffffff;
+
+    background: #10483a;
+
+    border-radius: 5px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        background-color .25s ease,
+        transform .25s ease;
+}
+
+
+.impacts-cta__button:hover {
+    color: #ffffff;
+
+    background: #0c382e;
+
+    transform: translateY(-2px);
+}
+
+
+.impacts-cta__button-icon {
+    font-size: 12px;
+}
+
+
+/* ==========================================================
+   RIGHT VISUAL
+========================================================== */
+
+.impacts-cta__visual {
+    position: relative;
+
+    min-height: 260px;
+}
+
+
+/* ==========================================================
+   PEOPLE PLACEHOLDER
+========================================================== */
+
+.impacts-cta__people-placeholder {
+    position: absolute;
+
+    right: 25px;
+    bottom: 0;
+
+    width: 430px;
+    height: 235px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255,255,255,.08);
+
+    border:
+        1px dashed rgba(255,255,255,.42);
+
+    border-radius:
+        45%
+        45%
+        0
+        0;
+}
+
+
+.impacts-cta__people-placeholder span {
+    padding:
+        6px
+        9px;
+
+    color: #ffffff;
+
+    background: rgba(12,59,46,.65);
+
+    border-radius: 999px;
+
+    font-size: 7px;
+}
+
+
+/* ==========================================================
+   DECORATIVE LEAVES
+========================================================== */
+
+.impacts-cta__leaf {
+    position: absolute;
+
+    z-index: 3;
+
+    color: rgba(218,177,85,.60);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 120px;
+
+    line-height: 1;
+
+    pointer-events: none;
+}
+
+
+.impacts-cta__leaf--left {
+    left: -35px;
+    bottom: -22px;
+
+    transform:
+        rotate(18deg);
+}
+
+
+.impacts-cta__leaf--right {
+    right: -30px;
+    bottom: -18px;
+
+    transform:
+        rotate(-28deg);
+}
+
+
+/* ==========================================================
+   FOOTER SPACING
+========================================================== */
+
+.impacts-page + .site-footer {
+    margin-top: 32px;
+}
+
+/* ==========================================================
+   IMPACTS PAGE — RESPONSIVE
+   Add this entire block at the END of impacts.css
+========================================================== */
+
+
+/* ==========================================================
+   TABLET / SMALL LAPTOP
+   1200px and below
+========================================================== */
+
+@media (max-width: 1200px) {
+
+    /* HERO */
+
+    .impacts-hero__layout {
+        grid-template-columns:
+            minmax(280px, .75fr)
+            minmax(0, 1.25fr);
+
+        gap: 35px;
+    }
+
+    .impacts-hero__title {
+        font-size: 50px;
+    }
+
+    .impacts-hero__script {
+        font-size: 31px;
+    }
+
+
+    /* RECOGNITION */
+
+    .impacts-recognition__grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    /* STATS */
+
+    .impacts-stats__grid {
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+        row-gap: 24px;
+    }
+
+    .impacts-stats__item:nth-child(4)::after {
+        display: none;
+    }
+
+
+    /* STORIES */
+
+    .impacts-stories__layout {
+        grid-template-columns:
+            minmax(220px, .6fr)
+            minmax(0, 1.4fr);
+
+        gap: 25px;
+    }
+
+
+    /* MAP */
+
+    .impacts-map__layout {
+        grid-template-columns:
+            minmax(0, 1.1fr)
+            minmax(350px, .9fr);
+
+        gap: 25px;
+    }
+
+
+    /* VOICES */
+
+    .impacts-voices__timeline-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    /* CTA */
+
+    .impacts-cta__layout {
+        grid-template-columns:
+            minmax(300px, .85fr)
+            minmax(0, 1.15fr);
+    }
+
+    .impacts-cta__people-placeholder {
+        width: min(400px, 100%);
+        right: 0;
+    }
+}
+
+
+
+/* ==========================================================
+   TABLET
+   992px and below
+========================================================== */
+
+@media (max-width: 992px) {
+
+    /* ------------------------------------------------------
+       HERO
+    ------------------------------------------------------ */
+
+    .impacts-hero {
+        margin-top: 35px;
+
+        padding:
+            45px
+            0
+            35px;
+    }
+
+    .impacts-hero__layout {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+    }
+
+    .impacts-hero__content {
+        max-width: 600px;
+    }
+
+    .impacts-hero__title {
+        font-size: 48px;
+    }
+
+    .impacts-hero__text {
+        max-width: 520px;
+
+        font-size: 13px;
+    }
+
+    .impacts-hero__visual {
+        min-height: 330px;
+    }
+
+    .impacts-hero__image-placeholder {
+        height: 330px;
+
+        border-radius:
+            100px
+            8px
+            8px
+            8px;
+    }
+
+
+    /* ------------------------------------------------------
+       RECOGNITION
+    ------------------------------------------------------ */
+
+    .impacts-recognition {
+        padding:
+            35px
+            0;
+    }
+
+    .impacts-recognition__grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 14px;
+    }
+
+    .impacts-recognition__card,
+    .impacts-recognition__image,
+    .impacts-recognition__quote {
+        min-height: 190px;
+    }
+
+    .impacts-recognition__card p {
+        font-size: 10px;
+    }
+
+    .impacts-recognition__quote p {
+        font-size: 13px;
+    }
+
+
+    /* ------------------------------------------------------
+       STATS
+    ------------------------------------------------------ */
+
+    .impacts-stats__grid {
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        row-gap: 28px;
+    }
+
+    .impacts-stats__item {
+        padding:
+            5px
+            12px;
+    }
+
+    .impacts-stats__item strong {
+        font-size: 30px;
+    }
+
+    .impacts-stats__item p {
+        font-size: 9px;
+    }
+
+    .impacts-stats__item:nth-child(4)::after {
+        display: none;
+    }
+
+
+    /* ------------------------------------------------------
+       STORIES
+    ------------------------------------------------------ */
+
+    .impacts-stories {
+        padding:
+            42px
+            0;
+    }
+
+    .impacts-stories__layout {
+        grid-template-columns: 1fr;
+
+        gap: 28px;
+    }
+
+    .impacts-stories__intro {
+        max-width: 600px;
+    }
+
+    .impacts-stories__intro h2 {
+        font-size: 30px;
+    }
+
+    .impacts-stories__intro p {
+        max-width: 520px;
+
+        font-size: 11px;
+    }
+
+    .impacts-stories__grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .impacts-story-card__content p {
+        font-size: 9px;
+    }
+
+
+    /* ------------------------------------------------------
+       MAP
+    ------------------------------------------------------ */
+
+    .impacts-map__layout {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .impacts-map__map {
+        max-width: 750px;
+
+        margin:
+            0
+            auto;
+    }
+
+    .impacts-map__content {
+        max-width: 750px;
+
+        margin:
+            0
+            auto;
+
+        width: 100%;
+    }
+
+    .impacts-map__regions {
+        row-gap: 20px;
+    }
+
+    .impacts-map__region h3 {
+        font-size: 13px;
+    }
+
+    .impacts-map__region p {
+        font-size: 10px;
+    }
+
+
+    /* ------------------------------------------------------
+       PARTNERS + SDGs
+    ------------------------------------------------------ */
+
+    .impacts-partners__panel {
+        grid-template-columns: 1fr;
+    }
+
+    .impacts-partners__featured::after {
+        top: auto;
+        right: 25px;
+        bottom: 0;
+        left: 25px;
+
+        width: auto;
+        height: 1px;
+    }
+
+    .impacts-partners__featured,
+    .impacts-partners__sdgs {
+        padding:
+            25px
+            28px;
+    }
+
+    .impacts-partners__logo > span {
+        font-size: 8px;
+    }
+
+
+    /* ------------------------------------------------------
+       VOICES + JOURNEY
+    ------------------------------------------------------ */
+
+    .impacts-voices__panel {
+        grid-template-columns: 1fr;
+    }
+
+    .impacts-voices__community::after {
+        top: auto;
+        right: 25px;
+        bottom: 0;
+        left: 25px;
+
+        width: auto;
+        height: 1px;
+    }
+
+    .impacts-voices__community,
+    .impacts-voices__journey {
+        padding:
+            26px
+            28px;
+    }
+
+    .impacts-voices__community-layout {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(250px, 1fr);
+    }
+
+    .impacts-voices__timeline {
+        max-width: 700px;
+
+        margin:
+            28px
+            auto
+            0;
+    }
+
+
+    /* ------------------------------------------------------
+       CTA
+    ------------------------------------------------------ */
+
+    .impacts-cta__layout {
+        grid-template-columns:
+            minmax(280px, .8fr)
+            minmax(0, 1.2fr);
+
+        gap: 20px;
+    }
+
+    .impacts-cta__content h2 {
+        font-size: 29px;
+    }
+
+    .impacts-cta__people-placeholder {
+        width: 100%;
+        max-width: 380px;
+
+        right: 0;
+    }
+}
+
+
+
+/* ==========================================================
+   MOBILE / LARGE PHONE
+   767px and below
+========================================================== */
+
+@media (max-width: 767px) {
+
+    /* ------------------------------------------------------
+       HERO
+    ------------------------------------------------------ */
+
+    .impacts-hero {
+        margin-top: 20px;
+
+        padding:
+            34px
+            0
+            30px;
+    }
+
+    .impacts-hero__layout {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+    }
+
+    .impacts-hero__content {
+        max-width: 100%;
+    }
+
+    .impacts-hero__title {
+        font-size: 42px;
+    }
+
+    .impacts-hero__script {
+        font-size: 28px;
+    }
+
+    .impacts-hero__text {
+        max-width: 100%;
+
+        margin-top: 15px;
+
+        font-size: 12px;
+
+        line-height: 1.65;
+    }
+
+    .impacts-hero__signature {
+        margin-top: 16px;
+
+        font-size: 24px;
+    }
+
+    .impacts-hero__visual {
+        min-height: 260px;
+    }
+
+    .impacts-hero__image-placeholder {
+        height: 260px;
+
+        border-radius:
+            70px
+            6px
+            6px
+            6px;
+    }
+
+
+    /* ------------------------------------------------------
+       RECOGNITION
+    ------------------------------------------------------ */
+
+    .impacts-recognition {
+        padding:
+            30px
+            0
+            34px;
+    }
+
+    .impacts-recognition__heading {
+        justify-content: flex-start;
+
+        margin-bottom: 18px;
+    }
+
+    .impacts-recognition__heading h2 {
+        font-size: 21px;
+    }
+
+    .impacts-recognition__grid {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .impacts-recognition__card,
+    .impacts-recognition__image,
+    .impacts-recognition__quote {
+        min-height: 180px;
+    }
+
+    .impacts-recognition__card {
+        padding: 22px;
+    }
+
+    .impacts-recognition__card h3 {
+        font-size: 17px;
+    }
+
+    .impacts-recognition__card p {
+        font-size: 11px;
+    }
+
+    .impacts-recognition__eyebrow {
+        font-size: 8px;
+    }
+
+    .impacts-recognition__quote {
+        padding:
+            30px
+            25px
+            25px
+            48px;
+    }
+
+    .impacts-recognition__quote p {
+        font-size: 14px;
+    }
+
+    .impacts-recognition__quote cite {
+        font-size: 10px;
+    }
+
+
+    /* ------------------------------------------------------
+       STATS
+    ------------------------------------------------------ */
+
+    .impacts-stats {
+        min-height: auto;
+    }
+
+    .impacts-stats__inner {
+        min-height: auto;
+
+        padding:
+            35px
+            0;
+    }
+
+    .impacts-stats__heading {
+        margin-bottom: 28px;
+    }
+
+    .impacts-stats__heading h2 {
+        font-size: 22px;
+    }
+
+    .impacts-stats__grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        row-gap: 0;
+    }
+
+    .impacts-stats__item {
+        min-height: 105px;
+
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 18px 10px;
+
+        border-bottom:
+            1px solid rgba(255,255,255,.14);
+    }
+
+    .impacts-stats__item::after,
+    .impacts-stats__item:nth-child(4)::after {
+        display: block !important;
+
+        top: 18px !important;
+        bottom: 18px !important;
+    }
+
+    .impacts-stats__item:nth-child(even)::after,
+    .impacts-stats__item:last-child::after {
+        display: none !important;
+    }
+
+    .impacts-stats__item:nth-last-child(-n+2) {
+        border-bottom: 0;
+    }
+
+    .impacts-stats__item strong {
+        font-size: 32px;
+    }
+
+    .impacts-stats__item p {
+        max-width: 130px;
+
+        font-size: 9px;
+    }
+
+
+    /* ------------------------------------------------------
+       STORIES
+    ------------------------------------------------------ */
+
+    .impacts-stories {
+        padding:
+            38px
+            0;
+    }
+
+    .impacts-stories__layout {
+        grid-template-columns: 1fr;
+
+        gap: 26px;
+    }
+
+    .impacts-stories__intro {
+        max-width: 100%;
+    }
+
+    .impacts-stories__eyebrow {
+        font-size: 9px;
+    }
+
+    .impacts-stories__intro h2 {
+        font-size: 29px;
+    }
+
+    .impacts-stories__intro p {
+        font-size: 11px;
+    }
+
+    .impacts-stories__button {
+        padding:
+            10px
+            14px;
+
+        font-size: 9px;
+    }
+
+    .impacts-stories__grid {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .impacts-story-card__image {
+        min-height: 210px;
+    }
+
+    .impacts-story-card__content {
+        padding:
+            17px
+            16px;
+    }
+
+    .impacts-story-card__content h3 {
+        font-size: 18px;
+    }
+
+    .impacts-story-card__content p {
+        font-size: 11px;
+    }
+
+    .impacts-story-card__content a {
+        font-size: 9px;
+    }
+
+
+    /* ------------------------------------------------------
+       MAP
+    ------------------------------------------------------ */
+
+    .impacts-map {
+        padding:
+            20px
+            0
+            32px;
+    }
+
+    .impacts-map__layout {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+
+        padding-bottom: 25px;
+    }
+
+    .impacts-map__map {
+        min-height: 220px;
+
+        aspect-ratio: 1.65 / 1;
+    }
+
+    .impacts-map__map-label {
+        font-size: 10px;
+    }
+
+    .impacts-map__pin {
+        width: 11px;
+        height: 11px;
+
+        border-width: 2px;
+    }
+
+    .impacts-map__heading h2 {
+        font-size: 25px;
+    }
+
+    .impacts-map__regions {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap:
+            20px
+            0;
+    }
+
+    .impacts-map__region {
+        padding:
+            0
+            15px
+            0
+            0;
+    }
+
+    .impacts-map__region:nth-child(3n + 2),
+    .impacts-map__region:nth-child(3n + 3) {
+        padding-left: 0;
+    }
+
+    .impacts-map__region:nth-child(even) {
+        padding-left: 15px;
+    }
+
+    .impacts-map__region::after {
+        display: none;
+    }
+
+    .impacts-map__region:nth-child(odd)::after {
+        content: "";
+
+        display: block;
+
+        position: absolute;
+
+        top: 0;
+        right: 0;
+        bottom: 0;
+
+        width: 1px;
+
+        background:
+            rgba(12,59,46,.14);
+    }
+
+    .impacts-map__region h3 {
+        font-size: 13px;
+    }
+
+    .impacts-map__region p {
+        font-size: 9px;
+    }
+
+
+    /* ------------------------------------------------------
+       PARTNERS + SDGs
+    ------------------------------------------------------ */
+
+    .impacts-partners {
+        padding-bottom: 24px;
+    }
+
+    .impacts-partners__panel {
+        grid-template-columns: 1fr;
+    }
+
+    .impacts-partners__featured,
+    .impacts-partners__sdgs {
+        padding:
+            23px
+            20px;
+    }
+
+    .impacts-partners__heading h2 {
+        font-size: 19px;
+    }
+
+    .impacts-partners__logos {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap:
+            16px
+            10px;
+    }
+
+    .impacts-partners__logo-placeholder {
+        height: 55px;
+    }
+
+    .impacts-partners__logo > span {
+        font-size: 8px;
+    }
+
+    .impacts-partners__sdg-grid {
+        grid-template-columns:
+            repeat(5, minmax(0, 1fr));
+
+        gap: 6px;
+    }
+
+    .impacts-partners__sdg-placeholder {
+        font-size: 8px;
+    }
+
+
+    /* ------------------------------------------------------
+       VOICES
+    ------------------------------------------------------ */
+
+    .impacts-voices__panel {
+        grid-template-columns: 1fr;
+    }
+
+    .impacts-voices__community,
+    .impacts-voices__journey {
+        padding:
+            24px
+            20px;
+    }
+
+    .impacts-voices__heading h2 {
+        font-size: 20px;
+    }
+
+    .impacts-voices__community-layout {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .impacts-voices__quote {
+        padding:
+            14px
+            10px
+            10px
+            38px;
+    }
+
+    .impacts-voices__quote p {
+        font-size: 15px;
+    }
+
+    .impacts-voices__image {
+        min-height: 220px;
+    }
+
+
+    /* JOURNEY */
+
+    .impacts-voices__timeline {
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap:
+            24px
+            8px;
+
+        margin-top: 22px;
+    }
+
+    .impacts-voices__timeline-line {
+        display: none;
+    }
+
+    .impacts-voices__timeline-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .impacts-voices__timeline-item strong {
+        font-size: 11px;
+    }
+
+    .impacts-voices__timeline-item > span {
+        font-size: 8px;
+    }
+
+
+    /* ------------------------------------------------------
+       CTA
+    ------------------------------------------------------ */
+
+    .impacts-cta {
+        min-height: auto;
+    }
+
+    .impacts-cta__layout {
+        min-height: auto;
+
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+    .impacts-cta__content {
+        position: relative;
+
+        z-index: 3;
+
+        max-width: 100%;
+
+        padding:
+            40px
+            0
+            20px;
+    }
+
+    .impacts-cta__content h2 {
+        max-width: 380px;
+
+        font-size: 30px;
+    }
+
+    .impacts-cta__content p {
+        font-size: 11px;
+    }
+
+    .impacts-cta__button {
+        padding:
+            10px
+            15px;
+
+        font-size: 10px;
+    }
+
+    .impacts-cta__visual {
+        min-height: 240px;
+    }
+
+    .impacts-cta__people-placeholder {
+        right: 50%;
+
+        width: min(430px, 94%);
+        height: 225px;
+
+        transform:
+            translateX(50%);
+    }
+
+    .impacts-cta__leaf {
+        font-size: 85px;
+    }
+
+    .impacts-page + .site-footer {
+        margin-top: 24px;
+    }
+}
+
+
+
+/* ==========================================================
+   SMALL MOBILE
+   480px and below
+========================================================== */
+
+@media (max-width: 480px) {
+
+    /* HERO */
+
+    .impacts-hero {
+        padding-top: 28px;
+    }
+
+    .impacts-hero__title {
+        font-size: 37px;
+    }
+
+    .impacts-hero__script {
+        font-size: 25px;
+    }
+
+    .impacts-hero__visual {
+        min-height: 225px;
+    }
+
+    .impacts-hero__image-placeholder {
+        height: 225px;
+
+        border-radius:
+            50px
+            6px
+            6px
+            6px;
+    }
+
+
+    /* SECTION TITLES */
+
+    .impacts-recognition__heading h2,
+    .impacts-stats__heading h2,
+    .impacts-partners__heading h2,
+    .impacts-voices__heading h2 {
+        font-size: 19px;
+    }
+
+
+    /* STATS */
+
+    .impacts-stats__item {
+        min-height: 100px;
+    }
+
+    .impacts-stats__item strong {
+        font-size: 29px;
+    }
+
+
+    /* STORIES */
+
+    .impacts-stories__intro h2 {
+        font-size: 26px;
+    }
+
+    .impacts-story-card__image {
+        min-height: 185px;
+    }
+
+
+    /* MAP */
+
+    .impacts-map__map {
+        min-height: 190px;
+    }
+
+    .impacts-map__map-label {
+        font-size: 8px;
+    }
+
+    .impacts-map__heading h2 {
+        font-size: 23px;
+    }
+
+    .impacts-map__regions {
+        grid-template-columns: 1fr;
+
+        row-gap: 16px;
+    }
+
+    .impacts-map__region,
+    .impacts-map__region:nth-child(even) {
+        padding:
+            0
+            0
+            12px;
+    }
+
+    .impacts-map__region:nth-child(odd)::after {
+        display: none;
+    }
+
+    .impacts-map__region {
+        border-bottom:
+            1px solid rgba(12,59,46,.10);
+    }
+
+    .impacts-map__region:last-child {
+        border-bottom: 0;
+    }
+
+
+    /* PARTNERS */
+
+    .impacts-partners__logos {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .impacts-partners__sdg-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 8px;
+    }
+
+
+    /* JOURNEY */
+
+    .impacts-voices__timeline {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        row-gap: 24px;
+    }
+
+
+    /* CTA */
+
+    .impacts-cta__content h2 {
+        font-size: 27px;
+    }
+
+    .impacts-cta__visual {
+        min-height: 205px;
+    }
+
+    .impacts-cta__people-placeholder {
+        height: 195px;
+    }
+
+    .impacts-cta__leaf {
+        font-size: 65px;
+    }
+}

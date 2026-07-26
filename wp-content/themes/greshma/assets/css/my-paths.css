@@ -1,0 +1,2331 @@
+/* ==========================================================
+   MY PATHS PAGE
+========================================================== */
+
+.my-paths-page {
+    background: #fffdf9;
+}
+
+
+/* ==========================================================
+   MY PATHS HERO
+========================================================== */
+
+.my-paths-hero {
+    position: relative;
+    margin-top: 50px;
+
+    padding: 78px 0 58px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fffdf9 0%,
+            #fffdf9 48%,
+            #fbf8f0 100%
+        );
+}
+
+
+/* ==========================================================
+   MAIN LAYOUT
+========================================================== */
+
+.my-paths-hero__layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, .88fr)
+        minmax(250px, .72fr)
+        minmax(520px, 1.4fr);
+
+    gap: 42px;
+
+    align-items: center;
+}
+
+
+/* ==========================================================
+   LEFT INTRO
+========================================================== */
+
+.my-paths-hero__intro {
+    max-width: 370px;
+}
+
+
+.my-paths-hero__eyebrow {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+
+    color: #9b762c;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .11em;
+
+    text-transform: uppercase;
+}
+
+
+.my-paths-hero__leaf {
+    color: #6d8978;
+
+    font-size: 15px;
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.my-paths-hero__title {
+    margin: 0;
+
+    color: #17221d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 47px;
+
+    font-weight: 400;
+
+    line-height: 1.05;
+
+    letter-spacing: -.035em;
+}
+
+
+.my-paths-hero__title em {
+    display: block;
+
+    color: var(--primary);
+
+    font-weight: 400;
+
+    font-style: italic;
+}
+
+
+/* ==========================================================
+   DIVIDER
+========================================================== */
+
+.my-paths-hero__divider {
+    width: 62px;
+    height: 1px;
+
+    margin: 22px 0 18px;
+
+    background: var(--secondary);
+}
+
+
+/* ==========================================================
+   INTRO TEXT
+========================================================== */
+
+.my-paths-hero__text {
+    max-width: 320px;
+
+    margin: 0;
+
+    color: #53615b;
+
+    font-size: 12px;
+
+    line-height: 1.75;
+}
+
+
+/* ==========================================================
+   DOWNLOAD BUTTON
+========================================================== */
+
+.my-paths-hero__button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 22px;
+
+    padding: 8px 10px 8px 17px;
+
+    color: #ffffff;
+
+    background: var(--primary);
+
+    border-radius: 6px;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background-color .25s ease,
+        transform .25s ease;
+}
+
+
+.my-paths-hero__button:hover {
+    color: #ffffff;
+
+    background: var(--primary-dark);
+
+    transform: translateY(-2px);
+}
+
+
+.my-paths-hero__button-icon {
+    width: 27px;
+    height: 27px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-left:
+        1px solid rgba(255,255,255,.18);
+}
+
+
+/* ==========================================================
+   CENTER STORY
+========================================================== */
+
+.my-paths-hero__story {
+    max-width: 280px;
+
+    align-self: center;
+}
+
+
+.my-paths-hero__story p {
+    margin: 0 0 13px;
+
+    color: #35433d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+}
+
+
+/* ==========================================================
+   SIGNATURE
+========================================================== */
+
+.my-paths-hero__signature {
+    margin-top: 23px;
+
+    color: #214a3e;
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size: 27px;
+
+    font-style: italic;
+}
+
+
+.my-paths-hero__signature-line {
+    display: block;
+
+    width: 58px;
+    height: 1px;
+
+    margin-top: 8px;
+
+    background: var(--secondary);
+}
+
+
+/* ==========================================================
+   RIGHT COLLAGE
+========================================================== */
+
+.my-paths-hero__visual {
+    position: relative;
+
+    min-height: 390px;
+}
+
+
+/* Shared photo style */
+
+.my-paths-hero__photo {
+    position: absolute;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 14px 30px rgba(12,59,46,.08);
+}
+
+
+.my-paths-hero__photo span {
+    max-width: 90%;
+
+    padding: 6px 9px;
+
+    color: #ffffff;
+
+    background: rgba(12,59,46,.64);
+
+    border-radius: 999px;
+
+    font-size: 8px;
+
+    line-height: 1.25;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   IMAGE 01
+   SMALL UPPER-LEFT
+========================================================== */
+
+.my-paths-hero__photo--1 {
+    top: 55px;
+    left: 0;
+
+    width: 155px;
+    height: 125px;
+
+    background: #98a98f;
+
+    z-index: 2;
+}
+
+
+/* ==========================================================
+   IMAGE 02
+   LARGE UPPER-RIGHT
+========================================================== */
+
+.my-paths-hero__photo--2 {
+    top: 0;
+    right: 25px;
+
+    width: 235px;
+    height: 180px;
+
+    background: #6f876e;
+
+    z-index: 3;
+}
+
+
+/* ==========================================================
+   IMAGE 03
+   SMALL LOWER-LEFT
+========================================================== */
+
+.my-paths-hero__photo--3 {
+    left: 28px;
+    bottom: 22px;
+
+    width: 155px;
+    height: 115px;
+
+    background: #879a84;
+
+    z-index: 3;
+}
+
+
+/* ==========================================================
+   IMAGE 04
+   WIDE LOWER-RIGHT
+========================================================== */
+
+.my-paths-hero__photo--4 {
+    right: 0;
+    bottom: 0;
+
+    width: 300px;
+    height: 135px;
+
+    background: #647c68;
+
+    z-index: 2;
+}
+
+
+/* ==========================================================
+   BOTANICAL DECORATION
+========================================================== */
+
+.my-paths-hero__botanical {
+    position: absolute;
+
+    top: 22px;
+    right: -20px;
+
+    color: rgba(76,107,82,.17);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 135px;
+
+    line-height: 1;
+
+    transform: rotate(-25deg);
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+/* ==========================================================
+   MY PATHS — KEY MOMENTS + EDUCATION SIDEBAR
+========================================================== */
+
+.my-paths-moments {
+    position: relative;
+
+    padding: 35px 0 70px;
+
+    background: #fffdf9;
+
+    overflow: hidden;
+}
+
+
+/* ==========================================================
+   HEADING
+========================================================== */
+
+.my-paths-moments__heading {
+    margin-bottom: 32px;
+
+    text-align: center;
+}
+
+
+.my-paths-moments__heading h2 {
+    margin: 0;
+
+    color: #173f35;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 30px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+
+.my-paths-moments__heading-decoration {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 7px;
+
+    color: #718a79;
+}
+
+
+.my-paths-moments__heading-decoration span:first-child,
+.my-paths-moments__heading-decoration span:last-child {
+    width: 26px;
+    height: 1px;
+
+    background: #d2b26a;
+}
+
+
+.my-paths-moments__heading-decoration span:nth-child(2) {
+    font-size: 13px;
+}
+
+
+/* ==========================================================
+   MAIN LAYOUT
+========================================================== */
+
+.my-paths-moments__layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(190px, 225px);
+
+    gap: 42px;
+
+    align-items: start;
+}
+
+
+/* ==========================================================
+   LEFT TIMELINE
+========================================================== */
+
+.my-paths-moments__timeline {
+    position: relative;
+}
+
+
+.my-paths-moments__center-line {
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    left: 50%;
+
+    width: 1px;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            #c6af79 0,
+            #c6af79 2px,
+            transparent 2px,
+            transparent 6px
+        );
+
+    transform: translateX(-50%);
+}
+
+
+/* ==========================================================
+   MOMENT ROW
+========================================================== */
+
+.my-paths-moment {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        58px
+        minmax(0, 1fr);
+
+    gap: 22px;
+
+    align-items: center;
+
+    min-height: 210px;
+
+    margin-bottom: 8px;
+}
+
+
+.my-paths-moment:last-child {
+    margin-bottom: 0;
+}
+
+
+.my-paths-moment__left,
+.my-paths-moment__right {
+    min-width: 0;
+}
+
+
+/* ==========================================================
+   IMAGE PLACEHOLDER
+========================================================== */
+
+.my-paths-moment__image {
+    width: 100%;
+    max-width: 290px;
+
+    min-height: 165px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #8fa18d;
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 11px 24px rgba(12,59,46,.08);
+}
+
+
+.my-paths-moment--left
+.my-paths-moment__left
+.my-paths-moment__image {
+    margin-left: auto;
+}
+
+
+.my-paths-moment--right
+.my-paths-moment__right
+.my-paths-moment__image {
+    margin-right: auto;
+}
+
+
+.my-paths-moment:nth-child(2)
+.my-paths-moment__image {
+    background: #71876f;
+}
+
+
+.my-paths-moment:nth-child(3)
+.my-paths-moment__image {
+    background: #94a88d;
+}
+
+
+.my-paths-moment:nth-child(4)
+.my-paths-moment__image {
+    background: #69806d;
+}
+
+
+.my-paths-moment:nth-child(5)
+.my-paths-moment__image {
+    background: #899b85;
+}
+
+
+.my-paths-moment:nth-child(6)
+.my-paths-moment__image {
+    background: #758d7d;
+}
+
+
+.my-paths-moment:nth-child(7)
+.my-paths-moment__image {
+    background: #607967;
+}
+
+
+.my-paths-moment__image span {
+    max-width: 85%;
+
+    padding: 6px 9px;
+
+    color: #ffffff;
+
+    background: rgba(12,59,46,.62);
+
+    border-radius: 999px;
+
+    font-size: 8px;
+
+    line-height: 1.3;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.my-paths-moment__content {
+    max-width: 305px;
+}
+
+
+.my-paths-moment--left
+.my-paths-moment__right
+.my-paths-moment__content {
+    margin-right: auto;
+}
+
+
+.my-paths-moment--right
+.my-paths-moment__left
+.my-paths-moment__content {
+    margin-left: auto;
+}
+
+
+.my-paths-moment__number {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #1b4b3d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 28px;
+
+    line-height: 1;
+}
+
+
+.my-paths-moment__content h3 {
+    margin: 0 0 5px;
+
+    color: #1d4538;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 20px;
+
+    font-weight: 400;
+
+    line-height: 1.15;
+}
+
+
+.my-paths-moment__period {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #b3832d;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    line-height: 1.3;
+}
+
+
+.my-paths-moment__content p {
+    margin: 0;
+
+    color: #56625c;
+
+    font-size: 9px;
+
+    line-height: 1.6;
+}
+
+
+/* ==========================================================
+   CENTER MARKER
+========================================================== */
+
+.my-paths-moment__marker {
+    position: relative;
+
+    z-index: 3;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: auto;
+
+    color: #ffffff;
+
+    background: #0f493a;
+
+    border: 5px solid #fffdf9;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 1px rgba(12,59,46,.10);
+}
+
+
+.my-paths-moment__marker span {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 16px;
+
+    line-height: 1;
+}
+
+
+.my-paths-moment:nth-child(even)
+.my-paths-moment__marker {
+    background: #bd8526;
+}
+
+
+/* ==========================================================
+   RIGHT SIDEBAR
+========================================================== */
+
+.my-paths-moments__sidebar {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+
+    padding-top: 22px;
+}
+
+
+/* ==========================================================
+   QUOTE CARD
+========================================================== */
+
+.my-paths-moments__quote {
+    position: relative;
+
+    min-height: 360px;
+
+    margin: 0;
+
+    padding: 42px 28px 36px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            155deg,
+            #f4f1e9,
+            #faf8f1
+        );
+
+    border:
+        1px solid rgba(12,59,46,.07);
+
+    border-radius: 25px;
+}
+
+
+.my-paths-moments__quote-mark {
+    display: block;
+
+    margin-bottom: 16px;
+
+    color: #0f493a;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 52px;
+
+    font-weight: 700;
+
+    line-height: .65;
+}
+
+
+.my-paths-moments__quote p {
+    margin: 0;
+
+    color: #183d32;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 22px;
+
+    font-style: italic;
+
+    line-height: 1.42;
+}
+
+
+.my-paths-moments__quote cite {
+    display: block;
+
+    margin-top: 25px;
+
+    color: #344b42;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 10px;
+
+    font-style: italic;
+}
+
+
+.my-paths-moments__quote-leaf {
+    position: absolute;
+
+    right: 15px;
+    bottom: 10px;
+
+    color: rgba(77,107,84,.20);
+
+    font-size: 100px;
+
+    line-height: 1;
+
+    transform: rotate(-25deg);
+}
+
+
+/* ==========================================================
+   EDUCATION CARD
+========================================================== */
+
+.my-paths-education-card {
+    position: relative;
+
+    padding: 24px 19px 25px;
+
+    background: #f7f3e9;
+
+    border:
+        1px solid rgba(12,59,46,.08);
+
+    border-radius: 15px;
+}
+
+
+/* ==========================================================
+   EDUCATION HEADING
+========================================================== */
+
+.my-paths-education-card__heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 22px;
+
+    color: #17483b;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: .1em;
+
+    text-transform: uppercase;
+}
+
+
+.my-paths-education-card__heading span:last-child {
+    color: #af8737;
+
+    font-size: 13px;
+}
+
+
+/* ==========================================================
+   EDUCATION TIMELINE
+========================================================== */
+
+.my-paths-education-card__timeline {
+    position: relative;
+}
+
+
+.my-paths-education-card__timeline::before {
+    content: "";
+
+    position: absolute;
+
+    top: 8px;
+    bottom: 8px;
+
+    left: 41px;
+
+    width: 1px;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            #c7a65e 0,
+            #c7a65e 3px,
+            transparent 3px,
+            transparent 7px
+        );
+}
+
+
+/* ==========================================================
+   EDUCATION ITEM
+========================================================== */
+
+.my-paths-education-card__item {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        30px
+        22px
+        minmax(0, 1fr);
+
+    gap: 7px;
+
+    padding-bottom: 25px;
+}
+
+
+.my-paths-education-card__item:last-child {
+    padding-bottom: 0;
+}
+
+
+/* Year */
+
+.my-paths-education-card__year {
+    padding-top: 3px;
+
+    color: #a37b30;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+
+/* Marker */
+
+.my-paths-education-card__marker {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: center;
+
+    padding-top: 4px;
+}
+
+
+.my-paths-education-card__marker span {
+    width: 9px;
+    height: 9px;
+
+    display: block;
+
+    background: #1c5343;
+
+    border: 3px solid #f7f3e9;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 1px #c7a65e;
+}
+
+
+/* Content */
+
+.my-paths-education-card__content h3 {
+    margin: 0 0 4px;
+
+    color: #21483b;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 11px;
+
+    font-weight: 400;
+
+    line-height: 1.35;
+}
+
+
+.my-paths-education-card__content p {
+    margin: 0;
+
+    color: #78827d;
+
+    font-size: 8px;
+
+    line-height: 1.45;
+}
+
+/* ==========================================================
+   MY PATHS — IMPACT SUMMARY
+   Matches approved My Paths reference
+========================================================== */
+
+.my-paths-impact {
+    position: relative;
+
+    padding: 0 0 24px;
+
+    background: #fffdf9;
+}
+
+
+/* ==========================================================
+   PANEL
+========================================================== */
+
+.my-paths-impact__panel {
+    padding: 18px 28px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4f0e5,
+            #f8f5ed
+        );
+
+    border:
+        1px solid rgba(12,59,46,.06);
+
+    border-radius: 15px;
+}
+
+
+/* ==========================================================
+   HEADING
+========================================================== */
+
+.my-paths-impact__heading {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+}
+
+
+.my-paths-impact__heading h2 {
+    margin: 0;
+
+    color: #21463a;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 20px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+
+.my-paths-impact__heading-leaf {
+    color: #668274;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.my-paths-impact__grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    align-items: stretch;
+}
+
+
+/* ==========================================================
+   ITEM
+========================================================== */
+
+.my-paths-impact__item {
+    position: relative;
+
+    min-width: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        38px
+        minmax(0, 1fr);
+
+    grid-template-rows:
+        auto
+        auto;
+
+    column-gap: 10px;
+
+    align-items: center;
+
+    padding: 5px 20px;
+
+    text-align: left;
+}
+
+
+/* separators */
+
+.my-paths-impact__item:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    top: 4px;
+    right: 0;
+    bottom: 4px;
+
+    width: 1px;
+
+    background:
+        rgba(12,59,46,.12);
+}
+
+
+/* ==========================================================
+   ICON
+========================================================== */
+
+.my-paths-impact__icon {
+    grid-row:
+        1 / span 2;
+
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #18483b;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 25px;
+
+    line-height: 1;
+}
+
+
+/* ==========================================================
+   NUMBER
+========================================================== */
+
+.my-paths-impact__number {
+    color: #173f35;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 25px;
+
+    font-weight: 400;
+
+    line-height: 1;
+}
+
+
+.my-paths-impact__number span {
+    color: #a97f2f;
+
+    font-size: .65em;
+
+    vertical-align: top;
+}
+
+
+/* ==========================================================
+   LABEL
+========================================================== */
+
+.my-paths-impact__item p {
+    margin: 4px 0 0;
+
+    color: #53635b;
+
+    font-size: 8px;
+
+    font-weight: 500;
+
+    line-height: 1.35;
+}
+
+/* ==========================================================
+   MY PATHS — BOTTOM CTA
+   Matches approved My Paths reference
+========================================================== */
+
+.my-paths-cta {
+    position: relative;
+
+    min-height: 210px;
+
+    overflow: hidden;
+
+    background: #0d3b31;
+
+    color: #ffffff;
+}
+
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.my-paths-cta__background {
+    position: absolute;
+
+    inset: 0;
+}
+
+
+/*
+FINAL IMAGE:
+assets/images/my-paths/my-paths-cta-bg.png
+*/
+
+.my-paths-cta__background-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #67806e 0%,
+            #355846 48%,
+            #173f35 100%
+        );
+}
+
+
+.my-paths-cta__background-placeholder span {
+    padding: 7px 11px;
+
+    color: rgba(255,255,255,.55);
+
+    background: rgba(11,50,41,.48);
+
+    border-radius: 999px;
+
+    font-size: 8px;
+
+    letter-spacing: .08em;
+}
+
+
+/* ==========================================================
+   DARK OVERLAY
+========================================================== */
+
+.my-paths-cta__overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8,44,35,.96) 0%,
+            rgba(8,44,35,.90) 42%,
+            rgba(8,44,35,.66) 72%,
+            rgba(8,44,35,.52) 100%
+        );
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   LAYOUT
+========================================================== */
+
+.my-paths-cta__layout {
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 210px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    padding: 30px 0;
+}
+
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.my-paths-cta__content {
+    max-width: 540px;
+}
+
+
+.my-paths-cta__content h2 {
+    margin: 0;
+
+    color: #fffaf0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 28px;
+
+    font-weight: 400;
+
+    line-height: 1.15;
+
+    letter-spacing: -.02em;
+}
+
+
+.my-paths-cta__content p {
+    margin: 11px 0 0;
+
+    color: #d2b56f;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================================
+   BUTTON
+========================================================== */
+
+.my-paths-cta__button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 16px;
+
+    padding: 9px 14px;
+
+    color: #173f35;
+
+    background: #e9c472;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        background-color .25s ease,
+        transform .25s ease;
+}
+
+
+.my-paths-cta__button:hover {
+    color: #173f35;
+
+    background: #f3d695;
+
+    transform: translateY(-2px);
+}
+
+
+.my-paths-cta__button-icon {
+    font-size: 13px;
+}
+
+
+/* ==========================================================
+   SOCIAL LINKS
+========================================================== */
+
+.my-paths-cta__socials {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.my-paths-cta__socials a {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #ffffff;
+
+    border:
+        1px solid rgba(255,255,255,.34);
+
+    border-radius: 50%;
+
+    background: rgba(8,44,35,.34);
+
+    transition:
+        color .25s ease,
+        background-color .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
+}
+
+
+.my-paths-cta__socials a:hover {
+    color: #173f35;
+
+    background: #e1bc69;
+
+    border-color: #e1bc69;
+
+    transform: translateY(-2px);
+}
+
+
+/* Force icon size */
+
+.my-paths-cta__socials svg,
+.my-paths-cta__socials .icon {
+    display: block !important;
+
+    width: 16px !important;
+    height: 16px !important;
+
+    min-width: 16px !important;
+    min-height: 16px !important;
+
+    max-width: 16px !important;
+    max-height: 16px !important;
+}
+
+
+.my-paths-cta__socials .icon-instagram,
+.my-paths-cta__socials .icon-email {
+    fill: none !important;
+
+    stroke: currentColor !important;
+
+    stroke-width: 1.7 !important;
+}
+
+
+.my-paths-cta__socials .icon-linkedin,
+.my-paths-cta__socials .icon-youtube {
+    fill: currentColor !important;
+
+    stroke: none !important;
+}
+
+   .my-paths-page + .site-footer {
+        margin-top: 30px;
+    }
+/* ==========================================================
+   MY PATHS — RESPONSIVE
+========================================================== */
+
+
+/* ==========================================================
+   SMALL DESKTOP / TABLET LANDSCAPE
+   1200px and below
+========================================================== */
+
+@media (max-width: 1200px) {
+
+    /* HERO */
+
+    .my-paths-hero {
+        margin-top: 35px;
+        padding: 65px 0 50px;
+    }
+
+    .my-paths-hero__layout {
+        grid-template-columns:
+            minmax(260px, .9fr)
+            minmax(220px, .75fr)
+            minmax(430px, 1.35fr);
+
+        gap: 30px;
+    }
+
+    .my-paths-hero__title {
+        font-size: 42px;
+    }
+
+    .my-paths-hero__visual {
+        min-height: 360px;
+    }
+
+    .my-paths-hero__photo--1 {
+        width: 135px;
+        height: 110px;
+    }
+
+    .my-paths-hero__photo--2 {
+        width: 205px;
+        height: 160px;
+    }
+
+    .my-paths-hero__photo--3 {
+        width: 135px;
+        height: 105px;
+    }
+
+    .my-paths-hero__photo--4 {
+        width: 260px;
+        height: 125px;
+    }
+
+
+    /* MOMENTS */
+
+    .my-paths-moments__layout {
+        grid-template-columns:
+            minmax(0, 1fr)
+            200px;
+
+        gap: 30px;
+    }
+
+    .my-paths-moment {
+        grid-template-columns:
+            minmax(0, 1fr)
+            50px
+            minmax(0, 1fr);
+
+        gap: 16px;
+    }
+
+    .my-paths-moment__image {
+        max-width: 250px;
+    }
+
+    .my-paths-moment__content {
+        max-width: 260px;
+    }
+
+    .my-paths-moments__quote {
+        padding: 34px 22px 30px;
+    }
+
+    .my-paths-moments__quote p {
+        font-size: 19px;
+    }
+
+
+    /* IMPACT */
+
+    .my-paths-impact__item {
+        padding-inline: 14px;
+    }
+
+
+    /* CTA */
+
+    .my-paths-cta__content h2 {
+        font-size: 26px;
+    }
+}
+
+
+
+/* ==========================================================
+   TABLET
+   900px and below
+========================================================== */
+
+@media (max-width: 900px) {
+
+    /* HERO */
+
+    .my-paths-hero {
+        margin-top: 20px;
+        padding: 55px 0 45px;
+    }
+
+    .my-paths-hero__layout {
+        grid-template-columns:
+            1fr
+            1fr;
+
+        grid-template-areas:
+            "intro story"
+            "visual visual";
+
+        gap: 35px 30px;
+    }
+
+    .my-paths-hero__intro {
+        grid-area: intro;
+        max-width: none;
+    }
+
+    .my-paths-hero__story {
+        grid-area: story;
+        max-width: none;
+    }
+
+    .my-paths-hero__visual {
+        grid-area: visual;
+
+        width: min(100%, 650px);
+        min-height: 410px;
+
+        margin-inline: auto;
+    }
+
+    .my-paths-hero__title {
+        font-size: 43px;
+    }
+
+    .my-paths-hero__photo--1 {
+        top: 55px;
+        left: 8%;
+
+        width: 170px;
+        height: 130px;
+    }
+
+    .my-paths-hero__photo--2 {
+        top: 0;
+        right: 10%;
+
+        width: 245px;
+        height: 185px;
+    }
+
+    .my-paths-hero__photo--3 {
+        left: 15%;
+        bottom: 25px;
+
+        width: 170px;
+        height: 125px;
+    }
+
+    .my-paths-hero__photo--4 {
+        right: 4%;
+        bottom: 0;
+
+        width: 320px;
+        height: 145px;
+    }
+
+
+    /* KEY MOMENTS + SIDEBAR */
+
+    .my-paths-moments {
+        padding-bottom: 55px;
+    }
+
+    .my-paths-moments__layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .my-paths-moments__sidebar {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 18px;
+
+        padding-top: 0;
+    }
+
+    .my-paths-moments__quote {
+        min-height: 320px;
+    }
+
+    .my-paths-education-card {
+        min-height: 320px;
+    }
+
+    .my-paths-moment__image {
+        max-width: 270px;
+    }
+
+
+    /* IMPACT */
+
+    .my-paths-impact__grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        row-gap: 20px;
+    }
+
+    .my-paths-impact__item:nth-child(3)::after {
+        display: none;
+    }
+
+    .my-paths-impact__item:nth-child(4),
+    .my-paths-impact__item:nth-child(5) {
+        padding-top: 14px;
+    }
+
+
+    /* CTA */
+
+    .my-paths-cta {
+        min-height: 230px;
+    }
+
+    .my-paths-cta__layout {
+        min-height: 230px;
+    }
+}
+
+
+
+/* ==========================================================
+   MOBILE
+   700px and below
+========================================================== */
+
+@media (max-width: 700px) {
+
+    /* PAGE */
+
+    .my-paths-page {
+        overflow: hidden;
+    }
+
+
+    /* HERO */
+
+    .my-paths-hero {
+        margin-top: 10px;
+        padding: 48px 0 40px;
+    }
+
+    .my-paths-hero__layout {
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+            "intro"
+            "story"
+            "visual";
+
+        gap: 30px;
+    }
+
+    .my-paths-hero__intro,
+    .my-paths-hero__story {
+        max-width: 100%;
+    }
+
+    .my-paths-hero__title {
+        font-size: 39px;
+        line-height: 1.06;
+    }
+
+    .my-paths-hero__text {
+        max-width: 100%;
+        font-size: 13px;
+    }
+
+    .my-paths-hero__story p {
+        font-size: 13px;
+    }
+
+    .my-paths-hero__signature {
+        font-size: 24px;
+    }
+
+    .my-paths-hero__visual {
+        min-height: auto;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 8px;
+
+        width: 100%;
+    }
+
+    .my-paths-hero__photo {
+        position: relative;
+
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+
+        width: 100% !important;
+
+        min-height: 170px;
+
+        height: auto !important;
+    }
+
+    .my-paths-hero__photo--2 {
+        min-height: 220px;
+    }
+
+    .my-paths-hero__photo--4 {
+        min-height: 190px;
+    }
+
+    .my-paths-hero__botanical {
+        display: none;
+    }
+
+
+    /* MOMENTS HEADING */
+
+    .my-paths-moments {
+        padding:
+            30px
+            0
+            50px;
+    }
+
+    .my-paths-moments__heading {
+        margin-bottom: 30px;
+    }
+
+    .my-paths-moments__heading h2 {
+        font-size: 26px;
+    }
+
+
+    /* MOBILE TIMELINE */
+
+    .my-paths-moments__center-line {
+        left: 21px;
+
+        transform: none;
+    }
+
+    .my-paths-moment {
+        grid-template-columns:
+            44px
+            minmax(0, 1fr);
+
+        gap: 14px;
+
+        min-height: auto;
+
+        margin-bottom: 32px;
+    }
+
+    .my-paths-moment__marker {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+
+        width: 42px;
+        height: 42px;
+
+        align-self: start;
+    }
+
+    .my-paths-moment__left,
+    .my-paths-moment__right {
+        grid-column: 2;
+    }
+
+    .my-paths-moment--left
+    .my-paths-moment__left {
+        grid-row: 1;
+    }
+
+    .my-paths-moment--left
+    .my-paths-moment__right {
+        grid-row: 2;
+    }
+
+    .my-paths-moment--right
+    .my-paths-moment__left {
+        grid-row: 1;
+    }
+
+    .my-paths-moment--right
+    .my-paths-moment__right {
+        grid-row: 2;
+    }
+
+    .my-paths-moment__image {
+        max-width: 100%;
+
+        min-height: 210px;
+
+        margin: 0 !important;
+    }
+
+    .my-paths-moment__content {
+        max-width: 100%;
+
+        margin: 0 !important;
+
+        padding-top: 5px;
+    }
+
+    .my-paths-moment__number {
+        font-size: 26px;
+    }
+
+    .my-paths-moment__content h3 {
+        font-size: 21px;
+    }
+
+    .my-paths-moment__period {
+        font-size: 11px;
+    }
+
+    .my-paths-moment__content p {
+        font-size: 11px;
+    }
+
+
+    /* SIDEBAR */
+
+    .my-paths-moments__sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .my-paths-moments__quote {
+        min-height: 280px;
+
+        padding: 32px 26px;
+    }
+
+    .my-paths-moments__quote p {
+        font-size: 20px;
+    }
+
+    .my-paths-education-card {
+        min-height: auto;
+
+        padding: 25px 22px;
+    }
+
+    .my-paths-education-card__heading {
+        font-size: 11px;
+    }
+
+    .my-paths-education-card__content h3 {
+        font-size: 13px;
+    }
+
+    .my-paths-education-card__content p {
+        font-size: 10px;
+    }
+
+    .my-paths-education-card__year {
+        font-size: 11px;
+    }
+
+
+    /* IMPACT */
+
+    .my-paths-impact {
+        padding-bottom: 20px;
+    }
+
+    .my-paths-impact__panel {
+        padding: 22px 18px;
+    }
+
+    .my-paths-impact__heading h2 {
+        font-size: 19px;
+    }
+
+    .my-paths-impact__grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 22px 0;
+    }
+
+    .my-paths-impact__item {
+        padding: 5px 15px;
+    }
+
+    .my-paths-impact__item::after {
+        display: none !important;
+    }
+
+    .my-paths-impact__item:last-child {
+        grid-column: 1 / -1;
+
+        max-width: 260px;
+
+        width: 100%;
+
+        margin-inline: auto;
+    }
+
+    .my-paths-impact__number {
+        font-size: 23px;
+    }
+
+    .my-paths-impact__item p {
+        font-size: 9px;
+    }
+
+
+    /* CTA */
+
+    .my-paths-cta {
+        min-height: auto;
+    }
+
+    .my-paths-cta__layout {
+        min-height: auto;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 28px;
+
+        padding: 42px 0;
+    }
+
+    .my-paths-cta__content {
+        max-width: 100%;
+    }
+
+    .my-paths-cta__content h2 {
+        font-size: 26px;
+    }
+
+    .my-paths-cta__content p {
+        font-size: 11px;
+    }
+
+    .my-paths-cta__socials {
+        align-self: flex-start;
+    }
+
+
+    /* FOOTER SPACE */
+
+    .my-paths-page + .site-footer {
+        margin-top: 25px;
+    }
+}
+
+
+
+/* ==========================================================
+   SMALL MOBILE
+   480px and below
+========================================================== */
+
+@media (max-width: 480px) {
+
+    /* HERO */
+
+    .my-paths-hero {
+        padding-top: 42px;
+    }
+
+    .my-paths-hero__title {
+        font-size: 34px;
+    }
+
+    .my-paths-hero__eyebrow {
+        font-size: 10px;
+    }
+
+    .my-paths-hero__story p {
+        font-size: 12px;
+    }
+
+    .my-paths-hero__visual {
+        grid-template-columns: 1fr;
+    }
+
+    .my-paths-hero__photo,
+    .my-paths-hero__photo--2,
+    .my-paths-hero__photo--4 {
+        min-height: 210px;
+    }
+
+
+    /* MOMENTS */
+
+    .my-paths-moments__heading h2 {
+        font-size: 23px;
+    }
+
+    .my-paths-moment {
+        grid-template-columns:
+            38px
+            minmax(0, 1fr);
+
+        gap: 11px;
+    }
+
+    .my-paths-moments__center-line {
+        left: 18px;
+    }
+
+    .my-paths-moment__marker {
+        width: 36px;
+        height: 36px;
+
+        border-width: 4px;
+    }
+
+    .my-paths-moment__marker span {
+        font-size: 13px;
+    }
+
+    .my-paths-moment__image {
+        min-height: 185px;
+    }
+
+    .my-paths-moment__content h3 {
+        font-size: 19px;
+    }
+
+    .my-paths-moment__content p {
+        font-size: 10px;
+    }
+
+
+    /* QUOTE */
+
+    .my-paths-moments__quote {
+        min-height: 250px;
+
+        border-radius: 18px;
+    }
+
+    .my-paths-moments__quote p {
+        font-size: 18px;
+    }
+
+
+    /* EDUCATION */
+
+    .my-paths-education-card {
+        padding: 22px 17px;
+    }
+
+    .my-paths-education-card__item {
+        grid-template-columns:
+            32px
+            20px
+            1fr;
+    }
+
+
+    /* IMPACT */
+
+    .my-paths-impact__grid {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .my-paths-impact__item,
+    .my-paths-impact__item:last-child {
+        max-width: 280px;
+
+        width: 100%;
+
+        margin-inline: auto;
+    }
+
+
+    /* CTA */
+
+    .my-paths-cta__content h2 {
+        font-size: 23px;
+    }
+
+    .my-paths-cta__button {
+        padding: 9px 13px;
+    }
+
+    .my-paths-cta__socials a {
+        width: 36px;
+        height: 36px;
+    }
+}

@@ -1,0 +1,28 @@
+/*
+Theme Name: Greshma Portfolio
+Theme URI: https://greshma.me
+Author: Sikha Njnaseelan for Finklinz IT Services
+Author URI: https://greshma.me
+Description: A custom personal brand and impact portfolio theme for Greshma Pious Raju.
+Version: 1.0.0
+Requires at least: 6.5
+Tested up to: 6.8
+Requires PHP: 8.1
+Text Domain: greshma-portfolio
+*/
+
+body:not(.home) {
+    padding-top: 102px;
+}
+
+@media (max-width: 1240px) {
+    body:not(.home) {
+        padding-top: 90px;
+    }
+}
+
+@media (max-width: 767px) {
+    body:not(.home) {
+        padding-top: 78px;
+    }
+}

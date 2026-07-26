@@ -1,0 +1,3178 @@
+/* ==========================================================
+   ABOUT PAGE
+========================================================== */
+
+.about-page {
+    background: #f8f5ee;
+}
+
+
+/* ==========================================================
+   ABOUT HERO
+========================================================== */
+
+.about-hero {
+    position: relative;
+    min-height: 650px;
+    overflow: hidden;
+    background: #f8f5ee;
+}
+
+
+/* ==========================================================
+   BACKGROUND IMAGE AREA
+
+   FINAL IMAGE:
+   assets/images/about/about-hero-bg.png
+========================================================== */
+
+.about-hero__background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 62%;
+}
+
+
+.about-hero__image-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #9baa91;
+}
+
+
+.about-hero__image-placeholder span {
+    padding: 8px 14px;
+
+    color: #ffffff;
+
+    background: rgba(12, 59, 46, 0.65);
+
+    border-radius: 30px;
+
+    font-size: 11px;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* Fade background into cream content area */
+
+.about-hero__fade {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #f8f5ee 0%,
+            #f8f5ee 34%,
+            rgba(248, 245, 238, 0.96) 42%,
+            rgba(248, 245, 238, 0.55) 55%,
+            rgba(248, 245, 238, 0.08) 72%,
+            transparent 100%
+        );
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   LAYOUT
+========================================================== */
+
+.about-hero__layout {
+    position: relative;
+    z-index: 3;
+
+    min-height: 650px;
+
+    display: grid;
+
+    grid-template-columns:
+        46%
+        54%;
+}
+
+
+/* ==========================================================
+   LEFT CONTENT
+========================================================== */
+
+.about-hero__content {
+    align-self: center;
+
+    max-width: 510px;
+
+    padding: 60px 0;
+}
+
+
+.about-hero__eyebrow {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 15px;
+
+    color: var(--primary);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 0.1em;
+
+    text-transform: uppercase;
+}
+
+
+.about-hero__eyebrow-icon {
+    color: var(--secondary);
+
+    font-size: 17px;
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.about-hero__title {
+    max-width: 500px;
+
+    margin: 0;
+
+    color: #171b19;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 64px;
+
+    font-weight: 400;
+
+    line-height: 0.99;
+
+    letter-spacing: -0.04em;
+}
+
+
+.about-hero__title em {
+    display: block;
+
+    color: var(--primary);
+
+    font-weight: 400;
+}
+
+
+.about-hero__title span {
+    color: var(--primary);
+
+    font-style: italic;
+}
+
+
+/* ==========================================================
+   SMALL GOLD LINE
+========================================================== */
+
+.about-hero__divider {
+    width: 55px;
+    height: 1px;
+
+    margin: 23px 0 17px;
+
+    background: var(--secondary);
+}
+
+
+/* ==========================================================
+   INTRO
+========================================================== */
+
+.about-hero__intro {
+    max-width: 445px;
+
+    margin: 0;
+
+    color: #4d5b55;
+
+    font-size: 13px;
+
+    line-height: 1.75;
+}
+
+
+/* ==========================================================
+   SIGNATURE PLACEHOLDER
+
+   FINAL:
+   assets/images/about/about-signature.png
+========================================================== */
+
+.about-hero__signature-placeholder {
+    margin-top: 19px;
+
+    color: #354d43;
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size: 28px;
+
+    font-style: italic;
+}
+
+
+/* ==========================================================
+   RIGHT VISUAL
+========================================================== */
+
+.about-hero__visual {
+    position: relative;
+
+    min-height: 650px;
+}
+
+
+/* ==========================================================
+   PERSON PLACEHOLDER
+
+   FINAL:
+   assets/images/about/about-hero-person.png
+========================================================== */
+
+.about-hero__person-placeholder {
+    position: absolute;
+
+    left: 43%;
+    bottom: 0;
+
+    width: 320px;
+    height: 500px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transform: translateX(-50%);
+
+    border: 2px dashed rgba(255, 255, 255, 0.75);
+
+    background: rgba(255, 255, 255, 0.20);
+}
+
+
+.about-hero__person-placeholder span {
+    padding: 8px 12px;
+
+    color: #ffffff;
+
+    background: rgba(12, 59, 46, 0.72);
+
+    border-radius: 30px;
+
+    font-size: 10px;
+
+    letter-spacing: 0.06em;
+}
+
+
+/* ==========================================================
+   QUOTE CARD
+========================================================== */
+
+.about-hero__quote {
+    position: absolute;
+
+    right: 0;
+    bottom: 72px;
+
+    width: 355px;
+
+    display: grid;
+
+    grid-template-columns:
+        30px
+        1fr;
+
+    gap: 12px;
+
+    margin: 0;
+
+    padding: 25px 27px;
+
+    background: #fffdf8;
+
+    border:
+        1px solid rgba(12, 59, 46, 0.12);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 18px 40px rgba(12, 59, 46, 0.12);
+}
+
+
+.about-hero__quote-mark {
+    color: var(--secondary);
+
+    font-family: Georgia, serif;
+
+    font-size: 40px;
+
+    font-weight: 700;
+
+    line-height: 0.8;
+}
+
+
+.about-hero__quote-content p {
+    margin: 0;
+
+    color: #34483f;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 16px;
+
+    font-style: italic;
+
+    line-height: 1.55;
+}
+
+
+.about-hero__quote-content cite {
+    display: block;
+
+    margin-top: 12px;
+
+    color: #536159;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 12px;
+
+    font-style: italic;
+}
+
+
+/* ==========================================================
+   SOCIAL BAR
+========================================================== */
+/* ==========================================================
+   ABOUT HERO SOCIAL ICON FIX
+   Prevent global SVG styles from enlarging social icons
+========================================================== */
+
+.about-hero__social {
+    position: absolute;
+    z-index: 20;
+    left: 20px;
+    top: 50%;
+
+    width: 44px;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 4px;
+
+    background: rgba(255, 253, 248, 0.95);
+
+    border: 1px solid rgba(12, 59, 46, 0.18);
+    border-radius: 8px;
+
+    transform: translateY(-50%);
+}
+
+
+.about-hero__social a {
+    width: 34px;
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    color: #0C3B2E;
+
+    border-bottom: 1px solid rgba(12, 59, 46, 0.10);
+}
+
+
+.about-hero__social a:last-child {
+    border-bottom: 0;
+}
+
+
+/* IMPORTANT: force SVG dimensions */
+
+.about-hero__social a svg,
+.about-hero__social svg.icon {
+    display: block !important;
+
+    width: 16px !important;
+    height: 16px !important;
+
+    min-width: 16px !important;
+    min-height: 16px !important;
+
+    max-width: 16px !important;
+    max-height: 16px !important;
+
+    flex: 0 0 16px !important;
+
+    overflow: visible;
+}
+
+
+/* Instagram */
+
+.about-hero__social .icon-instagram {
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1.7 !important;
+}
+
+
+/* Email */
+
+.about-hero__social .icon-email {
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1.7 !important;
+}
+
+
+/* LinkedIn */
+
+.about-hero__social .icon-linkedin {
+    fill: currentColor !important;
+    stroke: none !important;
+}
+
+
+/* YouTube */
+
+.about-hero__social .icon-youtube {
+    fill: currentColor !important;
+    stroke: none !important;
+}
+
+
+.about-hero__social a:hover {
+    color: #ffffff;
+    background: #0C3B2E;
+}
+
+/* ==========================================================
+   ABOUT PAGE — MY STORY
+========================================================== */
+
+.about-story {
+    position: relative;
+
+    padding: 72px 0;
+
+    background: #fbf9f4;
+
+    overflow: hidden;
+}
+
+
+/* Subtle decorative background */
+
+.about-story::before {
+    content: "";
+
+    position: absolute;
+
+    top: -150px;
+    left: -160px;
+
+    width: 390px;
+    height: 390px;
+
+    border: 1px solid rgba(12, 59, 46, 0.055);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   MAIN LAYOUT
+========================================================== */
+
+.about-story__layout {
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, 0.75fr)
+        minmax(650px, 1.75fr);
+
+    gap: 55px;
+
+    align-items: stretch;
+}
+
+
+/* ==========================================================
+   LEFT CONTENT
+========================================================== */
+
+.about-story__content {
+    align-self: center;
+
+    max-width: 390px;
+
+    padding-right: 10px;
+}
+
+
+.about-story__eyebrow {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 18px;
+
+    color: var(--primary);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.11em;
+
+    text-transform: uppercase;
+}
+
+
+.about-story__eyebrow-line {
+    width: 38px;
+    height: 1px;
+
+    background: var(--secondary);
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.about-story__title {
+    max-width: 370px;
+
+    margin: 0 0 20px;
+
+    color: #18201d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 38px;
+
+    font-weight: 400;
+
+    line-height: 1.03;
+
+    letter-spacing: -0.035em;
+}
+
+
+/* ==========================================================
+   TEXT
+========================================================== */
+
+.about-story__text {
+    max-width: 375px;
+
+    margin: 0;
+
+    color: #53605a;
+
+    font-size: 12px;
+
+    line-height: 1.72;
+}
+
+
+/* ==========================================================
+   DOWNLOAD BUTTON
+========================================================== */
+
+.about-story__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 13px;
+
+    min-height: 43px;
+
+    margin-top: 24px;
+
+    padding: 8px 10px 8px 18px;
+
+    color: #ffffff;
+
+    background: var(--primary);
+
+    border-radius: 6px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.about-story__button-icon {
+    width: 27px;
+    height: 27px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-left:
+        1px solid rgba(255, 255, 255, 0.20);
+
+    font-size: 15px;
+}
+
+
+.about-story__button:hover {
+    color: #ffffff;
+
+    background: var(--primary-dark);
+
+    transform: translateY(-2px);
+}
+
+
+/* ==========================================================
+   RIGHT MEDIA
+========================================================== */
+
+.about-story__media {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2.1fr)
+        minmax(190px, 0.78fr);
+
+    gap: 8px;
+
+    min-height: 365px;
+}
+
+
+/* ==========================================================
+   PHOTO COLLAGE
+========================================================== */
+
+.about-story__photos {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    grid-template-rows:
+        repeat(2, 1fr);
+
+    gap: 6px;
+}
+
+
+.about-story__photo {
+    position: relative;
+
+    min-height: 177px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #dfe5db;
+
+    border-radius: 8px;
+}
+
+
+/* Different placeholder shades only so
+   the four future images are easy to identify */
+
+.about-story__photo--1 {
+    background: #9caf9e;
+}
+
+
+.about-story__photo--2 {
+    background: #788f78;
+}
+
+
+.about-story__photo--3 {
+    background: #b2bca5;
+}
+
+
+.about-story__photo--4 {
+    background: #647e6f;
+}
+
+
+.about-story__photo span {
+    max-width: 85%;
+
+    padding: 7px 10px;
+
+    color: #ffffff;
+
+    background: rgba(12, 59, 46, 0.66);
+
+    border-radius: 30px;
+
+    font-size: 9px;
+
+    line-height: 1.3;
+
+    text-align: center;
+
+    letter-spacing: 0.04em;
+}
+
+
+/* ==========================================================
+   QUOTE PANEL
+========================================================== */
+
+.about-story__quote {
+    position: relative;
+
+    min-width: 0;
+
+    margin: 0;
+
+    padding: 37px 29px 28px;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            145deg,
+            #174a3e,
+            #0d382f
+        );
+
+    border-radius: 8px;
+}
+
+
+.about-story__quote-mark {
+    display: block;
+
+    margin-bottom: 13px;
+
+    color: #d9b45f;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 44px;
+
+    font-weight: 700;
+
+    line-height: 0.65;
+}
+
+
+.about-story__quote p {
+    margin: 0 0 17px;
+
+    color: rgba(255, 255, 255, 0.92);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 16px;
+
+    font-style: italic;
+
+    line-height: 1.55;
+}
+
+
+.about-story__quote p:last-of-type {
+    margin-bottom: 0;
+}
+
+
+/* Decorative leaf */
+
+.about-story__quote-decoration {
+    position: absolute;
+
+    right: -5px;
+    bottom: -5px;
+
+    color: rgba(211, 187, 125, 0.26);
+
+    font-family: Georgia, serif;
+
+    font-size: 100px;
+
+    line-height: 1;
+
+    transform: rotate(-30deg);
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   ABOUT PAGE — VALUES
+========================================================== */
+
+.about-values {
+    position: relative;
+
+    padding: 48px 0 52px;
+
+    background: #fffdf9;
+
+    border-top:
+        1px solid rgba(12, 59, 46, 0.06);
+
+    border-bottom:
+        1px solid rgba(12, 59, 46, 0.06);
+}
+
+
+/* ==========================================================
+   SECTION HEADING
+========================================================== */
+
+.about-values__heading {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    margin-bottom: 34px;
+}
+
+
+.about-values__heading h2 {
+    margin: 0;
+
+    color: #24493e;
+
+    font-family:
+        Inter,
+        sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.11em;
+
+    line-height: 1;
+
+    text-align: center;
+
+    text-transform: uppercase;
+}
+
+
+.about-values__heading-line {
+    width: 42px;
+    height: 1px;
+
+    background: #d3b572;
+}
+
+
+/* ==========================================================
+   VALUES GRID
+========================================================== */
+
+.about-values__grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    align-items: stretch;
+}
+
+
+/* ==========================================================
+   VALUE ITEM
+========================================================== */
+
+.about-values__item {
+    position: relative;
+
+    min-width: 0;
+
+    padding: 7px 28px 5px;
+
+    text-align: center;
+}
+
+
+/* Vertical separators */
+
+.about-values__item:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    top: 7px;
+    right: 0;
+    bottom: 6px;
+
+    width: 1px;
+
+    background:
+        rgba(12, 59, 46, 0.11);
+}
+
+
+/* ==========================================================
+   ICON
+========================================================== */
+
+.about-values__icon {
+    width: 56px;
+    height: 56px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 12px;
+
+    color: #214d40;
+}
+
+
+.about-values__icon span {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 36px;
+
+    font-weight: 400;
+
+    line-height: 1;
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.about-values__item h3 {
+    margin: 0 0 8px;
+
+    color: #26342f;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 18px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.about-values__item p {
+    max-width: 185px;
+
+    margin: 0 auto;
+
+    color: #58645f;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+/* ==========================================================
+   ABOUT PAGE — JOURNEY
+========================================================== */
+
+.about-journey {
+    position: relative;
+
+    padding: 42px 0 54px;
+
+    background: #fffdf9;
+}
+
+
+/* ==========================================================
+   HEADING
+========================================================== */
+
+.about-journey__heading {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    margin-bottom: 30px;
+
+    color: var(--primary);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.11em;
+
+    text-transform: uppercase;
+}
+
+
+.about-journey__heading-leaf {
+    color: var(--secondary);
+
+    font-size: 15px;
+}
+
+
+.about-journey__heading-line {
+    width: 32px;
+    height: 1px;
+
+    margin-left: 3px;
+
+    background: #d5b874;
+}
+
+
+/* ==========================================================
+   TIMELINE WRAPPER
+========================================================== */
+
+.about-journey__timeline {
+    position: relative;
+
+    padding-top: 2px;
+}
+
+
+/* Horizontal connecting line */
+
+.about-journey__line {
+    position: absolute;
+
+    top: 23px;
+    left: 7%;
+    right: 7%;
+
+    height: 1px;
+
+    background:
+        repeating-linear-gradient(
+            to right,
+            #718a79 0,
+            #718a79 2px,
+            transparent 2px,
+            transparent 6px
+        );
+}
+
+
+/* ==========================================================
+   ITEMS
+========================================================== */
+
+.about-journey__items {
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+
+.about-journey__item {
+    min-width: 0;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   MARKER
+========================================================== */
+
+.about-journey__marker {
+    display: flex;
+
+    justify-content: center;
+
+    margin-bottom: 10px;
+}
+
+
+.about-journey__icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #244f42;
+
+    background: #f1e8cf;
+
+    border: 5px solid #fffdf9;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 1px rgba(12, 59, 46, 0.08);
+}
+
+
+.about-journey__icon span {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 19px;
+
+    line-height: 1;
+}
+
+
+/* Slightly varied tones like approved design */
+
+.about-journey__item:nth-child(2) .about-journey__icon {
+    background: #dce5d4;
+}
+
+.about-journey__item:nth-child(3) .about-journey__icon {
+    background: #ece4c7;
+}
+
+.about-journey__item:nth-child(4) .about-journey__icon {
+    background: #d7e2d2;
+}
+
+.about-journey__item:nth-child(5) .about-journey__icon {
+    background: #dce4d4;
+}
+
+.about-journey__item:nth-child(6) .about-journey__icon {
+    color: #9b7328;
+
+    background: #efd99e;
+}
+
+
+/* ==========================================================
+   YEAR
+========================================================== */
+
+.about-journey__year {
+    margin: 0 0 7px;
+
+    color: #9f7d36;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+}
+
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.about-journey__text {
+    max-width: 165px;
+
+    margin: 0 auto;
+
+    color: #53635c;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+/* ==========================================================
+   ABOUT PAGE — IMPACT
+========================================================== */
+
+.about-impact {
+    position: relative;
+
+    min-height: 390px;
+
+    overflow: hidden;
+
+    background: #103d32;
+
+    color: #ffffff;
+}
+
+
+/* ==========================================================
+   BACKGROUND
+
+   FINAL IMAGE:
+   assets/images/about/about-impact-bg.png
+========================================================== */
+
+.about-impact__background {
+    position: absolute;
+
+    inset: 0;
+}
+
+
+.about-impact__background-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #617b6a 0%,
+            #315746 45%,
+            #133e33 100%
+        );
+}
+
+
+.about-impact__background-placeholder span {
+    padding: 8px 13px;
+
+    color: rgba(255,255,255,.75);
+
+    background: rgba(9,45,36,.55);
+
+    border: 1px solid rgba(255,255,255,.22);
+
+    border-radius: 999px;
+
+    font-size: 10px;
+
+    letter-spacing: .08em;
+}
+
+
+/* ==========================================================
+   DARK OVERLAY
+========================================================== */
+
+.about-impact__overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(9, 43, 35, .95) 0%,
+            rgba(12, 55, 45, .88) 42%,
+            rgba(12, 55, 45, .72) 70%,
+            rgba(12, 55, 45, .62) 100%
+        );
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   INNER
+========================================================== */
+
+.about-impact__inner {
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 390px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 58px 0 48px;
+}
+
+
+/* ==========================================================
+   INTRO
+========================================================== */
+
+.about-impact__intro {
+    max-width: 760px;
+
+    margin: 0 auto 44px;
+
+    text-align: center;
+}
+
+
+.about-impact__eyebrow {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-bottom: 13px;
+
+    color: #d2b36d;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+}
+
+
+.about-impact__eyebrow-line {
+    width: 34px;
+    height: 1px;
+
+    background: rgba(210,179,109,.75);
+}
+
+
+.about-impact__title {
+    max-width: 690px;
+
+    margin: 0 auto;
+
+    color: #fffaf0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 35px;
+
+    font-weight: 400;
+
+    line-height: 1.08;
+
+    letter-spacing: -.025em;
+}
+
+
+.about-impact__description {
+    max-width: 610px;
+
+    margin: 14px auto 0;
+
+    color: rgba(255,255,255,.72);
+
+    font-size: 12px;
+
+    line-height: 1.65;
+}
+
+
+/* ==========================================================
+   STATS
+========================================================== */
+
+.about-impact__stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    align-items: stretch;
+
+    max-width: 1050px;
+
+    width: 100%;
+
+    margin: 0 auto;
+}
+
+
+.about-impact__stat {
+    position: relative;
+
+    min-width: 0;
+
+    padding: 4px 24px;
+
+    text-align: center;
+}
+
+
+/* Vertical separators */
+
+.about-impact__stat:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    top: 6px;
+    right: 0;
+    bottom: 6px;
+
+    width: 1px;
+
+    background: rgba(255,255,255,.18);
+}
+
+
+/* Number */
+
+.about-impact__stat strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 42px;
+
+    font-weight: 400;
+
+    line-height: 1;
+}
+
+
+.about-impact__stat strong span {
+    color: #d8b96f;
+
+    font-size: .58em;
+
+    vertical-align: top;
+}
+
+
+/* Label */
+
+.about-impact__stat p {
+    margin: 8px 0 0;
+
+    color: rgba(255,255,255,.72);
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    letter-spacing: .08em;
+
+    line-height: 1.4;
+
+    text-transform: uppercase;
+}
+
+
+/*==================================================
+ABOUT LEADERSHIP
+==================================================*/
+
+/* ==========================================================
+   ABOUT PAGE — LEADERSHIP & ROLES
+   Matches approved About-page reference
+========================================================== */
+
+.about-leadership {
+    position: relative;
+
+    padding: 38px 0 48px;
+
+    background: #fffdf9;
+}
+
+
+/* ==========================================================
+   HEADING
+========================================================== */
+
+.about-leadership__heading {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 17px;
+
+    color: var(--primary);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: .1em;
+
+    text-transform: uppercase;
+}
+
+
+.about-leadership__leaf {
+    color: #6f8c7b;
+
+    font-size: 15px;
+}
+
+
+.about-leadership__line {
+    width: 32px;
+    height: 1px;
+
+    background: var(--secondary);
+}
+
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.about-leadership__grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr))
+        minmax(175px, 1fr);
+
+    gap: 7px;
+
+    align-items: stretch;
+}
+
+
+/* ==========================================================
+   ROLE CARD
+========================================================== */
+
+.about-leadership__card {
+    min-width: 0;
+
+    min-height: 150px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 17px 13px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12, 59, 46, .10);
+
+    border-radius: 7px;
+}
+
+
+.about-leadership__logo-placeholder {
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 12px;
+
+    color: #3f806a;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    letter-spacing: .03em;
+}
+
+
+.about-leadership__card h3 {
+    margin: 0 0 5px;
+
+    color: #253a32;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    line-height: 1.35;
+}
+
+
+.about-leadership__card p {
+    max-width: 145px;
+
+    margin: 0;
+
+    color: #66726c;
+
+    font-size: 9px;
+
+    line-height: 1.4;
+}
+
+
+/* ==========================================================
+   QUOTE CARD
+========================================================== */
+
+.about-leadership__quote {
+    position: relative;
+
+    min-width: 0;
+    min-height: 150px;
+
+    display: flex;
+    align-items: center;
+
+    margin: 0;
+
+    padding: 22px 20px;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    background: #123f34;
+
+    border-radius: 7px;
+}
+
+
+.about-leadership__quote p {
+    position: relative;
+    z-index: 2;
+
+    margin: 0;
+
+    color: rgba(255,255,255,.88);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 11px;
+
+    font-style: italic;
+
+    line-height: 1.6;
+}
+
+
+.about-leadership__quote-decoration {
+    position: absolute;
+
+    right: -5px;
+    bottom: -10px;
+
+    color: rgba(208,181,111,.14);
+
+    font-size: 82px;
+
+    transform: rotate(-25deg);
+}
+
+/* ==========================================================
+   ABOUT PAGE — WHAT DRIVES ME EVERY DAY
+   Matches approved About-page reference
+========================================================== */
+
+.about-purpose {
+    position: relative;
+
+    padding: 38px 0 48px;
+
+    background: #fffdf9;
+
+    overflow: hidden;
+}
+
+
+/* ==========================================================
+   HEADING
+========================================================== */
+
+.about-purpose__heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 17px;
+
+    color: var(--primary);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .10em;
+
+    text-transform: uppercase;
+}
+
+
+.about-purpose__leaf {
+    color: #6f8c7b;
+
+    font-size: 15px;
+}
+
+
+.about-purpose__line {
+    width: 32px;
+    height: 1px;
+
+    background: var(--secondary);
+}
+
+
+/* ==========================================================
+   MAIN LAYOUT
+========================================================== */
+
+.about-purpose__layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(250px, 1.15fr)
+        minmax(220px, .95fr)
+        minmax(250px, 1.05fr)
+        minmax(165px, .72fr);
+
+    gap: 10px;
+
+    align-items: stretch;
+}
+
+
+/* ==========================================================
+   MAIN IMAGE
+========================================================== */
+
+.about-purpose__main-image {
+    min-height: 315px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #79907d;
+
+    border-radius: 8px;
+}
+
+
+.about-purpose__main-image span {
+    padding: 7px 10px;
+
+    color: #ffffff;
+
+    background: rgba(12, 59, 46, .62);
+
+    border-radius: 999px;
+
+    font-size: 9px;
+
+    letter-spacing: .04em;
+}
+
+
+/* ==========================================================
+   PURPOSE MESSAGE
+========================================================== */
+
+.about-purpose__message {
+    min-height: 315px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 30px 27px;
+
+    background: #f7f3ea;
+
+    border:
+        1px solid rgba(12, 59, 46, .07);
+
+    border-radius: 8px;
+}
+
+
+.about-purpose__message h2 {
+    margin: 0 0 19px;
+
+    color: #1a4b3d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 27px;
+
+    font-weight: 400;
+
+    font-style: italic;
+
+    line-height: 1.15;
+
+    letter-spacing: -.02em;
+}
+
+
+.about-purpose__message p {
+    margin: 0;
+
+    color: #52615a;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+}
+
+
+.about-purpose__signature {
+    margin-top: 20px;
+
+    color: #3d554b;
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size: 22px;
+
+    font-style: italic;
+}
+
+
+/* ==========================================================
+   TESTIMONIAL COLUMN
+========================================================== */
+
+.about-purpose__testimonials {
+    display: grid;
+
+    grid-template-rows:
+        repeat(2, 1fr);
+
+    gap: 8px;
+}
+
+
+.about-purpose__testimonial {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    min-height: 153px;
+
+    padding: 20px 20px 17px 42px;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(12, 59, 46, .10);
+
+    border-radius: 8px;
+}
+
+
+.about-purpose__quote-mark {
+    position: absolute;
+
+    top: 17px;
+    left: 17px;
+
+    color: #b68b35;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 31px;
+
+    font-weight: 700;
+
+    line-height: .8;
+}
+
+
+.about-purpose__testimonial > p {
+    margin: 0;
+
+    color: #4b5a53;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 11px;
+
+    font-style: italic;
+
+    line-height: 1.55;
+}
+
+
+/* ==========================================================
+   TESTIMONIAL PERSON
+========================================================== */
+
+.about-purpose__person {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 12px;
+}
+
+
+.about-purpose__avatar {
+    width: 31px;
+    height: 31px;
+
+    flex: 0 0 31px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #ffffff;
+
+    background: #6e8979;
+
+    border-radius: 50%;
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+.about-purpose__person h3 {
+    margin: 0 0 1px;
+
+    color: #263b33;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+
+.about-purpose__person span {
+    display: block;
+
+    color: #78827d;
+
+    font-size: 8px;
+
+    line-height: 1.3;
+}
+
+
+/* ==========================================================
+   RIGHT IMAGE GALLERY
+========================================================== */
+
+.about-purpose__gallery {
+    display: grid;
+
+    grid-template-rows:
+        repeat(3, 1fr);
+
+    gap: 7px;
+}
+
+
+.about-purpose__gallery-image {
+    min-height: 97px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #819a87;
+
+    border-radius: 7px;
+}
+
+
+.about-purpose__gallery-image:nth-child(2) {
+    background: #677e6e;
+}
+
+
+.about-purpose__gallery-image:nth-child(3) {
+    background: #9ca98c;
+}
+
+
+.about-purpose__gallery-image span {
+    max-width: 90%;
+
+    padding: 5px 7px;
+
+    color: #ffffff;
+
+    background: rgba(12,59,46,.58);
+
+    border-radius: 999px;
+
+    font-size: 7px;
+
+    line-height: 1.25;
+
+    text-align: center;
+}
+
+/* ==========================================================
+   ABOUT PAGE — SPACE BEFORE FOOTER
+========================================================== */
+
+.about-page + .site-footer {
+    margin-top: 45px;
+}
+
+
+/* ==========================================================
+   ABOUT PAGE — RESPONSIVE
+   Desktop CSS above remains unchanged.
+========================================================== */
+
+
+/* ==========================================================
+   SMALL DESKTOP / TABLET LANDSCAPE
+   1200px and below
+========================================================== */
+
+@media (max-width: 1200px) {
+
+    /* ------------------------------------------------------
+       HERO
+    ------------------------------------------------------ */
+
+    .about-hero {
+        min-height: 610px;
+    }
+
+    .about-hero__layout {
+        min-height: 610px;
+
+        grid-template-columns:
+            44%
+            56%;
+    }
+
+    .about-hero__content {
+        max-width: 460px;
+
+        padding: 55px 0;
+    }
+
+    .about-hero__title {
+        max-width: 450px;
+
+        font-size: 55px;
+    }
+
+    .about-hero__intro {
+        max-width: 410px;
+    }
+
+    .about-hero__visual {
+        min-height: 610px;
+    }
+
+    .about-hero__person-placeholder {
+        width: 285px;
+        height: 455px;
+    }
+
+    .about-hero__quote {
+        width: 320px;
+
+        right: 5px;
+
+        padding: 22px 23px;
+    }
+
+
+    /* ------------------------------------------------------
+       STORY
+    ------------------------------------------------------ */
+
+    .about-story__layout {
+        grid-template-columns:
+            minmax(280px, .8fr)
+            minmax(0, 1.6fr);
+
+        gap: 38px;
+    }
+
+    .about-story__media {
+        grid-template-columns:
+            minmax(0, 2fr)
+            minmax(165px, .75fr);
+    }
+
+    .about-story__quote {
+        padding: 30px 22px;
+    }
+
+    .about-story__quote p {
+        font-size: 14px;
+    }
+
+
+    /* ------------------------------------------------------
+       VALUES
+    ------------------------------------------------------ */
+
+    .about-values__item {
+        padding-inline: 18px;
+    }
+
+
+    /* ------------------------------------------------------
+       JOURNEY
+    ------------------------------------------------------ */
+
+    .about-journey__items {
+        gap: 8px;
+    }
+
+    .about-journey__text {
+        max-width: 145px;
+    }
+
+
+    /* ------------------------------------------------------
+       IMPACT
+    ------------------------------------------------------ */
+
+    .about-impact__stat {
+        padding-inline: 16px;
+    }
+
+
+    /* ------------------------------------------------------
+       LEADERSHIP
+    ------------------------------------------------------ */
+
+    .about-leadership__grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .about-leadership__quote {
+        grid-column: span 3;
+        min-height: 110px;
+    }
+
+
+    /* ------------------------------------------------------
+       PURPOSE
+    ------------------------------------------------------ */
+
+    .about-purpose__layout {
+        grid-template-columns:
+            1fr
+            .9fr
+            1fr;
+
+        grid-template-areas:
+            "main message testimonials"
+            "gallery gallery gallery";
+    }
+
+    .about-purpose__main-image {
+        grid-area: main;
+    }
+
+    .about-purpose__message {
+        grid-area: message;
+    }
+
+    .about-purpose__testimonials {
+        grid-area: testimonials;
+    }
+
+    .about-purpose__gallery {
+        grid-area: gallery;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        grid-template-rows: none;
+
+        margin-top: 2px;
+    }
+
+    .about-purpose__gallery-image {
+        min-height: 125px;
+    }
+}
+
+
+
+/* ==========================================================
+   TABLET
+   900px and below
+========================================================== */
+
+@media (max-width: 900px) {
+
+    /* ------------------------------------------------------
+       HERO
+    ------------------------------------------------------ */
+
+    .about-hero {
+        min-height: auto;
+
+        padding-bottom: 0;
+    }
+
+    .about-hero__background {
+        top: auto;
+        bottom: 0;
+
+        width: 100%;
+        height: 53%;
+    }
+
+    .about-hero__fade {
+        background:
+            linear-gradient(
+                180deg,
+                #f8f5ee 0%,
+                #f8f5ee 42%,
+                rgba(248,245,238,.94) 53%,
+                rgba(248,245,238,.34) 73%,
+                rgba(248,245,238,.05) 100%
+            );
+    }
+
+    .about-hero__layout {
+        min-height: auto;
+
+        grid-template-columns: 1fr;
+    }
+
+    .about-hero__content {
+        max-width: 620px;
+
+        padding:
+            75px
+            0
+            45px;
+    }
+
+    .about-hero__title {
+        max-width: 580px;
+
+        font-size: 58px;
+    }
+
+    .about-hero__intro {
+        max-width: 520px;
+
+        font-size: 14px;
+    }
+
+    .about-hero__visual {
+        min-height: 520px;
+    }
+
+    .about-hero__person-placeholder {
+        left: 46%;
+
+        width: 310px;
+        height: 465px;
+    }
+
+    .about-hero__quote {
+        right: 20px;
+        bottom: 55px;
+    }
+
+    .about-hero__social {
+        left: 10px;
+    }
+
+
+    /* ------------------------------------------------------
+       STORY
+    ------------------------------------------------------ */
+
+    .about-story {
+        padding:
+            60px
+            0;
+    }
+
+    .about-story__layout {
+        grid-template-columns: 1fr;
+
+        gap: 38px;
+    }
+
+    .about-story__content {
+        max-width: 610px;
+
+        padding-right: 0;
+    }
+
+    .about-story__title {
+        max-width: 520px;
+
+        font-size: 42px;
+    }
+
+    .about-story__text {
+        max-width: 610px;
+
+        font-size: 13px;
+    }
+
+    .about-story__media {
+        grid-template-columns:
+            minmax(0, 2fr)
+            minmax(180px, .75fr);
+    }
+
+
+    /* ------------------------------------------------------
+       VALUES
+    ------------------------------------------------------ */
+
+    .about-values {
+        padding:
+            44px
+            0;
+    }
+
+    .about-values__grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        row-gap: 34px;
+    }
+
+    .about-values__item {
+        padding-inline: 25px;
+    }
+
+    .about-values__item:nth-child(3)::after,
+    .about-values__item:nth-child(5)::after {
+        display: none;
+    }
+
+    .about-values__item:nth-child(4),
+    .about-values__item:nth-child(5) {
+        grid-column: span 1;
+    }
+
+
+    /* ------------------------------------------------------
+       JOURNEY
+    ------------------------------------------------------ */
+
+    .about-journey {
+        padding:
+            40px
+            0
+            48px;
+    }
+
+    .about-journey__timeline {
+        overflow-x: auto;
+
+        padding-bottom: 12px;
+
+        scrollbar-width: thin;
+    }
+
+    .about-journey__items {
+        width: max-content;
+
+        grid-template-columns:
+            repeat(6, 155px);
+
+        gap: 12px;
+
+        padding-inline: 15px;
+    }
+
+    .about-journey__line {
+        left: 38px;
+        right: auto;
+
+        width: 930px;
+    }
+
+
+    /* ------------------------------------------------------
+       IMPACT
+    ------------------------------------------------------ */
+
+    .about-impact {
+        min-height: auto;
+    }
+
+    .about-impact__inner {
+        min-height: auto;
+
+        padding:
+            55px
+            0;
+    }
+
+    .about-impact__intro {
+        margin-bottom: 38px;
+    }
+
+    .about-impact__stats {
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        row-gap: 32px;
+    }
+
+    .about-impact__stat:nth-child(3)::after {
+        display: none;
+    }
+
+    .about-impact__stat:nth-child(4),
+    .about-impact__stat:nth-child(5) {
+        padding-top: 10px;
+    }
+
+
+    /* ------------------------------------------------------
+       LEADERSHIP
+    ------------------------------------------------------ */
+
+    .about-leadership {
+        padding:
+            38px
+            0
+            45px;
+    }
+
+    .about-leadership__grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 10px;
+    }
+
+    .about-leadership__quote {
+        grid-column: 1 / -1;
+    }
+
+
+    /* ------------------------------------------------------
+       PURPOSE
+    ------------------------------------------------------ */
+
+    .about-purpose__layout {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        grid-template-areas:
+            "main message"
+            "testimonials testimonials"
+            "gallery gallery";
+    }
+
+    .about-purpose__main-image,
+    .about-purpose__message {
+        min-height: 330px;
+    }
+
+    .about-purpose__testimonials {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        grid-template-rows: none;
+    }
+
+    .about-purpose__gallery {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    .about-purpose__gallery-image {
+        min-height: 140px;
+    }
+}
+
+
+
+/* ==========================================================
+   MOBILE
+   700px and below
+========================================================== */
+
+@media (max-width: 700px) {
+
+    /* ------------------------------------------------------
+       GLOBAL ABOUT
+    ------------------------------------------------------ */
+
+    .about-page {
+        overflow: hidden;
+    }
+
+
+    /* ------------------------------------------------------
+       HERO
+    ------------------------------------------------------ */
+
+    .about-hero__content {
+        padding:
+            60px
+            0
+            35px;
+    }
+
+    .about-hero__eyebrow {
+        font-size: 10px;
+    }
+
+    .about-hero__title {
+        max-width: 100%;
+
+        font-size: 46px;
+
+        line-height: 1.02;
+    }
+
+    .about-hero__divider {
+        margin:
+            20px
+            0
+            16px;
+    }
+
+    .about-hero__intro {
+        max-width: 100%;
+
+        font-size: 13px;
+    }
+
+    .about-hero__signature-placeholder {
+        font-size: 24px;
+    }
+
+    .about-hero__visual {
+        min-height: 450px;
+    }
+
+    .about-hero__person-placeholder {
+        left: 50%;
+
+        width: 260px;
+        height: 390px;
+    }
+
+    .about-hero__quote {
+        left: 50%;
+        right: auto;
+        bottom: 20px;
+
+        width: min(330px, 92%);
+
+        transform: translateX(-50%);
+    }
+
+    .about-hero__quote-content p {
+        font-size: 14px;
+    }
+
+    .about-hero__social {
+        display: none;
+    }
+
+
+    /* ------------------------------------------------------
+       STORY
+    ------------------------------------------------------ */
+
+    .about-story {
+        padding:
+            50px
+            0;
+    }
+
+    .about-story__title {
+        font-size: 36px;
+    }
+
+    .about-story__media {
+        grid-template-columns: 1fr;
+
+        gap: 9px;
+    }
+
+    .about-story__photos {
+        min-height: 430px;
+    }
+
+    .about-story__photo {
+        min-height: 205px;
+    }
+
+    .about-story__quote {
+        min-height: 220px;
+
+        padding: 30px 28px;
+    }
+
+    .about-story__quote p {
+        font-size: 17px;
+    }
+
+
+    /* ------------------------------------------------------
+       VALUES
+    ------------------------------------------------------ */
+
+    .about-values__heading {
+        gap: 12px;
+
+        margin-bottom: 30px;
+    }
+
+    .about-values__heading-line {
+        width: 25px;
+    }
+
+    .about-values__grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 28px 0;
+    }
+
+    .about-values__item {
+        padding:
+            5px
+            18px;
+    }
+
+    .about-values__item::after {
+        display: none !important;
+    }
+
+    .about-values__item:nth-child(5) {
+        grid-column: 1 / -1;
+
+        max-width: 320px;
+
+        width: 100%;
+
+        margin-inline: auto;
+    }
+
+    .about-values__item h3 {
+        font-size: 17px;
+    }
+
+    .about-values__item p {
+        font-size: 11px;
+    }
+
+
+    /* ------------------------------------------------------
+       JOURNEY
+    ------------------------------------------------------ */
+
+    .about-journey__heading {
+        margin-bottom: 26px;
+    }
+
+    .about-journey__items {
+        grid-template-columns:
+            repeat(6, 145px);
+
+        gap: 5px;
+    }
+
+    .about-journey__text {
+        max-width: 130px;
+    }
+
+
+    /* ------------------------------------------------------
+       IMPACT
+    ------------------------------------------------------ */
+
+    .about-impact__inner {
+        padding:
+            48px
+            0;
+    }
+
+    .about-impact__intro {
+        margin-bottom: 32px;
+    }
+
+    .about-impact__title {
+        font-size: 31px;
+    }
+
+    .about-impact__description {
+        font-size: 11px;
+    }
+
+    .about-impact__stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 30px 0;
+    }
+
+    .about-impact__stat {
+        padding-inline: 15px;
+    }
+
+    .about-impact__stat::after {
+        display: none !important;
+    }
+
+    .about-impact__stat:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .about-impact__stat strong {
+        font-size: 38px;
+    }
+
+
+    /* ------------------------------------------------------
+       LEADERSHIP
+    ------------------------------------------------------ */
+
+    .about-leadership__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-leadership__card {
+        min-height: 135px;
+    }
+
+    .about-leadership__quote {
+        grid-column: auto;
+
+        min-height: 130px;
+    }
+
+    .about-leadership__quote p {
+        font-size: 13px;
+    }
+
+
+    /* ------------------------------------------------------
+       PURPOSE
+    ------------------------------------------------------ */
+
+    .about-purpose {
+        padding:
+            38px
+            0
+            50px;
+    }
+
+    .about-purpose__layout {
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+            "main"
+            "message"
+            "testimonials"
+            "gallery";
+    }
+
+    .about-purpose__main-image {
+        min-height: 390px;
+    }
+
+    .about-purpose__message {
+        min-height: auto;
+
+        padding:
+            32px
+            27px;
+    }
+
+    .about-purpose__message h2 {
+        font-size: 30px;
+    }
+
+    .about-purpose__message p {
+        font-size: 13px;
+    }
+
+    .about-purpose__testimonials {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+    .about-purpose__testimonial {
+        min-height: 165px;
+
+        padding:
+            24px
+            23px
+            21px
+            48px;
+    }
+
+    .about-purpose__testimonial > p {
+        font-size: 13px;
+    }
+
+    .about-purpose__gallery {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+    .about-purpose__gallery-image {
+        min-height: 190px;
+    }
+
+
+    /* ------------------------------------------------------
+       SPACE BEFORE FOOTER
+    ------------------------------------------------------ */
+
+    .about-page + .site-footer {
+        margin-top: 30px;
+    }
+}
+
+
+
+/* ==========================================================
+   SMALL MOBILE
+   480px and below
+========================================================== */
+
+@media (max-width: 480px) {
+
+    /* ------------------------------------------------------
+       HERO
+    ------------------------------------------------------ */
+
+    .about-hero__content {
+        padding-top: 48px;
+    }
+
+    .about-hero__title {
+        font-size: 39px;
+    }
+
+    .about-hero__intro {
+        font-size: 12px;
+
+        line-height: 1.7;
+    }
+
+    .about-hero__visual {
+        min-height: 420px;
+    }
+
+    .about-hero__person-placeholder {
+        width: 235px;
+        height: 355px;
+    }
+
+    .about-hero__quote {
+        width: calc(100% - 20px);
+
+        padding:
+            20px
+            18px;
+
+        grid-template-columns:
+            25px
+            1fr;
+    }
+
+    .about-hero__quote-mark {
+        font-size: 34px;
+    }
+
+
+    /* ------------------------------------------------------
+       STORY
+    ------------------------------------------------------ */
+
+    .about-story {
+        padding:
+            44px
+            0;
+    }
+
+    .about-story__title {
+        font-size: 32px;
+    }
+
+    .about-story__text {
+        font-size: 12px;
+    }
+
+    .about-story__photos {
+        grid-template-columns: 1fr;
+
+        grid-template-rows: none;
+
+        min-height: 0;
+    }
+
+    .about-story__photo {
+        min-height: 210px;
+    }
+
+
+    /* ------------------------------------------------------
+       VALUES
+    ------------------------------------------------------ */
+
+    .about-values {
+        padding:
+            40px
+            0;
+    }
+
+    .about-values__heading h2 {
+        font-size: 10px;
+    }
+
+    .about-values__grid {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+    }
+
+    .about-values__item:nth-child(5) {
+        grid-column: auto;
+    }
+
+    .about-values__item {
+        max-width: 310px;
+
+        width: 100%;
+
+        margin-inline: auto;
+    }
+
+
+    /* ------------------------------------------------------
+       JOURNEY
+    ------------------------------------------------------ */
+
+    .about-journey__heading {
+        font-size: 10px;
+    }
+
+    .about-journey__items {
+        grid-template-columns:
+            repeat(6, 135px);
+    }
+
+    .about-journey__line {
+        width: 805px;
+    }
+
+
+    /* ------------------------------------------------------
+       IMPACT
+    ------------------------------------------------------ */
+
+    .about-impact__title {
+        font-size: 28px;
+    }
+
+    .about-impact__stats {
+        grid-template-columns: 1fr;
+
+        gap: 27px;
+    }
+
+    .about-impact__stat:last-child {
+        grid-column: auto;
+    }
+
+
+    /* ------------------------------------------------------
+       LEADERSHIP
+    ------------------------------------------------------ */
+
+    .about-leadership {
+        padding:
+            35px
+            0
+            42px;
+    }
+
+    .about-leadership__card {
+        padding:
+            20px
+            16px;
+    }
+
+    .about-leadership__card h3 {
+        font-size: 13px;
+    }
+
+    .about-leadership__card p {
+        font-size: 10px;
+    }
+
+
+    /* ------------------------------------------------------
+       PURPOSE
+    ------------------------------------------------------ */
+
+    .about-purpose__main-image {
+        min-height: 330px;
+    }
+
+    .about-purpose__message h2 {
+        font-size: 27px;
+    }
+
+    .about-purpose__gallery-image {
+        min-height: 165px;
+    }
+}

@@ -1,0 +1,103 @@
+# ==================================================
+# Greshma Portfolio - Git Ignore
+# ==================================================
+
+# WordPress Core
+/wp-admin/
+/wp-includes/
+
+# WordPress root/core files
+/index.php
+/license.txt
+/readme.html
+/wp-activate.php
+/wp-blog-header.php
+/wp-comments-post.php
+/wp-config-sample.php
+/wp-cron.php
+/wp-links-opml.php
+/wp-load.php
+/wp-login.php
+/wp-mail.php
+/wp-settings.php
+/wp-signup.php
+/wp-trackback.php
+/xmlrpc.php
+
+# Sensitive WordPress configuration
+/wp-config.php
+
+# User uploads
+/wp-content/uploads/
+
+# Cache
+/wp-content/cache/
+/wp-content/litespeed/
+/wp-content/wflogs/
+
+# WordPress upgrade/temp files
+/wp-content/upgrade/
+
+# Backups
+*.sql
+*.sql.gz
+*.zip
+*.tar
+*.tar.gz
+
+# Logs
+*.log
+debug.log
+
+# Dependencies
+node_modules/
+vendor/
+
+# Environment files
+.env
+.env.*
+
+# IDE / Editor
+.idea/
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Local WP / local environment
+local-xdebuginfo.php
+.htaccess
+
+
+# ==================================================
+# WordPress themes
+# ==================================================
+
+# Ignore all themes by default
+/wp-content/themes/*
+
+# Track our custom Greshma theme
+!/wp-content/themes/greshma/
+!/wp-content/themes/greshma/**
+
+
+# ==================================================
+# WordPress plugins
+# ==================================================
+
+# Ignore all plugins by default
+/wp-content/plugins/*
+
+# Later we will track our custom Greshma Core plugin
+!/wp-content/plugins/greshma-core/
+!/wp-content/plugins/greshma-core/**
+
+
+# WordPress content helper files
+/wp-content/index.php
