@@ -2,208 +2,257 @@
 /**
  * Projects Page — Projects & Collaborations.
  *
- * IMAGE ASSETS REQUIRED LATER:
- *
- * assets/images/projects/projects-collab-01.png
- * assets/images/projects/projects-collab-02.png
- * assets/images/projects/projects-collab-03.png
- * assets/images/projects/projects-collab-04.png
- * assets/images/projects/projects-collab-05.png
- * assets/images/projects/projects-collab-06.png
+ * Dynamic data from Greshma Core Projects CPT.
  *
  * @package Greshma
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$projects = [
+/**
+ * Get project categories for filter buttons.
+ */
+$project_categories = get_terms(
+	array(
+		'taxonomy'   => 'greshma_project_category',
+		'hide_empty' => true,
+	)
+);
 
-    [
-        'title'    => 'Youth Climate Dialogue',
-        'location' => 'India',
-        'year'     => '2024',
-        'image'    => 'projects-collab-01.png',
-        'category' => 'Climate Action',
-    ],
-
-    [
-        'title'    => 'Interfaith Leadership Workshop',
-        'location' => 'Kenya',
-        'year'     => '2024',
-        'image'    => 'projects-collab-02.png',
-        'category' => 'Peacebuilding',
-    ],
-
-    [
-        'title'    => 'Peace Education Program',
-        'location' => 'Costa Rica',
-        'year'     => '2023',
-        'image'    => 'projects-collab-03.png',
-        'category' => 'Dialogue',
-    ],
-
-    [
-        'title'    => 'Climate Action Summit',
-        'location' => 'Thailand',
-        'year'     => '2023',
-        'image'    => 'projects-collab-04.png',
-        'category' => 'Climate Action',
-    ],
-
-    [
-        'title'    => 'Youth Peace Forum',
-        'location' => 'Portugal',
-        'year'     => '2022',
-        'image'    => 'projects-collab-05.png',
-        'category' => 'Youth',
-    ],
-
-    [
-        'title'    => 'Community Dialogue Series',
-        'location' => 'Multiple Countries',
-        'year'     => 'Ongoing',
-        'image'    => 'projects-collab-06.png',
-        'category' => 'Dialogue',
-    ],
-
-];
+/**
+ * Get published projects.
+ *
+ * Order:
+ * 1. menu_order
+ * 2. title
+ */
+$projects_query = new WP_Query(
+	array(
+		'post_type'      => 'greshma_project',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'orderby'        => array(
+			'menu_order' => 'ASC',
+			'title'      => 'ASC',
+		),
+		'order'          => 'ASC',
+	)
+);
 ?>
 
 <div class="projects-collaborations">
 
-    <!-- ==========================================
-         SECTION LABEL
-    =========================================== -->
+	<!-- ==========================================
+	     SECTION LABEL
+	=========================================== -->
 
-    <div class="projects-subsection-label">
-        3. Projects &amp; Collaborations
-    </div>
-
-
-    <!-- ==========================================
-         FILTER PILLS
-    =========================================== -->
-
-    <div class="projects-collaborations__filters">
-
-        <button
-            type="button"
-            class="projects-filter is-active"
-        >
-            All
-        </button>
-
-        <button
-            type="button"
-            class="projects-filter"
-        >
-            Climate Action
-        </button>
-
-        <button
-            type="button"
-            class="projects-filter"
-        >
-            Peacebuilding
-        </button>
-
-        <button
-            type="button"
-            class="projects-filter"
-        >
-            Dialogue
-        </button>
-
-        <button
-            type="button"
-            class="projects-filter"
-        >
-            Youth
-        </button>
-
-        <button
-            type="button"
-            class="projects-filter"
-        >
-            Training
-        </button>
-
-    </div>
+	<div class="projects-subsection-label">
+		3. Projects &amp; Collaborations
+	</div>
 
 
-    <!-- ==========================================
-         PROJECT GRID
-    =========================================== -->
+	<?php if ( ! empty( $project_categories ) && ! is_wp_error( $project_categories ) ) : ?>
 
-    <div class="projects-collaborations__grid">
+		<!-- ==========================================
+		     FILTER PILLS
+		=========================================== -->
 
-        <?php foreach ( $projects as $project ) : ?>
+		<div class="projects-collaborations__filters">
 
-            <article class="projects-collaboration-card">
+			<button
+				type="button"
+				class="projects-filter is-active"
+				data-filter="all"
+			>
+				All
+			</button>
 
-                <!--
-                FINAL IMAGE:
-                assets/images/projects/<?php
-                echo esc_html( $project['image'] );
-                ?>
-                -->
+			<?php foreach ( $project_categories as $category ) : ?>
 
-                <div class="projects-collaboration-card__image">
+				<button
+					type="button"
+					class="projects-filter"
+					data-filter="<?php echo esc_attr( $category->slug ); ?>"
+				>
+					<?php echo esc_html( $category->name ); ?>
+				</button>
 
-                    <span>
-                        <?php
-                        echo esc_html(
-                            $project['image']
-                        );
-                        ?>
-                    </span>
+			<?php endforeach; ?>
 
-                </div>
+		</div>
 
-
-                <div class="projects-collaboration-card__content">
-
-                    <h3>
-                        <?php
-                        echo esc_html(
-                            $project['title']
-                        );
-                        ?>
-                    </h3>
+	<?php endif; ?>
 
 
-                    <div class="projects-collaboration-card__meta">
+	<!-- ==========================================
+	     PROJECT GRID
+	=========================================== -->
 
-                        <span>
-                            <?php
-                            echo esc_html(
-                                $project['location']
-                            );
-                            ?>
-                        </span>
+	<div class="projects-collaborations__grid">
 
-                        <span>
-                            <?php
-                            echo esc_html(
-                                $project['year']
-                            );
-                            ?>
-                        </span>
+		<?php if ( $projects_query->have_posts() ) : ?>
 
-                    </div>
+			<?php while ( $projects_query->have_posts() ) : ?>
+
+				<?php
+				$projects_query->the_post();
+
+				$project_id = get_the_ID();
+
+				$location = get_post_meta(
+					$project_id,
+					'_greshma_project_location',
+					true
+				);
+
+				$year = get_post_meta(
+					$project_id,
+					'_greshma_project_year',
+					true
+				);
+
+				$project_url = get_post_meta(
+					$project_id,
+					'_greshma_project_url',
+					true
+				);
+
+				$categories = get_the_terms(
+					$project_id,
+					'greshma_project_category'
+				);
+
+				$category_slugs = array();
+
+				if ( $categories && ! is_wp_error( $categories ) ) {
+					$category_slugs = wp_list_pluck(
+						$categories,
+						'slug'
+					);
+				}
+
+				$filter_classes = implode(
+					' ',
+					array_map(
+						'sanitize_html_class',
+						$category_slugs
+					)
+				);
+
+				$link = ! empty( $project_url )
+					? $project_url
+					: get_permalink();
+				?>
+
+				<article
+					class="projects-collaboration-card"
+					data-category="<?php echo esc_attr( $filter_classes ); ?>"
+				>
+
+					<!-- ==================================
+					     PROJECT IMAGE
+					=================================== -->
+
+					<div class="projects-collaboration-card__image">
+
+						<?php if ( has_post_thumbnail() ) : ?>
+
+							<?php
+							the_post_thumbnail(
+								'large',
+								array(
+									'alt'     => the_title_attribute(
+										array(
+											'echo' => false,
+										)
+									),
+									'loading' => 'lazy',
+								)
+							);
+							?>
+
+						<?php else : ?>
+
+							<span>
+								<?php esc_html_e(
+									'Project image',
+									'greshma'
+								); ?>
+							</span>
+
+						<?php endif; ?>
+
+					</div>
 
 
-                    <a href="#">
-                        View Project
-                        <span aria-hidden="true">→</span>
-                    </a>
+					<!-- ==================================
+					     PROJECT CONTENT
+					=================================== -->
 
-                </div>
+					<div class="projects-collaboration-card__content">
 
-            </article>
+						<h3>
+							<?php the_title(); ?>
+						</h3>
 
-        <?php endforeach; ?>
 
-    </div>
+						<?php if ( $location || $year ) : ?>
+
+							<div class="projects-collaboration-card__meta">
+
+								<?php if ( $location ) : ?>
+
+									<span>
+										<?php echo esc_html( $location ); ?>
+									</span>
+
+								<?php endif; ?>
+
+
+								<?php if ( $year ) : ?>
+
+									<span>
+										<?php echo esc_html( $year ); ?>
+									</span>
+
+								<?php endif; ?>
+
+							</div>
+
+						<?php endif; ?>
+
+
+						<a
+							href="<?php echo esc_url( $link ); ?>"
+							<?php
+							if ( ! empty( $project_url ) ) {
+								echo 'target="_blank" rel="noopener noreferrer"';
+							}
+							?>
+						>
+							View Project
+							<span aria-hidden="true">→</span>
+						</a>
+
+					</div>
+
+				</article>
+
+			<?php endwhile; ?>
+
+			<?php wp_reset_postdata(); ?>
+
+		<?php else : ?>
+
+			<p class="projects-collaborations__empty">
+				<?php esc_html_e(
+					'Projects will be added soon.',
+					'greshma'
+				); ?>
+			</p>
+
+		<?php endif; ?>
+
+	</div>
 
 </div>

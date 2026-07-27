@@ -126,6 +126,17 @@ wp_enqueue_style(
     )
 );
 
+if ( is_page( 'projects' ) ) {
+
+	wp_enqueue_script(
+		'greshma-projects',
+		GRESHMA_THEME_URI . '/assets/js/projects.js',
+		array(),
+		GRESHMA_THEME_VERSION,
+		true
+	);
+}
+
 wp_enqueue_style(
     'greshma-impacts',
     get_template_directory_uri() . '/assets/css/impacts.css',
