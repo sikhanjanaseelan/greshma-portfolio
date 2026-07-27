@@ -138,15 +138,15 @@
 
 					<li>
 						<span aria-hidden="true">✉</span>
-						<a href="mailto:hello@greshma.me">
-							hello@greshma.me
+						<a href="mailto:XXXXXXXXXX">
+							XXXXXXXXXXXXXXX
 						</a>
 					</li>
 
 					<li>
 						<span aria-hidden="true">⌕</span>
-						<a href="tel:+919876543210">
-							+91 98765 43210
+						<a href="tel:+91xxxxxxxxx">
+							+91 XXXXXXXXXXX
 						</a>
 					</li>
 
