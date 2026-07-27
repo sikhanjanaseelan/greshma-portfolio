@@ -136,7 +136,21 @@ if ( is_page( 'projects' ) ) {
 		true
 	);
 }
+if ( is_singular( 'greshma_project' ) ) {
 
+	$single_project_css =
+		GRESHMA_THEME_DIR . '/assets/css/single-project.css';
+
+	if ( file_exists( $single_project_css ) ) {
+
+		wp_enqueue_style(
+			'greshma-single-project',
+			GRESHMA_THEME_URI . '/assets/css/single-project.css',
+			array( 'style' ),
+			filemtime( $single_project_css )
+		);
+	}
+}
 wp_enqueue_style(
     'greshma-impacts',
     get_template_directory_uri() . '/assets/css/impacts.css',

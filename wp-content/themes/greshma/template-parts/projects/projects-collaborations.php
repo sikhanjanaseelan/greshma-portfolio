@@ -139,9 +139,7 @@ $projects_query = new WP_Query(
 					)
 				);
 
-				$link = ! empty( $project_url )
-					? $project_url
-					: get_permalink();
+				$link = get_permalink();
 				?>
 
 				<article
@@ -224,11 +222,7 @@ $projects_query = new WP_Query(
 
 						<a
 							href="<?php echo esc_url( $link ); ?>"
-							<?php
-							if ( ! empty( $project_url ) ) {
-								echo 'target="_blank" rel="noopener noreferrer"';
-							}
-							?>
+							
 						>
 							View Project
 							<span aria-hidden="true">→</span>
