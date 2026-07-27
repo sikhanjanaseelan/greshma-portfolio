@@ -29,3 +29,10 @@ require_once GRESHMA_CORE_DIR . 'includes/class-workshop-meta.php';
 
 require_once GRESHMA_CORE_DIR . 'includes/class-resources.php';
 require_once GRESHMA_CORE_DIR . 'includes/class-resource-meta.php';
+
+
+require_once GRESHMA_CORE_DIR . 'includes/class-testimonials.php';
+require_once GRESHMA_CORE_DIR . 'includes/class-testimonial-meta.php';
+
+require_once GRESHMA_CORE_DIR . 'includes/class-media.php';
+require_once GRESHMA_CORE_DIR . 'includes/class-media-meta.php';
