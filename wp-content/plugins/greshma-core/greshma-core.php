@@ -25,3 +25,7 @@ require_once GRESHMA_CORE_DIR . 'includes/class-event-meta.php';
 
 require_once GRESHMA_CORE_DIR . 'includes/class-workshops.php';
 require_once GRESHMA_CORE_DIR . 'includes/class-workshop-meta.php';
+
+
+require_once GRESHMA_CORE_DIR . 'includes/class-resources.php';
+require_once GRESHMA_CORE_DIR . 'includes/class-resource-meta.php';
