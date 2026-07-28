@@ -50,3 +50,7 @@ require_once GRESHMA_CORE_DIR . 'includes/class-media-meta.php';
 // custom settings for adding datas like linkdin , insta fb social media copyright section etc
 
 require_once GRESHMA_CORE_DIR . 'includes/class-settings.php';
+
+// adding organizations greshma had worked dynamically
+require_once GRESHMA_CORE_DIR . 'includes/class-organizations.php';
+require_once GRESHMA_CORE_DIR . 'includes/class-organization-meta.php';

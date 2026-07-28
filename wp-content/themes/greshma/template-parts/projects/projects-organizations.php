@@ -2,155 +2,196 @@
 /**
  * Projects Page — Organizations I Serve.
  *
- * IMAGE ASSETS REQUIRED LATER:
- *
- * assets/images/projects/projects-org-okc-logo.png
- * assets/images/projects/projects-org-okc-image.png
- *
- * assets/images/projects/projects-org-uri-logo.png
- * assets/images/projects/projects-org-uri-image.png
- *
- * assets/images/projects/projects-org-unep-logo.png
- * assets/images/projects/projects-org-unep-image.png
+ * Dynamic data from Greshma Core Organizations CPT.
  *
  * @package Greshma
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$organizations = [
-
-    [
-        'name'        => 'Our Kids’ Climate',
-        'role'        => 'Community & Fellowship Manager',
-        'description' => 'Managing an international fellowship program, fostering youth leadership for climate justice through training, mentoring and global collaboration.',
-        'logo'        => 'projects-org-okc-logo.png',
-        'image'       => 'projects-org-okc-image.png',
-    ],
-
-    [
-        'name'        => 'United Religions Initiative',
-        'role'        => 'Global Council Trustee',
-        'description' => 'Serving on the Global Council to support governance, strategy and collaboration for interfaith peacebuilding and global transformation.',
-        'logo'        => 'projects-org-uri-logo.png',
-        'image'       => 'projects-org-uri-image.png',
-    ],
-
-    [
-        'name'        => 'UNEP Faith for Earth Initiative',
-        'role'        => 'Global Youth Contributor',
-        'description' => 'Collaborating with a global network of faith-based leaders and organisations for environmental action and sustainability.',
-        'logo'        => 'projects-org-unep-logo.png',
-        'image'       => 'projects-org-unep-image.png',
-    ],
-
-];
+$organizations_query = new WP_Query(
+	array(
+		'post_type'      => 'greshma_organization',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'orderby'        => array(
+			'menu_order' => 'ASC',
+			'title'      => 'ASC',
+		),
+		'order'          => 'ASC',
+	)
+);
 ?>
 
 <div class="projects-organizations">
 
-    <div class="projects-subsection-label">
-        2. Organizations I Serve
-    </div>
+	<div class="projects-subsection-label">
+		2. Organizations I Serve
+	</div>
 
+	<div class="projects-organizations__list">
 
-    <div class="projects-organizations__list">
+		<?php if ( $organizations_query->have_posts() ) : ?>
 
-        <?php foreach ( $organizations as $organization ) : ?>
+			<?php while ( $organizations_query->have_posts() ) : ?>
 
-            <article class="projects-organization-card">
+				<?php
+				$organizations_query->the_post();
 
+				$organization_id = get_the_ID();
 
-                <!-- ==============================
-                     LEFT CONTENT
-                =============================== -->
+				$role = get_post_meta(
+					$organization_id,
+					'_greshma_organization_role',
+					true
+				);
 
-                <div class="projects-organization-card__content">
+				$organization_url = get_post_meta(
+					$organization_id,
+					'_greshma_organization_url',
+					true
+				);
 
-                    <div class="projects-organization-card__header">
+				$logo_id = absint(
+					get_post_meta(
+						$organization_id,
+						'_greshma_organization_logo_id',
+						true
+					)
+				);
 
+				$description = get_the_content();
 
-                        <!--
-                        FINAL LOGO:
+				$link = ! empty( $organization_url )
+					? $organization_url
+					: '#';
+				?>
 
-                        assets/images/projects/<?php
-                        echo esc_html( $organization['logo'] );
-                        ?>
-                        -->
+				<article class="projects-organization-card">
 
-                        <div class="projects-organization-card__logo">
-                            LOGO
-                        </div>
+					<div class="projects-organization-card__content">
 
+						<div class="projects-organization-card__header">
 
-                        <div class="projects-organization-card__heading">
+							<div class="projects-organization-card__logo">
 
-                            <h3>
-                                <?php
-                                echo esc_html(
-                                    $organization['name']
-                                );
-                                ?>
-                            </h3>
+								<?php if ( $logo_id ) : ?>
 
-                            <span>
-                                <?php
-                                echo esc_html(
-                                    $organization['role']
-                                );
-                                ?>
-                            </span>
+									<?php
+									echo wp_get_attachment_image(
+										$logo_id,
+										'medium',
+										false,
+										array(
+											'alt'     => get_the_title(),
+											'loading' => 'lazy',
+										)
+									);
+									?>
 
-                        </div>
+								<?php else : ?>
 
-                    </div>
+									<span>
+										LOGO
+									</span>
 
+								<?php endif; ?>
 
-                    <p>
-                        <?php
-                        echo esc_html(
-                            $organization['description']
-                        );
-                        ?>
-                    </p>
+							</div>
 
+							<div class="projects-organization-card__heading">
 
-                    <a href="#">
-                        View My Role
-                        <span aria-hidden="true">→</span>
-                    </a>
+								<h3>
+									<?php the_title(); ?>
+								</h3>
 
-                </div>
+								<?php if ( $role ) : ?>
 
+									<span>
+										<?php echo esc_html( $role ); ?>
+									</span>
 
-                <!-- ==============================
-                     RIGHT IMAGE
-                =============================== -->
+								<?php endif; ?>
 
-                <!--
-                FINAL IMAGE:
+							</div>
 
-                assets/images/projects/<?php
-                echo esc_html( $organization['image'] );
-                ?>
-                -->
+						</div>
 
-                <div class="projects-organization-card__image">
+						<?php if ( $description ) : ?>
 
-                    <span>
-                        <?php
-                        echo esc_html(
-                            $organization['image']
-                        );
-                        ?>
-                    </span>
+							<div class="projects-organization-card__description">
+								<?php
+								echo wp_kses_post(
+									wpautop( $description )
+								);
+								?>
+							</div>
 
-                </div>
+						<?php endif; ?>
 
-            </article>
+						<?php if ( $organization_url ) : ?>
 
-        <?php endforeach; ?>
+							<a
+								href="<?php echo esc_url( $link ); ?>"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								View My Role
+								<span aria-hidden="true">→</span>
+							</a>
 
-    </div>
+						<?php endif; ?>
+
+					</div>
+
+					<div class="projects-organization-card__image">
+
+						<?php if ( has_post_thumbnail() ) : ?>
+
+							<?php
+							the_post_thumbnail(
+								'large',
+								array(
+									'alt'     => the_title_attribute(
+										array(
+											'echo' => false,
+										)
+									),
+									'loading' => 'lazy',
+								)
+							);
+							?>
+
+						<?php else : ?>
+
+							<span>
+								<?php esc_html_e(
+									'Organization image',
+									'greshma'
+								); ?>
+							</span>
+
+						<?php endif; ?>
+
+					</div>
+
+				</article>
+
+			<?php endwhile; ?>
+
+			<?php wp_reset_postdata(); ?>
+
+		<?php else : ?>
+
+			<p class="projects-organizations__empty">
+				<?php esc_html_e(
+					'Organizations will be added soon.',
+					'greshma'
+				); ?>
+			</p>
+
+		<?php endif; ?>
+
+	</div>
 
 </div>
