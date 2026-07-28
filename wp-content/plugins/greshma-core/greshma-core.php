@@ -54,3 +54,7 @@ require_once GRESHMA_CORE_DIR . 'includes/class-settings.php';
 // adding organizations greshma had worked dynamically
 require_once GRESHMA_CORE_DIR . 'includes/class-organizations.php';
 require_once GRESHMA_CORE_DIR . 'includes/class-organization-meta.php';
+
+//dynamic journey section in my-path page.
+require_once GRESHMA_CORE_DIR . 'includes/class-journey.php';
+require_once GRESHMA_CORE_DIR . 'includes/class-journey-meta.php';

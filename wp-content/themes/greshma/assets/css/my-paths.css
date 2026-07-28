@@ -2329,3 +2329,35 @@ assets/images/my-paths/my-paths-cta-bg.png
         height: 36px;
     }
 }
+
+
+/* Journey timeline image container */
+.my-paths-moment__image {
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+    border-radius: 22px;
+    position: relative;
+}
+
+/* Dynamic featured image */
+.my-paths-moment__image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media (max-width: 1024px) {
+    .my-paths-moment__image {
+        height: 230px;
+    }
+}
+
+@media (max-width: 767px) {
+    .my-paths-moment__image {
+        height: 220px;
+        border-radius: 18px;
+    }
+}

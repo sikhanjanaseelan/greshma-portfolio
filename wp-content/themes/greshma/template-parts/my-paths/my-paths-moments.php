@@ -17,79 +17,19 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$moments = [
-
-    [
-        'number'      => '01',
-        'title'       => 'Early Spark',
-        'period'      => 'Around the age of fourteen',
-        'description' => 'My journey began when I discovered the power of intercultural, interfaith and environmental work. Curiosity turned into a lifelong commitment to understanding people, nature and our shared world.',
-        'icon'        => '♧',
-        'image'       => 'my-paths-moment-01.png',
-        'side'        => 'left',
-    ],
-
-    [
-        'number'      => '02',
-        'title'       => 'Academic Foundations',
-        'period'      => '2016 – 2019',
-        'description' => 'Completed my Bachelor’s in English Literature and went on to study International Peace Studies at the University for Peace, Costa Rica — a turning point that broadened my global perspective.',
-        'icon'        => '◆',
-        'image'       => 'my-paths-moment-02.png',
-        'side'        => 'right',
-    ],
-
-    [
-        'number'      => '03',
-        'title'       => 'Starting to Lead',
-        'period'      => '2019 – 2020',
-        'description' => 'Began facilitating workshops, youth programs and community dialogues on peace, climate action and sustainability, working with people from diverse cultures and communities.',
-        'icon'        => '●',
-        'image'       => 'my-paths-moment-03.png',
-        'side'        => 'left',
-    ],
-
-    [
-        'number'      => '04',
-        'title'       => 'Founding Ecopeace Teen Café',
-        'period'      => 'January 2021 – Present',
-        'description' => 'Founded a global youth initiative delivering multilingual climate and peace education across Asia, Latin America, Africa and the UK — empowering young people to become compassionate leaders and changemakers.',
-        'icon'        => '◎',
-        'image'       => 'my-paths-moment-04.png',
-        'side'        => 'right',
-    ],
-
-    [
-        'number'      => '05',
-        'title'       => 'Building Global Partnerships',
-        'period'      => '2021 – 2023',
-        'description' => 'Partnered with international organisations, led global events, mentored youth and created spaces for dialogue, resilience building and climate justice.',
-        'icon'        => '∞',
-        'image'       => 'my-paths-moment-05.png',
-        'side'        => 'left',
-    ],
-
-    [
-        'number'      => '06',
-        'title'       => 'Expanding Leadership',
-        'period'      => '2024 – Present',
-        'description' => 'Serving as Community & Fellowship Manager at Our Kids’ Climate and as Global Council Trustee at United Religions Initiative, contributing to global governance, strategy and policy for peace.',
-        'icon'        => '★',
-        'image'       => 'my-paths-moment-06.png',
-        'side'        => 'right',
-    ],
-
-    [
-        'number'      => '07',
-        'title'       => 'Continuing the Journey',
-        'period'      => 'Today and Beyond',
-        'description' => 'I continue to learn, connect and create impact — believing that together, we can build a world where people and the planet thrive in harmony.',
-        'icon'        => '♥',
-        'image'       => 'my-paths-moment-07.png',
-        'side'        => 'left',
-    ],
-
-];
+$journey_query = new WP_Query(
+	array(
+		'post_type'      => 'greshma_journey',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'meta_key'       => '_greshma_journey_order',
+		'orderby'        => array(
+			'meta_value_num' => 'ASC',
+			'title'          => 'ASC',
+		),
+		'order'          => 'ASC',
+	)
+);
 ?>
 
 <section class="my-paths-moments">
@@ -137,7 +77,43 @@ $moments = [
                 ></div>
 
 
-                <?php foreach ( $moments as $moment ) : ?>
+              <?php if ( $journey_query->have_posts() ) : ?>
+
+	<?php while ( $journey_query->have_posts() ) : ?>
+
+		<?php
+		$journey_query->the_post();
+
+		$moment = array(
+			'number' => get_post_meta(
+				get_the_ID(),
+				'_greshma_journey_number',
+				true
+			),
+
+			'title' => get_the_title(),
+
+			'period' => get_post_meta(
+				get_the_ID(),
+				'_greshma_journey_period',
+				true
+			),
+
+			'description' => get_the_content(),
+
+			'icon' => get_post_meta(
+				get_the_ID(),
+				'_greshma_journey_icon',
+				true
+			),
+
+			'side' => get_post_meta(
+				get_the_ID(),
+				'_greshma_journey_side',
+				true
+			),
+		);
+		?> 
 
                     <article
                         class="
@@ -162,17 +138,33 @@ $moments = [
                                 ?>
                                 -->
 
-                                <div class="my-paths-moment__image">
+                             <div class="my-paths-moment__image">
 
-                                    <span>
-                                        <?php
-                                        echo esc_html(
-                                            $moment['image']
-                                        );
-                                        ?>
-                                    </span>
+	<?php if ( has_post_thumbnail() ) : ?>
 
-                                </div>
+		<?php
+		the_post_thumbnail(
+			'large',
+			array(
+				'alt'     => the_title_attribute(
+					array(
+						'echo' => false,
+					)
+				),
+				'loading' => 'lazy',
+			)
+		);
+		?>
+
+	<?php else : ?>
+
+		<span>
+			<?php esc_html_e( 'Journey image', 'greshma' ); ?>
+		</span>
+
+	<?php endif; ?>
+
+</div>
 
                             <?php else : ?>
 
@@ -245,17 +237,33 @@ $moments = [
                                 ?>
                                 -->
 
-                                <div class="my-paths-moment__image">
+<div class="my-paths-moment__image">
 
-                                    <span>
-                                        <?php
-                                        echo esc_html(
-                                            $moment['image']
-                                        );
-                                        ?>
-                                    </span>
+	<?php if ( has_post_thumbnail() ) : ?>
 
-                                </div>
+		<?php
+		the_post_thumbnail(
+			'large',
+			array(
+				'alt'     => the_title_attribute(
+					array(
+						'echo' => false,
+					)
+				),
+				'loading' => 'lazy',
+			)
+		);
+		?>
+
+	<?php else : ?>
+
+		<span>
+			<?php esc_html_e( 'Journey image', 'greshma' ); ?>
+		</span>
+
+	<?php endif; ?>
+
+</div>
 
                             <?php else : ?>
 
@@ -301,7 +309,17 @@ $moments = [
 
                     </article>
 
-                <?php endforeach; ?>
+                <?php endwhile; ?>
+
+<?php wp_reset_postdata(); ?>
+
+<?php else : ?>
+
+	<p class="my-paths-moments__empty">
+		<?php esc_html_e( 'Journey moments will be added soon.', 'greshma' ); ?>
+	</p>
+
+<?php endif; ?>
 
             </div>
 
