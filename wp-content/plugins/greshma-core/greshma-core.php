@@ -58,3 +58,7 @@ require_once GRESHMA_CORE_DIR . 'includes/class-organization-meta.php';
 //dynamic journey section in my-path page.
 require_once GRESHMA_CORE_DIR . 'includes/class-journey.php';
 require_once GRESHMA_CORE_DIR . 'includes/class-journey-meta.php';
+
+// dynamic education details adding section
+require_once GRESHMA_CORE_DIR . 'includes/class-education.php';
+require_once GRESHMA_CORE_DIR . 'includes/class-education-meta.php';

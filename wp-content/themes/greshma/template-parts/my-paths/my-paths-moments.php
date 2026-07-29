@@ -365,6 +365,22 @@ $journey_query = new WP_Query(
 
                 </aside>
 
+                <?php
+$education_query = new WP_Query(
+	array(
+		'post_type'      => 'greshma_education',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'meta_key'       => '_greshma_education_order',
+		'orderby'        => array(
+			'meta_value_num' => 'ASC',
+			'title'          => 'ASC',
+		),
+		'order'          => 'ASC',
+	)
+);
+?>
+
 
                 <!-- ==================================
                      MY EDUCATION
@@ -384,92 +400,77 @@ $journey_query = new WP_Query(
 
 
                     <div class="my-paths-education-card__timeline">
+<?php if ( $education_query->have_posts() ) : ?>
 
+	<?php while ( $education_query->have_posts() ) : ?>
 
-                        <!-- 2020 -->
+		<?php
+		$education_query->the_post();
 
-                        <div class="my-paths-education-card__item">
+		$year = get_post_meta(
+			get_the_ID(),
+			'_greshma_education_year',
+			true
+		);
 
-                            <div class="my-paths-education-card__year">
-                                2020
-                            </div>
+		$institution = get_post_meta(
+			get_the_ID(),
+			'_greshma_education_institution',
+			true
+		);
 
-                            <div class="my-paths-education-card__marker">
-                                <span></span>
-                            </div>
+		$location = get_post_meta(
+			get_the_ID(),
+			'_greshma_education_location',
+			true
+		);
+		?>
 
-                            <div class="my-paths-education-card__content">
+		<div class="my-paths-education-card__item">
 
-                                <h3>
-                                    Master’s in International
-                                    Peace Studies
-                                </h3>
+			<div class="my-paths-education-card__year">
+				<?php echo esc_html( $year ); ?>
+			</div>
 
-                                <p>
-                                    University for Peace,
-                                    Costa Rica
-                                </p>
+			<div class="my-paths-education-card__marker">
+				<span></span>
+			</div>
 
-                            </div>
+			<div class="my-paths-education-card__content">
 
-                        </div>
+				<h3>
+					<?php the_title(); ?>
+				</h3>
 
+				<p>
+					<?php
+					echo esc_html(
+						trim(
+							$institution .
+							( $location ? ', ' . $location : '' )
+						)
+					);
+					?>
+				</p>
 
-                        <!-- 2019 -->
+			</div>
 
-                        <div class="my-paths-education-card__item">
+		</div>
 
-                            <div class="my-paths-education-card__year">
-                                2019
-                            </div>
+	<?php endwhile; ?>
 
-                            <div class="my-paths-education-card__marker">
-                                <span></span>
-                            </div>
+	<?php wp_reset_postdata(); ?>
 
-                            <div class="my-paths-education-card__content">
+<?php else : ?>
 
-                                <h3>
-                                    International Learning
-                                    &amp; Global Exposure
-                                </h3>
+	<p>
+		<?php esc_html_e(
+			'Education entries will be added soon.',
+			'greshma'
+		); ?>
+	</p>
 
-                                <p>
-                                    Peacebuilding &amp;
-                                    intercultural programs
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- 2016 -->
-
-                        <div class="my-paths-education-card__item">
-
-                            <div class="my-paths-education-card__year">
-                                2016
-                            </div>
-
-                            <div class="my-paths-education-card__marker">
-                                <span></span>
-                            </div>
-
-                            <div class="my-paths-education-card__content">
-
-                                <h3>
-                                    Bachelor’s Degree
-                                    in English
-                                </h3>
-
-                                <p>
-                                    India
-                                </p>
-
-                            </div>
-
-                        </div>
+<?php endif; ?>
 
 
                     </div>
