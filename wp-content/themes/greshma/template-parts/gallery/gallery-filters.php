@@ -7,15 +7,14 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$filters = [
-    'all'                  => 'All',
-    'programs-workshops'   => 'Programs & Workshops',
-    'dialogue-circles'     => 'Dialogue Circles',
-    'conferences-events'   => 'Conferences & Events',
-    'youth-leadership'     => 'Youth Leadership',
-    'community-engagement' => 'Community Engagement',
-    'travel-field-visits'  => 'Travel & Field Visits',
-];
+$gallery_categories = get_terms(
+	array(
+		'taxonomy'   => 'greshma_gallery_category',
+		'hide_empty' => true,
+		'orderby'    => 'name',
+		'order'      => 'ASC',
+	)
+);
 ?>
 
 <section class="gallery-filters">
@@ -33,17 +32,32 @@ $filters = [
 
             <div class="gallery-filters__categories">
 
-                <?php foreach ( $filters as $key => $label ) : ?>
+              <button
+	type="button"
+	class="gallery-filter is-active"
+	data-gallery-filter="all"
+>
+	<?php esc_html_e( 'All', 'greshma' ); ?>
+</button>
 
-                    <button
-                        type="button"
-                        class="gallery-filter<?php echo 'all' === $key ? ' is-active' : ''; ?>"
-                        data-gallery-filter="<?php echo esc_attr( $key ); ?>"
-                    >
-                        <?php echo esc_html( $label ); ?>
-                    </button>
+<?php if (
+	! empty( $gallery_categories ) &&
+	! is_wp_error( $gallery_categories )
+) : ?>
 
-                <?php endforeach; ?>
+	<?php foreach ( $gallery_categories as $gallery_category ) : ?>
+
+		<button
+			type="button"
+			class="gallery-filter"
+			data-gallery-filter="<?php echo esc_attr( $gallery_category->slug ); ?>"
+		>
+			<?php echo esc_html( $gallery_category->name ); ?>
+		</button>
+
+	<?php endforeach; ?>
+
+<?php endif; ?>
 
             </div>
 

@@ -22,93 +22,19 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$gallery_items = [
 
-    [
-        'title'    => 'Dialogue Circle with Youth',
-        'location' => 'Kerala, India',
-        'image'    => 'gallery-01.png',
-        'category' => 'dialogue-circles',
-    ],
+$gallery_query = new WP_Query(
+	array(
+		'post_type'      => 'greshma_gallery',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'orderby'        => array(
+			'menu_order' => 'ASC',
+			'date'       => 'DESC',
+		),
+	)
+);
 
-    [
-        'title'    => 'Youth Leadership Workshop',
-        'location' => 'Bengaluru, India',
-        'image'    => 'gallery-02.png',
-        'category' => 'youth-leadership',
-    ],
-
-    [
-        'title'    => 'URI Global Conference',
-        'location' => 'Lisbon, Portugal',
-        'image'    => 'gallery-03.png',
-        'category' => 'conferences-events',
-    ],
-
-    [
-        'title'    => 'Community Peace Workshop',
-        'location' => 'Thailand',
-        'image'    => 'gallery-04.png',
-        'category' => 'programs-workshops',
-    ],
-
-    [
-        'title'    => 'Ecopeace Teen Café Session',
-        'location' => 'Online',
-        'image'    => 'gallery-05.png',
-        'category' => 'community-engagement',
-    ],
-
-    [
-        'title'    => 'Restorative Dialogue Process',
-        'location' => 'Mumbai, India',
-        'image'    => 'gallery-06.png',
-        'category' => 'dialogue-circles',
-    ],
-
-    [
-        'title'    => 'Field Visit',
-        'location' => 'Western Ghats, India',
-        'image'    => 'gallery-07.png',
-        'category' => 'travel-field-visits',
-    ],
-
-    [
-        'title'    => 'Speaking at Interfaith Conference',
-        'location' => 'Nairobi, Kenya',
-        'image'    => 'gallery-08.png',
-        'category' => 'conferences-events',
-    ],
-
-    [
-        'title'    => 'Youth Climate Action',
-        'location' => 'Bali, Indonesia',
-        'image'    => 'gallery-09.png',
-        'category' => 'youth-leadership',
-    ],
-
-    [
-        'title'    => 'Peace Education for Youth',
-        'location' => 'Kerala, India',
-        'image'    => 'gallery-10.png',
-        'category' => 'programs-workshops',
-    ],
-
-    [
-        'title'    => 'Values in Action',
-        'location' => 'Dialogue Activity',
-        'image'    => 'gallery-11.png',
-        'category' => 'community-engagement',
-    ],
-
-    [
-        'title'    => 'Training of Youth Facilitators',
-        'location' => 'Kodaikanal, India',
-        'image'    => 'gallery-12.png',
-        'category' => 'programs-workshops',
-    ],
-
-];
 ?>
 
 <section class="gallery-content">
@@ -127,64 +53,145 @@ $gallery_items = [
                 data-gallery-grid
             >
 
-                <?php foreach ( $gallery_items as $item ) : ?>
+           <?php if ( $gallery_query->have_posts() ) : ?>
 
-                    <article
-                        class="gallery-card"
-                        data-gallery-item
-                        data-category="<?php echo esc_attr( $item['category'] ); ?>"
-                    >
+	<?php while ( $gallery_query->have_posts() ) : ?>
 
-                        <!--
-                        FINAL IMAGE:
-                        assets/images/gallery/<?php
-                        echo esc_html( $item['image'] );
-                        ?>
-                        -->
+		<?php
+		$gallery_query->the_post();
 
-                        <div class="gallery-card__image">
+		$caption = get_post_meta(
+			get_the_ID(),
+			'_greshma_gallery_caption',
+			true
+		);
 
-                            <span>
-                                <?php
-                                echo esc_html(
-                                    $item['image']
-                                );
-                                ?>
-                            </span>
+		$location = get_post_meta(
+			get_the_ID(),
+			'_greshma_gallery_location',
+			true
+		);
 
-                        </div>
+		$year = get_post_meta(
+			get_the_ID(),
+			'_greshma_gallery_year',
+			true
+		);
 
+		$categories = get_the_terms(
+			get_the_ID(),
+			'greshma_gallery_category'
+		);
 
-                        <div class="gallery-card__content">
+		$category_slugs = array();
 
-                            <h3>
-                                <?php
-                                echo esc_html(
-                                    $item['title']
-                                );
-                                ?>
-                            </h3>
+		if (
+			! empty( $categories ) &&
+			! is_wp_error( $categories )
+		) {
+			$category_slugs = wp_list_pluck(
+				$categories,
+				'slug'
+			);
+		}
 
+		$category_value = ! empty( $category_slugs )
+			? implode( ' ', $category_slugs )
+			: 'uncategorized';
+		?>
 
-                            <p>
+		<article
+			class="gallery-card"
+			data-gallery-item
+			data-category="<?php echo esc_attr( $category_value ); ?>"
+		>
 
-                                <span aria-hidden="true">
-                                    ⌖
-                                </span>
+			<div class="gallery-card__image">
 
-                                <?php
-                                echo esc_html(
-                                    $item['location']
-                                );
-                                ?>
+				<?php if ( has_post_thumbnail() ) : ?>
 
-                            </p>
+					<?php
+					the_post_thumbnail(
+						'large',
+						array(
+							'loading' => 'lazy',
+							'alt'     => the_title_attribute(
+								array(
+									'echo' => false,
+								)
+							),
+						)
+					);
+					?>
 
-                        </div>
+				<?php else : ?>
 
-                    </article>
+					<span>
+						<?php esc_html_e( 'Gallery image', 'greshma' ); ?>
+					</span>
 
-                <?php endforeach; ?>
+				<?php endif; ?>
+
+			</div>
+
+			<div class="gallery-card__content">
+
+				<h3>
+					<?php the_title(); ?>
+				</h3>
+
+				<?php if ( $caption ) : ?>
+
+					<p class="gallery-card__caption">
+						<?php echo esc_html( $caption ); ?>
+					</p>
+
+				<?php endif; ?>
+
+				<?php if ( $location || $year ) : ?>
+
+					<p>
+
+						<span aria-hidden="true">
+							⌖
+						</span>
+
+						<?php
+						echo esc_html(
+							trim(
+								$location .
+								( $location && $year ? ' · ' : '' ) .
+								$year
+							)
+						);
+						?>
+
+					</p>
+
+				<?php endif; ?>
+
+			</div>
+
+		</article>
+
+	<?php endwhile; ?>
+
+	<?php wp_reset_postdata(); ?>
+
+<?php else : ?>
+
+	<div class="gallery-grid__empty">
+
+		<p>
+			<?php esc_html_e(
+				'Gallery items will be added soon.',
+				'greshma'
+			); ?>
+		</p>
+
+	</div>
+
+<?php endif; ?>
 
             </div>
 
