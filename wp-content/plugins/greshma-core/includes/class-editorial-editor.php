@@ -61,6 +61,15 @@ class Greshma_Core_Editorial_Editor {
 	 */
 	public static function register_meta_boxes(): void {
 
+    add_meta_box(
+	'greshma-editorial-reading-details',
+	__( 'Reading Details', 'greshma-core' ),
+	array( __CLASS__, 'render_reading_details' ),
+	Greshma_Core_Editorial::POST_TYPE,
+	'side',
+	'default'
+);
+
 		add_meta_box(
 			'greshma-editorial-details',
 			__( 'Editorial Details', 'greshma-core' ),
@@ -250,7 +259,126 @@ class Greshma_Core_Editorial_Editor {
 
 		<?php
 	}
+/**
+ * Render the Editorial Reading Details meta box.
+ *
+ * @param WP_Post $post Current Editorial post.
+ */
+public static function render_reading_details( $post ): void {
 
+	$calculated_time = (int) get_post_meta(
+		$post->ID,
+		'_greshma_editorial_reading_time',
+		true
+	);
+
+	$manual_time = (int) get_post_meta(
+		$post->ID,
+		'_greshma_editorial_reading_time_override',
+		true
+	);
+
+	if ( $calculated_time < 1 ) {
+		$calculated_time = self::calculate_reading_time(
+			$post->post_content
+		);
+	}
+
+	$effective_time = $manual_time > 0
+		? $manual_time
+		: $calculated_time;
+	?>
+
+	<div class="greshma-editorial-reading-details">
+
+		<p>
+			<strong>
+				<?php esc_html_e( 'Current reading time', 'greshma-core' ); ?>
+			</strong>
+		</p>
+
+		<p>
+			<span
+				style="
+					display:inline-block;
+					padding:7px 11px;
+					background:#f0f6f4;
+					border-radius:20px;
+					font-weight:600;
+				"
+			>
+				<?php
+				printf(
+					/* translators: %d is the reading time in minutes. */
+					esc_html(
+						_n(
+							'%d minute read',
+							'%d minutes read',
+							$effective_time,
+							'greshma-core'
+						)
+					),
+					$effective_time
+				);
+				?>
+			</span>
+		</p>
+
+		<hr>
+
+		<p>
+			<label for="greshma-editorial-reading-time-override">
+				<strong>
+					<?php
+					esc_html_e(
+						'Manual override',
+						'greshma-core'
+					);
+					?>
+				</strong>
+			</label>
+		</p>
+
+		<p>
+			<input
+				type="number"
+				id="greshma-editorial-reading-time-override"
+				name="greshma_editorial_reading_time_override"
+				value="<?php echo esc_attr( $manual_time ?: '' ); ?>"
+				min="1"
+				step="1"
+				class="small-text"
+			>
+
+			<?php esc_html_e( 'minutes', 'greshma-core' ); ?>
+		</p>
+
+		<p class="description">
+			<?php
+			esc_html_e(
+				'Leave empty to calculate the reading time automatically from the main content.',
+				'greshma-core'
+			);
+			?>
+		</p>
+
+		<p class="description">
+			<?php
+			printf(
+				/* translators: %d is the automatic reading time. */
+				esc_html__(
+					'Automatic estimate: %d minutes.',
+					'greshma-core'
+				),
+				$calculated_time
+			);
+			?>
+		</p>
+
+	</div>
+
+	<?php
+}
 	/**
 	 * Save Editorial custom fields.
 	 *
@@ -321,6 +449,21 @@ class Greshma_Core_Editorial_Editor {
 			'greshma_editorial_publication_date',
 			'_greshma_editorial_publication_date'
 		);
+        self::save_positive_integer_field(
+	$post_id,
+	'greshma_editorial_reading_time_override',
+	'_greshma_editorial_reading_time_override'
+);
+
+$calculated_reading_time = self::calculate_reading_time(
+	$post->post_content
+);
+
+update_post_meta(
+	$post_id,
+	'_greshma_editorial_reading_time',
+	$calculated_reading_time
+);
 	}
 
 	/**
@@ -589,6 +732,82 @@ public static function assign_editorial_type_to_new_post(
 		array( (int) $term->term_id ),
 		Greshma_Core_Editorial_Taxonomy::TYPE_TAXONOMY,
 		false
+	);
+}
+
+/**
+ * Calculate reading time from Editorial content.
+ *
+ * The calculation uses an average reading speed of
+ * 220 words per minute.
+ *
+ * @param string $content Editorial post content.
+ *
+ * @return int Reading time in minutes.
+ */
+private static function calculate_reading_time(
+	string $content
+): int {
+
+	$content = strip_shortcodes( $content );
+	$content = wp_strip_all_tags( $content );
+	$content = trim( $content );
+
+	if ( '' === $content ) {
+		return 1;
+	}
+
+	$words = preg_split(
+		'/\s+/u',
+		$content,
+		-1,
+		PREG_SPLIT_NO_EMPTY
+	);
+
+	$word_count = is_array( $words )
+		? count( $words )
+		: 0;
+
+	$reading_time = (int) ceil( $word_count / 220 );
+
+	return max( 1, $reading_time );
+}
+/**
+ * Save a positive integer field.
+ *
+ * @param int    $post_id  Current post ID.
+ * @param string $form_key Submitted form field name.
+ * @param string $meta_key Database meta key.
+ */
+private static function save_positive_integer_field(
+	int $post_id,
+	string $form_key,
+	string $meta_key
+): void {
+
+	if (
+		! isset( $_POST[ $form_key ] ) ||
+		'' === trim(
+			(string) wp_unslash( $_POST[ $form_key ] )
+		)
+	) {
+		delete_post_meta( $post_id, $meta_key );
+		return;
+	}
+
+	$value = absint(
+		wp_unslash( $_POST[ $form_key ] )
+	);
+
+	if ( $value < 1 ) {
+		delete_post_meta( $post_id, $meta_key );
+		return;
+	}
+
+	update_post_meta(
+		$post_id,
+		$meta_key,
+		$value
 	);
 }
 }
