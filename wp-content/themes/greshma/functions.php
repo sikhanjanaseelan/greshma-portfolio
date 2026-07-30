@@ -351,6 +351,25 @@ if ( is_page( 'workshops' ) ) {
     }
 
 } 
+
+if (
+	is_post_type_archive( 'greshma_editorial' ) ||
+	is_singular( 'greshma_editorial' )
+) {
+	$editorial_css =
+		get_template_directory()
+		. '/assets/css/editorial.css';
+
+	if ( file_exists( $editorial_css ) ) {
+		wp_enqueue_style(
+			'greshma-editorial',
+			get_template_directory_uri()
+				. '/assets/css/editorial.css',
+			array( 'style' ),
+			filemtime( $editorial_css )
+		);
+	}
+}
 wp_enqueue_style(
 'responsive',
 get_template_directory_uri().'/assets/css/responsive.css',
