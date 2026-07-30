@@ -1,0 +1,463 @@
+/**
+ * Editorial Content Studio
+ *
+ * Styles the custom Editorial dashboard inside WordPress admin.
+ *
+ * @package GreshmaCore
+ */
+
+.greshma-editorial-studio {
+	max-width: 1440px;
+	margin-top: 24px;
+}
+
+.greshma-editorial-studio * {
+	box-sizing: border-box;
+}
+
+/* =========================================================
+   Hero
+   ========================================================= */
+
+.greshma-editorial-studio__hero {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 32px;
+	padding: 38px 40px;
+	margin-bottom: 30px;
+	overflow: hidden;
+	border: 1px solid #dfe5f2;
+	border-radius: 22px;
+	background:
+		linear-gradient(
+			135deg,
+			#ffffff 0%,
+			#f7f8ff 52%,
+			#eef2ff 100%
+		);
+	box-shadow: 0 14px 38px rgba(33, 43, 82, 0.08);
+}
+
+.greshma-editorial-studio__hero::before {
+	content: "";
+	position: absolute;
+	top: -100px;
+	right: -80px;
+	width: 260px;
+	height: 260px;
+	border-radius: 50%;
+	background: rgba(92, 104, 245, 0.09);
+}
+
+.greshma-editorial-studio__hero::after {
+	content: "";
+	position: absolute;
+	right: 180px;
+	bottom: -110px;
+	width: 210px;
+	height: 210px;
+	border-radius: 50%;
+	background: rgba(33, 181, 166, 0.08);
+}
+
+.greshma-editorial-studio__hero > * {
+	position: relative;
+	z-index: 1;
+}
+
+.greshma-editorial-studio__eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 12px;
+	color: #5963df;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+.greshma-editorial-studio__eyebrow::before {
+	content: "";
+	width: 28px;
+	height: 2px;
+	border-radius: 999px;
+	background: currentColor;
+}
+
+.greshma-editorial-studio__hero h1 {
+	padding: 0;
+	margin: 0 0 12px;
+	color: #17213d;
+	font-size: clamp(30px, 4vw, 46px);
+	font-weight: 750;
+	line-height: 1.08;
+	letter-spacing: -0.035em;
+}
+
+.greshma-editorial-studio__hero p {
+	max-width: 720px;
+	margin: 0;
+	color: #5f687c;
+	font-size: 16px;
+	line-height: 1.75;
+}
+
+.greshma-editorial-studio__hero-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 12px;
+	min-width: 290px;
+}
+
+.greshma-editorial-studio .button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 42px;
+	padding: 8px 17px;
+	border-radius: 10px;
+	font-weight: 650;
+	line-height: 1.2;
+	text-decoration: none;
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease,
+		border-color 0.2s ease,
+		background-color 0.2s ease;
+}
+
+.greshma-editorial-studio .button:hover,
+.greshma-editorial-studio .button:focus {
+	transform: translateY(-1px);
+}
+
+.greshma-editorial-studio .button-primary {
+	border-color: #5963df;
+	background: #5963df;
+	box-shadow: 0 8px 18px rgba(89, 99, 223, 0.22);
+}
+
+.greshma-editorial-studio .button-primary:hover,
+.greshma-editorial-studio .button-primary:focus {
+	border-color: #4852cc;
+	background: #4852cc;
+	box-shadow: 0 10px 22px rgba(89, 99, 223, 0.3);
+}
+
+/* =========================================================
+   Section heading
+   ========================================================= */
+
+.greshma-editorial-studio__section {
+	margin-top: 18px;
+}
+
+.greshma-editorial-studio__section-heading {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 20px;
+	margin-bottom: 20px;
+}
+
+.greshma-editorial-studio__section-heading h2 {
+	margin: 0 0 7px;
+	color: #1d2946;
+	font-size: 24px;
+	line-height: 1.25;
+}
+
+.greshma-editorial-studio__section-heading p {
+	margin: 0;
+	color: #687286;
+	font-size: 14px;
+	line-height: 1.65;
+}
+
+/* =========================================================
+   Grid
+   ========================================================= */
+
+.greshma-editorial-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 22px;
+}
+
+/* =========================================================
+   Cards
+   ========================================================= */
+
+.greshma-editorial-card {
+	--editorial-accent: #5963df;
+	--editorial-soft: #eef0ff;
+	--editorial-border: #dfe2ff;
+
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-height: 292px;
+	padding: 24px;
+	overflow: hidden;
+	border: 1px solid var(--editorial-border);
+	border-radius: 18px;
+	background:
+		linear-gradient(
+			180deg,
+			#ffffff 0%,
+			#ffffff 68%,
+			var(--editorial-soft) 145%
+		);
+	box-shadow: 0 10px 28px rgba(38, 48, 82, 0.07);
+	transition:
+		transform 0.24s ease,
+		box-shadow 0.24s ease,
+		border-color 0.24s ease;
+}
+
+.greshma-editorial-card::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 5px;
+	background: var(--editorial-accent);
+}
+
+.greshma-editorial-card::after {
+	content: "";
+	position: absolute;
+	top: -52px;
+	right: -52px;
+	width: 136px;
+	height: 136px;
+	border-radius: 50%;
+	background: var(--editorial-soft);
+	opacity: 0.85;
+	transition: transform 0.24s ease;
+}
+
+.greshma-editorial-card:hover {
+	transform: translateY(-5px);
+	border-color: var(--editorial-accent);
+	box-shadow: 0 18px 38px rgba(38, 48, 82, 0.13);
+}
+
+.greshma-editorial-card:hover::after {
+	transform: scale(1.12);
+}
+
+.greshma-editorial-card__icon {
+	position: relative;
+	z-index: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 52px;
+	height: 52px;
+	margin-bottom: 22px;
+	border-radius: 15px;
+	color: var(--editorial-accent);
+	background: var(--editorial-soft);
+}
+
+.greshma-editorial-card__icon .dashicons {
+	width: auto;
+	height: auto;
+	font-size: 27px;
+	line-height: 1;
+}
+
+.greshma-editorial-card__content {
+	position: relative;
+	z-index: 1;
+	flex: 1;
+}
+
+.greshma-editorial-card__content h3 {
+	margin: 0 0 10px;
+	color: #17213d;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 1.3;
+}
+
+.greshma-editorial-card__content p {
+	margin: 0;
+	color: #657084;
+	font-size: 14px;
+	line-height: 1.7;
+}
+
+.greshma-editorial-card__actions {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	padding-top: 24px;
+	margin-top: 22px;
+	border-top: 1px solid rgba(84, 95, 125, 0.12);
+}
+
+.greshma-editorial-card__actions .button {
+	flex: 1;
+	min-width: 105px;
+}
+
+.greshma-editorial-card__actions .button:not(.button-primary) {
+	color: var(--editorial-accent);
+	border-color: var(--editorial-border);
+	background: #ffffff;
+}
+
+.greshma-editorial-card__actions .button:not(.button-primary):hover,
+.greshma-editorial-card__actions .button:not(.button-primary):focus {
+	color: var(--editorial-accent);
+	border-color: var(--editorial-accent);
+	background: var(--editorial-soft);
+}
+
+.greshma-editorial-card__actions .button-primary {
+	border-color: var(--editorial-accent);
+	background: var(--editorial-accent);
+	box-shadow: none;
+}
+
+.greshma-editorial-card__actions .button-primary:hover,
+.greshma-editorial-card__actions .button-primary:focus {
+	border-color: var(--editorial-accent);
+	background: var(--editorial-accent);
+	filter: brightness(0.93);
+	box-shadow: 0 8px 18px color-mix(in srgb, var(--editorial-accent) 22%, transparent);
+}
+
+/* =========================================================
+   Card colour variants
+   ========================================================= */
+
+.greshma-editorial-card--reflection {
+	--editorial-accent: #7a5af8;
+	--editorial-soft: #f1edff;
+	--editorial-border: #dfd7ff;
+}
+
+.greshma-editorial-card--field-story {
+	--editorial-accent: #2f9e66;
+	--editorial-soft: #eaf8f0;
+	--editorial-border: #ccebd9;
+}
+
+.greshma-editorial-card--impact-story {
+	--editorial-accent: #3478d4;
+	--editorial-soft: #ebf3ff;
+	--editorial-border: #cee1fb;
+}
+
+.greshma-editorial-card--print {
+	--editorial-accent: #d87a22;
+	--editorial-soft: #fff3e7;
+	--editorial-border: #f4d7b9;
+}
+
+.greshma-editorial-card--linkedin {
+	--editorial-accent: #0a7ea4;
+	--editorial-soft: #e7f7fc;
+	--editorial-border: #c5e8f2;
+}
+
+.greshma-editorial-card--article {
+	--editorial-accent: #5156c9;
+	--editorial-soft: #eceeff;
+	--editorial-border: #d6d8fb;
+}
+
+.greshma-editorial-card--research {
+	--editorial-accent: #168b78;
+	--editorial-soft: #e8f7f3;
+	--editorial-border: #c6e8df;
+}
+
+.greshma-editorial-card--publication {
+	--editorial-accent: #167f8d;
+	--editorial-soft: #e8f6f8;
+	--editorial-border: #c8e6ea;
+}
+
+.greshma-editorial-card--opinion {
+	--editorial-accent: #c24c77;
+	--editorial-soft: #fcecf2;
+	--editorial-border: #f2cedc;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media screen and (max-width: 1180px) {
+	.greshma-editorial-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 782px) {
+	.greshma-editorial-studio {
+		margin-top: 14px;
+	}
+
+	.greshma-editorial-studio__hero {
+		align-items: flex-start;
+		flex-direction: column;
+		padding: 28px 24px;
+		border-radius: 16px;
+	}
+
+	.greshma-editorial-studio__hero-actions {
+		justify-content: flex-start;
+		width: 100%;
+		min-width: 0;
+	}
+
+	.greshma-editorial-studio__hero-actions .button {
+		flex: 1;
+	}
+
+	.greshma-editorial-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.greshma-editorial-card {
+		min-height: 0;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.greshma-editorial-studio__hero {
+		padding: 24px 18px;
+	}
+
+	.greshma-editorial-studio__hero h1 {
+		font-size: 31px;
+	}
+
+	.greshma-editorial-studio__hero-actions,
+	.greshma-editorial-card__actions {
+		flex-direction: column;
+	}
+
+	.greshma-editorial-studio__hero-actions .button,
+	.greshma-editorial-card__actions .button {
+		width: 100%;
+	}
+
+	.greshma-editorial-card {
+		padding: 21px 18px;
+		border-radius: 15px;
+	}
+}

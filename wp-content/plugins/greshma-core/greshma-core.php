@@ -62,3 +62,9 @@ require_once GRESHMA_CORE_DIR . 'includes/class-journey-meta.php';
 // dynamic education details adding section
 require_once GRESHMA_CORE_DIR . 'includes/class-education.php';
 require_once GRESHMA_CORE_DIR . 'includes/class-education-meta.php';
+
+// Editorial publishing section.
+require_once GRESHMA_CORE_DIR . 'includes/class-editorial.php';
+require_once GRESHMA_CORE_DIR . 'includes/class-editorial-taxonomy.php';
+require_once GRESHMA_CORE_DIR . 'includes/class-editorial-admin.php';
+require_once GRESHMA_CORE_DIR . 'includes/class-editorial-editor.php';
