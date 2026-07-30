@@ -95,6 +95,172 @@
 	line-height: 1.8;
 }
 
+/* ---------------------------------------------------------
+   Editorial Filters
+--------------------------------------------------------- */
+
+.editorial-filters {
+	padding: 2rem 0 0;
+	background: var(--color-background, #f8f3eb);
+}
+
+.editorial-filters__inner {
+	position: relative;
+	display: grid;
+	gap: 1.35rem;
+	padding: 1.5rem;
+	border: 1px solid rgba(78, 103, 86, 0.14);
+	border-radius: 1.25rem;
+	background: rgba(255, 255, 255, 0.58);
+	box-shadow: 0 14px 36px rgba(52, 68, 57, 0.06);
+}
+
+.editorial-filter-group {
+	display: grid;
+	gap: 0.75rem;
+}
+
+.editorial-filter-group__label {
+	margin: 0;
+	color: var(--color-heading, #294436);
+	font-family: var(--font-heading, Georgia, serif);
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.editorial-filter-group__options {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.65rem;
+}
+
+.editorial-filter-pill {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 2.45rem;
+	padding: 0.6rem 1rem;
+	border: 1px solid rgba(78, 103, 86, 0.18);
+	border-radius: 999px;
+	background: rgba(224, 234, 225, 0.55);
+	color: var(--color-primary, #496b58);
+	font-size: 0.88rem;
+	font-weight: 600;
+	line-height: 1;
+	text-decoration: none;
+	transition:
+		background-color 0.2s ease,
+		border-color 0.2s ease,
+		color 0.2s ease,
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.editorial-filter-pill:hover,
+.editorial-filter-pill:focus-visible {
+	border-color: rgba(78, 103, 86, 0.38);
+	background: rgba(214, 228, 216, 0.9);
+	color: var(--color-heading, #294436);
+	transform: translateY(-1px);
+	box-shadow: 0 7px 18px rgba(50, 75, 59, 0.08);
+}
+
+.editorial-filter-pill:focus-visible {
+	outline: 2px solid rgba(175, 104, 76, 0.5);
+	outline-offset: 3px;
+}
+
+.editorial-filter-pill.is-active {
+	border-color: var(--color-accent, #b56f54);
+	background: var(--color-accent, #b56f54);
+	color: #ffffff;
+	box-shadow: 0 8px 20px rgba(181, 111, 84, 0.18);
+}
+
+.editorial-filter-pill.is-active:hover,
+.editorial-filter-pill.is-active:focus-visible {
+	background: var(--color-accent-dark, #9c5d46);
+	color: #ffffff;
+}
+
+.editorial-filter-pill--topic {
+	background: rgba(247, 239, 227, 0.8);
+	border-color: rgba(181, 111, 84, 0.18);
+	color: var(--color-accent-dark, #9c5d46);
+}
+
+.editorial-filter-pill--topic:hover,
+.editorial-filter-pill--topic:focus-visible {
+	background: rgba(242, 226, 208, 0.95);
+	border-color: rgba(181, 111, 84, 0.34);
+	color: var(--color-accent-dark, #9c5d46);
+}
+
+.editorial-filter-pill--topic.is-active {
+	background: var(--color-primary, #496b58);
+	border-color: var(--color-primary, #496b58);
+	color: #ffffff;
+}
+
+.editorial-filters__clear {
+	justify-self: start;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	color: var(--color-accent-dark, #9c5d46);
+	font-size: 0.88rem;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.editorial-filters__clear:hover,
+.editorial-filters__clear:focus-visible {
+	text-decoration: underline;
+	text-underline-offset: 0.22rem;
+}
+
+.editorial-filters__clear span {
+	font-size: 1.1rem;
+	line-height: 1;
+}
+
+@media (min-width: 768px) {
+	.editorial-filters {
+		padding-top: 2.5rem;
+	}
+
+	.editorial-filters__inner {
+		padding: 1.75rem 2rem;
+	}
+
+	.editorial-filter-group {
+		grid-template-columns: 9rem minmax(0, 1fr);
+		align-items: start;
+	}
+
+	.editorial-filter-group__label {
+		padding-top: 0.55rem;
+	}
+}
+
+@media (max-width: 767px) {
+	.editorial-filters__inner {
+		padding: 1.25rem;
+		border-radius: 1rem;
+	}
+
+	.editorial-filter-group__options {
+		gap: 0.55rem;
+	}
+
+	.editorial-filter-pill {
+		min-height: 2.3rem;
+		padding: 0.55rem 0.85rem;
+		font-size: 0.82rem;
+	}
+}
+
 /* ==========================================================
    Archive content
    ========================================================== */
@@ -555,5 +721,11 @@
 
 	.editorial-card:hover .editorial-card__image img {
 		transform: none;
+	}
+}
+
+@media (max-width: 767px) {
+	.editorial-archive__content {
+		padding-top: 2rem;
 	}
 }

@@ -9,6 +9,12 @@
 
 defined( 'ABSPATH' ) || exit;
 
+
+
+global $wp_query;
+
+
+
 get_header();
 ?>
 
@@ -39,7 +45,262 @@ get_header();
 		</div>
 
 	</section>
+	<?php
 
+$current_type  = isset( $_GET['editorial_type'] )
+	? sanitize_text_field( wp_unslash( $_GET['editorial_type'] ) )
+	: '';
+
+$current_topic = isset( $_GET['editorial_topic'] )
+	? sanitize_text_field( wp_unslash( $_GET['editorial_topic'] ) )
+	: '';
+
+$editorial_types = get_terms(
+	array(
+		'taxonomy'   => 'greshma_editorial_type',
+		'hide_empty' => true,
+	)
+);
+
+$editorial_topics = get_terms(
+	array(
+		'taxonomy'   => 'greshma_editorial_topic',
+		'hide_empty' => true,
+	)
+);
+
+?>
+
+<!-- <section class="editorial-filters">
+
+	<div class="container">
+
+		<div class="editorial-filter-group">
+
+			<h3 class="editorial-filter-title">
+				<?php esc_html_e( 'Editorial Type', 'greshma' ); ?>
+			</h3>
+
+			<div class="editorial-filter-list">
+
+				<a
+					class="editorial-filter-pill <?php echo empty( $current_type ) ? 'is-active' : ''; ?>"
+					href="<?php echo esc_url( get_post_type_archive_link( 'greshma_editorial' ) ); ?>"
+				>
+					All
+				</a>
+
+				<?php foreach ( $editorial_types as $type ) : ?>
+
+					<a
+						class="editorial-filter-pill <?php echo $current_type === $type->slug ? 'is-active' : ''; ?>"
+						href="<?php echo esc_url( add_query_arg( 'editorial_type', $type->slug ) ); ?>"
+					>
+						<?php echo esc_html( $type->name ); ?>
+					</a>
+
+				<?php endforeach; ?>
+
+			</div>
+
+		</div>
+
+		<?php if ( ! empty( $editorial_topics ) ) : ?>
+
+		<div class="editorial-filter-group">
+
+			<h3 class="editorial-filter-title">
+				Topics
+			</h3>
+
+			<div class="editorial-filter-list">
+
+				<?php foreach ( $editorial_topics as $topic ) : ?>
+
+					<a
+						class="editorial-filter-pill <?php echo $current_topic === $topic->slug ? 'is-active' : ''; ?>"
+						href="<?php echo esc_url( add_query_arg( 'editorial_topic', $topic->slug ) ); ?>"
+					>
+						<?php echo esc_html( $topic->name ); ?>
+					</a>
+
+				<?php endforeach; ?>
+
+			</div>
+
+		</div>
+
+		<?php endif; ?>
+
+	</div>
+
+</section> -->
+<?php
+$current_type  = '';
+$current_topic = '';
+
+if ( isset( $_GET['editorial_type'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$current_type = sanitize_key(
+		wp_unslash( $_GET['editorial_type'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	);
+}
+
+if ( isset( $_GET['editorial_topic'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$current_topic = sanitize_key(
+		wp_unslash( $_GET['editorial_topic'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	);
+}
+
+$editorial_archive_url = get_post_type_archive_link( 'greshma_editorial' );
+
+$filter_editorial_types = get_terms(
+	array(
+		'taxonomy'   => 'greshma_editorial_type',
+		'hide_empty' => true,
+	)
+);
+
+$filter_editorial_topics = get_terms(
+	array(
+		'taxonomy'   => 'greshma_editorial_topic',
+		'hide_empty' => true,
+	)
+);
+?>
+
+<section class="editorial-filters" aria-label="<?php esc_attr_e( 'Filter Editorial content', 'greshma' ); ?>">
+
+	<div class="container">
+
+		<div class="editorial-filters__inner">
+
+			<div class="editorial-filter-group">
+
+				<p class="editorial-filter-group__label">
+					<?php esc_html_e( 'Editorial Type', 'greshma' ); ?>
+				</p>
+
+				<div class="editorial-filter-group__options">
+
+					<a
+						class="editorial-filter-pill<?php echo empty( $current_type ) && empty( $current_topic ) ? ' is-active' : ''; ?>"
+						href="<?php echo esc_url( $editorial_archive_url ); ?>"
+						<?php echo empty( $current_type ) && empty( $current_topic ) ? 'aria-current="page"' : ''; ?>
+					>
+						<?php esc_html_e( 'All', 'greshma' ); ?>
+					</a>
+
+					<?php
+					if (
+						! empty( $filter_editorial_types ) &&
+						! is_wp_error( $filter_editorial_types )
+					) :
+						?>
+
+						<?php foreach ( $filter_editorial_types as $type ) : ?>
+
+							<?php
+							$type_url = add_query_arg(
+								'editorial_type',
+								$type->slug,
+								$editorial_archive_url
+							);
+
+							if ( ! empty( $current_topic ) ) {
+								$type_url = add_query_arg(
+									'editorial_topic',
+									$current_topic,
+									$type_url
+								);
+							}
+
+							$is_active_type = $current_type === $type->slug;
+							?>
+
+							<a
+								class="editorial-filter-pill<?php echo $is_active_type ? ' is-active' : ''; ?>"
+								href="<?php echo esc_url( $type_url ); ?>"
+								<?php echo $is_active_type ? 'aria-current="page"' : ''; ?>
+							>
+								<?php echo esc_html( $type->name ); ?>
+							</a>
+
+						<?php endforeach; ?>
+
+					<?php endif; ?>
+
+				</div>
+
+			</div>
+
+			<?php
+			if (
+				! empty( $filter_editorial_topics ) &&
+				! is_wp_error( $filter_editorial_topics )
+			) :
+				?>
+
+				<div class="editorial-filter-group">
+
+					<p class="editorial-filter-group__label">
+						<?php esc_html_e( 'Topics', 'greshma' ); ?>
+					</p>
+
+					<div class="editorial-filter-group__options">
+
+						<?php foreach ( $filter_editorial_topics as $topic ) : ?>
+
+							<?php
+							$topic_url = add_query_arg(
+								'editorial_topic',
+								$topic->slug,
+								$editorial_archive_url
+							);
+
+							if ( ! empty( $current_type ) ) {
+								$topic_url = add_query_arg(
+									'editorial_type',
+									$current_type,
+									$topic_url
+								);
+							}
+
+							$is_active_topic = $current_topic === $topic->slug;
+							?>
+
+							<a
+								class="editorial-filter-pill editorial-filter-pill--topic<?php echo $is_active_topic ? ' is-active' : ''; ?>"
+								href="<?php echo esc_url( $topic_url ); ?>"
+								<?php echo $is_active_topic ? 'aria-current="page"' : ''; ?>
+							>
+								<?php echo esc_html( $topic->name ); ?>
+							</a>
+
+						<?php endforeach; ?>
+
+					</div>
+
+				</div>
+
+			<?php endif; ?>
+
+			<?php if ( ! empty( $current_type ) || ! empty( $current_topic ) ) : ?>
+
+				<a
+					class="editorial-filters__clear"
+					href="<?php echo esc_url( $editorial_archive_url ); ?>"
+				>
+					<?php esc_html_e( 'Clear filters', 'greshma' ); ?>
+					<span aria-hidden="true">×</span>
+				</a>
+
+			<?php endif; ?>
+
+		</div>
+
+	</div>
+
+</section>
 	<section class="editorial-archive__content">
 
 		<div class="container">

@@ -406,3 +406,62 @@ add_action('wp_enqueue_scripts','greshma_enqueue_assets');
 
 
 require get_template_directory() . '/inc/template-functions.php';
+
+/**
+ * Filter the Editorial archive by Editorial Type and Topic.
+ *
+ * @param WP_Query $query Current WordPress query.
+ * @return void
+ */
+function greshma_filter_editorial_archive( $query ) {
+
+	if (
+		is_admin() ||
+		! $query->is_main_query() ||
+		! $query->is_post_type_archive( 'greshma_editorial' )
+	) {
+		return;
+	}
+
+	$tax_query = array();
+
+	if ( isset( $_GET['editorial_type'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		$current_type = sanitize_key(
+			wp_unslash( $_GET['editorial_type'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		);
+
+		if ( ! empty( $current_type ) ) {
+			$tax_query[] = array(
+				'taxonomy' => 'greshma_editorial_type',
+				'field'    => 'slug',
+				'terms'    => $current_type,
+			);
+		}
+	}
+
+	if ( isset( $_GET['editorial_topic'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		$current_topic = sanitize_key(
+			wp_unslash( $_GET['editorial_topic'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		);
+
+		if ( ! empty( $current_topic ) ) {
+			$tax_query[] = array(
+				'taxonomy' => 'greshma_editorial_topic',
+				'field'    => 'slug',
+				'terms'    => $current_topic,
+			);
+		}
+	}
+
+	if ( count( $tax_query ) > 1 ) {
+		$tax_query['relation'] = 'AND';
+	}
+
+	if ( ! empty( $tax_query ) ) {
+		$query->set( 'tax_query', $tax_query );
+	}
+}
+
+add_action( 'pre_get_posts', 'greshma_filter_editorial_archive' );
