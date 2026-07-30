@@ -78,6 +78,15 @@ class Greshma_Core_Editorial_Editor {
 			'normal',
 			'high'
 		);
+
+        add_meta_box(
+	'greshma-editorial-settings',
+	__( 'Editorial Settings', 'greshma-core' ),
+	array( __CLASS__, 'render_editorial_settings' ),
+	Greshma_Core_Editorial::POST_TYPE,
+	'side',
+	'default'
+);
 	}
 
 	/**
@@ -379,6 +388,191 @@ public static function render_reading_details( $post ): void {
 
 	<?php
 }
+
+
+
+/**
+ * Render the Editorial Settings meta box.
+ *
+ * @param WP_Post $post Current Editorial post.
+ */
+public static function render_editorial_settings( $post ): void {
+
+	$is_featured = (bool) get_post_meta(
+		$post->ID,
+		'_greshma_editorial_is_featured',
+		true
+	);
+
+	$show_on_homepage = (bool) get_post_meta(
+		$post->ID,
+		'_greshma_editorial_show_on_homepage',
+		true
+	);
+
+	$hero_layout = get_post_meta(
+		$post->ID,
+		'_greshma_editorial_hero_layout',
+		true
+	);
+
+	$show_featured_image = get_post_meta(
+		$post->ID,
+		'_greshma_editorial_show_featured_image',
+		true
+	);
+
+	$show_author = get_post_meta(
+		$post->ID,
+		'_greshma_editorial_show_author',
+		true
+	);
+
+	if ( '' === $hero_layout ) {
+		$hero_layout = 'standard';
+	}
+
+	if ( '' === $show_featured_image ) {
+		$show_featured_image = '1';
+	}
+
+	if ( '' === $show_author ) {
+		$show_author = '1';
+	}
+	?>
+
+	<div class="greshma-editorial-settings">
+
+		<p>
+			<label>
+				<input
+					type="checkbox"
+					name="greshma_editorial_is_featured"
+					value="1"
+					<?php checked( $is_featured ); ?>
+				>
+				<strong>
+					<?php esc_html_e( 'Featured Editorial', 'greshma-core' ); ?>
+				</strong>
+			</label>
+		</p>
+
+		<p class="description">
+			<?php
+			esc_html_e(
+				'Use this Editorial in featured sections and prominent content areas.',
+				'greshma-core'
+			);
+			?>
+		</p>
+
+		<hr>
+
+		<p>
+			<label>
+				<input
+					type="checkbox"
+					name="greshma_editorial_show_on_homepage"
+					value="1"
+					<?php checked( $show_on_homepage ); ?>
+				>
+				<strong>
+					<?php esc_html_e( 'Show on Homepage', 'greshma-core' ); ?>
+				</strong>
+			</label>
+		</p>
+
+		<p class="description">
+			<?php
+			esc_html_e(
+				'Allow this Editorial to appear in homepage Editorial sections.',
+				'greshma-core'
+			);
+			?>
+		</p>
+
+		<hr>
+
+		<p>
+			<label for="greshma-editorial-hero-layout">
+				<strong>
+					<?php esc_html_e( 'Hero Layout', 'greshma-core' ); ?>
+				</strong>
+			</label>
+		</p>
+
+		<p>
+			<select
+				id="greshma-editorial-hero-layout"
+				name="greshma_editorial_hero_layout"
+				class="widefat"
+			>
+				<option
+					value="standard"
+					<?php selected( $hero_layout, 'standard' ); ?>
+				>
+					<?php esc_html_e( 'Standard', 'greshma-core' ); ?>
+				</option>
+
+				<option
+					value="wide"
+					<?php selected( $hero_layout, 'wide' ); ?>
+				>
+					<?php esc_html_e( 'Wide Banner', 'greshma-core' ); ?>
+				</option>
+
+				<option
+					value="minimal"
+					<?php selected( $hero_layout, 'minimal' ); ?>
+				>
+					<?php esc_html_e( 'Minimal', 'greshma-core' ); ?>
+				</option>
+
+				<option
+					value="magazine"
+					<?php selected( $hero_layout, 'magazine' ); ?>
+				>
+					<?php esc_html_e( 'Magazine', 'greshma-core' ); ?>
+				</option>
+			</select>
+		</p>
+
+		<hr>
+
+		<p>
+			<label>
+				<input
+					type="checkbox"
+					name="greshma_editorial_show_featured_image"
+					value="1"
+					<?php checked( '1', $show_featured_image ); ?>
+				>
+				<?php esc_html_e( 'Show featured image', 'greshma-core' ); ?>
+			</label>
+		</p>
+
+		<p>
+			<label>
+				<input
+					type="checkbox"
+					name="greshma_editorial_show_author"
+					value="1"
+					<?php checked( '1', $show_author ); ?>
+				>
+				<?php esc_html_e( 'Show author information', 'greshma-core' ); ?>
+			</label>
+		</p>
+
+	</div>
+
+	<?php
+}
+
+
+
+
+
+
 	/**
 	 * Save Editorial custom fields.
 	 *
@@ -464,8 +658,97 @@ update_post_meta(
 	'_greshma_editorial_reading_time',
 	$calculated_reading_time
 );
+
+self::save_checkbox_field(
+	$post_id,
+	'greshma_editorial_is_featured',
+	'_greshma_editorial_is_featured'
+);
+
+self::save_checkbox_field(
+	$post_id,
+	'greshma_editorial_show_on_homepage',
+	'_greshma_editorial_show_on_homepage'
+);
+
+self::save_select_field(
+	$post_id,
+	'greshma_editorial_hero_layout',
+	'_greshma_editorial_hero_layout',
+	array(
+		'standard',
+		'wide',
+		'minimal',
+		'magazine',
+	)
+);
+
+self::save_checkbox_field(
+	$post_id,
+	'greshma_editorial_show_featured_image',
+	'_greshma_editorial_show_featured_image'
+);
+
+self::save_checkbox_field(
+	$post_id,
+	'greshma_editorial_show_author',
+	'_greshma_editorial_show_author'
+);
+	}
+/**
+ * Save a checkbox field.
+ *
+ * @param int    $post_id  Current post ID.
+ * @param string $form_key Submitted field name.
+ * @param string $meta_key Database meta key.
+ */
+private static function save_checkbox_field(
+	int $post_id,
+	string $form_key,
+	string $meta_key
+): void {
+
+	$value = isset( $_POST[ $form_key ] ) ? '1' : '0';
+
+	update_post_meta(
+		$post_id,
+		$meta_key,
+		$value
+	);
+}
+/**
+ * Save a select field from an allowed list.
+ *
+ * @param int      $post_id       Current post ID.
+ * @param string   $form_key      Submitted field name.
+ * @param string   $meta_key      Database meta key.
+ * @param string[] $allowed_values Allowed values.
+ */
+private static function save_select_field(
+	int $post_id,
+	string $form_key,
+	string $meta_key,
+	array $allowed_values
+): void {
+
+	if ( ! isset( $_POST[ $form_key ] ) ) {
+		return;
 	}
 
+	$value = sanitize_key(
+		wp_unslash( $_POST[ $form_key ] )
+	);
+
+	if ( ! in_array( $value, $allowed_values, true ) ) {
+		return;
+	}
+
+	update_post_meta(
+		$post_id,
+		$meta_key,
+		$value
+	);
+}
 	/**
 	 * Save a plain-text field.
 	 *
