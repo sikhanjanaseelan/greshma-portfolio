@@ -3670,3 +3670,68 @@ assets/images/impacts/impacts-cta-bg.png
         font-size: 65px;
     }
 }
+
+
+/* ==========================================================
+   IMPACT STORIES — DYNAMIC IMAGES
+========================================================== */
+
+.impacts-story-card__image {
+	position: relative;
+
+	overflow: hidden;
+}
+
+
+.impacts-story-card__image > a {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+}
+
+
+.impacts-story-card__image img {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+}
+
+
+.impacts-story-card__image-placeholder {
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+
+	align-items: center;
+	justify-content: center;
+
+	background:
+		linear-gradient(
+			135deg,
+			#dce5dc,
+			#b8c9ba
+		);
+
+	color: #47634f;
+
+	font-size: 36px;
+}
+
+
+/* Title link inherits existing card design */
+
+.impacts-story-card__content h3 a {
+	color: inherit;
+
+	text-decoration: none;
+}
+
+
+.impacts-story-card__content h3 a:hover {
+	color: #315b47;
+}
