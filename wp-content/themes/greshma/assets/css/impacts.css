@@ -3789,3 +3789,43 @@ assets/images/impacts/impacts-cta-bg.png
 
 	font-size: 12px;
 }
+
+/* ==========================================================
+   IMPACT PARTNERS — DYNAMIC ORGANIZATION LOGOS
+========================================================== */
+
+.impacts-partners__logo-image {
+	display: flex;
+
+	align-items: center;
+	justify-content: center;
+
+	width: 100%;
+	height: 70px;
+
+	padding: 6px;
+}
+
+
+.impacts-partners__logo-image img {
+	display: block;
+
+	width: auto;
+	max-width: 100%;
+
+	height: auto;
+	max-height: 58px;
+
+	object-fit: contain;
+}
+
+
+.impacts-partners__empty {
+	grid-column: 1 / -1;
+
+	padding: 20px 0;
+
+	color: #69766f;
+
+	font-size: 12px;
+}

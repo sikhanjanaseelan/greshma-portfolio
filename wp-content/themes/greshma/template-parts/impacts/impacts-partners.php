@@ -22,6 +22,22 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+/* ==========================================================
+   FEATURED ORGANIZATIONS / PARTNERS
+========================================================== */
+
+$impact_partners = new WP_Query(
+	array(
+		'post_type'      => 'greshma_organization',
+		'post_status'    => 'publish',
+		'posts_per_page' => 5,
+
+		'orderby' => array(
+			'menu_order' => 'ASC',
+			'date'       => 'ASC',
+		),
+	)
+);
 ?>
 
 <section class="impacts-partners">
@@ -58,103 +74,107 @@ defined( 'ABSPATH' ) || exit;
 
                 <div class="impacts-partners__logos">
 
+	<?php if ( $impact_partners->have_posts() ) : ?>
 
-                    <!-- URI -->
-                    <div class="impacts-partners__logo">
+		<?php
+		while ( $impact_partners->have_posts() ) :
+			$impact_partners->the_post();
+			?>
 
-                        <!--
-                        FINAL LOGO:
-                        assets/images/impacts/impacts-partner-uri.png
-                        -->
+			<div class="impacts-partners__logo">
 
-                        <div class="impacts-partners__logo-placeholder">
-                            URI
-                        </div>
+				<?php if ( has_post_thumbnail() ) : ?>
 
-                        <span>
-                            United Religions Initiative
-                        </span>
+					<div class="impacts-partners__logo-image">
 
-                    </div>
+						<?php
+						the_post_thumbnail(
+							'medium',
+							array(
+								'loading'  => 'lazy',
+								'decoding' => 'async',
+								'alt'      => get_the_title(),
+							)
+						);
+						?>
 
+					</div>
 
-                    <!-- OUR KIDS' CLIMATE -->
-                    <div class="impacts-partners__logo">
+				<?php else : ?>
 
-                        <!--
-                        FINAL LOGO:
-                        assets/images/impacts/impacts-partner-okc.png
-                        -->
+					<div class="impacts-partners__logo-placeholder">
 
-                        <div class="impacts-partners__logo-placeholder">
-                            OKC
-                        </div>
+						<?php
+						/*
+						 * Generate a short fallback label
+						 * from the organization title.
+						 */
+						$title = get_the_title();
 
-                        <span>
-                            Our Kids’ Climate
-                        </span>
+						$words = preg_split(
+							'/\s+/',
+							trim( $title )
+						);
 
-                    </div>
+						$initials = '';
 
+						if ( $words ) {
 
-                    <!-- EARTH CHARTER -->
-                    <div class="impacts-partners__logo">
+							foreach (
+								array_slice( $words, 0, 4 )
+								as $word
+							) {
 
-                        <!--
-                        FINAL LOGO:
-                        assets/images/impacts/impacts-partner-earth-charter.png
-                        -->
+								if ( '' !== $word ) {
 
-                        <div class="impacts-partners__logo-placeholder">
-                            ECI
-                        </div>
+									$initials .=
+										function_exists( 'mb_substr' )
+											? mb_substr( $word, 0, 1 )
+											: substr( $word, 0, 1 );
+								}
+							}
+						}
 
-                        <span>
-                            Earth Charter International
-                        </span>
+						echo esc_html(
+							strtoupper( $initials )
+						);
+						?>
 
-                    </div>
+					</div>
 
-
-                    <!-- UNEP -->
-                    <div class="impacts-partners__logo">
-
-                        <!--
-                        FINAL LOGO:
-                        assets/images/impacts/impacts-partner-unep.png
-                        -->
-
-                        <div class="impacts-partners__logo-placeholder">
-                            UNEP
-                        </div>
-
-                        <span>
-                            UN Environment Programme
-                        </span>
-
-                    </div>
+				<?php endif; ?>
 
 
-                    <!-- UPEACE -->
-                    <div class="impacts-partners__logo">
+				<span>
+					<?php the_title(); ?>
+				</span>
 
-                        <!--
-                        FINAL LOGO:
-                        assets/images/impacts/impacts-partner-upeace.png
-                        -->
+			</div>
 
-                        <div class="impacts-partners__logo-placeholder">
-                            UPEACE
-                        </div>
-
-                        <span>
-                            University for Peace
-                        </span>
-
-                    </div>
+		<?php endwhile; ?>
 
 
-                </div>
+		<?php wp_reset_postdata(); ?>
+
+
+	<?php else : ?>
+
+		<div class="impacts-partners__empty">
+
+			<p>
+				<?php
+				esc_html_e(
+					'Partner organizations will appear here soon.',
+					'greshma'
+				);
+				?>
+			</p>
+
+		</div>
+
+	<?php endif; ?>
+
+</div>
 
 
                 <p class="impacts-partners__note">
