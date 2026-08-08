@@ -104,6 +104,67 @@ public static function init(): void {
 			'copyright_text' => isset( $input['copyright_text'] )
 				? sanitize_text_field( $input['copyright_text'] )
 				: '',
+
+
+				'impact_countries' => isset( $input['impact_countries'] )
+	? absint( $input['impact_countries'] )
+	: 0,
+
+'impact_countries_suffix' => isset( $input['impact_countries_suffix'] )
+	? sanitize_text_field( $input['impact_countries_suffix'] )
+	: '',
+
+'impact_young_people' => isset( $input['impact_young_people'] )
+	? absint( $input['impact_young_people'] )
+	: 0,
+
+'impact_young_people_suffix' => isset( $input['impact_young_people_suffix'] )
+	? sanitize_text_field( $input['impact_young_people_suffix'] )
+	: '',
+
+'impact_workshops' => isset( $input['impact_workshops'] )
+	? absint( $input['impact_workshops'] )
+	: 0,
+
+'impact_workshops_suffix' => isset( $input['impact_workshops_suffix'] )
+	? sanitize_text_field( $input['impact_workshops_suffix'] )
+	: '',
+
+'impact_collaborations' => isset( $input['impact_collaborations'] )
+	? absint( $input['impact_collaborations'] )
+	: 0,
+
+'impact_collaborations_suffix' => isset( $input['impact_collaborations_suffix'] )
+	? sanitize_text_field( $input['impact_collaborations_suffix'] )
+	: '',
+
+'impact_years' => isset( $input['impact_years'] )
+	? absint( $input['impact_years'] )
+	: 0,
+
+'impact_years_suffix' => isset( $input['impact_years_suffix'] )
+	? sanitize_text_field( $input['impact_years_suffix'] )
+	: '',
+
+'impact_continents' => isset( $input['impact_continents'] )
+	? absint( $input['impact_continents'] )
+	: 0,
+
+'impact_continents_suffix' => isset( $input['impact_continents_suffix'] )
+	? sanitize_text_field( $input['impact_continents_suffix'] )
+	: '',
+
+'impact_networks' => isset( $input['impact_networks'] )
+	? absint( $input['impact_networks'] )
+	: 0,
+
+'impact_networks_suffix' => isset( $input['impact_networks_suffix'] )
+	? sanitize_text_field( $input['impact_networks_suffix'] )
+	: '',
+
+'impact_stats_background' => isset( $input['impact_stats_background'] )
+	? esc_url_raw( $input['impact_stats_background'] )
+	: '',
 		);
 	}
 
@@ -169,6 +230,51 @@ public static function init(): void {
 
 		$copyright =
 			$settings['copyright_text'] ?? '';
+
+			$impact_countries =
+	$settings['impact_countries'] ?? '25';
+
+$impact_countries_suffix =
+	$settings['impact_countries_suffix'] ?? '+';
+
+$impact_young_people =
+	$settings['impact_young_people'] ?? '500';
+
+$impact_young_people_suffix =
+	$settings['impact_young_people_suffix'] ?? '+';
+
+$impact_workshops =
+	$settings['impact_workshops'] ?? '100';
+
+$impact_workshops_suffix =
+	$settings['impact_workshops_suffix'] ?? '+';
+
+$impact_collaborations =
+	$settings['impact_collaborations'] ?? '50';
+
+$impact_collaborations_suffix =
+	$settings['impact_collaborations_suffix'] ?? '+';
+
+$impact_years =
+	$settings['impact_years'] ?? '12';
+
+$impact_years_suffix =
+	$settings['impact_years_suffix'] ?? '+';
+
+$impact_continents =
+	$settings['impact_continents'] ?? '4';
+
+$impact_continents_suffix =
+	$settings['impact_continents_suffix'] ?? '';
+
+$impact_networks =
+	$settings['impact_networks'] ?? '10';
+
+$impact_networks_suffix =
+	$settings['impact_networks_suffix'] ?? '+';
+
+$impact_stats_background =
+	$settings['impact_stats_background'] ?? '';
 		?>
 
 		<div class="wrap">
@@ -352,6 +458,204 @@ public static function init(): void {
 					</tr>
 
 				</table>
+				<hr>
+
+<h2>
+	<?php esc_html_e(
+		'Impact Statistics',
+		'greshma-core'
+	); ?>
+</h2>
+
+<p>
+	<?php esc_html_e(
+		'Manage the numbers displayed in the Impact at a Glance section.',
+		'greshma-core'
+	); ?>
+</p>
+
+<table class="form-table">
+
+	<tr>
+		<th>Countries</th>
+
+		<td>
+			<input
+				type="number"
+				min="0"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_countries]"
+				value="<?php echo esc_attr( $impact_countries ); ?>"
+				class="small-text"
+			>
+
+			<input
+				type="text"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_countries_suffix]"
+				value="<?php echo esc_attr( $impact_countries_suffix ); ?>"
+				class="small-text"
+				placeholder="+"
+			>
+		</td>
+	</tr>
+
+
+	<tr>
+		<th>Young People Reached</th>
+
+		<td>
+			<input
+				type="number"
+				min="0"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_young_people]"
+				value="<?php echo esc_attr( $impact_young_people ); ?>"
+				class="small-text"
+			>
+
+			<input
+				type="text"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_young_people_suffix]"
+				value="<?php echo esc_attr( $impact_young_people_suffix ); ?>"
+				class="small-text"
+				placeholder="+"
+			>
+		</td>
+	</tr>
+
+
+	<tr>
+		<th>Workshops &amp; Sessions</th>
+
+		<td>
+			<input
+				type="number"
+				min="0"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_workshops]"
+				value="<?php echo esc_attr( $impact_workshops ); ?>"
+				class="small-text"
+			>
+
+			<input
+				type="text"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_workshops_suffix]"
+				value="<?php echo esc_attr( $impact_workshops_suffix ); ?>"
+				class="small-text"
+				placeholder="+"
+			>
+		</td>
+	</tr>
+
+
+	<tr>
+		<th>Collaborations</th>
+
+		<td>
+			<input
+				type="number"
+				min="0"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_collaborations]"
+				value="<?php echo esc_attr( $impact_collaborations ); ?>"
+				class="small-text"
+			>
+
+			<input
+				type="text"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_collaborations_suffix]"
+				value="<?php echo esc_attr( $impact_collaborations_suffix ); ?>"
+				class="small-text"
+				placeholder="+"
+			>
+		</td>
+	</tr>
+
+
+	<tr>
+		<th>Years of Engagement</th>
+
+		<td>
+			<input
+				type="number"
+				min="0"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_years]"
+				value="<?php echo esc_attr( $impact_years ); ?>"
+				class="small-text"
+			>
+
+			<input
+				type="text"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_years_suffix]"
+				value="<?php echo esc_attr( $impact_years_suffix ); ?>"
+				class="small-text"
+				placeholder="+"
+			>
+		</td>
+	</tr>
+
+
+	<tr>
+		<th>Continents</th>
+
+		<td>
+			<input
+				type="number"
+				min="0"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_continents]"
+				value="<?php echo esc_attr( $impact_continents ); ?>"
+				class="small-text"
+			>
+
+			<input
+				type="text"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_continents_suffix]"
+				value="<?php echo esc_attr( $impact_continents_suffix ); ?>"
+				class="small-text"
+				placeholder=""
+			>
+		</td>
+	</tr>
+
+
+	<tr>
+		<th>Global Networks</th>
+
+		<td>
+			<input
+				type="number"
+				min="0"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_networks]"
+				value="<?php echo esc_attr( $impact_networks ); ?>"
+				class="small-text"
+			>
+
+			<input
+				type="text"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_networks_suffix]"
+				value="<?php echo esc_attr( $impact_networks_suffix ); ?>"
+				class="small-text"
+				placeholder="+"
+			>
+		</td>
+	</tr>
+
+
+	<tr>
+		<th>Background Image URL</th>
+
+		<td>
+			<input
+				type="url"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[impact_stats_background]"
+				value="<?php echo esc_attr( $impact_stats_background ); ?>"
+				class="regular-text"
+				placeholder="https://..."
+			>
+
+			<p class="description">
+				Optional background image for Impact at a Glance.
+			</p>
+		</td>
+	</tr>
+
+</table>
 
 				<hr>
 

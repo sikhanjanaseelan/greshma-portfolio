@@ -3829,3 +3829,13 @@ assets/images/impacts/impacts-cta-bg.png
 
 	font-size: 12px;
 }
+
+.impacts-stats__background-image {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+	object-position: center;
+}
