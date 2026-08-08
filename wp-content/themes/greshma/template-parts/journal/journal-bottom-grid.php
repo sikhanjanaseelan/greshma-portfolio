@@ -2,217 +2,465 @@
 /**
  * Journal Page — LinkedIn Insights + Media & Interviews.
  *
- * IMAGE ASSETS REQUIRED LATER:
+ * LinkedIn Insights:
+ * Dynamic data from Greshma Core Editorial CPT.
  *
- * assets/images/journal/journal-linkedin-main.png
- *
- * assets/images/journal/journal-media-01.png
- * assets/images/journal/journal-media-02.png
- * assets/images/journal/journal-media-03.png
+ * Media & Interviews:
+ * Static placeholder data for now.
+ * This will be connected to the Media module next.
  *
  * @package Greshma
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$media_items = [
 
-    [
-        'title' => 'Interview: Building Peace Through Youth Initiatives',
-        'meta'  => 'The Earth Charter Initiative',
-        'date'  => 'April 22, 2025',
-        'image' => 'journal-media-01.png',
-    ],
+/* ==========================================================
+   LINKEDIN INSIGHT QUERY
+========================================================== */
 
-    [
-        'title' => 'Podcast: Voices for the Planet',
-        'meta'  => 'Our Kids Climate Podcast',
-        'date'  => 'March 10, 2025',
-        'image' => 'journal-media-02.png',
-    ],
+$linkedin_query = new WP_Query(
+	array(
+		'post_type'           => 'greshma_editorial',
+		'post_status'         => 'publish',
+		'posts_per_page'      => 1,
+		'ignore_sticky_posts' => true,
+		'orderby'             => 'date',
+		'order'               => 'DESC',
+		'tax_query'           => array(
+			array(
+				'taxonomy' => 'greshma_editorial_type',
+				'field'    => 'slug',
+				'terms'    => array(
+					'linkedin-insight',
+				),
+			),
+		),
+	)
+);
 
-    [
-        'title' => 'Featured in: The New Indian Express',
-        'meta'  => 'Young Catholic woman leading climate conversations',
-        'date'  => 'Feb 10, 2025',
-        'image' => 'journal-media-03.png',
-    ],
 
-];
+/* ==========================================================
+   LINKEDIN ARCHIVE URL
+========================================================== */
+
+$editorial_archive_url = get_post_type_archive_link(
+	'greshma_editorial'
+);
+
+$linkedin_archive_url = add_query_arg(
+	'editorial_type',
+	'linkedin-insight',
+	$editorial_archive_url
+);
+
+
+/* ==========================================================
+   MEDIA — TEMPORARY STATIC DATA
+   We will connect this to Media CPT next.
+========================================================== */
+
+$media_items = array(
+
+	array(
+		'title' => 'Interview: Building Peace Through Youth Initiatives',
+		'meta'  => 'The Earth Charter Initiative',
+		'date'  => 'April 22, 2025',
+		'image' => 'journal-media-01.png',
+	),
+
+	array(
+		'title' => 'Podcast: Voices for the Planet',
+		'meta'  => 'Our Kids Climate Podcast',
+		'date'  => 'March 10, 2025',
+		'image' => 'journal-media-02.png',
+	),
+
+	array(
+		'title' => 'Featured in: The New Indian Express',
+		'meta'  => 'Young Catholic woman leading climate conversations',
+		'date'  => 'Feb 10, 2025',
+		'image' => 'journal-media-03.png',
+	),
+
+);
 ?>
 
 <section class="journal-bottom-grid">
 
 
-    <!-- ==========================================
-         LINKEDIN INSIGHTS
-    =========================================== -->
+	<!-- =====================================================
+	     LINKEDIN INSIGHTS
+	===================================================== -->
 
-    <article class="journal-linkedin">
+	<article class="journal-linkedin">
 
-        <div class="journal-bottom-grid__heading">
+		<div class="journal-bottom-grid__heading">
 
-            <h2>
-                LinkedIn Insights
-            </h2>
+			<h2>
+				<?php esc_html_e(
+					'LinkedIn Insights',
+					'greshma'
+				); ?>
+			</h2>
 
-            <a href="#">
-                View All on LinkedIn
-                <span aria-hidden="true">→</span>
-            </a>
+			<a href="<?php echo esc_url( $linkedin_archive_url ); ?>">
 
-        </div>
+				<?php esc_html_e(
+					'View All',
+					'greshma'
+				); ?>
 
+				<span aria-hidden="true">
+					→
+				</span>
 
-        <div class="journal-linkedin__content">
+			</a>
 
-
-            <!-- LEFT TEXT -->
-
-            <div class="journal-linkedin__copy">
-
-                <div class="journal-linkedin__meta">
-
-                    <span class="journal-linkedin__logo">
-                        in
-                    </span>
-
-                    <span>
-                        May 25, 2025
-                    </span>
-
-                    <span>
-                        •
-                    </span>
-
-                    <span>
-                        LinkedIn Article
-                    </span>
-
-                </div>
+		</div>
 
 
-                <h3>
-                    Why Interfaith Dialogue
-                    Matters More Than Ever
-                </h3>
+		<?php if ( $linkedin_query->have_posts() ) : ?>
+
+			<?php
+			while ( $linkedin_query->have_posts() ) :
+				$linkedin_query->the_post();
+
+				$linkedin_id = get_the_ID();
 
 
-                <p>
-                    In a world of polarities, dialogue is not just
-                    a choice—it’s the bridge that connects humanity.
-                </p>
+				/* ==================================================
+				   SUMMARY
+				================================================== */
+
+				$linkedin_summary = get_post_meta(
+					$linkedin_id,
+					'_greshma_editorial_summary',
+					true
+				);
+
+				if ( empty( $linkedin_summary ) ) {
+
+					$linkedin_summary = wp_trim_words(
+						get_the_excerpt(),
+						28,
+						'…'
+					);
+
+				}
 
 
-                <div class="journal-linkedin__stats">
+				/* ==================================================
+				   EXTERNAL LINKEDIN URL
+				================================================== */
 
-                    <span>♡ 78</span>
-                    <span>▢ 12</span>
-                    <span>↗ 6</span>
-
-                </div>
-
-
-                <a
-                    href="#"
-                    class="journal-linkedin__button"
-                >
-                    Read on LinkedIn
-                    <span aria-hidden="true">↗</span>
-                </a>
-
-            </div>
+				$linkedin_external_url = get_post_meta(
+					$linkedin_id,
+					'_greshma_editorial_external_url',
+					true
+				);
 
 
-            <!-- RIGHT IMAGE -->
+				/* ==================================================
+				   DESTINATION
+				================================================== */
 
-            <div class="journal-linkedin__visual">
-
-                <span>
-                    journal-linkedin-main.png
-                </span>
-
-            </div>
-
-        </div>
-
-    </article>
+				$linkedin_destination = ! empty( $linkedin_external_url )
+					? $linkedin_external_url
+					: get_permalink();
 
 
-    <!-- ==========================================
-         MEDIA & INTERVIEWS
-    =========================================== -->
+				/* ==================================================
+				   LINK TYPE LABEL
+				================================================== */
 
-    <article class="journal-media">
-
-        <div class="journal-bottom-grid__heading">
-
-            <h2>
-                Media &amp; Interviews
-            </h2>
-
-            <a href="#">
-                View All
-                <span aria-hidden="true">→</span>
-            </a>
-
-        </div>
+				$linkedin_type_label = ! empty( $linkedin_external_url )
+					? __( 'LinkedIn Post', 'greshma' )
+					: __( 'LinkedIn Insight', 'greshma' );
+				?>
 
 
-        <div class="journal-media__list">
-
-            <?php foreach ( $media_items as $item ) : ?>
-
-                <article class="journal-media__item">
+				<div class="journal-linkedin__content">
 
 
-                    <div class="journal-media__image">
+					<!-- ==========================================
+					     LEFT COPY
+					=========================================== -->
 
-                        <span>
-                            <?php
-                            echo esc_html(
-                                $item['image']
-                            );
-                            ?>
-                        </span>
-
-                    </div>
+					<div class="journal-linkedin__copy">
 
 
-                    <div class="journal-media__content">
+						<div class="journal-linkedin__meta">
 
-                        <h3>
-                            <?php
-                            echo esc_html(
-                                $item['title']
-                            );
-                            ?>
-                        </h3>
+							<span class="journal-linkedin__logo">
+								in
+							</span>
 
-                        <p>
-                            <?php
-                            echo esc_html(
-                                $item['meta']
-                            );
-                            ?>
-                        </p>
+							<span>
+								<?php echo esc_html( get_the_date() ); ?>
+							</span>
 
-                        <span>
-                            <?php
-                            echo esc_html(
-                                $item['date']
-                            );
-                            ?>
-                        </span>
+							<span aria-hidden="true">
+								•
+							</span>
 
-                    </div>
+							<span>
+								<?php
+								echo esc_html(
+									$linkedin_type_label
+								);
+								?>
+							</span>
 
-                </article>
+						</div>
 
-            <?php endforeach; ?>
 
-        </div>
+						<h3>
 
-    </article>
+							<a
+								href="<?php echo esc_url( $linkedin_destination ); ?>"
+								<?php if ( $linkedin_external_url ) : ?>
+									target="_blank"
+									rel="noopener noreferrer"
+								<?php endif; ?>
+							>
+
+								<?php the_title(); ?>
+
+							</a>
+
+						</h3>
+
+
+						<?php if ( $linkedin_summary ) : ?>
+
+							<p>
+
+								<?php
+								echo esc_html(
+									wp_trim_words(
+										$linkedin_summary,
+										28,
+										'…'
+									)
+								);
+								?>
+
+							</p>
+
+						<?php endif; ?>
+
+
+						<!--
+						Engagement statistics are intentionally
+						not displayed yet.
+
+						We do not currently have proper Editorial
+						admin fields for likes, comments or shares.
+						Once those fields exist we can restore the
+						stats row dynamically.
+						-->
+
+
+						<a
+							href="<?php echo esc_url( $linkedin_destination ); ?>"
+							class="journal-linkedin__button"
+							<?php if ( $linkedin_external_url ) : ?>
+								target="_blank"
+								rel="noopener noreferrer"
+							<?php endif; ?>
+						>
+
+							<?php
+							echo esc_html(
+								$linkedin_external_url
+									? __( 'Read on LinkedIn', 'greshma' )
+									: __( 'Read Insight', 'greshma' )
+							);
+							?>
+
+							<span aria-hidden="true">
+								<?php echo $linkedin_external_url ? '↗' : '→'; ?>
+							</span>
+
+						</a>
+
+					</div>
+
+
+					<!-- ==========================================
+					     RIGHT IMAGE
+					=========================================== -->
+
+					<div class="journal-linkedin__visual">
+
+						<?php if ( has_post_thumbnail() ) : ?>
+
+							<a
+								href="<?php echo esc_url( $linkedin_destination ); ?>"
+								class="journal-linkedin__visual-link"
+								<?php if ( $linkedin_external_url ) : ?>
+									target="_blank"
+									rel="noopener noreferrer"
+								<?php endif; ?>
+								aria-label="<?php echo esc_attr( get_the_title() ); ?>"
+							>
+
+								<?php
+								the_post_thumbnail(
+									'medium_large',
+									array(
+										'class'    => 'journal-linkedin__image',
+										'loading'  => 'lazy',
+										'decoding' => 'async',
+										'alt'      => the_title_attribute(
+											array(
+												'echo' => false,
+											)
+										),
+									)
+								);
+								?>
+
+							</a>
+
+						<?php else : ?>
+
+							<span>
+								<?php esc_html_e(
+									'LinkedIn Insight',
+									'greshma'
+								); ?>
+							</span>
+
+						<?php endif; ?>
+
+					</div>
+
+				</div>
+
+			<?php endwhile; ?>
+
+
+		<?php else : ?>
+
+
+			<div class="journal-linkedin__empty">
+
+				<p>
+					<?php esc_html_e(
+						'LinkedIn insights will appear here soon.',
+						'greshma'
+					); ?>
+				</p>
+
+			</div>
+
+
+		<?php endif; ?>
+
+		<?php wp_reset_postdata(); ?>
+
+	</article>
+
+
+
+	<!-- =====================================================
+	     MEDIA & INTERVIEWS
+	     Static for now — dynamic integration comes next.
+	===================================================== -->
+
+	<article class="journal-media">
+
+		<div class="journal-bottom-grid__heading">
+
+			<h2>
+				<?php esc_html_e(
+					'Media & Interviews',
+					'greshma'
+				); ?>
+			</h2>
+
+			<a href="#">
+
+				<?php esc_html_e(
+					'View All',
+					'greshma'
+				); ?>
+
+				<span aria-hidden="true">
+					→
+				</span>
+
+			</a>
+
+		</div>
+
+
+		<div class="journal-media__list">
+
+			<?php foreach ( $media_items as $item ) : ?>
+
+				<article class="journal-media__item">
+
+
+					<div class="journal-media__image">
+
+						<span>
+
+							<?php
+							echo esc_html(
+								$item['image']
+							);
+							?>
+
+						</span>
+
+					</div>
+
+
+					<div class="journal-media__content">
+
+						<h3>
+
+							<?php
+							echo esc_html(
+								$item['title']
+							);
+							?>
+
+						</h3>
+
+
+						<p>
+
+							<?php
+							echo esc_html(
+								$item['meta']
+							);
+							?>
+
+						</p>
+
+
+						<span>
+
+							<?php
+							echo esc_html(
+								$item['date']
+							);
+							?>
+
+						</span>
+
+					</div>
+
+				</article>
+
+			<?php endforeach; ?>
+
+		</div>
+
+	</article>
 
 </section>

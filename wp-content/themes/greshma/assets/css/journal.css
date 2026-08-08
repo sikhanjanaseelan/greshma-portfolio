@@ -3437,3 +3437,101 @@
 .journal-page div {
 	align-content: start;
 }
+/* ==========================================================
+   LINKEDIN — DYNAMIC IMAGE
+========================================================== */
+
+.journal-linkedin__visual-link {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	overflow: hidden;
+}
+
+.journal-linkedin__image {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	min-height: 235px;
+
+	object-fit: cover;
+	object-position: center;
+}
+
+
+/* ==========================================================
+   LINKEDIN — DYNAMIC TITLE
+========================================================== */
+
+.journal-linkedin__copy h3 a {
+	color: inherit;
+
+	text-decoration: none;
+}
+
+.journal-linkedin__copy h3 a:hover,
+.journal-linkedin__copy h3 a:focus-visible {
+	color: #17483b;
+}
+
+
+/* ==========================================================
+   LINKEDIN — EMPTY STATE
+========================================================== */
+
+.journal-linkedin__empty {
+	padding:
+		18px
+		16px
+		24px;
+
+	color: #66716b;
+
+	font-size: 8px;
+}
+
+/* ==========================================================
+   STORIES IN PRINT — DYNAMIC COVER IMAGE
+========================================================== */
+
+.journal-print-card__cover {
+	position: relative;
+	text-decoration: none;
+}
+
+.journal-print-card__cover-image {
+	position: absolute;
+	inset: 0;
+
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+	object-position: center;
+
+	transition: transform 0.35s ease;
+}
+
+.journal-print-card:hover
+.journal-print-card__cover-image {
+	transform: scale(1.035);
+}
+
+
+/* Dynamic title link */
+
+.journal-print-card__footer h3 a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.journal-print-card__footer h3 a:hover,
+.journal-print-card__footer h3 a:focus-visible {
+	color: #17483b;
+}
