@@ -2,337 +2,535 @@
 /**
  * Journal Page — Sidebar.
  *
+ * Dynamic sidebar data powered by Editorial.
+ *
  * @package Greshma
  */
 
 defined( 'ABSPATH' ) || exit;
+
+
+/* ==========================================================
+   EDITORIAL ARCHIVE URL
+========================================================== */
+
+$editorial_archive_url = get_post_type_archive_link(
+	'greshma_editorial'
+);
+
+
+/* ==========================================================
+   EDITORIAL TYPES
+========================================================== */
+
+$journal_types = get_terms(
+	array(
+		'taxonomy'   => 'greshma_editorial_type',
+		'hide_empty' => true,
+	)
+);
+
+
+/* ==========================================================
+   EDITORIAL TOPICS
+========================================================== */
+
+$journal_topics = get_terms(
+	array(
+		'taxonomy'   => 'greshma_editorial_topic',
+		'hide_empty' => true,
+		'number'     => 10,
+		'orderby'    => 'count',
+		'order'      => 'DESC',
+	)
+);
+
+
+/* ==========================================================
+   POPULAR READS
+
+   For now:
+   Latest 3 published Editorials.
+
+   Later, if we add a view-count system,
+   this can become true "Popular Reads".
+========================================================== */
+
+$popular_query = new WP_Query(
+	array(
+		'post_type'           => 'greshma_editorial',
+		'post_status'         => 'publish',
+		'posts_per_page'      => 3,
+		'ignore_sticky_posts' => true,
+		'orderby'             => 'date',
+		'order'               => 'DESC',
+	)
+);
+
+
+/* ==========================================================
+   ARCHIVES
+
+   Query Editorial posts only and group by month manually.
+========================================================== */
+
+$archive_posts = get_posts(
+	array(
+		'post_type'      => 'greshma_editorial',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'fields'         => 'ids',
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+	)
+);
+
+$archive_months = array();
+
+foreach ( $archive_posts as $archive_post_id ) {
+
+	$year  = get_the_date( 'Y', $archive_post_id );
+	$month = get_the_date( 'm', $archive_post_id );
+
+	$key = $year . '-' . $month;
+
+	if ( ! isset( $archive_months[ $key ] ) ) {
+
+		$archive_months[ $key ] = array(
+			'year'  => $year,
+			'month' => $month,
+			'label' => get_the_date(
+				'F Y',
+				$archive_post_id
+			),
+		);
+	}
+}
+
+$archive_months = array_slice(
+	$archive_months,
+	0,
+	6
+);
 ?>
+
 
 <div class="journal-sidebar">
 
 
-    <!-- ==========================================
-         SEARCH
-    =========================================== -->
+	<!-- =====================================================
+	     SEARCH
+	===================================================== -->
 
-    <section class="journal-sidebar__widget">
+	<section class="journal-sidebar__widget">
 
-        <h2 class="journal-sidebar__title">
-            Search Journal
-        </h2>
+		<h2 class="journal-sidebar__title">
+			<?php esc_html_e(
+				'Search Journal',
+				'greshma'
+			); ?>
+		</h2>
 
+
+		<form
+			class="journal-sidebar__search"
+			role="search"
+			method="get"
+			action="<?php echo esc_url( home_url( '/' ) ); ?>"
+		>
 
-        <form
-            class="journal-sidebar__search"
-            role="search"
-            method="get"
-            action="<?php echo esc_url( home_url( '/' ) ); ?>"
-        >
+			<label
+				class="screen-reader-text"
+				for="journal-search"
+			>
+				<?php esc_html_e(
+					'Search Journal',
+					'greshma'
+				); ?>
+			</label>
+
+
+			<input
+				type="search"
+				id="journal-search"
+				name="s"
+				placeholder="<?php esc_attr_e(
+					'Search...',
+					'greshma'
+				); ?>"
+			>
+
 
-            <label
-                class="screen-reader-text"
-                for="journal-search"
-            >
-                Search Journal
-            </label>
+			<input
+				type="hidden"
+				name="post_type"
+				value="greshma_editorial"
+			>
 
 
-            <input
-                type="search"
-                id="journal-search"
-                name="s"
-                placeholder="Search..."
-            >
+			<button
+				type="submit"
+				aria-label="<?php esc_attr_e(
+					'Search',
+					'greshma'
+				); ?>"
+			>
 
+				<svg viewBox="0 0 24 24" aria-hidden="true">
+					<circle cx="11" cy="11" r="6"></circle>
+					<path d="M16 16l5 5"></path>
+				</svg>
 
-            <button
-                type="submit"
-                aria-label="Search"
-            >
+			</button>
 
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="11" cy="11" r="6"/>
-                    <path d="M16 16l5 5"/>
-                </svg>
+		</form>
 
-            </button>
+	</section>
 
-        </form>
 
-    </section>
+	<!-- =====================================================
+	     CATEGORIES
+	===================================================== -->
 
+	<?php
+	if (
+		! empty( $journal_types ) &&
+		! is_wp_error( $journal_types )
+	) :
+		?>
 
-    <!-- ==========================================
-         CATEGORIES
-    =========================================== -->
+		<section class="journal-sidebar__widget">
 
-    <section class="journal-sidebar__widget">
+			<div class="journal-sidebar__heading">
 
-        <div class="journal-sidebar__heading">
+				<h2>
+					<?php esc_html_e(
+						'Categories',
+						'greshma'
+					); ?>
+				</h2>
 
-            <h2>
-                Categories
-            </h2>
+				<span aria-hidden="true">
+					❧
+				</span>
 
-            <span aria-hidden="true">
-                ❧
-            </span>
+			</div>
 
-        </div>
 
+			<ul class="journal-sidebar__categories">
 
-        <ul class="journal-sidebar__categories">
+				<?php foreach ( $journal_types as $type ) : ?>
 
-            <li>
-                <a href="#">
-                    <span>Thoughts &amp; Reflections</span>
-                    <span>12</span>
-                </a>
-            </li>
+					<li>
 
-            <li>
-                <a href="#">
-                    <span>Stories in Print</span>
-                    <span>08</span>
-                </a>
-            </li>
+						<a
+							href="<?php echo esc_url(
+								add_query_arg(
+									'editorial_type',
+									$type->slug,
+									$editorial_archive_url
+								)
+							); ?>"
+						>
 
-            <li>
-                <a href="#">
-                    <span>Media &amp; Interviews</span>
-                    <span>06</span>
-                </a>
-            </li>
+							<span>
+								<?php echo esc_html( $type->name ); ?>
+							</span>
 
-            <li>
-                <a href="#">
-                    <span>LinkedIn Insights</span>
-                    <span>18</span>
-                </a>
-            </li>
+							<span>
+								<?php
+								echo esc_html(
+									str_pad(
+										(string) $type->count,
+										2,
+										'0',
+										STR_PAD_LEFT
+									)
+								);
+								?>
+							</span>
 
-            <li>
-                <a href="#">
-                    <span>Events &amp; Talks</span>
-                    <span>10</span>
-                </a>
-            </li>
+						</a>
 
-            <li>
-                <a href="#">
-                    <span>Research &amp; Reports</span>
-                    <span>05</span>
-                </a>
-            </li>
+					</li>
 
-        </ul>
+				<?php endforeach; ?>
 
-    </section>
+			</ul>
 
+		</section>
 
-    <!-- ==========================================
-         ARCHIVES
-    =========================================== -->
+	<?php endif; ?>
 
-    <section class="journal-sidebar__widget">
 
-        <div class="journal-sidebar__heading">
+	<!-- =====================================================
+	     ARCHIVES
+	===================================================== -->
 
-            <h2>
-                Archives
-            </h2>
+	<?php if ( ! empty( $archive_months ) ) : ?>
 
-            <span aria-hidden="true">
-                ❧
-            </span>
+		<section class="journal-sidebar__widget">
 
-        </div>
+			<div class="journal-sidebar__heading">
 
+				<h2>
+					<?php esc_html_e(
+						'Archives',
+						'greshma'
+					); ?>
+				</h2>
 
-        <ul class="journal-sidebar__archives">
+				<span aria-hidden="true">
+					❧
+				</span>
 
-            <li>
-                <a href="#">
-                    June 2025
-                </a>
-            </li>
+			</div>
 
-            <li>
-                <a href="#">
-                    May 2025
-                </a>
-            </li>
 
-            <li>
-                <a href="#">
-                    April 2025
-                </a>
-            </li>
+			<ul class="journal-sidebar__archives">
 
-            <li>
-                <a href="#">
-                    March 2025
-                </a>
-            </li>
+				<?php foreach ( $archive_months as $archive_month ) : ?>
 
-        </ul>
+					<li>
 
-    </section>
+						<a
+							href="<?php echo esc_url(
+								add_query_arg(
+									array(
+										'editorial_year'  => $archive_month['year'],
+										'editorial_month' => $archive_month['month'],
+									),
+									$editorial_archive_url
+								)
+							); ?>"
+						>
 
+							<?php
+							echo esc_html(
+								$archive_month['label']
+							);
+							?>
 
-    <!-- ==========================================
-         POPULAR READS
-    =========================================== -->
+						</a>
 
-    <section class="journal-sidebar__widget">
+					</li>
 
-        <div class="journal-sidebar__heading">
+				<?php endforeach; ?>
 
-            <h2>
-                Popular Reads
-            </h2>
+			</ul>
 
-            <span aria-hidden="true">
-                ❧
-            </span>
+		</section>
 
-        </div>
+	<?php endif; ?>
 
 
-        <div class="journal-sidebar__popular">
+	<!-- =====================================================
+	     POPULAR READS
+	===================================================== -->
 
+	<?php if ( $popular_query->have_posts() ) : ?>
 
-            <!-- POPULAR ITEM -->
+		<section class="journal-sidebar__widget">
 
-            <article class="journal-sidebar__popular-item">
+			<div class="journal-sidebar__heading">
 
-                <div class="journal-sidebar__popular-image">
-                    01
-                </div>
+				<h2>
+					<?php esc_html_e(
+						'Popular Reads',
+						'greshma'
+					); ?>
+				</h2>
 
-                <div>
+				<span aria-hidden="true">
+					❧
+				</span>
 
-                    <h3>
-                        Why Listening is a Form
-                        of Leadership
-                    </h3>
+			</div>
 
-                    <span>
-                        June 05, 2025
-                    </span>
 
-                </div>
+			<div class="journal-sidebar__popular">
 
-            </article>
+				<?php
+				$popular_index = 1;
 
+				while ( $popular_query->have_posts() ) :
+					$popular_query->the_post();
+					?>
 
-            <article class="journal-sidebar__popular-item">
+					<article class="journal-sidebar__popular-item">
 
-                <div class="journal-sidebar__popular-image">
-                    02
-                </div>
 
-                <div>
+						<a
+							class="journal-sidebar__popular-image"
+							href="<?php the_permalink(); ?>"
+							aria-label="<?php echo esc_attr(
+								get_the_title()
+							); ?>"
+						>
 
-                    <h3>
-                        Young People Are Already
-                        Leading Change
-                    </h3>
+							<?php if ( has_post_thumbnail() ) : ?>
 
-                    <span>
-                        May 28, 2025
-                    </span>
+								<?php
+								the_post_thumbnail(
+									'thumbnail',
+									array(
+										'class'    => 'journal-sidebar__popular-image-file',
+										'loading'  => 'lazy',
+										'decoding' => 'async',
+										'alt'      => the_title_attribute(
+											array(
+												'echo' => false,
+											)
+										),
+									)
+								);
+								?>
 
-                </div>
+							<?php else : ?>
 
-            </article>
+								<span>
+									<?php
+									echo esc_html(
+										str_pad(
+											(string) $popular_index,
+											2,
+											'0',
+											STR_PAD_LEFT
+										)
+									);
+									?>
+								</span>
 
+							<?php endif; ?>
 
-            <article class="journal-sidebar__popular-item">
+						</a>
 
-                <div class="journal-sidebar__popular-image">
-                    03
-                </div>
 
-                <div>
+						<div>
 
-                    <h3>
-                        Building Peace Through
-                        Everyday Conversations
-                    </h3>
+							<h3>
 
-                    <span>
-                        May 16, 2025
-                    </span>
+								<a href="<?php the_permalink(); ?>">
+									<?php the_title(); ?>
+								</a>
 
-                </div>
+							</h3>
 
-            </article>
 
-        </div>
+							<span>
+								<?php echo esc_html(
+									get_the_date()
+								); ?>
+							</span>
 
-    </section>
+						</div>
 
+					</article>
 
-    <!-- ==========================================
-         TAGS
-    =========================================== -->
+					<?php
+					++$popular_index;
 
-    <section class="journal-sidebar__widget">
+				endwhile;
+				?>
 
-        <div class="journal-sidebar__heading">
+			</div>
 
-            <h2>
-                Tags
-            </h2>
+		</section>
 
-            <span aria-hidden="true">
-                ❧
-            </span>
+		<?php wp_reset_postdata(); ?>
 
-        </div>
+	<?php endif; ?>
 
 
-        <div class="journal-sidebar__tags">
+	<!-- =====================================================
+	     TOPICS
+	===================================================== -->
 
-            <a href="#">Peacebuilding</a>
-            <a href="#">Climate</a>
-            <a href="#">Leadership</a>
-            <a href="#">Youth</a>
-            <a href="#">Dialogue</a>
-            <a href="#">Interfaith</a>
-            <a href="#">Community</a>
+	<?php
+	if (
+		! empty( $journal_topics ) &&
+		! is_wp_error( $journal_topics )
+	) :
+		?>
 
-        </div>
+		<section class="journal-sidebar__widget">
 
-    </section>
+			<div class="journal-sidebar__heading">
 
+				<h2>
+					<?php esc_html_e(
+						'Topics',
+						'greshma'
+					); ?>
+				</h2>
 
-    <!-- ==========================================
-         SIDEBAR QUOTE
-    =========================================== -->
+				<span aria-hidden="true">
+					❧
+				</span>
 
-    <blockquote class="journal-sidebar__quote">
+			</div>
 
-        <span
-            class="journal-sidebar__quote-mark"
-            aria-hidden="true"
-        >
-            “
-        </span>
 
-        <p>
-            Peace begins when
-            people begin listening.
-        </p>
+			<div class="journal-sidebar__tags">
 
-        <span
-            class="journal-sidebar__quote-leaf"
-            aria-hidden="true"
-        >
-            ❧
-        </span>
+				<?php foreach ( $journal_topics as $topic ) : ?>
 
-    </blockquote>
+					<a
+						href="<?php echo esc_url(
+							add_query_arg(
+								'editorial_topic',
+								$topic->slug,
+								$editorial_archive_url
+							)
+						); ?>"
+					>
+
+						<?php echo esc_html(
+							$topic->name
+						); ?>
+
+					</a>
+
+				<?php endforeach; ?>
+
+			</div>
+
+		</section>
+
+	<?php endif; ?>
+
+
+	<!-- =====================================================
+	     SIDEBAR QUOTE
+	===================================================== -->
+
+	<blockquote class="journal-sidebar__quote">
+
+		<span
+			class="journal-sidebar__quote-mark"
+			aria-hidden="true"
+		>
+			“
+		</span>
+
+
+		<p>
+			<?php
+			esc_html_e(
+				'Peace begins when people begin listening.',
+				'greshma'
+			);
+			?>
+		</p>
+
+
+		<span
+			class="journal-sidebar__quote-leaf"
+			aria-hidden="true"
+		>
+			❧
+		</span>
+
+	</blockquote>
 
 </div>

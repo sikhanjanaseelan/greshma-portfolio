@@ -3535,3 +3535,51 @@
 .journal-print-card__footer h3 a:focus-visible {
 	color: #17483b;
 }
+
+/* ==========================================================
+   JOURNAL SIDEBAR — DYNAMIC POPULAR READS
+========================================================== */
+
+.journal-sidebar__popular-image {
+	position: relative;
+
+	overflow: hidden;
+
+	text-decoration: none;
+}
+
+.journal-sidebar__popular-image-file {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+	object-position: center;
+}
+
+.journal-sidebar__popular-image > span {
+	display: flex;
+
+	width: 100%;
+	height: 100%;
+
+	align-items: center;
+	justify-content: center;
+
+	color: #ffffff;
+}
+
+
+/* Title link */
+
+.journal-sidebar__popular-item h3 a {
+	color: inherit;
+
+	text-decoration: none;
+}
+
+.journal-sidebar__popular-item h3 a:hover,
+.journal-sidebar__popular-item h3 a:focus-visible {
+	color: #17483b;
+}
