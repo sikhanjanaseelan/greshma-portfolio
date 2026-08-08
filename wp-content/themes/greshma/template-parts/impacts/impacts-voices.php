@@ -94,7 +94,26 @@ if ( $primary_testimonial_id ) {
 		)
 	);
 }
+
+/* ==========================================================
+   JOURNEY OF IMPACT
+========================================================== */
+
+$impact_journey = new WP_Query(
+	array(
+		'post_type'      => 'greshma_journey',
+		'post_status'    => 'publish',
+		'posts_per_page' => 6,
+
+		'orderby' => array(
+			'menu_order' => 'ASC',
+			'date'       => 'ASC',
+		),
+	)
+);
 ?>
+
+
 
 <section class="impacts-voices">
 
@@ -286,132 +305,76 @@ if ( $primary_testimonial_id ) {
 
 				<div class="impacts-voices__timeline">
 
-					<div
-						class="impacts-voices__timeline-line"
-						aria-hidden="true"
-					></div>
+	<?php if ( $impact_journey->have_posts() ) : ?>
+
+		<div
+			class="impacts-voices__timeline-line"
+			aria-hidden="true"
+		></div>
 
 
-					<!-- 2010 -->
+		<?php
+		while ( $impact_journey->have_posts() ) :
+			$impact_journey->the_post();
 
-					<div class="impacts-voices__timeline-item">
+			$journey_year = trim(
+	(string) get_post_meta(
+		get_the_ID(),
+		Greshma_Core_Journey::YEAR_META,
+		true
+	)
+);
+			?>
 
-						<div class="impacts-voices__timeline-icon">
-							❧
-						</div>
+			<div class="impacts-voices__timeline-item">
 
-						<strong>
-							2010
-						</strong>
-
-						<span>
-							First Steps<br>
-							as Volunteer
-						</span>
-
-					</div>
-
-
-					<!-- 2014 -->
-
-					<div class="impacts-voices__timeline-item">
-
-						<div class="impacts-voices__timeline-icon">
-							❧
-						</div>
-
-						<strong>
-							2014
-						</strong>
-
-						<span>
-							Youth Dialogues<br>
-							Begin
-						</span>
-
-					</div>
-
-
-					<!-- 2016 -->
-
-					<div class="impacts-voices__timeline-item">
-
-						<div class="impacts-voices__timeline-icon">
-							❧
-						</div>
-
-						<strong>
-							2016
-						</strong>
-
-						<span>
-							International<br>
-							Peace Studies
-						</span>
-
-					</div>
-
-
-					<!-- 2021 -->
-
-					<div class="impacts-voices__timeline-item">
-
-						<div class="impacts-voices__timeline-icon">
-							❧
-						</div>
-
-						<strong>
-							2021
-						</strong>
-
-						<span>
-							Founded<br>
-							Ecopeace Teen Café
-						</span>
-
-					</div>
-
-
-					<!-- 2024 -->
-
-					<div class="impacts-voices__timeline-item">
-
-						<div class="impacts-voices__timeline-icon">
-							❧
-						</div>
-
-						<strong>
-							2024
-						</strong>
-
-						<span>
-							Global Council<br>
-							Trustee (URI)
-						</span>
-
-					</div>
-
-
-					<!-- TODAY -->
-
-					<div class="impacts-voices__timeline-item">
-
-						<div class="impacts-voices__timeline-icon">
-							❧
-						</div>
-
-						<strong>
-							<?php esc_html_e( 'Today', 'greshma' ); ?>
-						</strong>
-
-						<span>
-							Continuing the<br>
-							Journey
-						</span>
-
-					</div>
-
+				<div
+					class="impacts-voices__timeline-icon"
+					aria-hidden="true"
+				>
+					❧
 				</div>
+
+
+				<?php if ( '' !== $journey_year ) : ?>
+
+	<strong>
+		<?php echo esc_html( $journey_year ); ?>
+	</strong>
+
+<?php endif; ?>
+
+
+				<span>
+					<?php the_title(); ?>
+				</span>
+
+			</div>
+
+		<?php endwhile; ?>
+
+
+		<?php wp_reset_postdata(); ?>
+
+
+	<?php else : ?>
+
+		<div class="impacts-voices__timeline-empty">
+
+			<p>
+				<?php
+				esc_html_e(
+					'Journey moments will appear here soon.',
+					'greshma'
+				);
+				?>
+			</p>
+
+		</div>
+
+	<?php endif; ?>
+
+</div>
 
 			</div>
 
