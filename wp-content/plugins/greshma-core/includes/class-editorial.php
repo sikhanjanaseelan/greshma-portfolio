@@ -63,7 +63,7 @@ class Greshma_Core_Editorial {
 			'labels'             => $labels,
 			'public'             => true,
 			'show_ui'            => true,
-			'show_in_menu'       => true,
+			'show_in_menu'       => false,
 			'show_in_admin_bar'  => true,
 			'show_in_nav_menus'  => true,
 			'show_in_rest'       => true,

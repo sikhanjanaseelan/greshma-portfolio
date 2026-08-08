@@ -23,24 +23,13 @@ class Greshma_Core_Editorial_Admin {
 	 * Register WordPress hooks.
 	 */
 	public static function init(): void {
-		add_action( 'admin_menu', array( __CLASS__, 'register_admin_menu' ), 20 );
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_admin_assets' ) );
+	add_action(
+	'admin_enqueue_scripts',
+	array( __CLASS__, 'enqueue_admin_assets' )
+);
+
 	}
 
-	
-	/**
-	 * Register the Editorial dashboard submenu.
-	 */
-	public static function register_admin_menu(): void {
-
-add_submenu_page(
-	'edit.php?post_type=' . Greshma_Core_Editorial::POST_TYPE,
-	__( 'Content Studio', 'greshma-core' ),
-	__( 'Content Studio', 'greshma-core' ),
-	'edit_posts',
-	self::STUDIO_SLUG,
-	array( __CLASS__, 'render_content_studio' )
-);	}
 
 
 /**
