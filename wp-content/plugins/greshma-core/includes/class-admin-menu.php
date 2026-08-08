@@ -1,9 +1,13 @@
 <?php
 /**
- * Greshma Core admin menu.
+ * Central Greshma admin navigation.
  *
- * Provides a grouped administration workspace for
- * Greshma portfolio content modules.
+ * Provides a grouped accordion-style administration workspace
+ * for all Greshma Core content modules.
+ *
+ * WordPress natively supports only two admin-menu levels.
+ * This controller keeps all Greshma modules under one parent
+ * and visually creates a clean module -> child hierarchy.
  *
  * @package GreshmaCore
  */
@@ -13,13 +17,13 @@ defined( 'ABSPATH' ) || exit;
 class Greshma_Core_Admin_Menu {
 
 	/**
-	 * Main admin menu slug.
+	 * Main Greshma admin menu slug.
 	 */
 	const MENU_SLUG = 'greshma-admin';
 
 
 	/**
-	 * Initialise admin hooks.
+	 * Initialise hooks.
 	 *
 	 * @return void
 	 */
@@ -37,33 +41,568 @@ class Greshma_Core_Admin_Menu {
 			100
 		);
 
+		add_filter(
+			'parent_file',
+			array( __CLASS__, 'set_active_parent_menu' )
+		);
+
+		add_filter(
+			'submenu_file',
+			array( __CLASS__, 'set_active_submenu' )
+		);
+
 		add_action(
 			'admin_head',
 			array( __CLASS__, 'print_admin_styles' )
 		);
-        add_filter(
-	'parent_file',
-	array( __CLASS__, 'set_active_parent_menu' )
-);
 
-add_filter(
-	'submenu_file',
-	array( __CLASS__, 'set_active_submenu' )
-);
-
-
-add_action(
-	'admin_footer',
-	array( __CLASS__, 'print_admin_menu_script' )
-);
+		add_action(
+			'admin_footer',
+			array( __CLASS__, 'print_admin_script' )
+		);
 	}
 
 
+	/* ==========================================================
+	   MODULE CONFIGURATION
+	========================================================== */
+
 	/**
-	 * Register main Greshma menu.
+	 * Return all Greshma admin modules.
 	 *
-	 * @return void
+	 * @return array
 	 */
+	private static function modules(): array {
+
+		return array(
+
+			/* ==================================================
+			   MEDIA & PRESS
+			================================================== */
+
+			'media' => array(
+
+				'title'       => __( 'Media & Press', 'greshma-core' ),
+				'menu_title'  => __( 'MEDIA & PRESS', 'greshma-core' ),
+				'group_slug'  => 'greshma-media-section',
+				'color'       => '#e4bd65',
+				'capability'  => 'edit_posts',
+				'primary_cpt' => 'greshma_media',
+
+				'description' => __(
+					'Manage interviews, podcasts, videos, articles and press coverage featuring Greshma.',
+					'greshma-core'
+				),
+
+				'post_types' => array(
+					'greshma_media',
+				),
+
+				'taxonomies' => array(
+					'greshma_media_category',
+				),
+
+				'children' => array(
+
+					array(
+						'title' => __( 'All Media & Press', 'greshma-core' ),
+						'slug'  => 'edit.php?post_type=greshma_media',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Add New Media & Press', 'greshma-core' ),
+						'slug'  => 'post-new.php?post_type=greshma_media',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Media Categories', 'greshma-core' ),
+						'slug'  => 'edit-tags.php?taxonomy=greshma_media_category&post_type=greshma_media',
+						'cap'   => 'manage_categories',
+					),
+				),
+			),
+
+
+			/* ==================================================
+			   EDITORIAL
+			================================================== */
+
+			'editorial' => array(
+
+				'title'       => __( 'Editorial', 'greshma-core' ),
+				'menu_title'  => __( 'EDITORIAL', 'greshma-core' ),
+				'group_slug'  => 'greshma-editorial-section',
+				'color'       => '#91c09b',
+				'capability'  => 'edit_posts',
+				'primary_cpt' => 'greshma_editorial',
+
+				'description' => __(
+					'Manage reflections, stories, articles, research, publications and thought leadership.',
+					'greshma-core'
+				),
+
+				'post_types' => array(
+					'greshma_editorial',
+				),
+
+				'taxonomies' => array(
+					'greshma_editorial_type',
+					'greshma_editorial_topic',
+				),
+
+				'pages' => array(
+					'greshma-editorial-studio',
+				),
+
+				'children' => array(
+
+					array(
+						'title'    => __( 'Content Studio', 'greshma-core' ),
+						'slug'     => 'greshma-editorial-studio',
+						'cap'      => 'edit_posts',
+						'callback' => array(
+							'Greshma_Core_Editorial_Admin',
+							'render_content_studio',
+						),
+					),
+
+					array(
+						'title' => __( 'All Editorial', 'greshma-core' ),
+						'slug'  => 'edit.php?post_type=greshma_editorial',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Add New Editorial', 'greshma-core' ),
+						'slug'  => 'post-new.php?post_type=greshma_editorial',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Editorial Types', 'greshma-core' ),
+						'slug'  => 'edit-tags.php?taxonomy=greshma_editorial_type&post_type=greshma_editorial',
+						'cap'   => 'manage_categories',
+					),
+
+					array(
+						'title' => __( 'Editorial Topics', 'greshma-core' ),
+						'slug'  => 'edit-tags.php?taxonomy=greshma_editorial_topic&post_type=greshma_editorial',
+						'cap'   => 'manage_categories',
+					),
+				),
+			),
+
+
+			/* ==================================================
+			   PROJECTS
+			================================================== */
+
+			'projects' => array(
+
+				'title'       => __( 'Projects', 'greshma-core' ),
+				'menu_title'  => __( 'PROJECTS', 'greshma-core' ),
+				'group_slug'  => 'greshma-projects-section',
+				'color'       => '#8eb7c5',
+				'capability'  => 'edit_posts',
+				'primary_cpt' => 'greshma_project',
+
+				'description' => __(
+					'Manage initiatives, projects and organisations presented throughout the portfolio.',
+					'greshma-core'
+				),
+
+				'post_types' => array(
+					'greshma_project',
+					'greshma_organization',
+				),
+
+				'taxonomies' => array(
+					'greshma_project_category',
+				),
+
+				'children' => array(
+
+					array(
+						'title' => __( 'All Projects', 'greshma-core' ),
+						'slug'  => 'edit.php?post_type=greshma_project',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Add New Project', 'greshma-core' ),
+						'slug'  => 'post-new.php?post_type=greshma_project',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Project Categories', 'greshma-core' ),
+						'slug'  => 'edit-tags.php?taxonomy=greshma_project_category&post_type=greshma_project',
+						'cap'   => 'manage_categories',
+					),
+
+					array(
+						'title' => __( 'Organizations', 'greshma-core' ),
+						'slug'  => 'edit.php?post_type=greshma_organization',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Add Organization', 'greshma-core' ),
+						'slug'  => 'post-new.php?post_type=greshma_organization',
+						'cap'   => 'edit_posts',
+					),
+				),
+			),
+
+
+			/* ==================================================
+			   EVENTS
+			================================================== */
+
+			'events' => array(
+
+				'title'       => __( 'Events', 'greshma-core' ),
+				'menu_title'  => __( 'EVENTS', 'greshma-core' ),
+				'group_slug'  => 'greshma-events-section',
+				'color'       => '#d8a078',
+				'capability'  => 'edit_posts',
+				'primary_cpt' => 'greshma_event',
+
+				'description' => __(
+					'Manage upcoming and past events, engagements and appearances.',
+					'greshma-core'
+				),
+
+				'post_types' => array(
+					'greshma_event',
+				),
+
+				'taxonomies' => array(
+					'greshma_event_category',
+				),
+
+				'children' => array(
+
+					array(
+						'title' => __( 'All Events', 'greshma-core' ),
+						'slug'  => 'edit.php?post_type=greshma_event',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Add New Event', 'greshma-core' ),
+						'slug'  => 'post-new.php?post_type=greshma_event',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Event Categories', 'greshma-core' ),
+						'slug'  => 'edit-tags.php?taxonomy=greshma_event_category&post_type=greshma_event',
+						'cap'   => 'manage_categories',
+					),
+				),
+			),
+
+
+			/* ==================================================
+			   GALLERY
+			================================================== */
+
+			'gallery' => array(
+
+				'title'       => __( 'Gallery', 'greshma-core' ),
+				'menu_title'  => __( 'GALLERY', 'greshma-core' ),
+				'group_slug'  => 'greshma-gallery-section',
+				'color'       => '#b8a2cf',
+				'capability'  => 'edit_posts',
+				'primary_cpt' => 'greshma_gallery',
+
+				'description' => __(
+					'Manage visual stories and image collections shown in the portfolio gallery.',
+					'greshma-core'
+				),
+
+				'post_types' => array(
+					'greshma_gallery',
+				),
+
+				'taxonomies' => array(
+					'greshma_gallery_category',
+				),
+
+				'children' => array(
+
+					array(
+						'title' => __( 'All Gallery Items', 'greshma-core' ),
+						'slug'  => 'edit.php?post_type=greshma_gallery',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Add Gallery Item', 'greshma-core' ),
+						'slug'  => 'post-new.php?post_type=greshma_gallery',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Gallery Categories', 'greshma-core' ),
+						'slug'  => 'edit-tags.php?taxonomy=greshma_gallery_category&post_type=greshma_gallery',
+						'cap'   => 'manage_categories',
+					),
+				),
+			),
+
+
+			/* ==================================================
+			   WORKSHOPS
+			================================================== */
+
+			'workshops' => array(
+
+				'title'       => __( 'Workshops', 'greshma-core' ),
+				'menu_title'  => __( 'WORKSHOPS', 'greshma-core' ),
+				'group_slug'  => 'greshma-workshops-section',
+				'color'       => '#d0ad72',
+				'capability'  => 'edit_posts',
+				'primary_cpt' => 'greshma_workshop',
+
+				'description' => __(
+					'Manage workshops, programmes, sessions and learning engagements.',
+					'greshma-core'
+				),
+
+				'post_types' => array(
+					'greshma_workshop',
+				),
+
+				'taxonomies' => array(
+					'greshma_workshop_category',
+				),
+
+				'children' => array(
+
+					array(
+						'title' => __( 'All Workshops', 'greshma-core' ),
+						'slug'  => 'edit.php?post_type=greshma_workshop',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Add New Workshop', 'greshma-core' ),
+						'slug'  => 'post-new.php?post_type=greshma_workshop',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Workshop Categories', 'greshma-core' ),
+						'slug'  => 'edit-tags.php?taxonomy=greshma_workshop_category&post_type=greshma_workshop',
+						'cap'   => 'manage_categories',
+					),
+				),
+			),
+
+
+			/* ==================================================
+			   RESOURCES
+			================================================== */
+
+			'resources' => array(
+
+				'title'       => __( 'Resources', 'greshma-core' ),
+				'menu_title'  => __( 'RESOURCES', 'greshma-core' ),
+				'group_slug'  => 'greshma-resources-section',
+				'color'       => '#7fb8ae',
+				'capability'  => 'edit_posts',
+				'primary_cpt' => 'greshma_resource',
+
+				'description' => __(
+					'Manage publications, downloads, guides and resources shared through the website.',
+					'greshma-core'
+				),
+
+				'post_types' => array(
+					'greshma_resource',
+				),
+
+				'taxonomies' => array(
+					'greshma_resource_category',
+				),
+
+				'children' => array(
+
+					array(
+						'title' => __( 'All Resources', 'greshma-core' ),
+						'slug'  => 'edit.php?post_type=greshma_resource',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Add New Resource', 'greshma-core' ),
+						'slug'  => 'post-new.php?post_type=greshma_resource',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Resource Categories', 'greshma-core' ),
+						'slug'  => 'edit-tags.php?taxonomy=greshma_resource_category&post_type=greshma_resource',
+						'cap'   => 'manage_categories',
+					),
+				),
+			),
+
+
+			/* ==================================================
+			   MY PATHS
+			================================================== */
+
+			'paths' => array(
+
+				'title'       => __( 'My Paths', 'greshma-core' ),
+				'menu_title'  => __( 'MY PATHS', 'greshma-core' ),
+				'group_slug'  => 'greshma-paths-section',
+				'color'       => '#9eb77d',
+				'capability'  => 'edit_posts',
+				'primary_cpt' => 'greshma_journey',
+
+				'description' => __(
+					'Manage journey milestones, key moments and education history used on the My Paths page.',
+					'greshma-core'
+				),
+
+				'post_types' => array(
+					'greshma_journey',
+					'greshma_education',
+				),
+
+				'taxonomies' => array(),
+
+				'children' => array(
+
+					array(
+						'title' => __( 'Key Moments', 'greshma-core' ),
+						'slug'  => 'edit.php?post_type=greshma_journey',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Add Key Moment', 'greshma-core' ),
+						'slug'  => 'post-new.php?post_type=greshma_journey',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Education', 'greshma-core' ),
+						'slug'  => 'edit.php?post_type=greshma_education',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Add Education', 'greshma-core' ),
+						'slug'  => 'post-new.php?post_type=greshma_education',
+						'cap'   => 'edit_posts',
+					),
+				),
+			),
+
+
+			/* ==================================================
+			   TESTIMONIALS
+			================================================== */
+
+			'testimonials' => array(
+
+				'title'       => __( 'Testimonials', 'greshma-core' ),
+				'menu_title'  => __( 'TESTIMONIALS', 'greshma-core' ),
+				'group_slug'  => 'greshma-testimonials-section',
+				'color'       => '#c79a9a',
+				'capability'  => 'edit_posts',
+				'primary_cpt' => 'greshma_testimonial',
+
+				'description' => __(
+					'Manage testimonials, recommendations and voices shown throughout the portfolio.',
+					'greshma-core'
+				),
+
+				'post_types' => array(
+					'greshma_testimonial',
+				),
+
+				'taxonomies' => array(
+					'greshma_testimonial_group',
+				),
+
+				'children' => array(
+
+					array(
+						'title' => __( 'All Testimonials', 'greshma-core' ),
+						'slug'  => 'edit.php?post_type=greshma_testimonial',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Add New Testimonial', 'greshma-core' ),
+						'slug'  => 'post-new.php?post_type=greshma_testimonial',
+						'cap'   => 'edit_posts',
+					),
+
+					array(
+						'title' => __( 'Testimonial Groups', 'greshma-core' ),
+						'slug'  => 'edit-tags.php?taxonomy=greshma_testimonial_group&post_type=greshma_testimonial',
+						'cap'   => 'manage_categories',
+					),
+				),
+			),
+
+
+			/* ==================================================
+			   SITE SETTINGS
+			================================================== */
+
+			'settings' => array(
+
+				'title'       => __( 'Site Settings', 'greshma-core' ),
+				'menu_title'  => __( 'SITE SETTINGS', 'greshma-core' ),
+				'group_slug'  => 'greshma-settings-section',
+				'color'       => '#aebcb2',
+				'capability'  => 'manage_options',
+				'primary_cpt' => '',
+
+				'description' => __(
+					'Manage contact details, social links, newsletter information and global website settings.',
+					'greshma-core'
+				),
+
+				'post_types' => array(),
+
+				'taxonomies' => array(),
+
+				'pages' => array(
+					'greshma-settings',
+				),
+
+				'children' => array(
+
+					array(
+						'title'    => __( 'Site Settings', 'greshma-core' ),
+						'slug'     => 'greshma-settings',
+						'cap'      => 'manage_options',
+						'callback' => array(
+							'Greshma_Core_Settings',
+							'render_page',
+						),
+					),
+				),
+			),
+		);
+	}
+
+
+	/* ==========================================================
+	   PARENT MENU
+	========================================================== */
+
 	public static function register_parent_menu(): void {
 
 		add_menu_page(
@@ -78,16 +617,11 @@ add_action(
 	}
 
 
-	/**
-	 * Register grouped submenu items.
-	 *
-	 * @return void
-	 */
-	public static function register_submenus(): void {
+	/* ==========================================================
+	   SUBMENUS
+	========================================================== */
 
-		/* =====================================================
-		   DASHBOARD
-		===================================================== */
+	public static function register_submenus(): void {
 
 		add_submenu_page(
 			self::MENU_SLUG,
@@ -98,164 +632,242 @@ add_action(
 			array( __CLASS__, 'render_dashboard' )
 		);
 
+		foreach ( self::modules() as $module ) {
 
-		/* =====================================================
-		   MEDIA & PRESS — GROUP TITLE
-		===================================================== */
-
-		add_submenu_page(
-			self::MENU_SLUG,
-			__( 'Media & Press', 'greshma-core' ),
-			__( 'MEDIA & PRESS', 'greshma-core' ),
-			'edit_posts',
-			'greshma-media-section',
-			array( __CLASS__, 'render_media_section' )
-		);
-
-
-		/* =====================================================
-		   MEDIA & PRESS — CHILD LINKS
-		===================================================== */
-
-		add_submenu_page(
-			self::MENU_SLUG,
-			__( 'All Media & Press', 'greshma-core' ),
-			__( 'All Media & Press', 'greshma-core' ),
-			'edit_posts',
-			'edit.php?post_type=greshma_media',
-			null
-		);
+			/**
+			 * Module heading / landing page.
+			 */
+			add_submenu_page(
+				self::MENU_SLUG,
+				$module['title'],
+				$module['menu_title'],
+				$module['capability'],
+				$module['group_slug'],
+				array( __CLASS__, 'render_module_landing' )
+			);
 
 
-		add_submenu_page(
-			self::MENU_SLUG,
-			__( 'Add New Media & Press', 'greshma-core' ),
-			__( 'Add New Media & Press', 'greshma-core' ),
-			'edit_posts',
-			'post-new.php?post_type=greshma_media',
-			null
-		);
+			/**
+			 * Module children.
+			 */
+			foreach ( $module['children'] as $child ) {
 
+				$callback = isset( $child['callback'] )
+					? $child['callback']
+					: null;
 
-		add_submenu_page(
-			self::MENU_SLUG,
-			__( 'Media Categories', 'greshma-core' ),
-			__( 'Media Categories', 'greshma-core' ),
-			'manage_categories',
-			'edit-tags.php?taxonomy=greshma_media_category&post_type=greshma_media',
-			null
-		);
-
-
-
-        /* ==========================================================
-   EDITORIAL — GROUP TITLE
-========================================================== */
-
-add_submenu_page(
-	self::MENU_SLUG,
-	__( 'Editorial', 'greshma-core' ),
-	__( 'EDITORIAL', 'greshma-core' ),
-	'edit_posts',
-	'greshma-editorial-section',
-	array(
-		'Greshma_Core_Editorial_Admin',
-		'render_content_studio',
-	)
-);
-
-
-/* ==========================================================
-   EDITORIAL — CONTENT STUDIO
-========================================================== */
-
-add_submenu_page(
-	self::MENU_SLUG,
-	__( 'Content Studio', 'greshma-core' ),
-	__( 'Content Studio', 'greshma-core' ),
-	'edit_posts',
-	Greshma_Core_Editorial_Admin::STUDIO_SLUG,
-	array(
-		'Greshma_Core_Editorial_Admin',
-		'render_content_studio',
-	)
-);
-
-
-/* ==========================================================
-   EDITORIAL — ALL EDITORIAL
-========================================================== */
-
-add_submenu_page(
-	self::MENU_SLUG,
-	__( 'All Editorial', 'greshma-core' ),
-	__( 'All Editorial', 'greshma-core' ),
-	'edit_posts',
-	'edit.php?post_type=greshma_editorial',
-	null
-);
-
-
-/* ==========================================================
-   EDITORIAL — ADD NEW
-========================================================== */
-
-add_submenu_page(
-	self::MENU_SLUG,
-	__( 'Add New Editorial', 'greshma-core' ),
-	__( 'Add New Editorial', 'greshma-core' ),
-	'edit_posts',
-	'post-new.php?post_type=greshma_editorial',
-	null
-);
-
-
-/* ==========================================================
-   EDITORIAL — TYPES
-========================================================== */
-
-add_submenu_page(
-	self::MENU_SLUG,
-	__( 'Editorial Types', 'greshma-core' ),
-	__( 'Editorial Types', 'greshma-core' ),
-	'manage_categories',
-	'edit-tags.php?taxonomy=greshma_editorial_type&post_type=greshma_editorial',
-	null
-);
-
-
-/* ==========================================================
-   EDITORIAL — TOPICS
-========================================================== */
-
-add_submenu_page(
-	self::MENU_SLUG,
-	__( 'Editorial Topics', 'greshma-core' ),
-	__( 'Editorial Topics', 'greshma-core' ),
-	'manage_categories',
-	'edit-tags.php?taxonomy=greshma_editorial_topic&post_type=greshma_editorial',
-	null
-);
+				add_submenu_page(
+					self::MENU_SLUG,
+					$child['title'],
+					$child['title'],
+					$child['cap'],
+					$child['slug'],
+					$callback
+				);
+			}
+		}
 	}
 
 
-	/**
-	 * Render dashboard.
-	 *
-	 * @return void
-	 */
+	/* ==========================================================
+	   CURRENT MODULE
+	========================================================== */
+
+	private static function current_module(): string {
+
+		global $typenow;
+
+		$taxonomy = isset( $_GET['taxonomy'] )
+			? sanitize_key( wp_unslash( $_GET['taxonomy'] ) )
+			: '';
+
+		$page = isset( $_GET['page'] )
+			? sanitize_key( wp_unslash( $_GET['page'] ) )
+			: '';
+
+
+		foreach ( self::modules() as $key => $module ) {
+
+			if (
+				$page &&
+				$page === $module['group_slug']
+			) {
+				return $key;
+			}
+
+
+			if (
+				! empty( $module['pages'] ) &&
+				in_array(
+					$page,
+					$module['pages'],
+					true
+				)
+			) {
+				return $key;
+			}
+
+
+			if (
+				$typenow &&
+				in_array(
+					$typenow,
+					$module['post_types'],
+					true
+				)
+			) {
+				return $key;
+			}
+
+
+			if (
+				$taxonomy &&
+				in_array(
+					$taxonomy,
+					$module['taxonomies'],
+					true
+				)
+			) {
+				return $key;
+			}
+		}
+
+
+		return '';
+	}
+
+
+	/* ==========================================================
+	   KEEP GRESHMA PARENT ACTIVE
+	========================================================== */
+
+	public static function set_active_parent_menu( $parent_file ) {
+
+		if ( self::current_module() ) {
+			return self::MENU_SLUG;
+		}
+
+		return $parent_file;
+	}
+
+
+	/* ==========================================================
+	   ACTIVE CHILD MENU
+	========================================================== */
+
+	public static function set_active_submenu( $submenu_file ) {
+
+		global $typenow, $pagenow;
+
+		$taxonomy = isset( $_GET['taxonomy'] )
+			? sanitize_key( wp_unslash( $_GET['taxonomy'] ) )
+			: '';
+
+		$page = isset( $_GET['page'] )
+			? sanitize_key( wp_unslash( $_GET['page'] ) )
+			: '';
+
+
+		/**
+		 * Custom admin pages.
+		 */
+		if ( $page ) {
+
+			foreach ( self::modules() as $module ) {
+
+				foreach ( $module['children'] as $child ) {
+
+					if ( $page === $child['slug'] ) {
+						return $child['slug'];
+					}
+				}
+
+				if ( $page === $module['group_slug'] ) {
+					return $module['group_slug'];
+				}
+			}
+		}
+
+
+		/**
+		 * Taxonomies.
+		 */
+		if (
+			'edit-tags.php' === $pagenow &&
+			$taxonomy
+		) {
+
+			foreach ( self::modules() as $module ) {
+
+				foreach ( $module['children'] as $child ) {
+
+					if (
+						false !== strpos(
+							$child['slug'],
+							'taxonomy=' . $taxonomy
+						)
+					) {
+						return $child['slug'];
+					}
+				}
+			}
+		}
+
+
+		/**
+		 * Add New CPT.
+		 */
+		if (
+			'post-new.php' === $pagenow &&
+			$typenow
+		) {
+
+			return 'post-new.php?post_type=' . $typenow;
+		}
+
+
+		/**
+		 * Edit existing CPT.
+		 *
+		 * Highlight "All" while editing an item.
+		 */
+		if (
+			'post.php' === $pagenow &&
+			$typenow
+		) {
+
+			return 'edit.php?post_type=' . $typenow;
+		}
+
+
+		/**
+		 * CPT list.
+		 */
+		if (
+			'edit.php' === $pagenow &&
+			$typenow
+		) {
+
+			return 'edit.php?post_type=' . $typenow;
+		}
+
+
+		return $submenu_file;
+	}
+
+
+	/* ==========================================================
+	   DASHBOARD
+	========================================================== */
+
 	public static function render_dashboard(): void {
 
-		$media_count = wp_count_posts( 'greshma_media' );
-
-		$published_media = isset( $media_count->publish )
-			? (int) $media_count->publish
-			: 0;
+		$modules = self::modules();
 		?>
 
 		<div class="wrap greshma-admin-dashboard">
 
-			<div class="greshma-admin-dashboard__hero">
+			<header class="greshma-admin-dashboard__hero">
 
 				<span class="greshma-admin-dashboard__eyebrow">
 					<?php esc_html_e( 'Portfolio Management', 'greshma-core' ); ?>
@@ -268,68 +880,79 @@ add_submenu_page(
 				<p>
 					<?php
 					esc_html_e(
-						'Manage projects, stories, media, resources, events and portfolio information from one organised workspace.',
+						'Manage portfolio content, stories, projects, events, media and website information from one organised workspace.',
 						'greshma-core'
 					);
 					?>
 				</p>
 
-			</div>
+			</header>
 
 
 			<div class="greshma-admin-dashboard__grid">
 
-				<article class="greshma-admin-card">
+				<?php foreach ( $modules as $module ) : ?>
 
-					<div class="greshma-admin-card__icon">
+					<?php
+					if (
+						! current_user_can(
+							$module['capability']
+						)
+					) {
+						continue;
+					}
 
-						<span
-							class="dashicons dashicons-megaphone"
-							aria-hidden="true"
-						></span>
+					$count = 0;
 
-					</div>
+					if ( $module['primary_cpt'] ) {
 
-					<div>
+						$post_count = wp_count_posts(
+							$module['primary_cpt']
+						);
 
-						<h2>
-							<?php esc_html_e( 'Media & Press', 'greshma-core' ); ?>
-						</h2>
+						$count = isset( $post_count->publish )
+							? (int) $post_count->publish
+							: 0;
+					}
 
-						<p>
-							<strong>
-								<?php echo esc_html( $published_media ); ?>
-							</strong>
+					$module_url = admin_url(
+						'admin.php?page=' .
+						$module['group_slug']
+					);
+					?>
 
-							<?php esc_html_e( 'published items', 'greshma-core' ); ?>
-						</p>
+					<a
+						class="greshma-admin-card"
+						href="<?php echo esc_url( $module_url ); ?>"
+						style="--greshma-module-color: <?php echo esc_attr( $module['color'] ); ?>;"
+					>
 
-					</div>
+						<span class="greshma-admin-card__accent"></span>
 
+						<div>
 
-					<div class="greshma-admin-card__actions">
+							<h2>
+								<?php echo esc_html( $module['title'] ); ?>
+							</h2>
 
-						<a
-							class="button"
-							href="<?php echo esc_url(
-								admin_url( 'edit.php?post_type=greshma_media' )
-							); ?>"
-						>
-							<?php esc_html_e( 'View All', 'greshma-core' ); ?>
-						</a>
+							<p>
+								<?php echo esc_html( $module['description'] ); ?>
+							</p>
 
-						<a
-							class="button button-primary"
-							href="<?php echo esc_url(
-								admin_url( 'post-new.php?post_type=greshma_media' )
-							); ?>"
-						>
-							<?php esc_html_e( 'Add New', 'greshma-core' ); ?>
-						</a>
+							<?php if ( $module['primary_cpt'] ) : ?>
 
-					</div>
+								<span class="greshma-admin-card__count">
+									<?php echo esc_html( $count ); ?>
+									<?php esc_html_e( 'published', 'greshma-core' ); ?>
+								</span>
 
-				</article>
+							<?php endif; ?>
+
+						</div>
+
+					</a>
+
+				<?php endforeach; ?>
 
 			</div>
 
@@ -339,113 +962,128 @@ add_submenu_page(
 	}
 
 
-	/**
-	 * Media & Press landing page.
-	 *
-	 * This gives the Media module itself a proper title/landing
-	 * page when the MEDIA & PRESS group heading is clicked.
-	 *
-	 * @return void
-	 */
-	public static function render_media_section(): void {
+	/* ==========================================================
+	   GENERIC MODULE LANDING PAGE
+	========================================================== */
 
-		$media_count = wp_count_posts( 'greshma_media' );
+	public static function render_module_landing(): void {
 
-		$published = isset( $media_count->publish )
-			? (int) $media_count->publish
-			: 0;
+		$page = isset( $_GET['page'] )
+			? sanitize_key( wp_unslash( $_GET['page'] ) )
+			: '';
 
-		$drafts = isset( $media_count->draft )
-			? (int) $media_count->draft
-			: 0;
+		$selected = null;
+
+		foreach ( self::modules() as $module ) {
+
+			if ( $page === $module['group_slug'] ) {
+				$selected = $module;
+				break;
+			}
+		}
+
+		if ( ! $selected ) {
+			return;
+		}
+
+
+		$published = 0;
+		$drafts    = 0;
+
+		if ( $selected['primary_cpt'] ) {
+
+			$count = wp_count_posts(
+				$selected['primary_cpt']
+			);
+
+			$published = isset( $count->publish )
+				? (int) $count->publish
+				: 0;
+
+			$drafts = isset( $count->draft )
+				? (int) $count->draft
+				: 0;
+		}
 		?>
 
-		<div class="wrap greshma-module-page">
+		<div
+			class="wrap greshma-module-page"
+			style="--greshma-module-color: <?php echo esc_attr( $selected['color'] ); ?>;"
+		>
 
-			<div class="greshma-module-page__header">
+			<header class="greshma-module-page__header">
 
 				<span class="greshma-module-page__eyebrow">
 					<?php esc_html_e( 'Greshma Content', 'greshma-core' ); ?>
 				</span>
 
 				<h1>
-					<?php esc_html_e( 'Media & Press', 'greshma-core' ); ?>
+					<?php echo esc_html( $selected['title'] ); ?>
 				</h1>
 
 				<p>
-					<?php
-					esc_html_e(
-						'Manage interviews, podcasts, videos, articles and press coverage featuring Greshma.',
-						'greshma-core'
-					);
-					?>
+					<?php echo esc_html( $selected['description'] ); ?>
 				</p>
 
-			</div>
+			</header>
 
 
-			<div class="greshma-module-stats">
+			<?php if ( $selected['primary_cpt'] ) : ?>
 
-				<div class="greshma-module-stat">
+				<div class="greshma-module-stats">
 
-					<strong>
-						<?php echo esc_html( $published ); ?>
-					</strong>
+					<div class="greshma-module-stat">
 
-					<span>
-						<?php esc_html_e( 'Published', 'greshma-core' ); ?>
-					</span>
+						<strong>
+							<?php echo esc_html( $published ); ?>
+						</strong>
+
+						<span>
+							<?php esc_html_e( 'Published', 'greshma-core' ); ?>
+						</span>
+
+					</div>
+
+
+					<div class="greshma-module-stat">
+
+						<strong>
+							<?php echo esc_html( $drafts ); ?>
+						</strong>
+
+						<span>
+							<?php esc_html_e( 'Drafts', 'greshma-core' ); ?>
+						</span>
+
+					</div>
 
 				</div>
 
-
-				<div class="greshma-module-stat">
-
-					<strong>
-						<?php echo esc_html( $drafts ); ?>
-					</strong>
-
-					<span>
-						<?php esc_html_e( 'Drafts', 'greshma-core' ); ?>
-					</span>
-
-				</div>
-
-			</div>
+			<?php endif; ?>
 
 
 			<div class="greshma-module-actions">
 
-				<a
-					class="button button-primary"
-					href="<?php echo esc_url(
-						admin_url( 'post-new.php?post_type=greshma_media' )
-					); ?>"
-				>
-					<?php esc_html_e( 'Add New Media & Press', 'greshma-core' ); ?>
-				</a>
+				<?php foreach ( $selected['children'] as $index => $child ) : ?>
 
+					<?php
+					if ( ! current_user_can( $child['cap'] ) ) {
+						continue;
+					}
 
-				<a
-					class="button"
-					href="<?php echo esc_url(
-						admin_url( 'edit.php?post_type=greshma_media' )
-					); ?>"
-				>
-					<?php esc_html_e( 'All Media & Press', 'greshma-core' ); ?>
-				</a>
+					$url = self::admin_child_url(
+						$child['slug']
+					);
+					?>
 
+					<a
+						class="button <?php echo 0 === $index ? 'button-primary' : ''; ?>"
+						href="<?php echo esc_url( $url ); ?>"
+					>
+						<?php echo esc_html( $child['title'] ); ?>
+					</a>
 
-				<a
-					class="button"
-					href="<?php echo esc_url(
-						admin_url(
-							'edit-tags.php?taxonomy=greshma_media_category&post_type=greshma_media'
-						)
-					); ?>"
-				>
-					<?php esc_html_e( 'Media Categories', 'greshma-core' ); ?>
-				</a>
+				<?php endforeach; ?>
 
 			</div>
 
@@ -455,1167 +1093,729 @@ add_submenu_page(
 	}
 
 
+	/* ==========================================================
+	   ADMIN CHILD URL
+	========================================================== */
 
-    /**
- * Keep the Greshma parent menu expanded
- * while using Greshma module screens.
- *
- * @param string $parent_file Current WordPress parent menu.
- *
- * @return string
- */
-public static function set_active_parent_menu( $parent_file ) {
+	private static function admin_child_url( string $slug ): string {
 
-	global $typenow;
-
-	$taxonomy = isset( $_GET['taxonomy'] )
-		? sanitize_key( wp_unslash( $_GET['taxonomy'] ) )
-		: '';
-
-$page = isset( $_GET['page'] )
-	? sanitize_key( wp_unslash( $_GET['page'] ) )
-	: '';
-
-if (
-	Greshma_Core_Editorial_Admin::STUDIO_SLUG === $page ||
-	'greshma-editorial-section' === $page
-) {
-	return self::MENU_SLUG;
-}
-
-	if (
-	'greshma_media' === $typenow ||
-	'greshma_media_category' === $taxonomy ||
-	'greshma_editorial' === $typenow ||
-	'greshma_editorial_type' === $taxonomy ||
-	'greshma_editorial_topic' === $taxonomy
-) {
-	return self::MENU_SLUG;
-}
-
-	return $parent_file;
+		/**
+		 * Real WordPress admin screens.
+		 */
+		if (
+			0 === strpos( $slug, 'edit.php' ) ||
+			0 === strpos( $slug, 'post-new.php' ) ||
+			0 === strpos( $slug, 'edit-tags.php' )
+		) {
+			return admin_url( $slug );
+		}
 
 
-    
-}
-
-
-/**
- * Highlight the correct Greshma submenu item.
- *
- * @param string $submenu_file Current submenu.
- *
- * @return string
- */
-public static function set_active_submenu( $submenu_file ) {
-
-	global $typenow, $pagenow;
-
-	$taxonomy = isset( $_GET['taxonomy'] )
-		? sanitize_key( wp_unslash( $_GET['taxonomy'] ) )
-		: '';
-
-
-	/* Media Categories */
-
-	if (
-		'edit-tags.php' === $pagenow &&
-		'greshma_media_category' === $taxonomy
-	) {
-		return 'edit-tags.php?taxonomy=greshma_media_category&post_type=greshma_media';
+		/**
+		 * Custom admin page.
+		 */
+		return admin_url(
+			'admin.php?page=' . $slug
+		);
 	}
 
 
-	/* Add New Media & Press */
+	/* ==========================================================
+	   ADMIN MENU SCRIPT
+	========================================================== */
 
-	if (
-		'post-new.php' === $pagenow &&
-		'greshma_media' === $typenow
-	) {
-		return 'post-new.php?post_type=greshma_media';
-	}
+	public static function print_admin_script(): void {
 
+		$modules = self::modules();
 
-	/* Edit an individual Media & Press item */
+		$groups = array();
 
-	if (
-		'post.php' === $pagenow &&
-		'greshma_media' === $typenow
-	) {
-		return 'edit.php?post_type=greshma_media';
-	}
+		foreach ( $modules as $key => $module ) {
 
+			$groups[ $key ] = $module['group_slug'];
+		}
 
-	/* All Media & Press */
+		$current_module = self::current_module();
+		?>
 
-	if (
-		'edit.php' === $pagenow &&
-		'greshma_media' === $typenow
-	) {
-		return 'edit.php?post_type=greshma_media';
-	}
-
-/* Editorial Content Studio */
-
-if (
-	'admin.php' === $pagenow &&
-	isset( $_GET['page'] ) &&
-	Greshma_Core_Editorial_Admin::STUDIO_SLUG ===
-		sanitize_key( wp_unslash( $_GET['page'] ) )
-) {
-	return Greshma_Core_Editorial_Admin::STUDIO_SLUG;
-}
-
-
-/* Editorial Types */
-
-if (
-	'edit-tags.php' === $pagenow &&
-	'greshma_editorial_type' === $taxonomy
-) {
-	return 'edit-tags.php?taxonomy=greshma_editorial_type&post_type=greshma_editorial';
-}
-
-
-/* Editorial Topics */
-
-if (
-	'edit-tags.php' === $pagenow &&
-	'greshma_editorial_topic' === $taxonomy
-) {
-	return 'edit-tags.php?taxonomy=greshma_editorial_topic&post_type=greshma_editorial';
-}
-
-
-/* Add New Editorial */
-
-if (
-	'post-new.php' === $pagenow &&
-	'greshma_editorial' === $typenow
-) {
-	return 'post-new.php?post_type=greshma_editorial';
-}
-
-
-/* Edit Editorial */
-
-if (
-	'post.php' === $pagenow &&
-	'greshma_editorial' === $typenow
-) {
-	return 'edit.php?post_type=greshma_editorial';
-}
-
-
-/* All Editorial */
-
-if (
-	'edit.php' === $pagenow &&
-	'greshma_editorial' === $typenow
-) {
-	return 'edit.php?post_type=greshma_editorial';
-}
-	return $submenu_file;
-}
-
-
-/**
- * Add accordion behaviour to the Greshma admin menu.
- *
- * WordPress supports only two native menu levels.
- * This script visually groups our submenu links into modules
- * and expands only the module currently being used.
- *
- * @return void
- */
-public static function print_admin_menu_script(): void {
-	?>
-
-	<script>
+		<script>
 		document.addEventListener('DOMContentLoaded', function () {
 
-			const greshmaMenu = document.querySelector(
+			const menu = document.querySelector(
 				'#adminmenu .toplevel_page_greshma-admin'
 			);
 
-			if (!greshmaMenu) {
+			if (!menu) {
 				return;
 			}
 
-			const submenu = greshmaMenu.querySelector('.wp-submenu');
+			const submenu = menu.querySelector('.wp-submenu');
 
 			if (!submenu) {
 				return;
 			}
 
+			const groups = <?php echo wp_json_encode( $groups ); ?>;
 
-			/* =====================================================
-			   MODULE DEFINITIONS
-			===================================================== */
+			const currentModule =
+				<?php echo wp_json_encode( $current_module ); ?>;
 
-			const modules = {
 
-				media: {
-					parentMatch: 'greshma-media-section',
+			/* ==================================================
+			   IDENTIFY GROUP HEADINGS
+			================================================== */
 
-					children: [
-						'edit.php?post_type=greshma_media',
-						'post-new.php?post_type=greshma_media',
-						'taxonomy=greshma_media_category'
-					]
-				},
+			const headings = {};
 
-				editorial: {
-					parentMatch: 'greshma-editorial-section',
+			Object.keys(groups).forEach(function (key) {
 
-					children: [
-						'greshma-editorial-studio',
-						'edit.php?post_type=greshma_editorial',
-						'post-new.php?post_type=greshma_editorial',
-						'taxonomy=greshma_editorial_type',
-						'taxonomy=greshma_editorial_topic'
-					]
-				}
+				const slug = groups[key];
 
-			};
-
-
-			/* =====================================================
-			   FIND MENU ITEMS
-			===================================================== */
-
-			Object.keys(modules).forEach(function (moduleName) {
-
-				const module = modules[moduleName];
-
-				module.parent = null;
-				module.items  = [];
-
-				submenu.querySelectorAll('li').forEach(function (li) {
-
-					const link = li.querySelector('a');
-
-					if (!link) {
-						return;
-					}
-
-					const href = link.getAttribute('href') || '';
-
-
-					/* Module heading */
-
-					if (href.includes(module.parentMatch)) {
-
-						module.parent = li;
-
-						li.classList.add(
-							'greshma-module-heading',
-							'greshma-module-heading--' + moduleName
-						);
-					}
-
-
-					/* Module children */
-
-					module.children.forEach(function (match) {
-
-						if (href.includes(match)) {
-
-							/*
-							 * Avoid treating the group heading itself
-							 * as one of its children.
-							 */
-							if (!href.includes(module.parentMatch)) {
-
-								li.classList.add(
-									'greshma-module-child',
-									'greshma-module-child--' + moduleName
-								);
-
-								if (!module.items.includes(li)) {
-									module.items.push(li);
-								}
-
-							}
-
-						}
-
-					});
-
-				});
-
-			});
-
-
-			/* =====================================================
-			   DETERMINE CURRENT MODULE
-			===================================================== */
-
-			function detectCurrentModule() {
-
-				const currentUrl = window.location.href;
-
-				/*
-				 * MEDIA & PRESS
-				 */
-				if (
-					currentUrl.includes('post_type=greshma_media') ||
-					currentUrl.includes('taxonomy=greshma_media_category') ||
-					currentUrl.includes('page=greshma-media-section')
-				) {
-					return 'media';
-				}
-
-
-				/*
-				 * EDITORIAL
-				 */
-				if (
-					currentUrl.includes('post_type=greshma_editorial') ||
-					currentUrl.includes('taxonomy=greshma_editorial_type') ||
-					currentUrl.includes('taxonomy=greshma_editorial_topic') ||
-					currentUrl.includes('page=greshma-editorial-studio') ||
-					currentUrl.includes('page=greshma-editorial-section')
-				) {
-					return 'editorial';
-				}
-
-
-				return null;
-			}
-
-
-			/* =====================================================
-			   COLLAPSE / EXPAND
-			===================================================== */
-
-			function openModule(moduleName) {
-
-				Object.keys(modules).forEach(function (name) {
-
-					const module = modules[name];
-
-					const isOpen = name === moduleName;
-
-
-					/* Module heading state */
-
-					if (module.parent) {
-
-						module.parent.classList.toggle(
-							'is-greshma-module-open',
-							isOpen
-						);
-
-						const parentLink =
-							module.parent.querySelector('a');
-
-						if (parentLink) {
-
-							parentLink.setAttribute(
-								'aria-expanded',
-								isOpen ? 'true' : 'false'
-							);
-
-						}
-
-					}
-
-
-					/* Child visibility */
-
-					module.items.forEach(function (item) {
-
-						item.classList.toggle(
-							'is-greshma-child-visible',
-							isOpen
-						);
-
-					});
-
-				});
-
-			}
-
-
-			/* =====================================================
-			   INITIAL STATE
-			===================================================== */
-
-			const currentModule = detectCurrentModule();
-
-			openModule(currentModule);
-
-
-			/* =====================================================
-			   HEADING CLICK
-			===================================================== */
-
-			Object.keys(modules).forEach(function (moduleName) {
-
-				const module = modules[moduleName];
-
-				if (!module.parent) {
-					return;
-				}
-
-				const link = module.parent.querySelector('a');
+				const link = submenu.querySelector(
+					'a[href*="page=' + slug + '"]'
+				);
 
 				if (!link) {
 					return;
 				}
 
-				link.addEventListener('click', function (event) {
+				const li = link.closest('li');
 
-					/*
-					 * Allow the module landing page to load normally.
-					 *
-					 * Before navigation, visually open the clicked
-					 * module so interaction feels immediate.
-					 */
-					openModule(moduleName);
+				if (!li) {
+					return;
+				}
+
+				li.classList.add(
+					'greshma-module-heading',
+					'greshma-module-heading--' + key
+				);
+
+				headings[key] = li;
+			});
+
+
+			/* ==================================================
+			   CLASSIFY CHILD ITEMS BY POSITION
+			================================================== */
+
+			Object.keys(headings).forEach(function (key) {
+
+				const heading = headings[key];
+
+				let next = heading.nextElementSibling;
+
+				while (next) {
+
+					if (
+						next.classList.contains(
+							'greshma-module-heading'
+						)
+					) {
+						break;
+					}
+
+					next.classList.add(
+						'greshma-module-child',
+						'greshma-module-child--' + key
+					);
+
+					next = next.nextElementSibling;
+				}
+			});
+
+
+			/* ==================================================
+			   OPEN ACTIVE MODULE ONLY
+			================================================== */
+
+			function applyState(moduleKey) {
+
+				Object.keys(headings).forEach(function (key) {
+
+					const open = key === moduleKey;
+
+					headings[key].classList.toggle(
+						'is-greshma-module-open',
+						open
+					);
+
+					submenu.querySelectorAll(
+						'.greshma-module-child--' + key
+					).forEach(function (item) {
+
+						item.classList.toggle(
+							'is-greshma-child-visible',
+							open
+						);
+
+					});
+				});
+			}
+
+
+			applyState(currentModule);
+
+
+			/* ==================================================
+			   CLICK FEEDBACK
+			================================================== */
+
+			Object.keys(headings).forEach(function (key) {
+
+				const link = headings[key].querySelector('a');
+
+				if (!link) {
+					return;
+				}
+
+				link.addEventListener('click', function () {
+
+					applyState(key);
 
 				});
-
 			});
 
 		});
-	</script>
+		</script>
 
-	<?php
-}
-
-
+		<?php
+	}
 
 
+	/* ==========================================================
+	   ADMIN STYLES
+	========================================================== */
 
-
-
-
-
-
-	/**
-	 * Admin menu and module styling.
-	 *
-	 * @return void
-	 */
 	public static function print_admin_styles(): void {
+
+		$modules = self::modules();
 		?>
 
 		<style>
 
-			/* =================================================
-			   GRESHMA TOP-LEVEL MENU
-			================================================= */
+		/* ======================================================
+		   GRESHMA TOP LEVEL
+		====================================================== */
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			> a {
-				color: #ffffff;
+		#adminmenu
+		.toplevel_page_greshma-admin
+		> a {
+			color: #ffffff;
+			background: #23483a;
 
-				background: #23483a;
+			border-left:
+				4px solid
+				#d4ad5d;
+		}
 
-				border-left:
-					4px solid
-					#d4ad5d;
-			}
 
+		#adminmenu
+		.toplevel_page_greshma-admin
+		> a:hover,
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			> a:hover,
+		#adminmenu
+		.toplevel_page_greshma-admin.wp-has-current-submenu
+		> a {
+			color: #ffffff;
+			background: #315b47;
+		}
 
-			#adminmenu
-			.toplevel_page_greshma-admin.wp-has-current-submenu
-			> a {
-				color: #ffffff;
 
-				background: #315b47;
-			}
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-menu-image::before {
+			color: #d9c47f;
+		}
+
 
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-menu-name {
+			font-weight: 700;
+		}
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			.wp-menu-image::before {
-				color: #d9c47f;
-			}
 
+		/* ======================================================
+		   SUBMENU
+		====================================================== */
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			.wp-menu-name {
-				font-weight: 700;
-			}
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-submenu {
+			padding:
+				8px
+				0
+				12px;
 
+			background: #12261e;
+		}
 
-			/* =================================================
-			   GRESHMA SUBMENU CONTAINER
-			================================================= */
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			.wp-submenu {
-				padding:
-					8px
-					0
-					12px;
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-submenu
+		a {
+			color: #d3ded7;
 
-				background:
-					#12261e;
-			}
+			transition:
+				color .16s ease,
+				background-color .16s ease;
+		}
 
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			.wp-submenu
-			a {
-				padding:
-					7px
-					14px;
+		/* ======================================================
+		   DASHBOARD
+		====================================================== */
 
-				color:
-					#d3ded7;
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-submenu
+		a[href="admin.php?page=greshma-admin"] {
+			margin-bottom: 6px;
 
-				font-size:
-					13px;
+			padding:
+				10px
+				14px
+				12px;
 
-				line-height:
-					1.35;
-			}
+			color: #ffffff;
 
+			font-weight: 700;
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			.wp-submenu
-			a:hover {
-				color: #ffffff;
+			border-bottom:
+				1px solid
+				rgba(255,255,255,.10);
+		}
 
-				background:
-					rgba(
-						120,
-						160,
-						128,
-						.14
-					);
-			}
 
+		/* ======================================================
+		   ACCORDION CHILDREN
+		====================================================== */
 
-			/* =================================================
-			   DASHBOARD LINK
-			================================================= */
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-submenu
+		.greshma-module-child {
+			display: none;
+		}
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			.wp-submenu
-			a[href="admin.php?page=greshma-admin"] {
-				margin-bottom: 7px;
 
-				padding-bottom: 11px;
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-submenu
+		.greshma-module-child.is-greshma-child-visible {
+			display: block;
+		}
 
-				color: #ffffff;
 
-				font-weight: 700;
+		/* ======================================================
+		   GROUP HEADINGS
+		====================================================== */
 
-				border-bottom:
-					1px solid
-					rgba(
-						255,
-						255,
-						255,
-						.09
-					);
-			}
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-submenu
+		.greshma-module-heading
+		> a {
+			position: relative;
 
+			margin-top: 5px;
 
-			/* =================================================
-			   MODULE GROUP TITLE — MEDIA & PRESS
-			================================================= */
+			padding:
+				10px
+				30px
+				8px
+				14px;
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			.wp-submenu
-			a[href*="greshma-media-section"] {
-				margin-top: 5px;
+			font-size: 11px;
+			font-weight: 800;
 
-				padding-top: 11px;
-				padding-bottom: 6px;
+			line-height: 1.25;
 
-				color: #e4bd65;
+			letter-spacing: .075em;
 
-				font-size: 11px;
+			text-transform: uppercase;
 
-				font-weight: 800;
+			border-top:
+				1px solid
+				rgba(255,255,255,.07);
+		}
 
-				letter-spacing: .08em;
 
-				text-transform: uppercase;
-			}
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-submenu
+		.greshma-module-heading
+		> a::after {
+			position: absolute;
 
+			top: 50%;
+			right: 13px;
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			.wp-submenu
-			a[href*="greshma-media-section"]:hover {
-				color: #f0cf83;
+			content: "+";
 
-				background: transparent;
-			}
+			font-size: 14px;
 
+			transform:
+				translateY(-50%);
 
-			/* =================================================
-			   MEDIA CHILD LINKS
-			================================================= */
+			opacity: .65;
+		}
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			.wp-submenu
-			a[href*="post_type=greshma_media"],
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			.wp-submenu
-			a[href*="taxonomy=greshma_media_category"] {
-				padding-left: 25px;
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-submenu
+		.greshma-module-heading.is-greshma-module-open
+		> a::after {
+			content: "−";
+		}
 
-				color: #bcd0c1;
-			}
 
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-submenu
+		.greshma-module-heading.is-greshma-module-open
+		> a {
+			background:
+				rgba(255,255,255,.055);
+		}
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			.wp-submenu
-			a[href*="post_type=greshma_media"]:hover,
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			.wp-submenu
-			a[href*="taxonomy=greshma_media_category"]:hover {
-				color: #ffffff;
-			}
+		/* ======================================================
+		   CHILD LINKS
+		====================================================== */
 
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-submenu
+		.greshma-module-child
+		> a {
+			position: relative;
 
-			/* =================================================
-			   CURRENT SUBMENU
-			================================================= */
+			padding:
+				7px
+				14px
+				7px
+				28px;
 
-			#adminmenu
-			.toplevel_page_greshma-admin
-			.wp-submenu
-			.current
-			a {
-				color: #ffffff;
+			color: #c5d3ca;
 
-				font-weight: 700;
-			}
+			font-size: 12px;
 
-/* =========================================================
-   EDITORIAL GROUP TITLE
-========================================================= */
+			font-weight: 400;
+		}
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-a[href*="greshma-editorial-section"] {
-	margin-top: 9px;
 
-	padding-top: 12px;
-	padding-bottom: 6px;
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-submenu
+		.greshma-module-child
+		> a::before {
+			position: absolute;
 
-	color: #8fc39b;
+			top: 50%;
+			left: 16px;
 
-	font-size: 11px;
-	font-weight: 800;
+			width: 4px;
+			height: 4px;
 
-	letter-spacing: .08em;
-	text-transform: uppercase;
+			content: "";
 
-	border-top:
-		1px solid
-		rgba(255, 255, 255, .08);
-}
+			background: currentColor;
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-a[href*="greshma-editorial-section"]:hover {
-	color: #a9d5b1;
-	background: transparent;
-}
+			border-radius: 50%;
 
+			transform:
+				translateY(-50%);
 
-/* Editorial children */
+			opacity: .40;
+		}
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-a[href*="greshma-editorial-studio"],
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-a[href*="post_type=greshma_editorial"],
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-submenu
+		.greshma-module-child
+		> a:hover {
+			color: #ffffff;
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-a[href*="taxonomy=greshma_editorial_type"],
+			background:
+				rgba(128,165,137,.12);
+		}
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-a[href*="taxonomy=greshma_editorial_topic"] {
-	padding-left: 25px;
-	color: #bfd1c3;
-}
 
-/* =========================================================
-   GRESHMA MODULE ACCORDION
-========================================================= */
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-submenu
+		.greshma-module-child.current
+		> a {
+			color: #ffffff;
 
-/*
- * Child items are hidden by default.
- */
+			font-weight: 700;
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-.greshma-module-child {
-	display: none;
-}
+			background:
+				rgba(128,165,137,.17);
+		}
 
 
-/*
- * Only children belonging to the currently active
- * module are displayed.
- */
+		/* ======================================================
+		   MODULE COLORS
+		====================================================== */
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-.greshma-module-child.is-greshma-child-visible {
-	display: block;
-}
+		<?php foreach ( $modules as $key => $module ) : ?>
 
+		#adminmenu
+		.toplevel_page_greshma-admin
+		.wp-submenu
+		.greshma-module-heading--<?php echo esc_attr( $key ); ?>
+		> a {
+			color:
+				<?php echo esc_html( $module['color'] ); ?>;
+		}
 
-/* =========================================================
-   MODULE HEADINGS
-========================================================= */
+		<?php endforeach; ?>
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-.greshma-module-heading > a {
-	position: relative;
 
-	margin-top: 7px;
+		/* ======================================================
+		   DASHBOARD / MODULE PAGES
+		====================================================== */
 
-	padding:
-		11px
-		28px
-		8px
-		14px;
+		.greshma-admin-dashboard,
+		.greshma-module-page {
+			max-width: 1180px;
 
-	font-size: 11px;
-	font-weight: 800;
+			margin-top: 25px;
+		}
 
-	letter-spacing: .08em;
 
-	text-transform: uppercase;
+		.greshma-admin-dashboard__hero,
+		.greshma-module-page__header {
+			max-width: 760px;
 
-	cursor: pointer;
+			margin-bottom: 28px;
+		}
 
-	border-top:
-		1px solid
-		rgba(255, 255, 255, .08);
-}
 
+		.greshma-admin-dashboard__eyebrow,
+		.greshma-module-page__eyebrow {
+			display: inline-block;
 
-/*
- * Small indicator.
- * Not a down-arrow glyph; just a clean + / − state.
- */
+			margin-bottom: 7px;
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-.greshma-module-heading > a::after {
-	position: absolute;
+			color: #62806b;
 
-	top: 50%;
-	right: 12px;
+			font-size: 11px;
 
-	content: "+";
+			font-weight: 700;
 
-	font-size: 15px;
-	font-weight: 400;
+			letter-spacing: .09em;
 
-	line-height: 1;
+			text-transform: uppercase;
+		}
 
-	transform: translateY(-50%);
 
-	opacity: .65;
-}
+		.greshma-admin-dashboard__hero h1,
+		.greshma-module-page__header h1 {
+			margin:
+				0
+				0
+				9px;
 
+			color: #19392d;
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-.greshma-module-heading.is-greshma-module-open > a::after {
-	content: "−";
-}
+			font-size: 30px;
+		}
 
 
-/* =========================================================
-   MEDIA GROUP
-========================================================= */
+		.greshma-admin-dashboard__hero p,
+		.greshma-module-page__header p {
+			max-width: 700px;
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-.greshma-module-heading--media > a {
-	color: #e4bd65;
-}
+			margin: 0;
 
+			color: #5e6963;
 
-/* =========================================================
-   EDITORIAL GROUP
-========================================================= */
+			font-size: 14px;
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-.greshma-module-heading--editorial > a {
-	color: #91c09b;
-}
+			line-height: 1.65;
+		}
 
 
-/* =========================================================
-   MODULE CHILD ITEMS
-========================================================= */
+		/* Dashboard cards */
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-.greshma-module-child > a {
-	position: relative;
+		.greshma-admin-dashboard__grid {
+			display: grid;
 
-	padding:
-		7px
-		14px
-		7px
-		27px;
+			grid-template-columns:
+				repeat(
+					auto-fit,
+					minmax(260px,1fr)
+				);
 
-	color: #c4d3c8;
+			gap: 16px;
+		}
 
-	font-size: 12px;
-	font-weight: 400;
 
-	text-transform: none;
+		.greshma-admin-card {
+			position: relative;
 
-	letter-spacing: normal;
-}
+			display: block;
 
+			overflow: hidden;
 
-/*
- * Simple visual guide rather than arrows.
- */
+			min-height: 145px;
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-.greshma-module-child > a::before {
-	position: absolute;
+			padding: 20px;
 
-	top: 50%;
-	left: 15px;
+			color: inherit;
 
-	width: 4px;
-	height: 4px;
+			background: #ffffff;
 
-	background: currentColor;
+			border:
+				1px solid #dfe7e1;
 
-	border-radius: 50%;
+			border-radius: 10px;
 
-	content: "";
+			box-shadow:
+				0 7px 22px
+				rgba(36,75,54,.05);
 
-	transform: translateY(-50%);
+			text-decoration: none;
+		}
 
-	opacity: .45;
-}
 
+		.greshma-admin-card:hover {
+			border-color:
+				var(--greshma-module-color);
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-.greshma-module-child > a:hover {
-	color: #ffffff;
+			box-shadow:
+				0 10px 26px
+				rgba(36,75,54,.09);
+		}
 
-	background:
-		rgba(130, 165, 138, .12);
-}
 
+		.greshma-admin-card__accent {
+			position: absolute;
 
-/* Current child */
+			top: 0;
+			left: 0;
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-.greshma-module-child.current > a {
-	color: #ffffff;
+			width: 4px;
+			height: 100%;
 
-	font-weight: 700;
+			background:
+				var(--greshma-module-color);
+		}
 
-	background:
-		rgba(130, 165, 138, .16);
-}
-/* Make Content Studio stand out */
 
-#adminmenu
-.toplevel_page_greshma-admin
-.wp-submenu
-a[href*="greshma-editorial-studio"] {
-	color: #ffffff;
-	font-weight: 700;
-}
-			/* =================================================
-			   GRESHMA DASHBOARD
-			================================================= */
+		.greshma-admin-card h2 {
+			margin:
+				0
+				0
+				7px;
 
-			.greshma-admin-dashboard,
-			.greshma-module-page {
-				max-width: 1160px;
+			color: #244638;
 
-				margin-top: 25px;
-			}
+			font-size: 17px;
+		}
 
 
-			.greshma-admin-dashboard__hero,
-			.greshma-module-page__header {
-				max-width: 760px;
+		.greshma-admin-card p {
+			margin:
+				0
+				0
+				12px;
 
-				margin-bottom: 28px;
-			}
+			color: #68756e;
 
+			font-size: 13px;
 
-			.greshma-admin-dashboard__eyebrow,
-			.greshma-module-page__eyebrow {
-				display: inline-block;
+			line-height: 1.55;
+		}
 
-				margin-bottom: 7px;
 
-				color: #6b876f;
+		.greshma-admin-card__count {
+			color:
+				var(--greshma-module-color);
 
-				font-size: 11px;
+			font-size: 11px;
 
-				font-weight: 700;
+			font-weight: 700;
 
-				letter-spacing: .09em;
+			text-transform: uppercase;
+		}
 
-				text-transform: uppercase;
-			}
 
+		/* Module statistics */
 
-			.greshma-admin-dashboard__hero h1,
-			.greshma-module-page__header h1 {
-				margin:
-					0
-					0
-					10px;
+		.greshma-module-stats {
+			display: flex;
 
-				color: #19392d;
+			flex-wrap: wrap;
 
-				font-size: 30px;
-			}
+			gap: 12px;
 
+			margin-bottom: 22px;
+		}
 
-			.greshma-admin-dashboard__hero p,
-			.greshma-module-page__header p {
-				max-width: 700px;
 
-				margin: 0;
+		.greshma-module-stat {
+			min-width: 130px;
 
-				color: #5e6963;
+			padding:
+				16px
+				18px;
 
-				font-size: 14px;
+			background: #ffffff;
 
-				line-height: 1.65;
-			}
+			border:
+				1px solid #dfe7e1;
 
+			border-radius: 8px;
+		}
 
-			/* =================================================
-			   DASHBOARD GRID
-			================================================= */
 
-			.greshma-admin-dashboard__grid {
-				display: grid;
+		.greshma-module-stat strong {
+			display: block;
 
-				grid-template-columns:
-					repeat(
-						auto-fit,
-						minmax(
-							280px,
-							1fr
-						)
-					);
+			color:
+				var(--greshma-module-color);
 
-				gap: 18px;
-			}
+			font-size: 24px;
+		}
 
 
-			/* =================================================
-			   DASHBOARD CARD
-			================================================= */
+		.greshma-module-stat span {
+			color: #738079;
 
-			.greshma-admin-card {
-				display: grid;
+			font-size: 12px;
+		}
 
-				grid-template-columns:
-					50px
-					minmax(
-						0,
-						1fr
-					);
 
-				gap: 15px;
+		.greshma-module-actions {
+			display: flex;
 
-				padding: 20px;
+			flex-wrap: wrap;
 
-				background: #ffffff;
+			gap: 8px;
+		}
 
-				border:
-					1px solid
-					#dfe7e1;
 
-				border-radius: 10px;
+		.greshma-module-actions
+		.button-primary {
+			background: #315b47;
 
-				box-shadow:
-					0
-					7px
-					22px
-					rgba(
-						36,
-						75,
-						54,
-						.05
-					);
-			}
+			border-color: #315b47;
+		}
 
 
-			.greshma-admin-card__icon {
-				width: 48px;
-				height: 48px;
+		.greshma-module-actions
+		.button-primary:hover {
+			background: #244b39;
 
-				display: flex;
-
-				align-items: center;
-				justify-content: center;
-
-				color: #315b47;
-
-				background: #edf4ef;
-
-				border-radius: 9px;
-			}
-
-
-			.greshma-admin-card h2 {
-				margin:
-					2px
-					0
-					5px;
-
-				color: #244638;
-
-				font-size: 16px;
-			}
-
-
-			.greshma-admin-card p {
-				margin: 0;
-
-				color: #69756e;
-			}
-
-
-			.greshma-admin-card__actions {
-				grid-column: 1 / -1;
-
-				display: flex;
-
-				flex-wrap: wrap;
-
-				gap: 8px;
-
-				margin-top: 5px;
-			}
-
-
-			.greshma-admin-card__actions
-			.button-primary,
-
-			.greshma-module-actions
-			.button-primary {
-				background: #315b47;
-
-				border-color: #315b47;
-			}
-
-
-			/* =================================================
-			   MODULE LANDING
-			================================================= */
-
-			.greshma-module-stats {
-				display: flex;
-
-				flex-wrap: wrap;
-
-				gap: 12px;
-
-				margin-bottom: 22px;
-			}
-
-
-			.greshma-module-stat {
-				min-width: 130px;
-
-				padding:
-					16px
-					18px;
-
-				background: #ffffff;
-
-				border:
-					1px solid
-					#dfe7e1;
-
-				border-radius: 8px;
-			}
-
-
-			.greshma-module-stat strong {
-				display: block;
-
-				color: #254c3a;
-
-				font-size: 23px;
-			}
-
-
-			.greshma-module-stat span {
-				color: #738079;
-
-				font-size: 12px;
-			}
-
-
-			.greshma-module-actions {
-				display: flex;
-
-				flex-wrap: wrap;
-
-				gap: 8px;
-			}
+			border-color: #244b39;
+		}
 
 		</style>
 

@@ -45,7 +45,7 @@ class Greshma_Core_Projects {
 			'labels'             => $labels,
 			'public'             => true,
 			'show_ui'            => true,
-			'show_in_menu'       => true,
+			'show_in_menu'       => false,
 			'show_in_rest'       => true,
 			'has_archive'        => false,
 			'rewrite'            => array(

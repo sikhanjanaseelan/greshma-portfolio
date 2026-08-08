@@ -46,7 +46,7 @@ class Greshma_Core_Resources {
 				'labels'             => $labels,
 				'public'             => true,
 				'show_ui'            => true,
-				'show_in_menu'       => true,
+				'show_in_menu'       => false,
 				'show_in_rest'       => true,
 				'publicly_queryable' => true,
 				'has_archive'        => false,

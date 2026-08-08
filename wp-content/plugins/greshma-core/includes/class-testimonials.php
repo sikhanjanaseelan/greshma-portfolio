@@ -41,7 +41,7 @@ class Greshma_Core_Testimonials {
 				'labels'             => $labels,
 				'public'             => false,
 				'show_ui'            => true,
-				'show_in_menu'       => true,
+				'show_in_menu'       => false,
 				'show_in_rest'       => true,
 				'publicly_queryable' => false,
 				'has_archive'        => false,

@@ -15,10 +15,16 @@ class Greshma_Core_Settings {
 	/**
 	 * Register hooks.
 	 */
-	public static function init(): void {
-		add_action( 'admin_menu', array( __CLASS__, 'add_settings_page' ) );
-		add_action( 'admin_init', array( __CLASS__, 'register_settings' ) );
-	}
+public static function init(): void {
+
+	add_action(
+		'admin_init',
+		array(
+			__CLASS__,
+			'register_settings',
+		)
+	);
+}
 
 	/**
 	 * Add settings page.

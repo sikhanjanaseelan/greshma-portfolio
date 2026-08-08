@@ -41,7 +41,7 @@ class Greshma_Core_Education {
 				'labels'             => $labels,
 				'public'             => false,
 				'show_ui'            => true,
-				'show_in_menu'       => true,
+				'show_in_menu'       => false,
 				'show_in_rest'       => true,
 				'publicly_queryable' => false,
 				'exclude_from_search'=> true,

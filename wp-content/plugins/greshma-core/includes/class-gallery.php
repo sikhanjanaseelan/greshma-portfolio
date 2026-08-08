@@ -42,7 +42,7 @@ class Greshma_Core_Gallery {
 				'labels'             => $labels,
 				'public'             => true,
 				'show_ui'            => true,
-				'show_in_menu'       => true,
+				'show_in_menu'       => false,
 				'show_in_rest'       => true,
 				'publicly_queryable' => false,
 				'has_archive'        => false,
