@@ -1,6 +1,6 @@
 <?php
 /**
- * Media module.
+ * Media & Press module.
  *
  * @package GreshmaCore
  */
@@ -18,24 +18,24 @@ class Greshma_Core_Media {
 	}
 
 	/**
-	 * Register Media custom post type.
+	 * Register Media & Press custom post type.
 	 */
 	public static function register_post_type(): void {
 
 		$labels = array(
-			'name'               => __( 'Media Features', 'greshma-core' ),
-			'singular_name'      => __( 'Media Item', 'greshma-core' ),
-			'menu_name'          => __( 'Media Features', 'greshma-core' ),
-			'name_admin_bar'     => __( 'Media Item', 'greshma-core' ),
+			'name'               => __( 'Media & Press', 'greshma-core' ),
+			'singular_name'      => __( 'Media & Press Item', 'greshma-core' ),
+			'menu_name'          => __( 'Media & Press', 'greshma-core' ),
+			'name_admin_bar'     => __( 'Media & Press Item', 'greshma-core' ),
 			'add_new'            => __( 'Add New', 'greshma-core' ),
-			'add_new_item'       => __( 'Add New Media Item', 'greshma-core' ),
-			'new_item'           => __( 'New Media Item', 'greshma-core' ),
-			'edit_item'          => __( 'Edit Media Item', 'greshma-core' ),
-			'view_item'          => __( 'View Media Item', 'greshma-core' ),
-			'all_items'          => __( 'All Media Features', 'greshma-core' ),
-			'search_items'       => __( 'Search Media', 'greshma-core' ),
-			'not_found'          => __( 'No media items found.', 'greshma-core' ),
-			'not_found_in_trash' => __( 'No media items found in Trash.', 'greshma-core' ),
+			'add_new_item'       => __( 'Add New Media & Press Item', 'greshma-core' ),
+			'new_item'           => __( 'New Media & Press Item', 'greshma-core' ),
+			'edit_item'          => __( 'Edit Media & Press Item', 'greshma-core' ),
+			'view_item'          => __( 'View Media & Press Item', 'greshma-core' ),
+		'all_items'     => __( 'All Media & Press', 'greshma-core' ),
+			'search_items'       => __( 'Search Media & Press', 'greshma-core' ),
+			'not_found'          => __( 'No Media & Press items found.', 'greshma-core' ),
+			'not_found_in_trash' => __( 'No Media & Press items found in Trash.', 'greshma-core' ),
 			'featured_image'     => __( 'Media Image', 'greshma-core' ),
 			'set_featured_image' => __( 'Set media image', 'greshma-core' ),
 		);
@@ -46,7 +46,7 @@ class Greshma_Core_Media {
 				'labels'             => $labels,
 				'public'             => true,
 				'show_ui'            => true,
-				'show_in_menu'       => true,
+				'show_in_menu'       => false,
 				'show_in_rest'       => true,
 				'publicly_queryable' => false,
 				'has_archive'        => false,
@@ -67,19 +67,19 @@ class Greshma_Core_Media {
 	}
 
 	/**
-	 * Register Media Categories.
+	 * Register Media & Press categories.
 	 */
 	public static function register_taxonomy(): void {
 
 		$labels = array(
-			'name'          => __( 'Media Categories', 'greshma-core' ),
-			'singular_name' => __( 'Media Category', 'greshma-core' ),
-			'search_items'  => __( 'Search Media Categories', 'greshma-core' ),
-			'all_items'     => __( 'All Media Categories', 'greshma-core' ),
-			'edit_item'     => __( 'Edit Media Category', 'greshma-core' ),
-			'update_item'   => __( 'Update Media Category', 'greshma-core' ),
-			'add_new_item'  => __( 'Add New Media Category', 'greshma-core' ),
-			'new_item_name' => __( 'New Media Category Name', 'greshma-core' ),
+			'name'          => __( 'Media & Press Categories', 'greshma-core' ),
+			'singular_name' => __( 'Media & Press Category', 'greshma-core' ),
+			'search_items'  => __( 'Search Media & Press Categories', 'greshma-core' ),
+			'all_items'     => __( 'All Media & Press Categories', 'greshma-core' ),
+			'edit_item'     => __( 'Edit Media & Press Category', 'greshma-core' ),
+			'update_item'   => __( 'Update Media & Press Category', 'greshma-core' ),
+			'add_new_item'  => __( 'Add New Media & Press Category', 'greshma-core' ),
+			'new_item_name' => __( 'New Media & Press Category Name', 'greshma-core' ),
 			'menu_name'     => __( 'Categories', 'greshma-core' ),
 		);
 

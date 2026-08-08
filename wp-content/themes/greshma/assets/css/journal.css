@@ -3583,3 +3583,69 @@
 .journal-sidebar__popular-item h3 a:focus-visible {
 	color: #17483b;
 }
+
+/* ==========================================================
+   JOURNAL MEDIA — DYNAMIC CONTENT
+========================================================== */
+
+.journal-media__image {
+	position: relative;
+
+	overflow: hidden;
+
+	text-decoration: none;
+}
+
+.journal-media__image-file {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+	object-position: center;
+}
+
+.journal-media__type {
+	display: block;
+
+	margin-bottom: 3px;
+
+	color: #9a762f;
+
+	font-size: 5px;
+
+	font-weight: 700;
+
+	letter-spacing: .05em;
+
+	text-transform: uppercase;
+}
+
+
+/* Title links */
+
+.journal-media__content h3 a {
+	color: inherit;
+
+	text-decoration: none;
+}
+
+.journal-media__content h3 a:hover,
+.journal-media__content h3 a:focus-visible {
+	color: #17483b;
+}
+
+
+/* Empty state */
+
+.journal-media__empty {
+	padding:
+		15px
+		16px
+		20px;
+
+	color: #66716b;
+
+	font-size: 8px;
+}

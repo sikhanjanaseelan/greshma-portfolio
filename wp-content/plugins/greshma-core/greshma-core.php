@@ -68,3 +68,6 @@ require_once GRESHMA_CORE_DIR . 'includes/class-editorial.php';
 require_once GRESHMA_CORE_DIR . 'includes/class-editorial-taxonomy.php';
 require_once GRESHMA_CORE_DIR . 'includes/class-editorial-admin.php';
 require_once GRESHMA_CORE_DIR . 'includes/class-editorial-editor.php';
+
+
+require_once GRESHMA_CORE_DIR . 'includes/class-admin-menu.php';

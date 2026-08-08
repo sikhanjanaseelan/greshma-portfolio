@@ -370,97 +370,341 @@ $media_items = array(
 	     Static for now — dynamic integration comes next.
 	===================================================== -->
 
-	<article class="journal-media">
+	<?php
+/* ==========================================================
+   MEDIA & INTERVIEWS QUERY
+========================================================== */
 
-		<div class="journal-bottom-grid__heading">
+$media_query = new WP_Query(
+	array(
+		'post_type'      => 'greshma_media',
+		'post_status'    => 'publish',
+		'posts_per_page' => 3,
 
-			<h2>
-				<?php esc_html_e(
-					'Media & Interviews',
-					'greshma'
-				); ?>
-			</h2>
+		'meta_key' => '_greshma_media_display_order',
 
-			<a href="#">
+		'orderby' => array(
+			'meta_value_num' => 'ASC',
+			'date'           => 'DESC',
+		),
 
-				<?php esc_html_e(
-					'View All',
-					'greshma'
-				); ?>
+		'order' => 'ASC',
+	)
+);
+?>
 
-				<span aria-hidden="true">
-					→
-				</span>
 
-			</a>
+<!-- =====================================================
+     MEDIA & INTERVIEWS
+===================================================== -->
 
-		</div>
+<article class="journal-media">
 
+	<div class="journal-bottom-grid__heading">
+
+		<h2>
+			<?php esc_html_e(
+				'Media & Interviews',
+				'greshma'
+			); ?>
+		</h2>
+
+	</div>
+
+
+	<?php if ( $media_query->have_posts() ) : ?>
 
 		<div class="journal-media__list">
 
-			<?php foreach ( $media_items as $item ) : ?>
+			<?php
+			while ( $media_query->have_posts() ) :
+				$media_query->the_post();
+
+				$media_id = get_the_ID();
+
+
+				/* ==============================================
+				   MEDIA TYPE
+				============================================== */
+
+				$media_type = get_post_meta(
+					$media_id,
+					'_greshma_media_type',
+					true
+				);
+
+
+				/* ==============================================
+				   PUBLICATION / PLATFORM
+				============================================== */
+
+				$publication = get_post_meta(
+					$media_id,
+					'_greshma_media_publication',
+					true
+				);
+
+
+				/* ==============================================
+				   PUBLICATION DATE
+				============================================== */
+
+				$media_date = get_post_meta(
+					$media_id,
+					'_greshma_media_date',
+					true
+				);
+
+
+				/* ==============================================
+				   EXTERNAL URL
+				============================================== */
+
+				$external_url = get_post_meta(
+					$media_id,
+					'_greshma_media_external_url',
+					true
+				);
+
+
+				/* ==============================================
+				   VIDEO URL
+				============================================== */
+
+				$video_url = get_post_meta(
+					$media_id,
+					'_greshma_media_video_url',
+					true
+				);
+
+
+				/* ==============================================
+				   DESTINATION
+
+				   Video items prefer video URL.
+				   Everything else prefers external URL.
+				============================================== */
+
+				$media_destination = '';
+
+				if (
+					'video' === $media_type &&
+					! empty( $video_url )
+				) {
+					$media_destination = $video_url;
+				} elseif ( ! empty( $external_url ) ) {
+					$media_destination = $external_url;
+				} elseif ( ! empty( $video_url ) ) {
+					$media_destination = $video_url;
+				}
+
+
+				/* ==============================================
+				   TYPE LABEL
+				============================================== */
+
+				$type_labels = array(
+					'article'   => __( 'Article', 'greshma' ),
+					'interview' => __( 'Interview', 'greshma' ),
+					'podcast'   => __( 'Podcast', 'greshma' ),
+					'video'     => __( 'Video', 'greshma' ),
+					'press'     => __( 'Press Feature', 'greshma' ),
+					'other'     => __( 'Media', 'greshma' ),
+				);
+
+				$type_label = isset(
+					$type_labels[ $media_type ]
+				)
+					? $type_labels[ $media_type ]
+					: __( 'Media', 'greshma' );
+
+
+				/* ==============================================
+				   DATE FORMAT
+				============================================== */
+
+				$formatted_media_date = '';
+
+				if ( ! empty( $media_date ) ) {
+
+					$timestamp = strtotime(
+						$media_date
+					);
+
+					if ( $timestamp ) {
+						$formatted_media_date = date_i18n(
+							get_option( 'date_format' ),
+							$timestamp
+						);
+					}
+
+				}
+
+				if ( empty( $formatted_media_date ) ) {
+					$formatted_media_date = get_the_date();
+				}
+				?>
+
 
 				<article class="journal-media__item">
 
 
-					<div class="journal-media__image">
+					<!-- ==========================================
+					     IMAGE
+					=========================================== -->
 
-						<span>
+					<?php if ( $media_destination ) : ?>
+
+						<a
+							class="journal-media__image"
+							href="<?php echo esc_url( $media_destination ); ?>"
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="<?php echo esc_attr( get_the_title() ); ?>"
+						>
+
+					<?php else : ?>
+
+						<div class="journal-media__image">
+
+					<?php endif; ?>
+
+
+						<?php if ( has_post_thumbnail() ) : ?>
 
 							<?php
-							echo esc_html(
-								$item['image']
+							the_post_thumbnail(
+								'thumbnail',
+								array(
+									'class'    => 'journal-media__image-file',
+									'loading'  => 'lazy',
+									'decoding' => 'async',
+									'alt'      => the_title_attribute(
+										array(
+											'echo' => false,
+										)
+									),
+								)
 							);
 							?>
 
-						</span>
+						<?php else : ?>
 
-					</div>
+							<span>
+								<?php echo esc_html( $type_label ); ?>
+							</span>
 
+						<?php endif; ?>
+
+
+					<?php if ( $media_destination ) : ?>
+
+						</a>
+
+					<?php else : ?>
+
+						</div>
+
+					<?php endif; ?>
+
+
+
+					<!-- ==========================================
+					     CONTENT
+					=========================================== -->
 
 					<div class="journal-media__content">
 
+
+						<span class="journal-media__type">
+
+							<?php echo esc_html( $type_label ); ?>
+
+						</span>
+
+
 						<h3>
 
-							<?php
-							echo esc_html(
-								$item['title']
-							);
-							?>
+							<?php if ( $media_destination ) : ?>
+
+								<a
+									href="<?php echo esc_url( $media_destination ); ?>"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+
+									<?php the_title(); ?>
+
+								</a>
+
+							<?php else : ?>
+
+								<?php the_title(); ?>
+
+							<?php endif; ?>
 
 						</h3>
 
 
-						<p>
+						<?php if ( $publication ) : ?>
 
-							<?php
-							echo esc_html(
-								$item['meta']
-							);
-							?>
+							<p>
+								<?php echo esc_html( $publication ); ?>
+							</p>
 
-						</p>
+						<?php elseif ( has_excerpt() ) : ?>
+
+							<p>
+								<?php
+								echo esc_html(
+									wp_trim_words(
+										get_the_excerpt(),
+										12,
+										'…'
+									)
+								);
+								?>
+							</p>
+
+						<?php endif; ?>
 
 
 						<span>
-
-							<?php
-							echo esc_html(
-								$item['date']
-							);
-							?>
-
+							<?php echo esc_html( $formatted_media_date ); ?>
 						</span>
+
 
 					</div>
 
 				</article>
 
-			<?php endforeach; ?>
+			<?php endwhile; ?>
 
 		</div>
 
-	</article>
+
+	<?php else : ?>
+
+
+		<div class="journal-media__empty">
+
+			<p>
+				<?php
+				esc_html_e(
+					'Media features and interviews will appear here soon.',
+					'greshma'
+				);
+				?>
+			</p>
+
+		</div>
+
+
+	<?php endif; ?>
+
+
+	<?php wp_reset_postdata(); ?>
+
+</article>
 
 </section>
