@@ -3054,3 +3054,24 @@
     }
 
 }
+
+/* ==========================================================
+   EVENTS — DYNAMIC IMAGES
+========================================================== */
+
+.event-card__image-file {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+	object-position: center;
+}
+
+
+.events-upcoming__empty {
+	padding: 30px 20px;
+
+	color: #68746d;
+}
