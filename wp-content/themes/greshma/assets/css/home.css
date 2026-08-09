@@ -1798,185 +1798,551 @@
    Stories & Recognition
    ========================================================= */
 /* =========================================================
-   Stories From The Field
-   ========================================================= */
+   STORIES FROM THE FIELD
+========================================================= */
 
-.field-stories{
-    padding:90px 0 80px;
-    background:#f6f2ea;
+.field-stories {
+	position: relative;
+
+	padding: 78px 0 72px;
+
+	background: #f6f2ea;
+
+	overflow: hidden;
 }
 
-.field-stories__heading{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:18px;
-    margin-bottom:42px;
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.field-stories__heading {
+	display: flex;
+
+	align-items: center;
+	justify-content: center;
+
+	gap: 16px;
+
+	margin-bottom: 34px;
 }
 
-.field-stories__line{
-    flex:1;
-    max-width:170px;
-    height:1px;
-    background:#d8ccb5;
+
+.field-stories__line {
+	flex: 1;
+
+	max-width: 170px;
+
+	height: 1px;
+
+	background: #d8ccb5;
 }
 
-.field-stories__title{
-    margin:0;
-    color:#1b4338;
-    font-family:var(--font-heading,Georgia,serif);
-    font-size:18px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    font-weight:500;
+
+.field-stories__title {
+	margin: 0;
+
+	color: #1b4338;
+
+	font-family:
+		var(
+			--font-heading,
+			Georgia,
+			serif
+		);
+
+	font-size: 17px;
+
+	font-weight: 500;
+
+	line-height: 1.2;
+
+	letter-spacing: .14em;
+
+	text-transform: uppercase;
+
+	white-space: nowrap;
 }
 
-.field-stories__leaf{
-    color:#b08a3b;
-    font-size:18px;
+
+.field-stories__leaf {
+	color: #b08a3b;
+
+	font-size: 17px;
+
+	line-height: 1;
 }
 
-.field-stories__slider{
-    display:grid;
-    grid-template-columns:56px 1fr 56px;
-    gap:18px;
-    align-items:center;
+
+/* =========================================================
+   SLIDER
+========================================================= */
+
+.field-stories__slider {
+	display: grid;
+
+	grid-template-columns:
+		48px
+		minmax(0, 1fr)
+		48px;
+
+	align-items: center;
+
+	gap: 16px;
 }
 
-.field-stories__track{
-    display:grid;
-    grid-template-columns:repeat(5,minmax(220px,1fr));
-    gap:22px;
+
+.field-stories__track {
+	display: grid;
+
+	grid-template-columns:
+		repeat(
+			5,
+			minmax(0, 1fr)
+		);
+
+	gap: 18px;
+
+	min-width: 0;
 }
 
-.field-story-card{
-    background:#fff;
-    border:1px solid #ebe4d7;
-    border-radius:22px;
-    overflow:hidden;
-    transition:.35s ease;
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.field-story-card {
+	display: flex;
+
+	flex-direction: column;
+
+	min-width: 0;
+
+	overflow: hidden;
+
+	background: #ffffff;
+
+	border:
+		1px solid
+		#e7dfd2;
+
+	border-radius: 18px;
+
+	box-shadow:
+		0
+		8px
+		22px
+		rgba(
+			38,
+			60,
+			50,
+			.035
+		);
+
+	transition:
+		transform .3s ease,
+		box-shadow .3s ease,
+		border-color .3s ease;
 }
 
-.field-story-card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 18px 45px rgba(0,0,0,.08);
+
+.field-story-card:hover {
+	transform: translateY(-4px);
+
+	border-color:
+		rgba(
+			36,
+			73,
+			62,
+			.18
+		);
+
+	box-shadow:
+		0
+		16px
+		34px
+		rgba(
+			38,
+			60,
+			50,
+			.09
+		);
 }
 
-.field-story-card__media{
-    position:relative;
-    display:block;
-    height:185px;
-    overflow:hidden;
-    text-decoration:none;
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.field-story-card__media {
+	position: relative;
+
+	display: block;
+
+	height: 170px;
+
+	overflow: hidden;
+
+	background: #647961;
+
+	text-decoration: none;
 }
 
-.field-story-card__placeholder{
-    width:100%;
-    height:100%;
-    display:grid;
-    place-items:center;
-    color:#fff;
-    font-size:12px;
-    letter-spacing:.12em;
-    text-transform:uppercase;
+
+.field-story-card__image,
+.field-story-card__placeholder {
+	display: block;
+
+	width: 100%;
+	height: 100%;
 }
 
-.field-story-card__placeholder--1{background:#54774d;}
-.field-story-card__placeholder--2{background:#7b8d4a;}
-.field-story-card__placeholder--3{background:#5b6f53;}
-.field-story-card__placeholder--4{background:#7c7054;}
-.field-story-card__placeholder--5{background:#66745f;}
 
-.field-story-card__category{
-    position:absolute;
-    left:16px;
-    bottom:14px;
-    padding:6px 12px;
-    border-radius:999px;
-    background:rgba(255,255,255,.95);
-    color:#355448;
-    font-size:10px;
-    font-weight:700;
-    letter-spacing:.12em;
-    text-transform:uppercase;
+.field-story-card__image {
+	object-fit: cover;
+
+	object-position: center;
+
+	transition:
+		transform .4s ease;
 }
 
-.field-story-card__content{
-    padding:20px;
+
+.field-story-card:hover
+.field-story-card__image {
+	transform: scale(1.035);
 }
 
-.field-story-card__title{
-    margin:0;
-    font-family:var(--font-heading,Georgia,serif);
-    font-size:24px;
-    line-height:1.28;
-    font-weight:400;
+
+.field-story-card__placeholder {
+	display: grid;
+
+	place-items: center;
+
+	color: rgba(255, 255, 255, .88);
+
+	background:
+		linear-gradient(
+			135deg,
+			#557351,
+			#71816b
+		);
+
+	font-size: 10px;
+
+	font-weight: 700;
+
+	letter-spacing: .1em;
+
+	text-transform: uppercase;
 }
 
-.field-story-card__title a{
-    color:#1b4338;
-    text-decoration:none;
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.field-story-card__category {
+	position: absolute;
+
+	left: 14px;
+	bottom: 13px;
+
+	display: inline-flex;
+
+	align-items: center;
+
+	max-width:
+		calc(
+			100% - 28px
+		);
+
+	padding: 6px 10px;
+
+	overflow: hidden;
+
+	color: #355448;
+
+	background:
+		rgba(
+			255,
+			255,
+			255,
+			.95
+		);
+
+	border-radius: 999px;
+
+	font-size: 9px;
+
+	font-weight: 700;
+
+	line-height: 1;
+
+	letter-spacing: .09em;
+
+	text-overflow: ellipsis;
+
+	text-transform: uppercase;
+
+	white-space: nowrap;
 }
 
-.field-stories__arrow{
-    width:52px;
-    height:52px;
-    border-radius:50%;
-    border:1px solid #d7ccb7;
-    background:#fff;
-    cursor:pointer;
-    transition:.3s;
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.field-story-card__content {
+	display: flex;
+
+	flex: 1;
+
+	flex-direction: column;
+
+	min-height: 132px;
+
+	padding:
+		16px
+		16px
+		17px;
 }
 
-.field-stories__arrow:hover{
-    background:#1b4338;
-    color:#fff;
-    border-color:#1b4338;
+
+.field-story-card__title {
+	margin: 0;
+
+	font-family:
+		var(
+			--font-heading,
+			Georgia,
+			serif
+		);
+
+	font-size: 18px;
+
+	font-weight: 400;
+
+	line-height: 1.28;
 }
 
-@media(max-width:1200px){
 
-.field-story-card__title{
-    font-size:20px;
+.field-story-card__title a {
+	color: #1b4338;
+
+	text-decoration: none;
 }
 
-.field-stories__track{
-    overflow-x:auto;
-    grid-auto-flow:column;
-    grid-auto-columns:270px;
-    scrollbar-width:none;
+
+.field-story-card__title a:hover,
+.field-story-card__title a:focus-visible {
+	color: #a47b2c;
 }
 
-.field-stories__track::-webkit-scrollbar{
-    display:none;
+
+/* READ LINK */
+
+.field-story-card__read {
+	display: inline-flex;
+
+	align-items: center;
+
+	align-self: flex-start;
+
+	gap: 6px;
+
+	margin-top: auto;
+
+	padding-top: 13px;
+
+	color: #60766c;
+
+	font-size: 10px;
+
+	font-weight: 700;
+
+	text-decoration: none;
 }
 
+
+.field-story-card__read span {
+	transition: transform .2s ease;
 }
 
-@media(max-width:768px){
 
-.field-stories{
-    padding:70px 0;
+.field-story-card__read:hover {
+	color: #1b4338;
 }
 
-.field-stories__slider{
-    grid-template-columns:1fr;
+
+.field-story-card__read:hover span {
+	transform: translateX(3px);
 }
 
-.field-stories__arrow{
-    display:none;
+
+/* =========================================================
+   ARROWS
+========================================================= */
+
+.field-stories__arrow {
+	display: inline-flex;
+
+	align-items: center;
+	justify-content: center;
+
+	width: 46px;
+	height: 46px;
+
+	padding: 0;
+
+	color: #1b4338;
+
+	background: #ffffff;
+
+	border:
+		1px solid
+		#d7ccb7;
+
+	border-radius: 50%;
+
+	font-size: 15px;
+
+	cursor: pointer;
+
+	transition:
+		background-color .25s ease,
+		color .25s ease,
+		border-color .25s ease,
+		transform .25s ease;
 }
 
-.field-stories__heading{
-    margin-bottom:28px;
+
+.field-stories__arrow:hover {
+	color: #ffffff;
+
+	background: #1b4338;
+
+	border-color: #1b4338;
+
+	transform: scale(1.04);
 }
 
-.field-stories__line{
-    max-width:80px;
-}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1200px) {
+
+	.field-stories {
+		padding:
+			72px
+			0
+			68px;
+	}
+
+
+	.field-stories__track {
+		grid-auto-flow: column;
+
+		grid-auto-columns: 245px;
+
+		grid-template-columns: none;
+
+		overflow-x: auto;
+
+		padding-bottom: 8px;
+
+		scrollbar-width: none;
+	}
+
+
+	.field-stories__track::-webkit-scrollbar {
+		display: none;
+	}
 
 }
 
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+	.field-stories {
+		padding:
+			58px
+			0
+			56px;
+	}
+
+
+	.field-stories__heading {
+		gap: 11px;
+
+		margin-bottom: 27px;
+	}
+
+
+	.field-stories__line {
+		max-width: 55px;
+	}
+
+
+	.field-stories__title {
+		font-size: 14px;
+
+		letter-spacing: .11em;
+
+		white-space: normal;
+
+		text-align: center;
+	}
+
+
+	.field-stories__leaf {
+		font-size: 15px;
+	}
+
+
+	.field-stories__slider {
+		display: block;
+	}
+
+
+	.field-stories__arrow {
+		display: none;
+	}
+
+
+	.field-stories__track {
+		grid-auto-columns: 235px;
+
+		gap: 14px;
+	}
+
+
+	.field-story-card__media {
+		height: 160px;
+	}
+
+
+	.field-story-card__content {
+		min-height: 125px;
+
+		padding:
+			15px
+			15px
+			16px;
+	}
+
+
+	.field-story-card__title {
+		font-size: 17px;
+	}
+
+}
 /* =========================================================
    My Journey Timeline
    ========================================================= */
