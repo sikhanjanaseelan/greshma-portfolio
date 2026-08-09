@@ -1,128 +1,481 @@
 <?php
 /**
- * Homepage Journal Section
+ * Homepage — From The Journal.
+ *
+ * Dynamic source:
+ * Editorial content marked "Show on Homepage".
+ *
+ * Field Stories are excluded because they have
+ * their own homepage section.
  *
  * @package Greshma
  */
 
-$articles = array(
+defined( 'ABSPATH' ) || exit;
+
+
+/* ==========================================================
+   JOURNAL QUERY
+========================================================== */
+
+$journal_query = new WP_Query(
 	array(
-		'date'  => 'May 13, 2025',
-		'title' => 'The Power of Youth in Climate Action',
-		'image' => '',
-		'link'  => home_url('/journal/'),
-	),
-	array(
-		'date'  => 'April 20, 2025',
-		'title' => 'Why Interfaith Dialogue Matters Today',
-		'image' => '',
-		'link'  => home_url('/journal/'),
-	),
-	array(
-		'date'  => 'April 15, 2025',
-		'title' => 'Lessons from Nature on Peace and Coexistence',
-		'image' => '',
-		'link'  => home_url('/journal/'),
-	),
-	array(
-		'date'  => 'April 05, 2025',
-		'title' => 'Building Communities that Care',
-		'image' => '',
-		'link'  => home_url('/journal/'),
-	),
-	array(
-		'date'  => 'March 22, 2025',
-		'title' => 'Hope is a Collective Journey',
-		'image' => '',
-		'link'  => home_url('/journal/'),
-	),
+		'post_type'           => 'greshma_editorial',
+		'post_status'         => 'publish',
+		'posts_per_page'      => 4,
+		'ignore_sticky_posts' => true,
+
+		'meta_query' => array(
+			array(
+				'key'     => '_greshma_editorial_show_on_homepage',
+				'value'   => '1',
+				'compare' => '=',
+			),
+		),
+
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'greshma_editorial_type',
+				'field'    => 'slug',
+				'terms'    => array(
+					'field-story',
+				),
+				'operator' => 'NOT IN',
+			),
+		),
+
+		'orderby' => 'date',
+		'order'   => 'DESC',
+	)
 );
+
+
+/*
+ * Do not show an empty Journal section.
+ */
+if ( ! $journal_query->have_posts() ) {
+	return;
+}
+
+
+/* ==========================================================
+   BUILD ARTICLE ARRAY
+========================================================== */
+
+$journal_articles = array();
+
+while ( $journal_query->have_posts() ) {
+
+	$journal_query->the_post();
+
+	$article_id = get_the_ID();
+
+
+	/* ------------------------------------------------------
+	   EDITORIAL TYPE
+	------------------------------------------------------ */
+
+	$types = get_the_terms(
+		$article_id,
+		'greshma_editorial_type'
+	);
+
+	$type_label = __(
+		'Editorial',
+		'greshma'
+	);
+
+	if (
+		$types &&
+		! is_wp_error( $types )
+	) {
+
+		$primary_type = reset(
+			$types
+		);
+
+		if ( $primary_type ) {
+
+			$type_label =
+				$primary_type->name;
+		}
+	}
+
+
+	/* ------------------------------------------------------
+	   EXCERPT
+	------------------------------------------------------ */
+
+	$excerpt = get_the_excerpt();
+
+	if ( ! $excerpt ) {
+
+		$excerpt = wp_trim_words(
+			wp_strip_all_tags(
+				get_the_content()
+			),
+			22,
+			'…'
+		);
+	}
+
+
+	/* ------------------------------------------------------
+	   STORE ARTICLE
+	------------------------------------------------------ */
+
+	$journal_articles[] = array(
+		'id'      => $article_id,
+		'title'   => get_the_title(),
+		'url'     => get_permalink(),
+		'date'    => get_the_date(
+			'F j, Y'
+		),
+		'type'    => $type_label,
+		'excerpt' => $excerpt,
+	);
+}
+
+wp_reset_postdata();
+
+
+/* ==========================================================
+   FEATURED + SECONDARY
+========================================================== */
+
+$featured_article =
+	array_shift(
+		$journal_articles
+	);
 ?>
 
-<section class="home-journal">
+<section
+	class="home-journal"
+	aria-labelledby="home-journal-title"
+>
 
-    <div class="site-container">
+	<div class="site-container">
 
-        <div class="journal-heading">
 
-            <div>
+		<!-- ==================================================
+		     HEADING
+		================================================== -->
 
-                <span class="section-eyebrow">
-                    From The Journal
-                </span>
+		<div class="journal-heading">
 
-            </div>
+			<div>
 
-            <a href="<?php echo esc_url(home_url('/journal/')); ?>" class="journal-all">
+				<span class="section-eyebrow">
+					<?php esc_html_e(
+						'From The Journal',
+						'greshma'
+					); ?>
+				</span>
 
-                View All Articles →
+			</div>
 
-            </a>
 
-        </div>
+			<a
+				href="<?php echo esc_url(
+					home_url( '/journal/' )
+				); ?>"
+				class="journal-all"
+			>
+				<?php esc_html_e(
+					'View All Articles',
+					'greshma'
+				); ?>
 
-        <div class="journal-grid">
+				<span aria-hidden="true">
+					→
+				</span>
+			</a>
 
-            <?php foreach($articles as $article): ?>
+		</div>
 
-                <article class="journal-card">
 
-                    <a href="<?php echo esc_url($article['link']); ?>" class="journal-image">
+		<!-- ==================================================
+		     EDITORIAL LAYOUT
+		================================================== -->
 
-                        <?php if($article['image']) : ?>
+		<div class="journal-editorial-layout">
 
-                            <img
-                                src="<?php echo esc_url($article['image']); ?>"
-                                alt="<?php echo esc_attr($article['title']); ?>"
-                            >
 
-                        <?php else: ?>
+			<!-- ==================================================
+			     FEATURED ARTICLE
+			================================================== -->
 
-                            <div class="journal-placeholder">
+			<?php if ( $featured_article ) : ?>
 
-                                Image
+				<article class="journal-featured">
 
-                            </div>
 
-                        <?php endif; ?>
+					<a
+						href="<?php echo esc_url(
+							$featured_article['url']
+						); ?>"
+						class="journal-featured__image"
+						aria-label="<?php echo esc_attr(
+							$featured_article['title']
+						); ?>"
+					>
 
-                    </a>
+						<?php if (
+							has_post_thumbnail(
+								$featured_article['id']
+							)
+						) : ?>
 
-                    <div class="journal-content">
+							<?php
+							echo get_the_post_thumbnail(
+								$featured_article['id'],
+								'large',
+								array(
+									'class' =>
+										'journal-featured__image-file',
 
-                        <div class="journal-date">
+									'loading' =>
+										'lazy',
 
-                            <?php echo esc_html($article['date']); ?>
+									'decoding' =>
+										'async',
+								)
+							);
+							?>
 
-                        </div>
+						<?php else : ?>
 
-                        <h3>
+							<div class="journal-featured__placeholder">
 
-                            <a href="<?php echo esc_url($article['link']); ?>">
+								<span>
+									<?php echo esc_html(
+										$featured_article['type']
+									); ?>
+								</span>
 
-                                <?php echo esc_html($article['title']); ?>
+							</div>
 
-                            </a>
+						<?php endif; ?>
 
-                        </h3>
+					</a>
 
-                        <a
-                            href="<?php echo esc_url($article['link']); ?>"
-                            class="journal-read"
-                        >
 
-                            Read More →
+					<div class="journal-featured__content">
 
-                        </a>
 
-                    </div>
+						<div class="journal-featured__meta">
 
-                </article>
+							<span class="journal-featured__type">
 
-            <?php endforeach; ?>
+								<?php echo esc_html(
+									$featured_article['type']
+								); ?>
 
-        </div>
+							</span>
 
-    </div>
+
+							<span
+								class="journal-featured__dot"
+								aria-hidden="true"
+							></span>
+
+
+							<time>
+								<?php echo esc_html(
+									$featured_article['date']
+								); ?>
+							</time>
+
+						</div>
+
+
+						<h2 id="home-journal-title">
+
+							<a
+								href="<?php echo esc_url(
+									$featured_article['url']
+								); ?>"
+							>
+								<?php echo esc_html(
+									$featured_article['title']
+								); ?>
+							</a>
+
+						</h2>
+
+
+						<?php if (
+							$featured_article['excerpt']
+						) : ?>
+
+							<p>
+								<?php echo esc_html(
+									wp_trim_words(
+										$featured_article['excerpt'],
+										25,
+										'…'
+									)
+								); ?>
+							</p>
+
+						<?php endif; ?>
+
+
+						<a
+							href="<?php echo esc_url(
+								$featured_article['url']
+							); ?>"
+							class="journal-featured__read"
+						>
+							<?php esc_html_e(
+								'Read Article',
+								'greshma'
+							); ?>
+
+							<span aria-hidden="true">
+								→
+							</span>
+						</a>
+
+					</div>
+
+				</article>
+
+			<?php endif; ?>
+
+
+			<!-- ==================================================
+			     SECONDARY ARTICLES
+			================================================== -->
+
+			<?php if ( $journal_articles ) : ?>
+
+				<div class="journal-list">
+
+					<?php
+					foreach (
+						$journal_articles as $article
+					) :
+						?>
+
+						<article class="journal-list-card">
+
+
+							<a
+								href="<?php echo esc_url(
+									$article['url']
+								); ?>"
+								class="journal-list-card__image"
+								aria-label="<?php echo esc_attr(
+									$article['title']
+								); ?>"
+							>
+
+								<?php if (
+									has_post_thumbnail(
+										$article['id']
+									)
+								) : ?>
+
+									<?php
+									echo get_the_post_thumbnail(
+										$article['id'],
+										'medium',
+										array(
+											'class' =>
+												'journal-list-card__image-file',
+
+											'loading' =>
+												'lazy',
+
+											'decoding' =>
+												'async',
+										)
+									);
+									?>
+
+								<?php else : ?>
+
+									<div class="journal-list-card__placeholder">
+
+										<span>
+											<?php echo esc_html(
+												$article['type']
+											); ?>
+										</span>
+
+									</div>
+
+								<?php endif; ?>
+
+							</a>
+
+
+							<div class="journal-list-card__content">
+
+
+								<div class="journal-list-card__meta">
+
+									<span>
+										<?php echo esc_html(
+											$article['type']
+										); ?>
+									</span>
+
+									<time>
+										<?php echo esc_html(
+											$article['date']
+										); ?>
+									</time>
+
+								</div>
+
+
+								<h3>
+
+									<a
+										href="<?php echo esc_url(
+											$article['url']
+										); ?>"
+									>
+										<?php echo esc_html(
+											$article['title']
+										); ?>
+									</a>
+
+								</h3>
+
+
+								<a
+									href="<?php echo esc_url(
+										$article['url']
+									); ?>"
+									class="journal-list-card__read"
+								>
+									<?php esc_html_e(
+										'Read',
+										'greshma'
+									); ?>
+
+									<span aria-hidden="true">
+										→
+									</span>
+								</a>
+
+							</div>
+
+
+						</article>
+
+					<?php endforeach; ?>
+
+				</div>
+
+			<?php endif; ?>
+
+
+		</div>
+
+	</div>
 
 </section>
