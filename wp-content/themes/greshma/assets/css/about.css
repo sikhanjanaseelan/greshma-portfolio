@@ -3231,3 +3231,18 @@ ABOUT LEADERSHIP
         min-height: 165px;
     }
 }
+
+.about-purpose__avatar {
+	overflow: hidden;
+}
+
+.about-purpose__avatar img {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+
+	border-radius: 50%;
+}
