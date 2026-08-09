@@ -393,7 +393,7 @@ $filter_editorial_topics = get_terms(
 								<?php else : ?>
 
 									<div class="editorial-card__summary">
-										<?php echo esc_html( wp_trim_words( get_the_excerpt(), 16, '…' ) ); ?>
+										<?php echo esc_html( wp_trim_words( get_the_excerpt(), 10, '…' ) ); ?>
 									</div>
 
 								<?php endif; ?>
