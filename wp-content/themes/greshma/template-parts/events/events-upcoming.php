@@ -17,7 +17,11 @@ defined( 'ABSPATH' ) || exit;
 
 $today = current_time( 'Y-m-d' );
 
+$is_event_archive = is_post_type_archive( 'greshma_event' );
 
+$upcoming_limit = $is_event_archive
+	? -1
+	: 3;
 /* ==========================================================
    UPCOMING EVENTS QUERY
 ========================================================== */
@@ -26,7 +30,7 @@ $upcoming_events = new WP_Query(
 	array(
 		'post_type'      => 'greshma_event',
 		'post_status'    => 'publish',
-		'posts_per_page' => -1,
+		'posts_per_page' => $upcoming_limit,
 
 		'meta_query' => array(
 			array(
@@ -603,6 +607,32 @@ $format_labels = array(
 
 				</div>
 
+
+				<?php if ( ! $is_event_archive ) : ?>
+
+	<div class="events-upcoming__explore">
+
+		<a
+			href="<?php echo esc_url(
+				get_post_type_archive_link(
+					'greshma_event'
+				)
+			); ?>"
+			class="events-upcoming__explore-button"
+		>
+			<?php esc_html_e(
+				'Explore All Events',
+				'greshma'
+			); ?>
+
+			<span aria-hidden="true">
+				→
+			</span>
+		</a>
+
+	</div>
+
+<?php endif; ?>
 			</div>
 
 

@@ -280,45 +280,51 @@ if (
 	}
 }
 
-if ( is_page( 'events' ) ) {
+/* ==========================================================
+   EVENTS — PAGE + ARCHIVE + SINGLE
+========================================================== */
 
-    $events_css =
-        get_template_directory()
-        . '/assets/css/events.css';
+if (
+	is_page( 'events' ) ||
+	is_post_type_archive( 'greshma_event' ) ||
+	is_singular( 'greshma_event' )
+) {
 
-    if ( file_exists( $events_css ) ) {
+	/* CSS */
 
-        wp_enqueue_style(
-            'greshma-events',
-            get_template_directory_uri()
-            . '/assets/css/events.css',
-            array(),
-            filemtime( $events_css )
-        );
+	$events_css =
+		get_template_directory()
+		. '/assets/css/events.css';
 
-    }
+	if ( file_exists( $events_css ) ) {
 
-}
-if ( is_page( 'events' ) ) {
-
-    $events_js =
-        get_template_directory()
-        . '/assets/js/events.js';
+		wp_enqueue_style(
+			'greshma-events',
+			get_template_directory_uri()
+			. '/assets/css/events.css',
+			array( 'style' ),
+			filemtime( $events_css )
+		);
+	}
 
 
-    if ( file_exists( $events_js ) ) {
+	/* JavaScript */
 
-        wp_enqueue_script(
-            'greshma-events',
-            get_template_directory_uri()
-            . '/assets/js/events.js',
-            array(),
-            filemtime( $events_js ),
-            true
-        );
+	$events_js =
+		get_template_directory()
+		. '/assets/js/events.js';
 
-    }
+	if ( file_exists( $events_js ) ) {
 
+		wp_enqueue_script(
+			'greshma-events',
+			get_template_directory_uri()
+			. '/assets/js/events.js',
+			array(),
+			filemtime( $events_js ),
+			true
+		);
+	}
 }
 
 
