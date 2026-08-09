@@ -3501,3 +3501,34 @@
 .resources-page + .site-footer {
     margin-top: 0;
 }
+
+
+/* ==========================================================
+   FEATURED RESOURCES — DYNAMIC IMAGES
+========================================================== */
+
+.resources-feature-card__image {
+	position: relative;
+
+	overflow: hidden;
+}
+
+
+.resources-feature-card__image-file {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+	object-position: center;
+}
+
+
+.resources-featured__empty {
+	grid-column: 1 / -1;
+
+	padding: 24px;
+
+	color: #68756e;
+}
