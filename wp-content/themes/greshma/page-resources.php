@@ -29,6 +29,8 @@ get_header();
 get_template_part(
     'template-parts/resources/resources-browse'
 );
+
+
 get_template_part(
     'template-parts/resources/resources-values'
 );

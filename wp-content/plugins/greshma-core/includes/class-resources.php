@@ -49,8 +49,7 @@ class Greshma_Core_Resources {
 				'show_in_menu'       => false,
 				'show_in_rest'       => true,
 				'publicly_queryable' => true,
-				'has_archive'        => false,
-
+'has_archive' => 'resource-library',
 				'rewrite' => array(
 					'slug'       => 'resource',
 					'with_front' => false,

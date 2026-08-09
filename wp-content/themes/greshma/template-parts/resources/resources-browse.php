@@ -920,5 +920,34 @@ if ( $resources_query->have_posts() ) {
 		</div>
 
 	</div>
+<?php if ( ! is_post_type_archive( 'greshma_resource' ) ) : ?>
 
+	<div class="resources-library__archive-link">
+
+		<span>
+			<?php esc_html_e(
+				'Looking for more resources?',
+				'greshma'
+			); ?>
+		</span>
+
+		<a
+			href="<?php echo esc_url(
+				get_post_type_archive_link(
+					'greshma_resource'
+				)
+			); ?>"
+			class="resources-library__archive-button"
+		>
+			<?php esc_html_e(
+				'Explore All Resources',
+				'greshma'
+			); ?>
+
+			<span aria-hidden="true">→</span>
+		</a>
+
+	</div>
+
+<?php endif; ?>
 </section>

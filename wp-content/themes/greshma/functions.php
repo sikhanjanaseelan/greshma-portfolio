@@ -233,43 +233,51 @@ wp_enqueue_style(
     )
 );
 
-if ( is_page( 'resources' ) ) {
+/* ==========================================================
+   RESOURCES — PAGE + ARCHIVE + SINGLE
+========================================================== */
 
-    $resources_css = get_template_directory() . '/assets/css/resources.css';
+if (
+	is_page( 'resources' ) ||
+	is_post_type_archive( 'greshma_resource' ) ||
+	is_singular( 'greshma_resource' )
+) {
 
-    if ( file_exists( $resources_css ) ) {
+	/* CSS */
 
-        wp_enqueue_style(
-            'greshma-resources',
-            get_template_directory_uri() . '/assets/css/resources.css',
-            array(),
-            filemtime( $resources_css )
-        );
+	$resources_css =
+		get_template_directory()
+		. '/assets/css/resources.css';
 
-    }
+	if ( file_exists( $resources_css ) ) {
 
-}
-
-if ( is_page( 'resources' ) ) {
-
-    $resources_js =
-        get_template_directory()
-        . '/assets/js/resources.js';
+		wp_enqueue_style(
+			'greshma-resources',
+			get_template_directory_uri()
+			. '/assets/css/resources.css',
+			array( 'style' ),
+			filemtime( $resources_css )
+		);
+	}
 
 
-    if ( file_exists( $resources_js ) ) {
+	/* JavaScript */
 
-        wp_enqueue_script(
-            'greshma-resources',
-            get_template_directory_uri()
-            . '/assets/js/resources.js',
-            array(),
-            filemtime( $resources_js ),
-            true
-        );
+	$resources_js =
+		get_template_directory()
+		. '/assets/js/resources.js';
 
-    }
+	if ( file_exists( $resources_js ) ) {
 
+		wp_enqueue_script(
+			'greshma-resources',
+			get_template_directory_uri()
+			. '/assets/js/resources.js',
+			array(),
+			filemtime( $resources_js ),
+			true
+		);
+	}
 }
 
 if ( is_page( 'events' ) ) {
