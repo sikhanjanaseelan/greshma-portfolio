@@ -2,197 +2,263 @@
 /**
  * About Page — Journey Timeline.
  *
- * ICON ASSETS REQUIRED LATER:
- *
- * assets/images/about/about-journey-2010.png
- * assets/images/about/about-journey-2016.png
- * assets/images/about/about-journey-2019.png
- * assets/images/about/about-journey-2021.png
- * assets/images/about/about-journey-2024.png
- * assets/images/about/about-journey-today.png
+ * Dynamic source:
+ * Greshma Journey CPT.
  *
  * @package Greshma
  */
 
 defined( 'ABSPATH' ) || exit;
+
+
+/* ==========================================================
+   JOURNEY QUERY
+========================================================== */
+
+$journey_query = new WP_Query(
+	array(
+		'post_type'           => 'greshma_journey',
+		'post_status'         => 'publish',
+		'posts_per_page'      => 6,
+		'ignore_sticky_posts' => true,
+
+		'meta_key' => '_greshma_journey_order',
+
+		'orderby' => array(
+			'meta_value_num' => 'ASC',
+			'menu_order'     => 'ASC',
+			'date'           => 'ASC',
+		),
+
+		'order' => 'ASC',
+	)
+);
+
+
+/*
+ * Do not render an empty section.
+ */
+if ( ! $journey_query->have_posts() ) {
+	return;
+}
 ?>
 
 <section class="about-journey">
 
-    <div class="container">
-
-        <!-- ==========================================
-             SECTION HEADING
-        =========================================== -->
-        <div class="about-journey__heading">
-
-            <span>My Journey So Far</span>
-
-            <span
-                class="about-journey__heading-leaf"
-                aria-hidden="true"
-            >
-                ❧
-            </span>
-
-            <span
-                class="about-journey__heading-line"
-                aria-hidden="true"
-            ></span>
-
-        </div>
+	<div class="container">
 
 
-        <!-- ==========================================
-             TIMELINE
-        =========================================== -->
-        <div class="about-journey__timeline">
+		<!-- ==========================================
+		     SECTION HEADING
+		=========================================== -->
 
-            <div
-                class="about-journey__line"
-                aria-hidden="true"
-            ></div>
+		<div class="about-journey__heading">
 
-
-            <div class="about-journey__items">
-
-
-                <!-- 2010 -->
-                <article class="about-journey__item">
-
-                    <div class="about-journey__marker">
-                        <div class="about-journey__icon">
-                            <span>♧</span>
-                        </div>
-                    </div>
-
-                    <p class="about-journey__year">
-                        2010
-                    </p>
-
-                    <p class="about-journey__text">
-                        Started volunteering in
-                        intercultural, interfaith
-                        and environmental initiatives.
-                    </p>
-
-                </article>
+			<span>
+				<?php esc_html_e(
+					'My Journey So Far',
+					'greshma'
+				); ?>
+			</span>
 
 
-                <!-- 2016 -->
-                <article class="about-journey__item">
-
-                    <div class="about-journey__marker">
-                        <div class="about-journey__icon">
-                            <span>◆</span>
-                        </div>
-                    </div>
-
-                    <p class="about-journey__year">
-                        2016
-                    </p>
-
-                    <p class="about-journey__text">
-                        Completed my Bachelor's
-                        degree in English.
-                    </p>
-
-                </article>
+			<span
+				class="about-journey__heading-leaf"
+				aria-hidden="true"
+			>
+				❧
+			</span>
 
 
-                <!-- 2019 -->
-                <article class="about-journey__item">
+			<span
+				class="about-journey__heading-line"
+				aria-hidden="true"
+			></span>
 
-                    <div class="about-journey__marker">
-                        <div class="about-journey__icon">
-                            <span>◎</span>
-                        </div>
-                    </div>
-
-                    <p class="about-journey__year">
-                        2019
-                    </p>
-
-                    <p class="about-journey__text">
-                        Completed my Master's in
-                        International Peace Studies
-                        at the University for Peace,
-                        Costa Rica.
-                    </p>
-
-                </article>
+		</div>
 
 
-                <!-- 2021 -->
-                <article class="about-journey__item">
+		<!-- ==========================================
+		     TIMELINE
+		=========================================== -->
 
-                    <div class="about-journey__marker">
-                        <div class="about-journey__icon">
-                            <span>❧</span>
-                        </div>
-                    </div>
-
-                    <p class="about-journey__year">
-                        2021
-                    </p>
-
-                    <p class="about-journey__text">
-                        Founded Ecopeace Teen Café
-                        to empower youth for
-                        climate and peace.
-                    </p>
-
-                </article>
+		<div class="about-journey__timeline">
 
 
-                <!-- 2024 -->
-                <article class="about-journey__item">
-
-                    <div class="about-journey__marker">
-                        <div class="about-journey__icon">
-                            <span>●</span>
-                        </div>
-                    </div>
-
-                    <p class="about-journey__year">
-                        2024
-                    </p>
-
-                    <p class="about-journey__text">
-                        Joined Our Kids' Climate
-                        as Community & Fellowship
-                        Manager.
-                    </p>
-
-                </article>
+			<div
+				class="about-journey__line"
+				aria-hidden="true"
+			></div>
 
 
-                <!-- TODAY -->
-                <article class="about-journey__item">
-
-                    <div class="about-journey__marker">
-                        <div class="about-journey__icon">
-                            <span>★</span>
-                        </div>
-                    </div>
-
-                    <p class="about-journey__year">
-                        Today
-                    </p>
-
-                    <p class="about-journey__text">
-                        Global Council Trustee at
-                        URI & continuing the journey
-                        of impact and transformation.
-                    </p>
-
-                </article>
+			<div class="about-journey__items">
 
 
-            </div>
+				<?php
+				while ( $journey_query->have_posts() ) :
 
-        </div>
+					$journey_query->the_post();
 
-    </div>
+					$journey_id = get_the_ID();
+
+
+					/* ==========================================
+					   PERIOD / YEAR
+					========================================== */
+
+					$period = get_post_meta(
+						$journey_id,
+						'_greshma_journey_period',
+						true
+					);
+
+
+					/*
+					 * Older Journey field fallback.
+					 */
+					if ( ! $period ) {
+
+						$period = get_post_meta(
+							$journey_id,
+							'_greshma_journey_year',
+							true
+						);
+					}
+
+
+					/* ==========================================
+					   ICON
+					========================================== */
+
+					$icon = get_post_meta(
+						$journey_id,
+						'_greshma_journey_icon',
+						true
+					);
+
+
+					if ( ! $icon ) {
+						$icon = '◆';
+					}
+
+
+					/* ==========================================
+					   DESCRIPTION
+					========================================== */
+
+					$description = get_the_excerpt();
+
+
+					if ( ! $description ) {
+
+						$description = wp_trim_words(
+							wp_strip_all_tags(
+								get_the_content()
+							),
+							24,
+							'…'
+						);
+					}
+					?>
+
+
+					<article class="about-journey__item">
+
+
+						<!-- MARKER -->
+
+						<div class="about-journey__marker">
+
+							<div class="about-journey__icon">
+
+								<span aria-hidden="true">
+									<?php echo esc_html(
+										$icon
+									); ?>
+								</span>
+
+							</div>
+
+						</div>
+
+
+						<!-- YEAR / PERIOD -->
+
+						<?php if ( $period ) : ?>
+
+							<p class="about-journey__year">
+
+								<?php echo esc_html(
+									$period
+								); ?>
+
+							</p>
+
+						<?php endif; ?>
+
+
+						<!-- DESCRIPTION -->
+
+						<?php if ( $description ) : ?>
+
+							<p class="about-journey__text">
+
+								<?php echo esc_html(
+									wp_trim_words(
+										$description,
+										20,
+										'…'
+									)
+								); ?>
+
+							</p>
+
+						<?php endif; ?>
+
+
+					</article>
+
+
+				<?php endwhile; ?>
+
+
+				<?php wp_reset_postdata(); ?>
+
+
+			</div>
+
+		</div>
+
+
+		<!-- ==========================================
+		     EXPLORE JOURNEY
+		=========================================== -->
+
+		<div class="about-journey__footer">
+
+			<a
+				href="<?php echo esc_url(
+					home_url( '/my-paths/' )
+				); ?>"
+				class="about-journey__link"
+			>
+
+				<span>
+					<?php esc_html_e(
+						'Explore My Journey',
+						'greshma'
+					); ?>
+				</span>
+
+				<span aria-hidden="true">
+					→
+				</span>
+
+			</a>
+
+		</div>
+
+
+	</div>
 
 </section>

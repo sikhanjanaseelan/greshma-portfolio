@@ -884,7 +884,7 @@
 
     padding: 48px 0 52px;
 
-    background: #fffdf9;
+    background: #103d32;
 
     border-top:
         1px solid rgba(12, 59, 46, 0.06);
@@ -913,7 +913,7 @@
 .about-values__heading h2 {
     margin: 0;
 
-    color: #24493e;
+    color: #ffffff;
 
     font-family:
         Inter,
@@ -1003,7 +1003,7 @@
 
     margin: 0 auto 12px;
 
-    color: #214d40;
+    color: #ffffff;
 }
 
 
@@ -1028,7 +1028,7 @@
 .about-values__item h3 {
     margin: 0 0 8px;
 
-    color: #26342f;
+    color: #ffffff;
 
     font-family:
         Georgia,
@@ -1052,7 +1052,7 @@
 
     margin: 0 auto;
 
-    color: #58645f;
+    color: #ffffff;
 
     font-size: 11px;
 
@@ -1280,7 +1280,61 @@
 
     line-height: 1.5;
 }
+/* ==========================================================
+   ABOUT JOURNEY — EXPLORE LINK
+========================================================== */
 
+.about-journey__footer {
+	display: flex;
+	justify-content: center;
+
+	margin-top: 28px;
+}
+
+
+.about-journey__link {
+	display: inline-flex;
+
+	align-items: center;
+
+	gap: 9px;
+
+	padding-bottom: 5px;
+
+	color: #21473c;
+
+	border-bottom:
+		1px solid
+		rgba(33, 71, 60, .26);
+
+	font-size: 10px;
+	font-weight: 700;
+
+	text-decoration: none;
+
+	transition:
+		color .25s ease,
+		border-color .25s ease,
+		gap .25s ease;
+}
+
+
+.about-journey__link:hover {
+	gap: 13px;
+
+	color: #a77f30;
+
+	border-color: #a77f30;
+}
+
+
+@media (max-width: 700px) {
+
+	.about-journey__footer {
+		margin-top: 22px;
+	}
+
+}
 /* ==========================================================
    ABOUT PAGE — IMPACT
 ========================================================== */
@@ -2475,6 +2529,7 @@ ABOUT LEADERSHIP
         padding:
             44px
             0;
+            
     }
 
     .about-values__grid {
