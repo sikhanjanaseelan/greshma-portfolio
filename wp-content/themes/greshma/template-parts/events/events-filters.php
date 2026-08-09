@@ -2,243 +2,530 @@
 /**
  * Events Page — Search & Filters.
  *
+ * Dynamic source:
+ * Upcoming Greshma Events.
+ *
  * @package Greshma
  */
 
 defined( 'ABSPATH' ) || exit;
+
+
+/* ==========================================================
+   CURRENT DATE
+========================================================== */
+
+$today = current_time( 'Y-m-d' );
+
+
+/* ==========================================================
+   UPCOMING EVENT IDS
+========================================================== */
+
+$filter_events = get_posts(
+	array(
+		'post_type'      => 'greshma_event',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'fields'         => 'ids',
+
+		'meta_query' => array(
+			array(
+				'key'     => '_greshma_event_start_date',
+				'value'   => $today,
+				'compare' => '>=',
+				'type'    => 'DATE',
+			),
+		),
+
+		'meta_key' => '_greshma_event_start_date',
+
+		'orderby' => array(
+			'meta_value' => 'ASC',
+			'date'       => 'ASC',
+		),
+	)
+);
+
+
+/* ==========================================================
+   FILTER DATA
+========================================================== */
+
+$event_types     = array();
+$event_locations = array();
+$event_months    = array();
+
+
+foreach ( $filter_events as $event_id ) {
+
+
+	/* ======================================================
+	   EVENT TYPES
+	====================================================== */
+
+	$categories = get_the_terms(
+		$event_id,
+		'greshma_event_category'
+	);
+
+	if (
+		$categories &&
+		! is_wp_error( $categories )
+	) {
+
+		foreach ( $categories as $category ) {
+
+			$event_types[ $category->slug ] =
+				$category->name;
+		}
+	}
+
+
+	/* ======================================================
+	   LOCATION
+	====================================================== */
+
+	$location = get_post_meta(
+		$event_id,
+		'_greshma_event_location',
+		true
+	);
+
+	$venue = get_post_meta(
+		$event_id,
+		'_greshma_event_venue',
+		true
+	);
+
+	$location_label = $location ?: $venue;
+
+	if ( $location_label ) {
+
+		$location_key = sanitize_title(
+			$location_label
+		);
+
+		$event_locations[ $location_key ] =
+			$location_label;
+	}
+
+
+	/* ======================================================
+	   MONTH
+	====================================================== */
+
+	$start_date = get_post_meta(
+		$event_id,
+		'_greshma_event_start_date',
+		true
+	);
+
+	if ( $start_date ) {
+
+		$timestamp = strtotime(
+			$start_date
+		);
+
+		if ( $timestamp ) {
+
+			/*
+			 * Must match the data-event-month value
+			 * used in events-upcoming.php.
+			 */
+			$month_label = date_i18n(
+				'F',
+				$timestamp
+			);
+
+			$month_key = strtolower(
+				$month_label
+			);
+
+			/*
+			 * Timestamp is stored as the array value
+			 * temporarily so months can be ordered
+			 * chronologically.
+			 */
+			if (
+				! isset(
+					$event_months[ $month_key ]
+				)
+			) {
+
+				$event_months[ $month_key ] = array(
+					'label'     => $month_label,
+					'timestamp' => $timestamp,
+				);
+			}
+		}
+	}
+}
+
+
+/* ==========================================================
+   SORT FILTER VALUES
+========================================================== */
+
+if ( $event_types ) {
+
+	natcasesort(
+		$event_types
+	);
+}
+
+
+if ( $event_locations ) {
+
+	natcasesort(
+		$event_locations
+	);
+}
+
+
+if ( $event_months ) {
+
+	uasort(
+		$event_months,
+		static function ( $a, $b ) {
+
+			return $a['timestamp']
+				<=> $b['timestamp'];
+		}
+	);
+}
 ?>
 
 <section class="events-filters">
 
-    <div class="container">
+	<div class="container">
 
-        <form
-            class="events-filters__panel"
-            id="events-filter-form"
-            action="#"
-            method="get"
-        >
+		<form
+			class="events-filters__panel"
+			id="events-filter-form"
+			action="#"
+			method="get"
+		>
 
 
-            <!-- SEARCH -->
+			<!-- ==================================================
+			     SEARCH
+			================================================== -->
 
-            <label class="events-filter events-filter--search">
+			<label class="events-filter events-filter--search">
 
-                <span class="screen-reader-text">
-                    Search Events
-                </span>
+				<span class="screen-reader-text">
 
+					<?php
+					esc_html_e(
+						'Search Events',
+						'greshma'
+					);
+					?>
 
-                <span
-                    class="events-filter__icon"
-                    aria-hidden="true"
-                >
+				</span>
 
-                    <svg viewBox="0 0 24 24">
 
-                        <circle
-                            cx="10.5"
-                            cy="10.5"
-                            r="6.5"
-                        />
+				<span
+					class="events-filter__icon"
+					aria-hidden="true"
+				>
 
-                        <path d="M16 16l5 5"/>
+					<svg viewBox="0 0 24 24">
 
-                    </svg>
+						<circle
+							cx="10.5"
+							cy="10.5"
+							r="6.5"
+						/>
 
-                </span>
+						<path d="M16 16l5 5"/>
 
+					</svg>
 
-                <input
-                    type="search"
-                    name="event_search"
-                    placeholder="Search events..."
-                    data-event-search
-                >
+				</span>
 
-            </label>
 
+				<input
+					type="search"
+					name="event_search"
+					placeholder="<?php
+					esc_attr_e(
+						'Search events...',
+						'greshma'
+					);
+					?>"
+					data-event-search
+				>
 
-            <!-- EVENT TYPE -->
+			</label>
 
-            <label class="events-filter events-filter--select">
 
-                <span class="screen-reader-text">
-                    Event Type
-                </span>
+			<!-- ==================================================
+			     EVENT TYPE
+			================================================== -->
 
+			<label class="events-filter events-filter--select">
 
-                <select
-                    name="event_type"
-                    data-event-type
-                >
+				<span class="screen-reader-text">
 
-                    <option value="all">
-                        All Event Types
-                    </option>
+					<?php
+					esc_html_e(
+						'Event Type',
+						'greshma'
+					);
+					?>
 
-                    <option value="workshop">
-                        Workshops
-                    </option>
+				</span>
 
-                    <option value="panel-discussion">
-                        Panel Discussions
-                    </option>
 
-                    <option value="webinar">
-                        Webinars
-                    </option>
+				<select
+					name="event_type"
+					data-event-type
+				>
 
-                    <option value="community-walk">
-                        Community Walks
-                    </option>
+					<option value="all">
 
-                    <option value="conference">
-                        Conferences
-                    </option>
+						<?php
+						esc_html_e(
+							'All Event Types',
+							'greshma'
+						);
+						?>
 
-                </select>
+					</option>
 
 
-                <span
-                    class="events-filter__chevron"
-                    aria-hidden="true"
-                >
+					<?php foreach (
+						$event_types
+						as $type_slug => $type_name
+					) : ?>
 
-                    <svg viewBox="0 0 24 24">
-                        <path d="m7 9 5 5 5-5"/>
-                    </svg>
+						<option
+							value="<?php
+							echo esc_attr(
+								$type_slug
+							);
+							?>"
+						>
 
-                </span>
+							<?php
+							echo esc_html(
+								$type_name
+							);
+							?>
 
-            </label>
+						</option>
 
+					<?php endforeach; ?>
 
-            <!-- LOCATION -->
+				</select>
 
-            <label class="events-filter events-filter--select">
 
-                <span class="screen-reader-text">
-                    Event Location
-                </span>
+				<span
+					class="events-filter__chevron"
+					aria-hidden="true"
+				>
 
+					<svg viewBox="0 0 24 24">
 
-                <select
-                    name="event_location"
-                    data-event-location
-                >
+						<path d="m7 9 5 5 5-5"/>
 
-                    <option value="all">
-                        All Locations
-                    </option>
+					</svg>
 
-                    <option value="bengaluru">
-                        Bengaluru
-                    </option>
+				</span>
 
-                    <option value="new-delhi">
-                        New Delhi
-                    </option>
+			</label>
 
-                    <option value="online">
-                        Online
-                    </option>
 
-                    <option value="nandi-hills">
-                        Nandi Hills
-                    </option>
+			<!-- ==================================================
+			     LOCATION
+			================================================== -->
 
-                </select>
+			<label class="events-filter events-filter--select">
 
+				<span class="screen-reader-text">
 
-                <span
-                    class="events-filter__chevron"
-                    aria-hidden="true"
-                >
+					<?php
+					esc_html_e(
+						'Event Location',
+						'greshma'
+					);
+					?>
 
-                    <svg viewBox="0 0 24 24">
-                        <path d="m7 9 5 5 5-5"/>
-                    </svg>
+				</span>
 
-                </span>
 
-            </label>
+				<select
+					name="event_location"
+					data-event-location
+				>
 
+					<option value="all">
 
-            <!-- DATE -->
+						<?php
+						esc_html_e(
+							'All Locations',
+							'greshma'
+						);
+						?>
 
-            <label class="events-filter events-filter--select">
+					</option>
 
-                <span class="screen-reader-text">
-                    Event Date
-                </span>
 
+					<?php foreach (
+						$event_locations
+						as $location_slug => $location_name
+					) : ?>
 
-                <select
-                    name="event_date"
-                    data-event-date
-                >
+						<option
+							value="<?php
+							echo esc_attr(
+								$location_slug
+							);
+							?>"
+						>
 
-                    <option value="all">
-                        All Dates
-                    </option>
+							<?php
+							echo esc_html(
+								$location_name
+							);
+							?>
 
-                    <option value="may">
-                        May
-                    </option>
+						</option>
 
-                    <option value="june">
-                        June
-                    </option>
+					<?php endforeach; ?>
 
-                    <option value="july">
-                        July
-                    </option>
+				</select>
 
-                    <option value="august">
-                        August
-                    </option>
 
-                </select>
+				<span
+					class="events-filter__chevron"
+					aria-hidden="true"
+				>
 
+					<svg viewBox="0 0 24 24">
 
-                <span
-                    class="events-filter__chevron"
-                    aria-hidden="true"
-                >
+						<path d="m7 9 5 5 5-5"/>
 
-                    <svg viewBox="0 0 24 24">
-                        <path d="m7 9 5 5 5-5"/>
-                    </svg>
+					</svg>
 
-                </span>
+				</span>
 
-            </label>
+			</label>
 
 
-            <!-- FIND EVENTS -->
+			<!-- ==================================================
+			     DATE / MONTH
+			================================================== -->
 
-            <button
-                type="submit"
-                class="events-filters__submit"
-            >
+			<label class="events-filter events-filter--select">
 
-                <span>
-                    Find Events
-                </span>
+				<span class="screen-reader-text">
 
+					<?php
+					esc_html_e(
+						'Event Date',
+						'greshma'
+					);
+					?>
 
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
-                    <path d="M4 5h16l-6 7v5l-4 2v-7Z"/>
-                </svg>
+				</span>
 
-            </button>
 
-        </form>
+				<select
+					name="event_date"
+					data-event-date
+				>
 
-    </div>
+					<option value="all">
+
+						<?php
+						esc_html_e(
+							'All Dates',
+							'greshma'
+						);
+						?>
+
+					</option>
+
+
+					<?php foreach (
+						$event_months
+						as $month_slug => $month_data
+					) : ?>
+
+						<option
+							value="<?php
+							echo esc_attr(
+								$month_slug
+							);
+							?>"
+						>
+
+							<?php
+							echo esc_html(
+								$month_data['label']
+							);
+							?>
+
+						</option>
+
+					<?php endforeach; ?>
+
+				</select>
+
+
+				<span
+					class="events-filter__chevron"
+					aria-hidden="true"
+				>
+
+					<svg viewBox="0 0 24 24">
+
+						<path d="m7 9 5 5 5-5"/>
+
+					</svg>
+
+				</span>
+
+			</label>
+
+
+			<!-- ==================================================
+			     FIND EVENTS
+			================================================== -->
+
+			<button
+				type="submit"
+				class="events-filters__submit"
+			>
+
+				<span>
+
+					<?php
+					esc_html_e(
+						'Find Events',
+						'greshma'
+					);
+					?>
+
+				</span>
+
+
+				<svg
+					viewBox="0 0 24 24"
+					aria-hidden="true"
+				>
+
+					<path d="M4 5h16l-6 7v5l-4 2v-7Z"/>
+
+				</svg>
+
+			</button>
+
+		</form>
+
+	</div>
 
 </section>
