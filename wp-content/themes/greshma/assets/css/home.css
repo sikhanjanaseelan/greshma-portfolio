@@ -1211,13 +1211,14 @@
 }
 }
 
+
 /* =========================================================
-   Featured Initiatives
-   ========================================================= */
+   FEATURED INITIATIVES — COMPACT HOMEPAGE CARDS
+========================================================= */
 
 .home-initiatives {
 	position: relative;
-	padding: 130px 0;
+	padding: 58px 0 64px;
 	background: #f3efe7;
 	overflow: hidden;
 }
@@ -1227,64 +1228,92 @@
 	z-index: 2;
 }
 
+
+/* =========================================================
+   HEADER
+========================================================= */
+
 .home-initiatives__header {
 	display: grid;
-	grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
-	gap: 90px;
+
+	grid-template-columns:
+		minmax(0, 1.25fr)
+		minmax(260px, .75fr);
+
 	align-items: end;
-	margin-bottom: 70px;
+
+	gap: 42px;
+
+	margin-bottom: 30px;
 }
 
 .home-initiatives__heading-group {
-	max-width: 760px;
+	max-width: 650px;
 }
 
 .home-initiatives .section-eyebrow {
-	margin: 0 0 22px;
+	margin: 0 0 10px;
+
 	color: #a47b2c;
-	font-size: 13px;
-	font-weight: 600;
-	letter-spacing: 0.18em;
-	line-height: 1.4;
+
+	font-size: 10px;
+	font-weight: 700;
+
+	letter-spacing: .15em;
 	text-transform: uppercase;
 }
 
 .home-initiatives__title {
-	max-width: 760px;
+	max-width: 620px;
+
 	margin: 0;
+
 	color: #173f35;
-	font-family: var(--font-heading, Georgia, serif);
-	font-size: clamp(44px, 5vw, 76px);
+
+	font-family:
+		var(--font-heading, Georgia, serif);
+
+	font-size: clamp(29px, 3vw, 42px);
+
 	font-weight: 400;
-	letter-spacing: -0.035em;
-	line-height: 0.98;
+
+	line-height: 1.07;
+
+	letter-spacing: -.025em;
 }
 
 .home-initiatives__intro {
-	max-width: 430px;
-	padding-bottom: 4px;
+	max-width: 370px;
 }
 
 .home-initiatives__intro p {
-	margin: 0 0 28px;
-	color: #516d64;
-	font-size: 17px;
-	line-height: 1.75;
+	margin: 0 0 15px;
+
+	color: #586f66;
+
+	font-size: 12px;
+	line-height: 1.65;
 }
 
 .home-initiatives__all-link {
 	display: inline-flex;
+
 	align-items: center;
-	gap: 18px;
-	padding-bottom: 8px;
+
+	gap: 9px;
+
+	padding-bottom: 4px;
+
 	color: #173f35;
-	font-size: 15px;
-	font-weight: 600;
+
+	border-bottom:
+		1px solid
+		rgba(23, 63, 53, .28);
+
+	font-size: 10px;
+	font-weight: 700;
+
 	text-decoration: none;
-	border-bottom: 1px solid rgba(23, 63, 53, 0.32);
-	transition:
-		color 0.25s ease,
-		border-color 0.25s ease;
 }
 
 .home-initiatives__all-link:hover {
@@ -1292,507 +1321,424 @@
 	border-color: #a47b2c;
 }
 
-.home-initiatives__all-link .text-link__arrow {
-	display: inline-block;
-	font-size: 21px;
-	line-height: 1;
-	transition: transform 0.25s ease;
-}
 
-.home-initiatives__all-link:hover .text-link__arrow {
-	transform: translateX(5px);
-}
-
-/* Editorial project grid */
+/* =========================================================
+   GRID
+   All three cards have equal importance on homepage.
+========================================================= */
 
 .home-initiatives__grid {
 	display: grid;
-	grid-template-columns: minmax(0, 1.45fr) minmax(330px, 0.75fr);
-	grid-template-rows: repeat(2, minmax(0, 1fr));
-	gap: 28px;
-	min-height: 920px;
+
+	grid-template-columns:
+		repeat(3, minmax(0, 1fr));
+
+	gap: 18px;
+
+	min-height: 0;
 }
 
-.initiative-card {
+
+/*
+ * IMPORTANT:
+ * Remove the old large first-card layout.
+ */
+
+.home-initiatives .initiative-card--1,
+.home-initiatives .initiative-card--2,
+.home-initiatives .initiative-card--3 {
+	grid-column: auto;
+	grid-row: auto;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.home-initiatives .initiative-card {
 	position: relative;
+
 	display: flex;
 	flex-direction: column;
+
 	min-width: 0;
+
 	overflow: hidden;
-	border-radius: 30px;
-	background: #e7e1d5;
-	isolation: isolate;
+
+	background: #e9e3d8;
+
+	border:
+		1px solid
+		rgba(23, 63, 53, .09);
+
+	border-radius: 16px;
+
+	box-shadow:
+		0 7px 20px
+		rgba(32, 59, 50, .045);
+
+	transition:
+		transform .3s ease,
+		box-shadow .3s ease,
+		border-color .3s ease;
 }
 
-.initiative-card--1 {
-	grid-column: 1;
-	grid-row: 1 / span 2;
+.home-initiatives .initiative-card:hover {
+	transform: translateY(-4px);
+
+	border-color:
+		rgba(23, 63, 53, .17);
+
+	box-shadow:
+		0 15px 30px
+		rgba(32, 59, 50, .09);
 }
 
-.initiative-card--2 {
-	grid-column: 2;
-	grid-row: 1;
-}
 
-.initiative-card--3 {
-	grid-column: 2;
-	grid-row: 2;
-}
+/* =========================================================
+   IMAGE
+========================================================= */
 
-.initiative-card__media {
+.home-initiatives .initiative-card__media,
+.home-initiatives .initiative-card--1 .initiative-card__media,
+.home-initiatives .initiative-card--2 .initiative-card__media,
+.home-initiatives .initiative-card--3 .initiative-card__media {
 	position: relative;
+
 	display: block;
-	flex: 1;
-	min-height: 360px;
+
+	flex: none;
+
+	width: 100%;
+	height: 190px;
+
+	min-height: 0;
+
 	overflow: hidden;
-	text-decoration: none;
+
 	background: #244d42;
+
+	text-decoration: none;
 }
 
-.initiative-card--1 .initiative-card__media {
-	min-height: 580px;
-}
-
-.initiative-card__image,
-.initiative-card__placeholder {
+.home-initiatives .initiative-card__image,
+.home-initiatives .initiative-card__placeholder {
 	display: block;
+
 	width: 100%;
 	height: 100%;
-	min-height: inherit;
+
+	min-height: 0;
+
 	object-fit: cover;
-	transition:
-		transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
-		filter 0.7s ease;
+	object-position: center;
+
+	transition: transform .4s ease;
 }
 
-.initiative-card:hover .initiative-card__image,
-.initiative-card:hover .initiative-card__placeholder {
-	transform: scale(1.045);
+.home-initiatives .initiative-card:hover
+.initiative-card__image {
+	transform: scale(1.035);
 }
 
-.initiative-card__placeholder {
-	position: relative;
+
+/* Placeholder */
+
+.home-initiatives .initiative-card__placeholder {
 	display: grid;
 	place-items: center;
-	color: rgba(255, 255, 255, 0.76);
-	font-size: 13px;
-	font-weight: 600;
-	letter-spacing: 0.16em;
-	text-transform: uppercase;
+
+	color:
+		rgba(255, 255, 255, .8);
+
 	background:
 		linear-gradient(
 			135deg,
-			rgba(255, 255, 255, 0.08),
-			rgba(255, 255, 255, 0.015)
-		),
-		#244d42;
-}
-
-.initiative-card--2 .initiative-card__placeholder {
-	background:
-		linear-gradient(
-			135deg,
-			rgba(255, 255, 255, 0.08),
-			rgba(255, 255, 255, 0.015)
-		),
-		#315c50;
-}
-
-.initiative-card--3 .initiative-card__placeholder {
-	background:
-		linear-gradient(
-			135deg,
-			rgba(255, 255, 255, 0.08),
-			rgba(255, 255, 255, 0.015)
-		),
-		#1e443a;
-}
-
-.initiative-card__placeholder::before {
-	content: "";
-	position: absolute;
-	inset: 0;
-	background-image:
-		linear-gradient(
-			rgba(255, 255, 255, 0.04) 1px,
-			transparent 1px
-		),
-		linear-gradient(
-			90deg,
-			rgba(255, 255, 255, 0.04) 1px,
-			transparent 1px
+			#315c50,
+			#1e443a
 		);
-	background-size: 34px 34px;
-	opacity: 0.55;
+
+	font-size: 9px;
+	font-weight: 700;
+
+	letter-spacing: .12em;
+
+	text-transform: uppercase;
 }
 
-.initiative-card__placeholder::after {
-	content: "";
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.home-initiatives .initiative-card__number {
 	position: absolute;
-	width: 260px;
-	aspect-ratio: 1;
-	border: 1px solid rgba(255, 255, 255, 0.12);
-	border-radius: 50%;
-	transform: translate(34%, -20%);
-}
 
-.initiative-card__placeholder span {
-	position: relative;
-	z-index: 2;
-}
+	top: 12px;
+	left: 12px;
 
-.initiative-card__media::after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	pointer-events: none;
-	background: linear-gradient(
-		to top,
-		rgba(8, 35, 29, 0.5),
-		rgba(8, 35, 29, 0.03) 52%,
-		transparent
-	);
-}
-
-.initiative-card__number {
-	position: absolute;
-	top: 26px;
-	left: 28px;
 	z-index: 3;
+
 	display: inline-flex;
+
 	align-items: center;
 	justify-content: center;
-	width: 54px;
-	height: 54px;
-	color: #f7f3ea;
-	font-family: var(--font-heading, Georgia, serif);
-	font-size: 19px;
-	border: 1px solid rgba(255, 255, 255, 0.28);
+
+	width: 34px;
+	height: 34px;
+
+	color: #ffffff;
+
+	background:
+		rgba(15, 50, 41, .48);
+
+	border:
+		1px solid
+		rgba(255, 255, 255, .27);
+
 	border-radius: 50%;
-	background: rgba(15, 50, 41, 0.45);
-	-webkit-backdrop-filter: blur(12px);
-	backdrop-filter: blur(12px);
+
+	font-family:
+		var(--font-heading, Georgia, serif);
+
+	font-size: 11px;
+
+	backdrop-filter: blur(8px);
 }
 
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.home-initiatives .initiative-card__content,
+.home-initiatives .initiative-card--1
 .initiative-card__content {
-	position: relative;
-	z-index: 2;
-	padding: 34px 36px 38px;
+	display: flex;
+
+	flex: 1;
+	flex-direction: column;
+
+	padding: 17px 18px 18px;
+
 	background: #e9e3d8;
 }
 
-.initiative-card--1 .initiative-card__content {
-	padding: 42px 46px 48px;
-}
 
-.initiative-card__meta {
+/* Meta */
+
+.home-initiatives .initiative-card__meta {
 	display: flex;
-	flex-wrap: wrap;
+
+	align-items: center;
 	justify-content: space-between;
-	gap: 12px 20px;
-	margin-bottom: 20px;
+
+	flex-wrap: wrap;
+
+	gap: 7px 10px;
+
+	margin-bottom: 9px;
+
 	color: #789087;
-	font-size: 12px;
-	font-weight: 600;
-	letter-spacing: 0.12em;
+
+	font-size: 7px;
+	font-weight: 700;
+
+	letter-spacing: .1em;
+
 	text-transform: uppercase;
 }
 
-.initiative-card__category,
-.initiative-card__location {
+.home-initiatives .initiative-card__location {
 	display: inline-flex;
 	align-items: center;
 }
 
-.initiative-card__location::before {
+.home-initiatives .initiative-card__location::before {
 	content: "";
-	display: inline-block;
-	width: 5px;
-	height: 5px;
-	margin-right: 10px;
-	border-radius: 50%;
+
+	width: 4px;
+	height: 4px;
+
+	margin-right: 6px;
+
 	background: #a47b2c;
+
+	border-radius: 50%;
 }
 
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.home-initiatives .initiative-card__title,
+.home-initiatives .initiative-card--1
+.initiative-card__title,
+.home-initiatives .initiative-card--2
+.initiative-card__title,
+.home-initiatives .initiative-card--3
 .initiative-card__title {
-	margin: 0 0 16px;
+	min-height: 0;
+
+	margin: 0 0 8px;
+
 	color: #173f35;
-	font-family: var(--font-heading, Georgia, serif);
-	font-size: clamp(28px, 3vw, 48px);
+
+	font-family:
+		var(--font-heading, Georgia, serif);
+
+	font-size: 19px;
+
 	font-weight: 400;
-	letter-spacing: -0.025em;
-	line-height: 1.05;
+
+	line-height: 1.2;
 }
 
-.initiative-card--2 .initiative-card__title,
-.initiative-card--3 .initiative-card__title {
-	font-size: clamp(25px, 2.25vw, 35px);
-}
-
-.initiative-card__title a {
+.home-initiatives .initiative-card__title a {
 	color: inherit;
 	text-decoration: none;
 }
 
+.home-initiatives .initiative-card__title a:hover {
+	color: #a47b2c;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.home-initiatives .initiative-card__description,
+.home-initiatives .initiative-card--2
+.initiative-card__description,
+.home-initiatives .initiative-card--3
 .initiative-card__description {
-	max-width: 690px;
-	margin: 0 0 26px;
-	color: #526c63;
-	font-size: 16px;
-	line-height: 1.7;
-}
-
-.initiative-card--2 .initiative-card__description,
-.initiative-card--3 .initiative-card__description {
 	display: -webkit-box;
+
+	margin: 0 0 12px;
+
 	overflow: hidden;
+
+	color: #5c6f67;
+
+	font-size: 10px;
+
+	line-height: 1.55;
+
 	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 3;
-	font-size: 15px;
-	line-height: 1.65;
+	-webkit-line-clamp: 2;
 }
 
-.initiative-card__link {
+
+/* =========================================================
+   LINK
+========================================================= */
+
+.home-initiatives .initiative-card__link {
 	display: inline-flex;
+
 	align-items: center;
-	gap: 16px;
-	padding-bottom: 7px;
+	align-self: flex-start;
+
+	gap: 6px;
+
+	margin-top: auto;
+
+	padding-bottom: 3px;
+
 	color: #173f35;
-	font-size: 14px;
-	font-weight: 600;
+
+	border-bottom:
+		1px solid
+		rgba(23, 63, 53, .22);
+
+	font-size: 8px;
+	font-weight: 700;
+
 	text-decoration: none;
-	border-bottom: 1px solid rgba(23, 63, 53, 0.28);
-	transition:
-		color 0.25s ease,
-		border-color 0.25s ease;
 }
 
-.initiative-card__link span:last-child {
-	font-size: 20px;
-	transition: transform 0.25s ease;
-}
-
-.initiative-card__link:hover {
+.home-initiatives .initiative-card__link:hover {
 	color: #a47b2c;
 	border-color: #a47b2c;
 }
 
-.initiative-card__link:hover span:last-child {
-	transform: translateX(5px);
-}
-
-.initiative-card::after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	z-index: 4;
-	pointer-events: none;
-	border: 1px solid rgba(23, 63, 53, 0.08);
-	border-radius: inherit;
-}
 
 /* =========================================================
-   Featured Initiatives responsive
-   ========================================================= */
+   TABLET
+========================================================= */
 
-@media (max-width: 1100px) {
+@media (max-width: 950px) {
+
 	.home-initiatives {
-		padding: 110px 0;
-	}
-
-	.home-initiatives__header {
-		grid-template-columns: minmax(0, 1fr) minmax(260px, 0.65fr);
-		gap: 55px;
-		margin-bottom: 58px;
-	}
-
-	.home-initiatives__grid {
-		grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
-		gap: 22px;
-		min-height: 820px;
-	}
-
-	.initiative-card {
-		border-radius: 26px;
-	}
-
-	.initiative-card--1 .initiative-card__media {
-		min-height: 500px;
-	}
-
-	.initiative-card__content {
-		padding: 28px 28px 32px;
-	}
-
-	.initiative-card--1 .initiative-card__content {
-		padding: 36px 38px 42px;
-	}
-}
-
-@media (max-width: 900px) {
-	.home-initiatives {
-		padding: 95px 0;
+		padding: 54px 0 60px;
 	}
 
 	.home-initiatives__header {
 		grid-template-columns: 1fr;
-		gap: 30px;
-		margin-bottom: 50px;
+
+		gap: 18px;
+
+		margin-bottom: 26px;
 	}
 
 	.home-initiatives__intro {
-		max-width: 620px;
+		max-width: 600px;
 	}
 
 	.home-initiatives__grid {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		grid-template-rows: auto;
-		min-height: 0;
+		grid-template-columns:
+			repeat(2, minmax(0, 1fr));
 	}
 
-	.initiative-card--1 {
-		grid-column: 1 / -1;
-		grid-row: auto;
-	}
-
-	.initiative-card--2,
-	.initiative-card--3 {
-		grid-column: auto;
-		grid-row: auto;
-	}
-
-	.initiative-card--1 .initiative-card__media {
-		min-height: 480px;
-	}
-
-	.initiative-card--2 .initiative-card__media,
-	.initiative-card--3 .initiative-card__media {
-		min-height: 320px;
-	}
 }
 
-@media (max-width: 700px) {
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
 	.home-initiatives {
-		padding: 78px 0;
-	}
-
-	.home-initiatives__header {
-		gap: 24px;
-		margin-bottom: 38px;
-	}
-
-	.home-initiatives .section-eyebrow {
-		margin-bottom: 16px;
-		font-size: 11px;
+		padding: 48px 0 54px;
 	}
 
 	.home-initiatives__title {
-		font-size: clamp(38px, 12vw, 54px);
-		line-height: 1.02;
-	}
-
-	.home-initiatives__intro p {
-		margin-bottom: 22px;
-		font-size: 16px;
-		line-height: 1.7;
+		font-size: 30px;
 	}
 
 	.home-initiatives__grid {
 		grid-template-columns: 1fr;
-		gap: 22px;
+
+		gap: 14px;
 	}
 
-	.initiative-card--1,
-	.initiative-card--2,
-	.initiative-card--3 {
-		grid-column: auto;
-		grid-row: auto;
+	.home-initiatives .initiative-card__media,
+	.home-initiatives .initiative-card--1
+	.initiative-card__media,
+	.home-initiatives .initiative-card--2
+	.initiative-card__media,
+	.home-initiatives .initiative-card--3
+	.initiative-card__media {
+		height: 180px;
 	}
 
-	.initiative-card {
-		border-radius: 22px;
+	.home-initiatives .initiative-card__content,
+	.home-initiatives .initiative-card--1
+	.initiative-card__content {
+		padding: 16px;
 	}
 
-	.initiative-card--1 .initiative-card__media,
-	.initiative-card--2 .initiative-card__media,
-	.initiative-card--3 .initiative-card__media {
-		min-height: 330px;
+	.home-initiatives .initiative-card__title,
+	.home-initiatives .initiative-card--1
+	.initiative-card__title {
+		font-size: 19px;
 	}
 
-	.initiative-card__number {
-		top: 20px;
-		left: 20px;
-		width: 48px;
-		height: 48px;
-		font-size: 17px;
-	}
-
-	.initiative-card__content,
-	.initiative-card--1 .initiative-card__content {
-		padding: 27px 24px 30px;
-	}
-
-	.initiative-card__meta {
-		margin-bottom: 16px;
-		font-size: 10px;
-	}
-
-	.initiative-card__title,
-	.initiative-card--2 .initiative-card__title,
-	.initiative-card--3 .initiative-card__title {
-		font-size: clamp(29px, 9vw, 39px);
-	}
-
-	.initiative-card__description,
-	.initiative-card--2 .initiative-card__description,
-	.initiative-card--3 .initiative-card__description {
-		display: block;
-		overflow: visible;
-		font-size: 15px;
-		-webkit-line-clamp: unset;
-	}
-
-	.initiative-card__placeholder::after {
-		width: 190px;
-	}
 }
-
-@media (max-width: 430px) {
-	.home-initiatives {
-		padding: 68px 0;
-	}
-
-	.home-initiatives__title {
-		font-size: 38px;
-	}
-
-	.initiative-card--1 .initiative-card__media,
-	.initiative-card--2 .initiative-card__media,
-	.initiative-card--3 .initiative-card__media {
-		min-height: 285px;
-	}
-
-	.initiative-card__content,
-	.initiative-card--1 .initiative-card__content {
-		padding: 24px 20px 27px;
-	}
-
-	.initiative-card__meta {
-		flex-direction: column;
-		gap: 7px;
-	}
-
-	.initiative-card__location::before {
-		margin-right: 8px;
-	}
-
-	.initiative-card__title,
-	.initiative-card--2 .initiative-card__title,
-	.initiative-card--3 .initiative-card__title {
-		font-size: 31px;
-	}
-}
-
 
 /* =========================================================
    Stories & Recognition
@@ -3038,7 +2984,126 @@ Responsive
 
 }
 
+/* =========================================================
+   HOMEPAGE TESTIMONIALS — COMPACT CARDS
+========================================================= */
 
+.home-testimonials .home-testimonials__grid {
+	max-width: 980px;
+
+	margin-left: auto;
+	margin-right: auto;
+
+	gap: 18px;
+}
+
+
+.home-testimonials .testimonial-card {
+	min-height: 0;
+
+	padding: 22px 22px 20px;
+
+	border-radius: 16px;
+}
+
+
+.home-testimonials .testimonial-card__quote-mark {
+	margin-bottom: 8px;
+
+	font-size: 30px;
+	line-height: .8;
+}
+
+
+.home-testimonials .testimonial-card__quote {
+	margin: 0 0 18px;
+}
+
+
+.home-testimonials .testimonial-card__quote p {
+	margin: 0;
+
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+
+.home-testimonials .testimonial-card__person {
+	gap: 11px;
+}
+
+
+.home-testimonials .testimonial-card__avatar {
+	width: 38px;
+	height: 38px;
+
+	flex: 0 0 38px;
+
+	font-size: 12px;
+}
+
+
+.home-testimonials .testimonial-card__avatar img {
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+
+	border-radius: 50%;
+}
+
+
+.home-testimonials .testimonial-card__name {
+	margin: 0 0 2px;
+
+	font-size: 13px;
+	line-height: 1.25;
+}
+
+
+.home-testimonials .testimonial-card__role {
+	margin: 0;
+
+	font-size: 9px;
+	line-height: 1.4;
+}
+
+
+.home-testimonials .home-testimonials__navigation {
+	margin-top: 24px;
+}
+
+
+.home-testimonials .home-testimonials__arrow {
+	width: 36px;
+	height: 36px;
+}
+
+
+/* Tablet */
+
+@media (max-width: 900px) {
+
+	.home-testimonials .home-testimonials__grid {
+		max-width: 680px;
+	}
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+	.home-testimonials .testimonial-card {
+		padding: 20px 19px 18px;
+	}
+
+	.home-testimonials .testimonial-card__quote p {
+		font-size: 12px;
+	}
+
+}
 /* =========================================================
    SPEAKING & ENGAGEMENTS
 ========================================================= */

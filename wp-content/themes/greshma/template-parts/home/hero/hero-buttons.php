@@ -13,31 +13,31 @@ $theme_uri = get_template_directory_uri();
 <div class="hero__buttons">
 
     <!-- Primary Button -->
+<a
+    href="<?php echo esc_url( home_url( '/my-paths/' ) ); ?>"
+    class="hero-btn hero-btn--primary"
+>
 
-    <a
-        href="#paths"
-        class="hero-btn hero-btn--primary"
-        aria-label="Explore My Journey"
-    >
+    <span class="hero-btn__text">
 
-        <span class="hero-btn__text">
+        <?php esc_html_e( 'Explore My Journey', 'greshma' ); ?>
 
-            Explore My Journey
+    </span>
 
-        </span>
+    <span class="hero-btn__icon">
 
-        <span class="hero-btn__icon">
+        <img
+            src="<?php echo esc_url(
+                $theme_uri . '/assets/images/hero/button-leaf.png'
+            ); ?>"
+            alt=""
+            loading="lazy"
+            decoding="async"
+        >
 
-            <img
-                src="<?php echo esc_url( $theme_uri . '/assets/images/hero/button-leaf.png' ); ?>"
-                alt=""
-                loading="lazy"
-                decoding="async"
-            >
+    </span>
 
-        </span>
-
-    </a>
+</a>
 
 
     <!-- Secondary Button -->
