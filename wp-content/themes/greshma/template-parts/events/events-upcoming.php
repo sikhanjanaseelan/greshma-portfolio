@@ -2,8 +2,11 @@
 /**
  * Events Page — Upcoming Events.
  *
- * Dynamic source:
- * Greshma Events CPT.
+ * /events/
+ *     Shows 3 upcoming events with sidebar.
+ *
+ * /upcoming-events/
+ *     Shows all upcoming events.
  *
  * @package Greshma
  */
@@ -12,16 +15,30 @@ defined( 'ABSPATH' ) || exit;
 
 
 /* ==========================================================
+   PAGE CONTEXT
+========================================================== */
+
+$is_upcoming_page =
+	is_page( 'upcoming-events' ) ||
+	is_page_template( 'page-upcoming-events.php' );
+
+$is_event_archive =
+	is_post_type_archive( 'greshma_event' );
+
+
+$upcoming_limit =
+	$is_upcoming_page || $is_event_archive
+		? -1
+		: 3;
+
+
+/* ==========================================================
    CURRENT DATE
 ========================================================== */
 
 $today = current_time( 'Y-m-d' );
 
-$is_event_archive = is_post_type_archive( 'greshma_event' );
 
-$upcoming_limit = $is_event_archive
-	? -1
-	: 3;
 /* ==========================================================
    UPCOMING EVENTS QUERY
 ========================================================== */
@@ -32,21 +49,18 @@ $upcoming_events = new WP_Query(
 		'post_status'    => 'publish',
 		'posts_per_page' => $upcoming_limit,
 
+		'meta_key' => '_greshma_event_start_date',
+
 		'meta_query' => array(
 			array(
 				'key'     => '_greshma_event_start_date',
 				'value'   => $today,
 				'compare' => '>=',
-				'type'    => 'DATE',
 			),
 		),
 
-		'meta_key' => '_greshma_event_start_date',
-
-		'orderby' => array(
-			'meta_value' => 'ASC',
-			'date'       => 'ASC',
-		),
+		'orderby' => 'meta_value',
+		'order'   => 'ASC',
 	)
 );
 
@@ -60,18 +74,36 @@ $format_labels = array(
 	'online'    => __( 'Online', 'greshma' ),
 	'hybrid'    => __( 'Hybrid', 'greshma' ),
 );
+
+
+/* ==========================================================
+   UPCOMING PAGE URL
+========================================================== */
+
+$upcoming_page = get_page_by_path(
+	'upcoming-events'
+);
+
+$upcoming_url = $upcoming_page
+	? get_permalink( $upcoming_page )
+	: home_url( '/upcoming-events/' );
 ?>
 
-<section class="events-upcoming">
+
+<section
+	class="events-upcoming<?php echo $is_upcoming_page ? ' events-upcoming--listing' : ''; ?>"
+>
 
 	<div class="container">
 
-		<div class="events-upcoming__layout">
+		<div
+			class="events-upcoming__layout<?php echo $is_upcoming_page ? ' events-upcoming__layout--full' : ''; ?>"
+		>
 
 
-			<!-- ==========================================
-			     LEFT — EVENTS
-			=========================================== -->
+			<!-- ==================================================
+			     MAIN
+			================================================== -->
 
 			<div class="events-upcoming__main">
 
@@ -80,17 +112,27 @@ $format_labels = array(
 					<div>
 
 						<span class="events-upcoming__eyebrow">
-							<?php esc_html_e(
+							<?php
+							esc_html_e(
 								'What’s Coming Up',
 								'greshma'
-							); ?>
+							);
+							?>
 						</span>
 
+
 						<h2>
-							<?php esc_html_e(
-								'Upcoming Events',
-								'greshma'
-							); ?>
+							<?php
+							echo $is_upcoming_page
+								? esc_html__(
+									'All Upcoming Events',
+									'greshma'
+								)
+								: esc_html__(
+									'Upcoming Events',
+									'greshma'
+								);
+							?>
 						</h2>
 
 					</div>
@@ -99,13 +141,13 @@ $format_labels = array(
 					<span class="events-upcoming__count">
 
 						<?php
-						echo esc_html(
-							$upcoming_events->found_posts
-						);
-						?>
+						$count = (int) $upcoming_events->found_posts;
 
-						<?php
-						echo 1 === (int) $upcoming_events->found_posts
+						echo esc_html( $count );
+
+						echo ' ';
+
+						echo 1 === $count
 							? esc_html__( 'Event', 'greshma' )
 							: esc_html__( 'Events', 'greshma' );
 						?>
@@ -120,10 +162,13 @@ $format_labels = array(
 					data-events-list
 				>
 
+
 					<?php if ( $upcoming_events->have_posts() ) : ?>
+
 
 						<?php
 						while ( $upcoming_events->have_posts() ) :
+
 							$upcoming_events->the_post();
 
 							$event_id = get_the_ID();
@@ -139,31 +184,42 @@ $format_labels = array(
 								true
 							);
 
-							$date_timestamp = $start_date
-								? strtotime( $start_date )
-								: false;
 
-							$date_day = $date_timestamp
-								? date_i18n( 'd', $date_timestamp )
-								: '';
+							$date_timestamp =
+								$start_date
+									? strtotime( $start_date )
+									: false;
 
-							$date_month = $date_timestamp
-								? strtoupper(
-									date_i18n(
-										'M',
+
+							$date_day =
+								$date_timestamp
+									? date_i18n(
+										'd',
 										$date_timestamp
 									)
-								)
-								: '';
+									: '';
 
-							$month_filter = $date_timestamp
-								? strtolower(
-									date_i18n(
-										'F',
-										$date_timestamp
+
+							$date_month =
+								$date_timestamp
+									? strtoupper(
+										date_i18n(
+											'M',
+											$date_timestamp
+										)
 									)
-								)
-								: '';
+									: '';
+
+
+							$month_filter =
+								$date_timestamp
+									? strtolower(
+										date_i18n(
+											'F',
+											$date_timestamp
+										)
+									)
+									: '';
 
 
 							/* ==================================
@@ -176,62 +232,60 @@ $format_labels = array(
 								true
 							);
 
+
 							$end_time = get_post_meta(
 								$event_id,
 								'_greshma_event_end_time',
 								true
 							);
 
+
 							$time_label = '';
+
 
 							if ( $start_time ) {
 
-								$start_time_obj =
+								$start_object =
 									DateTime::createFromFormat(
 										'H:i',
 										$start_time
 									);
 
-								if ( $start_time_obj ) {
+								if ( $start_object ) {
+
 									$time_label =
-										$start_time_obj->format(
+										$start_object->format(
 											'g:i A'
 										);
 								}
 							}
 
+
 							if ( $end_time ) {
 
-								$end_time_obj =
+								$end_object =
 									DateTime::createFromFormat(
 										'H:i',
 										$end_time
 									);
 
-								if ( $end_time_obj ) {
+								if ( $end_object ) {
 
-									$formatted_end =
-										$end_time_obj->format(
+									$end_label =
+										$end_object->format(
 											'g:i A'
 										);
 
-									if ( $time_label ) {
-
-										$time_label .=
-											' – ' .
-											$formatted_end;
-
-									} else {
-
-										$time_label =
-											$formatted_end;
-									}
+									$time_label =
+										$time_label
+											? $time_label . ' – ' . $end_label
+											: $end_label;
 								}
 							}
 
 
 							/* ==================================
-							   LOCATION / VENUE
+							   LOCATION
 							================================== */
 
 							$location = get_post_meta(
@@ -240,14 +294,17 @@ $format_labels = array(
 								true
 							);
 
+
 							$venue = get_post_meta(
 								$event_id,
 								'_greshma_event_venue',
 								true
 							);
 
-							$location_label = $location
-								?: $venue;
+
+							$location_label =
+								$location ?: $venue;
+
 
 							$location_filter =
 								sanitize_title(
@@ -264,6 +321,7 @@ $format_labels = array(
 								'_greshma_event_format',
 								true
 							);
+
 
 							$format_label =
 								isset(
@@ -286,7 +344,7 @@ $format_labels = array(
 
 
 							/* ==================================
-							   EVENT CATEGORY
+							   CATEGORY
 							================================== */
 
 							$categories = get_the_terms(
@@ -294,8 +352,13 @@ $format_labels = array(
 								'greshma_event_category'
 							);
 
+
 							$category_slug  = '';
-							$category_label = __( 'Event', 'greshma' );
+							$category_label = __(
+								'Event',
+								'greshma'
+							);
+
 
 							if (
 								$categories &&
@@ -304,6 +367,7 @@ $format_labels = array(
 
 								$primary_category =
 									reset( $categories );
+
 
 								if ( $primary_category ) {
 
@@ -320,19 +384,23 @@ $format_labels = array(
 							   DESCRIPTION
 							================================== */
 
-							$description = get_the_excerpt();
+							$description =
+								get_the_excerpt();
+
 
 							if ( ! $description ) {
 
-								$description = wp_trim_words(
-									wp_strip_all_tags(
-										get_the_content()
-									),
-									28,
-									'…'
-								);
+								$description =
+									wp_trim_words(
+										wp_strip_all_tags(
+											get_the_content()
+										),
+										28,
+										'…'
+									);
 							}
 							?>
+
 
 							<article
 								class="event-card"
@@ -353,23 +421,25 @@ $format_labels = array(
 
 								<div class="event-card__image">
 
+
 									<?php if ( has_post_thumbnail() ) : ?>
 
 										<?php
 										the_post_thumbnail(
 											'medium_large',
 											array(
-												'class'    => 'event-card__image-file',
-												'loading'  => 'lazy',
-												'decoding' => 'async',
-												'alt'      => the_title_attribute(
-													array(
-														'echo' => false,
-													)
-												),
+												'class' =>
+													'event-card__image-file',
+
+												'loading' =>
+													'lazy',
+
+												'decoding' =>
+													'async',
 											)
 										);
 										?>
+
 
 									<?php else : ?>
 
@@ -388,21 +458,33 @@ $format_labels = array(
 									<?php endif; ?>
 
 
-									<div class="event-card__date">
+									<?php if (
+										$date_day &&
+										$date_month
+									) : ?>
 
-										<strong>
-											<?php echo esc_html(
-												$date_day
-											); ?>
-										</strong>
+										<div class="event-card__date">
 
-										<span>
-											<?php echo esc_html(
-												$date_month
-											); ?>
-										</span>
+											<strong>
+												<?php
+												echo esc_html(
+													$date_day
+												);
+												?>
+											</strong>
 
-									</div>
+											<span>
+												<?php
+												echo esc_html(
+													$date_month
+												);
+												?>
+											</span>
+
+										</div>
+
+									<?php endif; ?>
+
 
 								</div>
 
@@ -410,6 +492,7 @@ $format_labels = array(
 								<!-- CONTENT -->
 
 								<div class="event-card__content">
+
 
 									<span class="event-card__type">
 
@@ -478,7 +561,11 @@ $format_labels = array(
 													viewBox="0 0 24 24"
 													aria-hidden="true"
 												>
-													<circle cx="12" cy="12" r="8"/>
+													<circle
+														cx="12"
+														cy="12"
+														r="8"
+													/>
 													<path d="M12 7v5l3 2"/>
 												</svg>
 
@@ -516,6 +603,8 @@ $format_labels = array(
 									</div>
 
 
+									<!-- ACTIONS -->
+
 									<div class="event-card__actions">
 
 
@@ -530,37 +619,18 @@ $format_labels = array(
 												rel="noopener noreferrer"
 											>
 
-												<?php esc_html_e(
+												<?php
+												esc_html_e(
 													'Register',
 													'greshma'
-												); ?>
+												);
+												?>
 
 												<span aria-hidden="true">
 													→
 												</span>
 
 											</a>
-
-
-										<?php else : ?>
-
-
-											<a
-												href="<?php the_permalink(); ?>"
-												class="event-card__button event-card__button--primary"
-											>
-
-												<?php esc_html_e(
-													'View Event',
-													'greshma'
-												); ?>
-
-												<span aria-hidden="true">
-													→
-												</span>
-
-											</a>
-
 
 										<?php endif; ?>
 
@@ -569,10 +639,14 @@ $format_labels = array(
 											href="<?php the_permalink(); ?>"
 											class="event-card__button event-card__button--secondary"
 										>
-											<?php esc_html_e(
+
+											<?php
+											esc_html_e(
 												'Event Details',
 												'greshma'
-											); ?>
+											);
+											?>
+
 										</a>
 
 
@@ -581,6 +655,7 @@ $format_labels = array(
 								</div>
 
 							</article>
+
 
 						<?php endwhile; ?>
 
@@ -594,10 +669,12 @@ $format_labels = array(
 						<div class="events-upcoming__empty">
 
 							<p>
-								<?php esc_html_e(
+								<?php
+								esc_html_e(
 									'No upcoming events are currently scheduled.',
 									'greshma'
-								); ?>
+								);
+								?>
 							</p>
 
 						</div>
@@ -605,50 +682,67 @@ $format_labels = array(
 
 					<?php endif; ?>
 
+
 				</div>
 
 
-				<?php if ( ! $is_event_archive ) : ?>
+				<!-- ==================================================
+				     VIEW ALL — LANDING ONLY
+				================================================== -->
 
-	<div class="events-upcoming__explore">
+				<?php if (
+					! $is_upcoming_page &&
+					! $is_event_archive
+				) : ?>
 
-		<a
-			href="<?php echo esc_url(
-				get_post_type_archive_link(
-					'greshma_event'
-				)
-			); ?>"
-			class="events-upcoming__explore-button"
-		>
-			<?php esc_html_e(
-				'Explore All Events',
-				'greshma'
-			); ?>
+					<div class="events-upcoming__explore">
 
-			<span aria-hidden="true">
-				→
-			</span>
-		</a>
+						<a
+							href="<?php echo esc_url(
+								$upcoming_url
+							); ?>"
+							class="events-upcoming__explore-button"
+						>
 
-	</div>
+							<?php
+							esc_html_e(
+								'View All Upcoming Events',
+								'greshma'
+							);
+							?>
 
-<?php endif; ?>
+							<span aria-hidden="true">
+								→
+							</span>
+
+						</a>
+
+					</div>
+
+				<?php endif; ?>
+
+
 			</div>
 
 
-			<!-- ==========================================
-			     RIGHT — SIDEBAR
-			=========================================== -->
+			<!-- ==================================================
+			     SIDEBAR — LANDING ONLY
+			================================================== -->
 
-			<aside class="events-upcoming__sidebar">
+			<?php if ( ! $is_upcoming_page ) : ?>
 
-				<?php
-				get_template_part(
-					'template-parts/events/events-sidebar'
-				);
-				?>
+				<aside class="events-upcoming__sidebar">
 
-			</aside>
+					<?php
+					get_template_part(
+						'template-parts/events/events-sidebar'
+					);
+					?>
+
+				</aside>
+
+			<?php endif; ?>
+
 
 		</div>
 

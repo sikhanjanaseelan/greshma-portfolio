@@ -17,9 +17,9 @@ get_header();
         'template-parts/events/events-hero'
     );
 
-    get_template_part(
-    'template-parts/events/events-filters'
-);
+//     get_template_part(
+//     'template-parts/events/events-filters'
+// );
 
 
 

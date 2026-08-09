@@ -44,7 +44,7 @@ class Greshma_Core_Events {
 				'show_in_menu'       => false,
 				'show_in_rest'       => true,
 				'publicly_queryable' => true,
-				'has_archive'        => false,
+				'has_archive' => 'event-library',
 				'rewrite'            => array(
 					'slug'       => 'event',
 					'with_front' => false,

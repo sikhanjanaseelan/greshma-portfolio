@@ -4105,3 +4105,333 @@
 
 	transform: translateY(-1px);
 }
+
+.events-past-card__link {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+
+	margin-top: 12px;
+
+	color: #315b47;
+
+	font-size: 11px;
+	font-weight: 700;
+
+	text-decoration: none;
+}
+
+.events-past-card__link:hover,
+.events-past-card__link:focus-visible {
+	color: #203f31;
+}
+
+.events-upcoming__filter-empty {
+	padding: 30px 20px;
+	text-align: center;
+	color: #68746d;
+}
+
+.events-upcoming__filter-empty strong,
+.events-upcoming__filter-empty span {
+	display: block;
+}
+
+.events-upcoming__filter-empty span {
+	margin-top: 5px;
+	font-size: 12px;
+}
+
+/* ==========================================================
+   EVENT LISTING CTA
+========================================================== */
+
+.events-upcoming__explore,
+.events-past__explore {
+	display: flex;
+
+	justify-content: center;
+
+	margin-top: 28px;
+}
+
+
+.events-upcoming__explore-button,
+.events-past__explore-button {
+	display: inline-flex;
+
+	align-items: center;
+	justify-content: center;
+
+	gap: 8px;
+
+	padding: 10px 18px;
+
+	border-radius: 999px;
+
+	font-size: 11px;
+	font-weight: 700;
+
+	text-decoration: none;
+
+	transition:
+		background-color .2s ease,
+		color .2s ease,
+		transform .2s ease;
+}
+
+
+.events-upcoming__explore-button {
+	color: #ffffff;
+
+	background: #315b47;
+}
+
+
+.events-upcoming__explore-button:hover {
+	color: #ffffff;
+
+	background: #244b39;
+
+	transform: translateY(-1px);
+}
+
+
+.events-past__explore-button {
+	color: #315b47;
+
+	background: #ffffff;
+
+	border: 1px solid #bdccc1;
+}
+
+
+.events-past__explore-button:hover {
+	color: #ffffff;
+
+	background: #315b47;
+
+	border-color: #315b47;
+}
+
+
+/* ==========================================================
+   PAST EVENT CARD LINK
+========================================================== */
+
+.events-past-card__link {
+	display: inline-flex;
+
+	align-items: center;
+
+	gap: 7px;
+
+	margin-top: 12px;
+
+	color: #315b47;
+
+	font-size: 11px;
+	font-weight: 700;
+
+	text-decoration: none;
+}
+
+
+.events-past-card__link:hover {
+	color: #203f31;
+}
+
+
+/* ==========================================================
+   SINGLE EVENT — PAST ACTION
+========================================================== */
+
+.single-event__past-button {
+	display: inline-flex;
+
+	align-items: center;
+	justify-content: center;
+
+	gap: 8px;
+
+	padding: 10px 18px;
+
+	color: #315b47;
+
+	background: #ffffff;
+
+	border: 1px solid #bdccc1;
+
+	border-radius: 999px;
+
+	font-size: 11px;
+	font-weight: 700;
+
+	text-decoration: none;
+}
+
+
+.single-event__past-button:hover {
+	color: #ffffff;
+
+	background: #315b47;
+}
+
+
+/* ==========================================================
+   SINGLE EVENT — COMPLETED CARD
+========================================================== */
+
+.single-event__completed-card {
+	padding: 24px;
+
+	background: #f2f5f2;
+
+	border: 1px solid #dce5de;
+
+	border-radius: 12px;
+}
+
+
+.single-event__completed-card > span {
+	display: block;
+
+	margin-bottom: 7px;
+
+	color: #849188;
+
+	font-size: 9px;
+	font-weight: 700;
+
+	letter-spacing: .08em;
+
+	text-transform: uppercase;
+}
+
+
+.single-event__completed-card h2 {
+	margin: 0 0 15px;
+
+	color: #40594c;
+
+	font-size: 17px;
+	font-weight: 500;
+}
+
+
+.single-event__completed-card a {
+	display: inline-flex;
+
+	align-items: center;
+
+	gap: 7px;
+
+	color: #315b47;
+
+	font-size: 11px;
+	font-weight: 700;
+
+	text-decoration: none;
+}
+
+/* ==========================================================
+   DEDICATED EVENT LISTING PAGES
+========================================================== */
+
+.events-listing-page__back {
+	display: inline-flex;
+
+	align-items: center;
+
+	gap: 7px;
+
+	margin-bottom: 18px;
+
+	color: #65786c;
+
+	font-size: 11px;
+	font-weight: 600;
+
+	text-decoration: none;
+}
+
+
+.events-listing-page__back:hover {
+	color: #315b47;
+}
+
+
+/* Upcoming listing does not use landing sidebar */
+
+.events-upcoming__layout--full {
+	display: block;
+}
+
+
+.events-upcoming--listing
+.events-upcoming__main {
+	width: 100%;
+
+	max-width: none;
+}
+
+
+/*
+ * Give the dedicated page a slightly wider,
+ * cleaner listing area.
+ */
+
+.events-upcoming-page
+.events-upcoming {
+	padding-top: 48px;
+}
+
+/* ==========================================================
+   EVENT LISTING PAGES — FOOTER SPACING
+========================================================== */
+
+.events-upcoming-page,
+.events-listing-page {
+	padding-bottom: 70px;
+}
+
+
+/* Past Events page */
+body.page-template-page-past-events
+.events-past {
+	padding-bottom: 70px;
+}
+
+
+/* Upcoming Events page */
+body.page-template-page-upcoming-events
+.events-upcoming {
+	padding-bottom: 70px;
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+	.events-upcoming-page,
+	.events-listing-page {
+		padding-bottom: 48px;
+	}
+
+	body.page-template-page-past-events
+	.events-past,
+	body.page-template-page-upcoming-events
+	.events-upcoming {
+		padding-bottom: 48px;
+	}
+}
+
+.events-listing-page {
+	padding-bottom: 72px;
+}
+
+@media (max-width: 768px) {
+	.events-listing-page {
+		padding-bottom: 48px;
+	}
+}

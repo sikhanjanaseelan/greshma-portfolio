@@ -2,8 +2,14 @@
 /**
  * Events Page — Past Events.
  *
- * Dynamic source:
- * Greshma Events CPT.
+ * /events/
+ *     Shows 4 recent past events.
+ *
+ * /past-events/
+ *     Shows all past events.
+ *
+ * /event-library/
+ *     Shows all past events.
  *
  * @package Greshma
  */
@@ -12,10 +18,30 @@ defined( 'ABSPATH' ) || exit;
 
 
 /* ==========================================================
-   CURRENT DATE
+   CONTEXT
 ========================================================== */
 
-$today = current_time( 'Y-m-d' );
+$is_past_page = is_page(
+	'past-events'
+);
+
+$is_event_archive = is_post_type_archive(
+	'greshma_event'
+);
+
+$past_limit =
+	$is_past_page || $is_event_archive
+		? -1
+		: 4;
+
+
+/* ==========================================================
+   DATE
+========================================================== */
+
+$today = current_time(
+	'Y-m-d'
+);
 
 
 /* ==========================================================
@@ -26,7 +52,7 @@ $past_events = new WP_Query(
 	array(
 		'post_type'      => 'greshma_event',
 		'post_status'    => 'publish',
-		'posts_per_page' => -1,
+		'posts_per_page' => $past_limit,
 
 		'meta_query' => array(
 			array(
@@ -45,16 +71,25 @@ $past_events = new WP_Query(
 		),
 	)
 );
+
+
+/* ==========================================================
+   PAST PAGE URL
+========================================================== */
+
+$past_page = get_page_by_path(
+	'past-events'
+);
+
+$past_url = $past_page
+	? get_permalink( $past_page )
+	: home_url( '/past-events/' );
 ?>
 
 <section class="events-past">
 
 	<div class="container">
 
-
-		<!-- ==========================================
-		     SECTION HEADING
-		=========================================== -->
 
 		<div class="events-past__heading">
 
@@ -77,7 +112,9 @@ $past_events = new WP_Query(
 			</div>
 
 
-			<?php if ( $past_events->found_posts > 1 ) : ?>
+			<?php if (
+				$past_events->post_count > 1
+			) : ?>
 
 				<div class="events-past__controls">
 
@@ -85,23 +122,16 @@ $past_events = new WP_Query(
 						type="button"
 						class="events-past__arrow"
 						data-events-past-prev
-						aria-label="<?php esc_attr_e(
-							'Previous past event',
-							'greshma'
-						); ?>"
+						aria-label="Previous event"
 					>
 						←
 					</button>
-
 
 					<button
 						type="button"
 						class="events-past__arrow"
 						data-events-past-next
-						aria-label="<?php esc_attr_e(
-							'Next past event',
-							'greshma'
-						); ?>"
+						aria-label="Next event"
 					>
 						→
 					</button>
@@ -112,10 +142,6 @@ $past_events = new WP_Query(
 
 		</div>
 
-
-		<!-- ==========================================
-		     SLIDER
-		=========================================== -->
 
 		<div
 			class="events-past__viewport"
@@ -136,15 +162,12 @@ $past_events = new WP_Query(
 						$event_id = get_the_ID();
 
 
-						/* ==============================
-						   DATE
-						============================== */
-
 						$start_date = get_post_meta(
 							$event_id,
 							'_greshma_event_start_date',
 							true
 						);
+
 
 						$formatted_date = '';
 
@@ -156,17 +179,14 @@ $past_events = new WP_Query(
 
 							if ( $timestamp ) {
 
-								$formatted_date = date_i18n(
-									'F j, Y',
-									$timestamp
-								);
+								$formatted_date =
+									date_i18n(
+										'F j, Y',
+										$timestamp
+									);
 							}
 						}
 
-
-						/* ==============================
-						   LOCATION
-						============================== */
 
 						$location = get_post_meta(
 							$event_id,
@@ -180,13 +200,9 @@ $past_events = new WP_Query(
 							true
 						);
 
-						$location_label = $location
-							?: $venue;
+						$location_label =
+							$location ?: $venue;
 
-
-						/* ==============================
-						   CATEGORY / TYPE
-						============================== */
 
 						$categories = get_the_terms(
 							$event_id,
@@ -217,16 +233,9 @@ $past_events = new WP_Query(
 						<article class="events-past-card">
 
 
-							<!-- IMAGE -->
-
 							<div class="events-past-card__image">
 
-								<a
-									href="<?php the_permalink(); ?>"
-									aria-label="<?php echo esc_attr(
-										get_the_title()
-									); ?>"
-								>
+								<a href="<?php the_permalink(); ?>">
 
 									<?php if ( has_post_thumbnail() ) : ?>
 
@@ -234,14 +243,11 @@ $past_events = new WP_Query(
 										the_post_thumbnail(
 											'medium_large',
 											array(
-												'class'    => 'events-past-card__image-file',
-												'loading'  => 'lazy',
-												'decoding' => 'async',
-												'alt'      => the_title_attribute(
-													array(
-														'echo' => false,
-													)
-												),
+												'class' =>
+													'events-past-card__image-file',
+
+												'loading' =>
+													'lazy',
 											)
 										);
 										?>
@@ -251,11 +257,9 @@ $past_events = new WP_Query(
 										<div class="events-past-card__placeholder">
 
 											<span>
-												<?php
-												echo esc_html(
+												<?php echo esc_html(
 													$type_label
-												);
-												?>
+												); ?>
 											</span>
 
 										</div>
@@ -266,19 +270,13 @@ $past_events = new WP_Query(
 
 
 								<span class="events-past-card__type">
-
-									<?php
-									echo esc_html(
+									<?php echo esc_html(
 										$type_label
-									);
-									?>
-
+									); ?>
 								</span>
 
 							</div>
 
-
-							<!-- CONTENT -->
 
 							<div class="events-past-card__content">
 
@@ -293,15 +291,12 @@ $past_events = new WP_Query(
 
 								<div class="events-past-card__meta">
 
-
 									<?php if ( $formatted_date ) : ?>
 
 										<span>
-											<?php
-											echo esc_html(
+											<?php echo esc_html(
 												$formatted_date
-											);
-											?>
+											); ?>
 										</span>
 
 									<?php endif; ?>
@@ -323,17 +318,29 @@ $past_events = new WP_Query(
 									<?php if ( $location_label ) : ?>
 
 										<span>
-											<?php
-											echo esc_html(
+											<?php echo esc_html(
 												$location_label
-											);
-											?>
+											); ?>
 										</span>
 
 									<?php endif; ?>
 
-
 								</div>
+
+
+								<a
+									href="<?php the_permalink(); ?>"
+									class="events-past-card__link"
+								>
+									<?php esc_html_e(
+										'View Event',
+										'greshma'
+									); ?>
+
+									<span aria-hidden="true">
+										→
+									</span>
+								</a>
 
 							</div>
 
@@ -363,6 +370,39 @@ $past_events = new WP_Query(
 			</div>
 
 		</div>
+
+
+		<!-- ==================================================
+		     VIEW ALL PAST EVENTS
+		================================================== -->
+
+		<?php if (
+			! $is_past_page &&
+			! $is_event_archive
+		) : ?>
+
+			<div class="events-past__explore">
+
+				<a
+					href="<?php echo esc_url(
+						$past_url
+					); ?>"
+					class="events-past__explore-button"
+				>
+					<?php esc_html_e(
+						'View All Past Events',
+						'greshma'
+					); ?>
+
+					<span aria-hidden="true">
+						→
+					</span>
+
+				</a>
+
+			</div>
+
+		<?php endif; ?>
 
 	</div>
 

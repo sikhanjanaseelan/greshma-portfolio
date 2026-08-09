@@ -281,11 +281,13 @@ if (
 }
 
 /* ==========================================================
-   EVENTS — PAGE + ARCHIVE + SINGLE
+   EVENTS — LANDING + LISTINGS + ARCHIVE + SINGLE
 ========================================================== */
 
 if (
 	is_page( 'events' ) ||
+	is_page( 'upcoming-events' ) ||
+	is_page( 'past-events' ) ||
 	is_post_type_archive( 'greshma_event' ) ||
 	is_singular( 'greshma_event' )
 ) {

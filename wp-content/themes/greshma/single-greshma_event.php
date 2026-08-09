@@ -407,27 +407,47 @@ if ( have_posts() ) :
 							</div>
 
 
-							<?php if ( $registration_url ) : ?>
+						<?php
+/* ==========================================================
+   EVENT ACTION
+   Registration is available only for upcoming/ongoing events.
+========================================================== */
 
-								<a
-									href="<?php echo esc_url(
-										$registration_url
-									); ?>"
-									class="single-event__register"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									<?php esc_html_e(
-										'Register for Event',
-										'greshma'
-									); ?>
+$is_active_event = in_array(
+	$status['class'],
+	array(
+		'upcoming',
+		'ongoing',
+	),
+	true
+);
+?>
 
-									<span aria-hidden="true">
-										→
-									</span>
-								</a>
+<?php if (
+	$is_active_event &&
+	$registration_url
+) : ?>
 
-							<?php endif; ?>
+	<a
+		href="<?php echo esc_url(
+			$registration_url
+		); ?>"
+		class="single-event__register"
+		target="_blank"
+		rel="noopener noreferrer"
+	>
+		<?php esc_html_e(
+			'Register for Event',
+			'greshma'
+		); ?>
+
+		<span aria-hidden="true">
+			→
+		</span>
+
+	</a>
+
+<?php endif; ?>
 
 
 						</div>
@@ -558,7 +578,10 @@ if ( have_posts() ) :
 							</div>
 
 
-							<?php if ( $registration_url ) : ?>
+					<?php if (
+	$is_active_event &&
+	$registration_url
+) : ?>
 
 								<div class="single-event__registration-card">
 
