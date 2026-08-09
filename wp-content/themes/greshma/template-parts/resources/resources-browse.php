@@ -2,14 +2,8 @@
 /**
  * Resources Page — Browse All Resources.
  *
- * PNG placeholders:
- *
- * assets/images/resources/resource-grid-01.png
- * assets/images/resources/resource-grid-02.png
- * assets/images/resources/resource-grid-03.png
- * assets/images/resources/resource-grid-04.png
- * assets/images/resources/resource-grid-05.png
- * assets/images/resources/resource-grid-06.png
+ * Dynamic source:
+ * Greshma Core → Resources.
  *
  * @package Greshma
  */
@@ -17,578 +11,914 @@
 defined( 'ABSPATH' ) || exit;
 
 
-$resources = [
+/* ==========================================================
+   RESOURCE TYPES
+========================================================== */
 
-    [
-        'type'        => 'Guide',
-        'category'    => 'youth-education',
-        'title'       => 'Youth Leadership Facilitation Guide',
-        'description' => 'Practical tools and activities for supporting young people through meaningful leadership experiences.',
-        'format'      => 'PDF',
-        'size'        => '2.1 MB',
-        'image'       => 'resource-grid-01.png',
-    ],
+$resource_types = array(
 
-    [
-        'type'        => 'Toolkit',
-        'category'    => 'peacebuilding',
-        'title'       => 'Dialogue Circle Toolkit',
-        'description' => 'A simple toolkit for facilitating safe, inclusive, and meaningful dialogue circles.',
-        'format'      => 'PDF',
-        'size'        => '3.4 MB',
-        'image'       => 'resource-grid-02.png',
-    ],
+	'guide' => array(
+		'label'        => __( 'Guide', 'greshma' ),
+		'filter_label' => __( 'Guides', 'greshma' ),
+	),
 
-    [
-        'type'        => 'Activity Pack',
-        'category'    => 'climate-action',
-        'title'       => 'Climate Conversations Activity Pack',
-        'description' => 'Participatory activities that help young people explore climate concerns and community solutions.',
-        'format'      => 'PDF',
-        'size'        => '1.9 MB',
-        'image'       => 'resource-grid-03.png',
-    ],
+	'toolkit' => array(
+		'label'        => __( 'Toolkit', 'greshma' ),
+		'filter_label' => __( 'Toolkits', 'greshma' ),
+	),
 
-    [
-        'type'        => 'Publication',
-        'category'    => 'interfaith-dialogue',
-        'title'       => 'Interfaith Dialogue for Young Leaders',
-        'description' => 'An introductory resource for creating respectful dialogue across faiths and cultures.',
-        'format'      => 'PDF',
-        'size'        => '2.8 MB',
-        'image'       => 'resource-grid-04.png',
-    ],
+	'publication' => array(
+		'label'        => __( 'Publication', 'greshma' ),
+		'filter_label' => __( 'Publications', 'greshma' ),
+	),
 
-    [
-        'type'        => 'Template',
-        'category'    => 'facilitation-tools',
-        'title'       => 'Workshop Planning Template',
-        'description' => 'A reusable planning framework for designing engaging workshops and community conversations.',
-        'format'      => 'DOC',
-        'size'        => '850 KB',
-        'image'       => 'resource-grid-05.png',
-    ],
+	'report' => array(
+		'label'        => __( 'Report', 'greshma' ),
+		'filter_label' => __( 'Reports', 'greshma' ),
+	),
 
-    [
-        'type'        => 'Report',
-        'category'    => 'research-reports',
-        'title'       => 'Youth Participation & Community Impact',
-        'description' => 'Insights from youth-led initiatives, dialogue programs, and community engagement experiences.',
-        'format'      => 'PDF',
-        'size'        => '4.6 MB',
-        'image'       => 'resource-grid-06.png',
-    ],
+	'research' => array(
+		'label'        => __( 'Research', 'greshma' ),
+		'filter_label' => __( 'Research', 'greshma' ),
+	),
 
-];
+	'download' => array(
+		'label'        => __( 'Download', 'greshma' ),
+		'filter_label' => __( 'Downloads', 'greshma' ),
+	),
+
+	'other' => array(
+		'label'        => __( 'Other', 'greshma' ),
+		'filter_label' => __( 'Other', 'greshma' ),
+	),
+);
+
+
+/* ==========================================================
+   RESOURCE QUERY
+========================================================== */
+
+$resources_query = new WP_Query(
+	array(
+		'post_type'      => 'greshma_resource',
+		'post_status'    => 'publish',
+
+		/*
+		 * Load all resources here because the existing
+		 * frontend JavaScript performs filtering,
+		 * searching, sorting and Load More.
+		 */
+		'posts_per_page' => -1,
+
+		'meta_key' => '_greshma_resource_display_order',
+
+		'orderby' => array(
+			'meta_value_num' => 'ASC',
+			'date'           => 'DESC',
+		),
+	)
+);
+
+
+/* ==========================================================
+   AVAILABLE TYPES
+========================================================== */
+
+/*
+ * Only show type filters that are actually used by
+ * published resources.
+ */
+
+$available_types = array();
+
+if ( $resources_query->have_posts() ) {
+
+	foreach ( $resources_query->posts as $resource_post ) {
+
+		$resource_type = get_post_meta(
+			$resource_post->ID,
+			'_greshma_resource_type',
+			true
+		);
+
+		if (
+			$resource_type &&
+			isset( $resource_types[ $resource_type ] )
+		) {
+			$available_types[ $resource_type ] = true;
+		}
+	}
+}
+
+
+/* ==========================================================
+   AVAILABLE FORMATS
+========================================================== */
+
+$available_formats = array();
+
+if ( $resources_query->have_posts() ) {
+
+	foreach ( $resources_query->posts as $resource_post ) {
+
+		$file_id = absint(
+			get_post_meta(
+				$resource_post->ID,
+				'_greshma_resource_file_id',
+				true
+			)
+		);
+
+		if ( ! $file_id ) {
+			continue;
+		}
+
+		$file_path = get_attached_file( $file_id );
+
+		if ( ! $file_path ) {
+			continue;
+		}
+
+		$extension = strtolower(
+			pathinfo(
+				$file_path,
+				PATHINFO_EXTENSION
+			)
+		);
+
+		if ( $extension ) {
+			$available_formats[ $extension ] = true;
+		}
+	}
+}
+
 ?>
 
 <section
-    class="resources-browse"
-    id="resources-browse"
+	class="resources-browse"
+	id="resources-browse"
 >
 
-    <div class="container">
+	<div class="container">
 
 
-        <!-- ==========================================
-             SECTION HEADING
-        =========================================== -->
+		<!-- ==========================================
+		     SECTION HEADING
+		=========================================== -->
 
-        <div class="resources-browse__heading">
+		<div class="resources-browse__heading">
 
-            <div>
+			<div>
 
-                <span class="resources-browse__eyebrow">
-                    Resource Library
-                </span>
+				<span class="resources-browse__eyebrow">
+					<?php esc_html_e(
+						'Resource Library',
+						'greshma'
+					); ?>
+				</span>
 
-                <h2>
-                    Browse All Resources
-                </h2>
+				<h2>
+					<?php esc_html_e(
+						'Browse All Resources',
+						'greshma'
+					); ?>
+				</h2>
 
-            </div>
+			</div>
 
 
-            <p>
-                Explore practical resources created for learning,
-                dialogue, facilitation, and community action.
-            </p>
+			<p>
+				<?php esc_html_e(
+					'Explore practical resources created for learning, dialogue, facilitation, and community action.',
+					'greshma'
+				); ?>
+			</p>
 
-        </div>
+		</div>
 
 
-        <!-- ==========================================
-             MAIN LAYOUT
-        =========================================== -->
+		<!-- ==========================================
+		     MAIN LAYOUT
+		=========================================== -->
 
-        <div class="resources-browse__layout">
+		<div class="resources-browse__layout">
 
 
-            <!-- ======================================
-                 LEFT FILTER SIDEBAR
-            ======================================= -->
+			<!-- ======================================
+			     LEFT FILTER SIDEBAR
+			======================================= -->
 
-            <aside class="resources-filter">
+			<aside class="resources-filter">
 
 
-                <!-- TYPE -->
+				<!-- TYPE -->
 
-                <div class="resources-filter__group">
+				<div class="resources-filter__group">
 
-                    <h3>
-                        Filter by Type
-                    </h3>
+					<h3>
+						<?php esc_html_e(
+							'Filter by Type',
+							'greshma'
+						); ?>
+					</h3>
 
 
-                    <div class="resources-filter__options">
+					<div class="resources-filter__options">
 
-                        <label class="resources-filter__option">
 
-                            <input
-                                type="radio"
-                                name="resource-type"
-                                value="all"
-                                checked
-                            >
+						<label class="resources-filter__option">
 
-                            <span class="resources-filter__radio"></span>
+							<input
+								type="radio"
+								name="resource-type"
+								value="all"
+								checked
+							>
 
-                            <span>
-                                All
-                            </span>
+							<span class="resources-filter__radio"></span>
 
-                        </label>
+							<span>
+								<?php esc_html_e(
+									'All',
+									'greshma'
+								); ?>
+							</span>
 
+						</label>
 
-                        <label class="resources-filter__option">
 
-                            <input
-                                type="radio"
-                                name="resource-type"
-                                value="guide"
-                            >
+						<?php
+						foreach (
+							$resource_types
+							as $type_key => $type_data
+						) :
+							?>
 
-                            <span class="resources-filter__radio"></span>
+							<?php
+							if (
+								! isset(
+									$available_types[ $type_key ]
+								)
+							) {
+								continue;
+							}
+							?>
 
-                            <span>
-                                Guides
-                            </span>
+							<label class="resources-filter__option">
 
-                        </label>
+								<input
+									type="radio"
+									name="resource-type"
+									value="<?php echo esc_attr( $type_key ); ?>"
+								>
 
+								<span class="resources-filter__radio"></span>
 
-                        <label class="resources-filter__option">
+								<span>
+									<?php
+									echo esc_html(
+										$type_data['filter_label']
+									);
+									?>
+								</span>
 
-                            <input
-                                type="radio"
-                                name="resource-type"
-                                value="toolkit"
-                            >
+							</label>
 
-                            <span class="resources-filter__radio"></span>
+						<?php endforeach; ?>
 
-                            <span>
-                                Toolkits
-                            </span>
+					</div>
 
-                        </label>
+				</div>
 
 
-                        <label class="resources-filter__option">
+				<!-- FORMAT -->
 
-                            <input
-                                type="radio"
-                                name="resource-type"
-                                value="activity-pack"
-                            >
+				<?php if ( ! empty( $available_formats ) ) : ?>
 
-                            <span class="resources-filter__radio"></span>
+					<div class="resources-filter__group">
 
-                            <span>
-                                Activity Packs
-                            </span>
+						<h3>
+							<?php esc_html_e(
+								'Format',
+								'greshma'
+							); ?>
+						</h3>
 
-                        </label>
 
+						<div class="resources-filter__formats">
 
-                        <label class="resources-filter__option">
+							<?php
+							foreach (
+								$available_formats
+								as $format => $unused
+							) :
+								?>
 
-                            <input
-                                type="radio"
-                                name="resource-type"
-                                value="report"
-                            >
+								<button
+									type="button"
+									class="resources-format"
+									data-resource-format="<?php echo esc_attr( $format ); ?>"
+								>
+									<?php
+									echo esc_html(
+										strtoupper( $format )
+									);
+									?>
+								</button>
 
-                            <span class="resources-filter__radio"></span>
+							<?php endforeach; ?>
 
-                            <span>
-                                Reports
-                            </span>
+						</div>
 
-                        </label>
+					</div>
 
+				<?php endif; ?>
 
-                        <label class="resources-filter__option">
 
-                            <input
-                                type="radio"
-                                name="resource-type"
-                                value="publication"
-                            >
+				<!-- RESET -->
 
-                            <span class="resources-filter__radio"></span>
+				<button
+					type="button"
+					class="resources-filter__reset"
+				>
+					<?php esc_html_e(
+						'Reset Filters',
+						'greshma'
+					); ?>
+				</button>
 
-                            <span>
-                                Publications
-                            </span>
+			</aside>
 
-                        </label>
 
+			<!-- ======================================
+			     RIGHT RESOURCE AREA
+			======================================= -->
 
-                        <label class="resources-filter__option">
+			<div class="resources-library">
 
-                            <input
-                                type="radio"
-                                name="resource-type"
-                                value="template"
-                            >
 
-                            <span class="resources-filter__radio"></span>
+				<!-- SEARCH + SORT -->
 
-                            <span>
-                                Templates
-                            </span>
+				<div class="resources-library__toolbar">
 
-                        </label>
 
-                    </div>
+					<!-- SEARCH -->
 
-                </div>
+					<label class="resources-library__search">
 
+						<span class="screen-reader-text">
+							<?php esc_html_e(
+								'Search Resources',
+								'greshma'
+							); ?>
+						</span>
 
-                <!-- FORMAT -->
 
-                <div class="resources-filter__group">
+						<svg
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<circle
+								cx="10.5"
+								cy="10.5"
+								r="6.5"
+							/>
 
-                    <h3>
-                        Format
-                    </h3>
+							<path d="M16 16l5 5"/>
+						</svg>
 
 
-                    <div class="resources-filter__formats">
+						<input
+							type="search"
+							placeholder="<?php esc_attr_e(
+								'Search resources...',
+								'greshma'
+							); ?>"
+							data-resource-search
+						>
 
-                        <button
-                            type="button"
-                            class="resources-format"
-                            data-resource-format="pdf"
-                        >
-                            PDF
-                        </button>
+					</label>
 
 
-                        <button
-                            type="button"
-                            class="resources-format"
-                            data-resource-format="ppt"
-                        >
-                            PPT
-                        </button>
+					<!-- SORT -->
 
+					<label class="resources-library__sort">
 
-                        <button
-                            type="button"
-                            class="resources-format"
-                            data-resource-format="video"
-                        >
-                            Video
-                        </button>
+						<span>
+							<?php esc_html_e(
+								'Sort by',
+								'greshma'
+							); ?>
+						</span>
 
 
-                        <button
-                            type="button"
-                            class="resources-format"
-                            data-resource-format="doc"
-                        >
-                            DOC
-                        </button>
+						<select data-resource-sort>
 
-                    </div>
+							<option value="recent">
+								<?php esc_html_e(
+									'Most Recent',
+									'greshma'
+								); ?>
+							</option>
 
-                </div>
+							<option value="az">
+								<?php esc_html_e(
+									'A–Z',
+									'greshma'
+								); ?>
+							</option>
 
+							<option value="type">
+								<?php esc_html_e(
+									'Resource Type',
+									'greshma'
+								); ?>
+							</option>
 
-                <!-- RESET -->
+						</select>
 
-                <button
-                    type="button"
-                    class="resources-filter__reset"
-                >
-                    Reset Filters
-                </button>
+					</label>
 
-            </aside>
+				</div>
 
 
-            <!-- ======================================
-                 RIGHT RESOURCE AREA
-            ======================================= -->
+				<!-- ==================================
+				     RESOURCE GRID
+				=================================== -->
 
-            <div class="resources-library">
+				<div
+					class="resources-library__grid"
+					data-resource-grid
+				>
 
+					<?php if ( $resources_query->have_posts() ) : ?>
 
-                <!-- SEARCH + SORT -->
 
-                <div class="resources-library__toolbar">
+						<?php
+						while (
+							$resources_query->have_posts()
+						) :
+							$resources_query->the_post();
 
 
-                    <!-- SEARCH -->
+							/* ==============================
+							   RESOURCE ID
+							============================== */
 
-                    <label class="resources-library__search">
+							$resource_id = get_the_ID();
 
-                        <span class="screen-reader-text">
-                            Search Resources
-                        </span>
 
+							/* ==============================
+							   TYPE
+							============================== */
 
-                        <svg
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                        >
-                            <circle
-                                cx="10.5"
-                                cy="10.5"
-                                r="6.5"
-                            />
+							$type = get_post_meta(
+								$resource_id,
+								'_greshma_resource_type',
+								true
+							);
 
-                            <path d="M16 16l5 5"/>
-                        </svg>
+							$type = $type ?: 'other';
 
+							$type_label = isset(
+								$resource_types[ $type ]
+							)
+								? $resource_types[ $type ]['label']
+								: __( 'Resource', 'greshma' );
 
-                        <input
-                            type="search"
-                            placeholder="Search resources..."
-                            data-resource-search
-                        >
 
-                    </label>
+							/* ==============================
+							   CATEGORY
+							============================== */
 
+							$categories = get_the_terms(
+								$resource_id,
+								'greshma_resource_category'
+							);
 
-                    <!-- SORT -->
+							$category_slugs = array();
 
-                    <label class="resources-library__sort">
+							if (
+								$categories &&
+								! is_wp_error( $categories )
+							) {
 
-                        <span>
-                            Sort by
-                        </span>
+								foreach (
+									$categories
+									as $category
+								) {
 
+									$category_slugs[] =
+										$category->slug;
+								}
+							}
 
-                        <select data-resource-sort>
+							$category_data = implode(
+								' ',
+								$category_slugs
+							);
 
-                            <option value="recent">
-                                Most Recent
-                            </option>
 
-                            <option value="az">
-                                A–Z
-                            </option>
+							/* ==============================
+							   FILE
+							============================== */
 
-                            <option value="type">
-                                Resource Type
-                            </option>
+							$file_id = absint(
+								get_post_meta(
+									$resource_id,
+									'_greshma_resource_file_id',
+									true
+								)
+							);
 
-                        </select>
+							$file_url = $file_id
+								? wp_get_attachment_url(
+									$file_id
+								)
+								: '';
 
-                    </label>
 
-                </div>
+							/* ==============================
+							   FORMAT + SIZE
+							============================== */
 
+							$file_format = '';
+							$file_size   = '';
 
-                <!-- ==================================
-                     RESOURCE GRID
-                =================================== -->
+							if ( $file_id ) {
 
-                <div
-                    class="resources-library__grid"
-                    data-resource-grid
-                >
+								$file_path = get_attached_file(
+									$file_id
+								);
 
-                    <?php foreach ( $resources as $resource ) : ?>
+								if ( $file_path ) {
 
-                        <article
-                            class="resource-library-card"
-                            data-resource-item
-                            data-type="<?php
-                            echo esc_attr(
-                                sanitize_title(
-                                    $resource['type']
-                                )
-                            );
-                            ?>"
-                            data-category="<?php
-                            echo esc_attr(
-                                $resource['category']
-                            );
-                            ?>"
-                            data-format="<?php
-                            echo esc_attr(
-                                strtolower(
-                                    $resource['format']
-                                )
-                            );
-                            ?>"
-                        >
+									$file_format = strtolower(
+										pathinfo(
+											$file_path,
+											PATHINFO_EXTENSION
+										)
+									);
+								}
 
 
-                            <!-- IMAGE -->
+								if (
+									$file_path &&
+									file_exists( $file_path )
+								) {
 
-                            <div class="resource-library-card__image">
+									$file_size = size_format(
+										filesize( $file_path ),
+										1
+									);
+								}
+							}
 
-                                <div class="resource-library-card__placeholder">
 
-                                    <span>
-                                        <?php
-                                        echo esc_html(
-                                            $resource['image']
-                                        );
-                                        ?>
-                                    </span>
+							/* ==============================
+							   EXTERNAL URL
+							============================== */
 
-                                </div>
+							$external_url = get_post_meta(
+								$resource_id,
+								'_greshma_resource_external_url',
+								true
+							);
 
 
-                                <span class="resource-library-card__badge">
+							/* ==============================
+							   DESTINATION
+							============================== */
 
-                                    <?php
-                                    echo esc_html(
-                                        $resource['type']
-                                    );
-                                    ?>
+							if ( $file_url ) {
 
-                                </span>
+								$destination = $file_url;
 
-                            </div>
+							} elseif ( $external_url ) {
 
+								$destination = $external_url;
 
-                            <!-- CONTENT -->
+							} else {
 
-                            <div class="resource-library-card__content">
+								$destination = get_permalink(
+									$resource_id
+								);
+							}
 
-                                <h3>
 
-                                    <?php
-                                    echo esc_html(
-                                        $resource['title']
-                                    );
-                                    ?>
+							/* ==============================
+							   DESCRIPTION
+							============================== */
 
-                                </h3>
+							$description = get_the_excerpt();
 
+							if ( ! $description ) {
 
-                                <p>
+								$description = wp_trim_words(
+									wp_strip_all_tags(
+										get_the_content()
+									),
+									22,
+									'…'
+								);
+							}
 
-                                    <?php
-                                    echo esc_html(
-                                        $resource['description']
-                                    );
-                                    ?>
 
-                                </p>
+							/* ==============================
+							   SORT DATE
+							============================== */
 
+							$published_timestamp =
+								get_post_time(
+									'U',
+									true,
+									$resource_id
+								);
+							?>
 
-                                <div class="resource-library-card__footer">
 
-                                    <div class="resource-library-card__meta">
+							<article
+								class="resource-library-card"
+								data-resource-item
+								data-type="<?php echo esc_attr( $type ); ?>"
+								data-category="<?php echo esc_attr( $category_data ); ?>"
+								data-format="<?php echo esc_attr( $file_format ); ?>"
+								data-date="<?php echo esc_attr( $published_timestamp ); ?>"
+							>
 
-                                        <span>
 
-                                            <?php
-                                            echo esc_html(
-                                                $resource['format']
-                                            );
-                                            ?>
+								<!-- IMAGE -->
 
-                                        </span>
+								<div class="resource-library-card__image">
 
 
-                                        <span
-                                            class="resource-library-card__dot"
-                                            aria-hidden="true"
-                                        ></span>
+									<?php if ( has_post_thumbnail() ) : ?>
 
+										<?php
+										the_post_thumbnail(
+											'medium_large',
+											array(
+												'class' =>
+													'resource-library-card__image-file',
 
-                                        <span>
+												'loading' =>
+													'lazy',
 
-                                            <?php
-                                            echo esc_html(
-                                                $resource['size']
-                                            );
-                                            ?>
+												'decoding' =>
+													'async',
 
-                                        </span>
+												'alt' =>
+													the_title_attribute(
+														array(
+															'echo' => false,
+														)
+													),
+											)
+										);
+										?>
 
-                                    </div>
 
+									<?php else : ?>
 
-                                    <a
-                                        href="#"
-                                        class="resource-library-card__download"
-                                        aria-label="<?php
-                                        echo esc_attr(
-                                            'Download ' .
-                                            $resource['title']
-                                        );
-                                        ?>"
-                                    >
+										<div class="resource-library-card__placeholder">
 
-                                        <svg
-                                            viewBox="0 0 24 24"
-                                            aria-hidden="true"
-                                        >
-                                            <path d="M12 3v12"/>
-                                            <path d="m7 10 5 5 5-5"/>
-                                            <path d="M5 20h14"/>
-                                        </svg>
+											<span>
+												<?php
+												echo esc_html(
+													$type_label
+												);
+												?>
+											</span>
 
-                                    </a>
+										</div>
 
-                                </div>
+									<?php endif; ?>
 
-                            </div>
 
-                        </article>
+									<span class="resource-library-card__badge">
 
-                    <?php endforeach; ?>
+										<?php
+										echo esc_html(
+											$type_label
+										);
+										?>
 
-                </div>
+									</span>
 
+								</div>
 
-                <!-- LOAD MORE -->
 
-                <div
-                    class="resources-library__more"
-                    data-resource-more-wrap
-                >
+								<!-- CONTENT -->
 
-                    <button
-                        type="button"
-                        class="resources-library__more-button"
-                        data-resource-load-more
-                    >
+								<div class="resource-library-card__content">
 
-                        Load More Resources
+									<h3>
+										<?php the_title(); ?>
+									</h3>
 
-                        <span aria-hidden="true">
-                            ↓
-                        </span>
 
-                    </button>
+									<?php if ( $description ) : ?>
 
-                </div>
+										<p>
+											<?php
+											echo esc_html(
+												wp_trim_words(
+													$description,
+													22,
+													'…'
+												)
+											);
+											?>
+										</p>
 
-            </div>
+									<?php endif; ?>
 
-        </div>
 
-    </div>
+									<div class="resource-library-card__footer">
+
+
+										<div class="resource-library-card__meta">
+
+
+											<?php if ( $file_format ) : ?>
+
+												<span>
+
+													<?php
+													echo esc_html(
+														strtoupper(
+															$file_format
+														)
+													);
+													?>
+
+												</span>
+
+											<?php endif; ?>
+
+
+											<?php if (
+												$file_format &&
+												$file_size
+											) : ?>
+
+												<span
+													class="resource-library-card__dot"
+													aria-hidden="true"
+												></span>
+
+											<?php endif; ?>
+
+
+											<?php if ( $file_size ) : ?>
+
+												<span>
+													<?php
+													echo esc_html(
+														$file_size
+													);
+													?>
+												</span>
+
+											<?php endif; ?>
+
+
+											<?php if (
+												! $file_format &&
+												$external_url
+											) : ?>
+
+												<span>
+													<?php esc_html_e(
+														'Online',
+														'greshma'
+													); ?>
+												</span>
+
+											<?php endif; ?>
+
+
+										</div>
+
+
+										<a
+											href="<?php echo esc_url( $destination ); ?>"
+											class="resource-library-card__download"
+											aria-label="<?php echo esc_attr(
+												sprintf(
+													__(
+														'Open %s',
+														'greshma'
+													),
+													get_the_title()
+												)
+											); ?>"
+											<?php
+											if (
+												$file_url ||
+												$external_url
+											) :
+												?>
+												target="_blank"
+												rel="noopener noreferrer"
+											<?php endif; ?>
+										>
+
+											<svg
+												viewBox="0 0 24 24"
+												aria-hidden="true"
+											>
+												<path d="M12 3v12"/>
+												<path d="m7 10 5 5 5-5"/>
+												<path d="M5 20h14"/>
+											</svg>
+
+										</a>
+
+
+									</div>
+
+								</div>
+
+							</article>
+
+
+						<?php endwhile; ?>
+
+
+						<?php wp_reset_postdata(); ?>
+
+
+					<?php else : ?>
+
+
+						<div class="resources-library__empty">
+
+							<p>
+								<?php esc_html_e(
+									'Resources will appear here soon.',
+									'greshma'
+								); ?>
+							</p>
+
+						</div>
+
+
+					<?php endif; ?>
+
+				</div>
+
+
+				<!-- ==================================
+				     NO FILTER RESULTS
+				=================================== -->
+
+				<div
+					class="resources-library__no-results"
+					data-resource-no-results
+					hidden
+				>
+
+					<p>
+						<?php esc_html_e(
+							'No resources match your current filters.',
+							'greshma'
+						); ?>
+					</p>
+
+				</div>
+
+
+				<!-- LOAD MORE -->
+
+				<div
+					class="resources-library__more"
+					data-resource-more-wrap
+				>
+
+					<button
+						type="button"
+						class="resources-library__more-button"
+						data-resource-load-more
+					>
+
+						<?php esc_html_e(
+							'Load More Resources',
+							'greshma'
+						); ?>
+
+						<span aria-hidden="true">
+							↓
+						</span>
+
+					</button>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
 
 </section>
