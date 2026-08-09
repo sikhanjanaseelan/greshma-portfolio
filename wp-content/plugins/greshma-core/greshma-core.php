@@ -69,5 +69,8 @@ require_once GRESHMA_CORE_DIR . 'includes/class-editorial-taxonomy.php';
 require_once GRESHMA_CORE_DIR . 'includes/class-editorial-admin.php';
 require_once GRESHMA_CORE_DIR . 'includes/class-editorial-editor.php';
 
+//recognition module
+require_once GRESHMA_CORE_DIR . 'includes/class-recognition.php';
+
 
 require_once GRESHMA_CORE_DIR . 'includes/class-admin-menu.php';

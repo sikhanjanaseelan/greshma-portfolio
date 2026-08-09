@@ -3839,3 +3839,75 @@ assets/images/impacts/impacts-cta-bg.png
 	object-fit: cover;
 	object-position: center;
 }
+
+/* ==========================================================
+   RECOGNITION — DYNAMIC CONTENT
+========================================================== */
+
+.impacts-recognition__logo {
+	display: flex;
+
+	align-items: center;
+	justify-content: center;
+
+	width: 100%;
+	height: 76px;
+
+	overflow: hidden;
+}
+
+
+.impacts-recognition__logo-image {
+	display: block;
+
+	width: auto;
+	max-width: 100%;
+
+	height: auto;
+	max-height: 68px;
+
+	object-fit: contain;
+}
+
+
+.impacts-recognition__card-content h3 a {
+	color: inherit;
+
+	text-decoration: none;
+}
+
+
+.impacts-recognition__card-content h3 a:hover,
+.impacts-recognition__card-content h3 a:focus-visible {
+	color: #315b47;
+}
+
+
+.impacts-recognition__year {
+	display: inline-block;
+
+	margin-top: 8px;
+
+	color: #8d6c32;
+
+	font-size: 11px;
+	font-weight: 700;
+}
+
+
+.impacts-recognition__main-image {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+	object-position: center;
+}
+
+
+.impacts-recognition__empty {
+	padding: 30px 20px;
+
+	color: #68736d;
+}

@@ -554,7 +554,45 @@ class Greshma_Core_Admin_Menu {
 					),
 				),
 			),
+/* ==================================================
+   RECOGNITION
+================================================== */
 
+'recognition' => array(
+
+	'title'       => __( 'Recognition & Honors', 'greshma-core' ),
+	'menu_title'  => __( 'RECOGNITION', 'greshma-core' ),
+	'group_slug'  => 'greshma-recognition-section',
+	'color'       => '#c6a567',
+	'capability'  => 'edit_posts',
+	'primary_cpt' => 'greshma_recognition',
+
+	'description' => __(
+		'Manage awards, honors and recognition presented across the portfolio.',
+		'greshma-core'
+	),
+
+	'post_types' => array(
+		'greshma_recognition',
+	),
+
+	'taxonomies' => array(),
+
+	'children' => array(
+
+		array(
+			'title' => __( 'All Recognitions', 'greshma-core' ),
+			'slug'  => 'edit.php?post_type=greshma_recognition',
+			'cap'   => 'edit_posts',
+		),
+
+		array(
+			'title' => __( 'Add New Recognition', 'greshma-core' ),
+			'slug'  => 'post-new.php?post_type=greshma_recognition',
+			'cap'   => 'edit_posts',
+		),
+	),
+),
 
 			/* ==================================================
 			   SITE SETTINGS

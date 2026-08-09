@@ -165,6 +165,18 @@ public static function init(): void {
 'impact_stats_background' => isset( $input['impact_stats_background'] )
 	? esc_url_raw( $input['impact_stats_background'] )
 	: '',
+
+	'recognition_main_image' => isset( $input['recognition_main_image'] )
+	? esc_url_raw( $input['recognition_main_image'] )
+	: '',
+
+'recognition_quote' => isset( $input['recognition_quote'] )
+	? sanitize_textarea_field( $input['recognition_quote'] )
+	: '',
+
+'recognition_quote_author' => isset( $input['recognition_quote_author'] )
+	? sanitize_text_field( $input['recognition_quote_author'] )
+	: '',
 		);
 	}
 
@@ -275,7 +287,18 @@ $impact_networks_suffix =
 
 $impact_stats_background =
 	$settings['impact_stats_background'] ?? '';
-		?>
+	
+	$recognition_main_image =
+	$settings['recognition_main_image'] ?? '';
+
+$recognition_quote =
+	$settings['recognition_quote'] ??
+	'Recognition is meaningful not because of the title, but because it reflects the people, partnerships and purpose behind the work.';
+
+$recognition_quote_author =
+	$settings['recognition_quote_author'] ??
+	'Greshma Pious Raju';
+	?>
 
 		<div class="wrap">
 
@@ -658,7 +681,102 @@ $impact_stats_background =
 </table>
 
 				<hr>
+<hr>
 
+<h2>
+	<?php esc_html_e(
+		'Recognition & Honors',
+		'greshma-core'
+	); ?>
+</h2>
+
+<p>
+	<?php esc_html_e(
+		'Manage the main image and quote used in the Recognition & Honors section.',
+		'greshma-core'
+	); ?>
+</p>
+
+<table class="form-table">
+
+	<tr>
+
+		<th>
+			<label for="recognition_main_image">
+				<?php esc_html_e(
+					'Main Recognition Image URL',
+					'greshma-core'
+				); ?>
+			</label>
+		</th>
+
+		<td>
+
+			<input
+				type="url"
+				id="recognition_main_image"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[recognition_main_image]"
+				value="<?php echo esc_attr( $recognition_main_image ); ?>"
+				class="regular-text"
+				placeholder="https://..."
+			>
+
+		</td>
+
+	</tr>
+
+
+	<tr>
+
+		<th>
+			<label for="recognition_quote">
+				<?php esc_html_e(
+					'Recognition Quote',
+					'greshma-core'
+				); ?>
+			</label>
+		</th>
+
+		<td>
+
+			<textarea
+				id="recognition_quote"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[recognition_quote]"
+				rows="5"
+				class="large-text"
+			><?php echo esc_textarea( $recognition_quote ); ?></textarea>
+
+		</td>
+
+	</tr>
+
+
+	<tr>
+
+		<th>
+			<label for="recognition_quote_author">
+				<?php esc_html_e(
+					'Quote Author',
+					'greshma-core'
+				); ?>
+			</label>
+		</th>
+
+		<td>
+
+			<input
+				type="text"
+				id="recognition_quote_author"
+				name="<?php echo esc_attr( self::OPTION_NAME ); ?>[recognition_quote_author]"
+				value="<?php echo esc_attr( $recognition_quote_author ); ?>"
+				class="regular-text"
+			>
+
+		</td>
+
+	</tr>
+
+</table>
 				<h2>
 					<?php esc_html_e(
 						'Footer',
