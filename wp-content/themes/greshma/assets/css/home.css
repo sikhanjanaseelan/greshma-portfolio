@@ -1751,8 +1751,7 @@
 	position: relative;
 
 	padding: 78px 0 72px;
-
-	background: #f6f2ea;
+background:#173F35;
 
 	overflow: hidden;
 }
@@ -4634,5 +4633,976 @@ Responsive
 
     .site-footer__legal{
         flex-wrap:wrap;
+    }
+}
+
+
+/* =========================================================
+   HOMEPAGE RESPONSIVE STABILIZATION LAYER
+   Added after existing approved desktop styles.
+   Purpose:
+   - preserve desktop design
+   - remove horizontal overflow
+   - improve tablet stacking
+   - make cards/images fit smaller screens
+   - keep section spacing proportionate
+========================================================= */
+
+/* ---------- Global safeguards ---------- */
+
+.home-page,
+.home-page main,
+.paths-section,
+.home-about,
+.impact-section,
+.home-initiatives,
+.field-stories,
+.home-journey,
+.home-testimonials,
+.home-speaking,
+.home-journal,
+.home-cta {
+    max-width: 100%;
+}
+
+.paths-section *,
+.home-about *,
+.impact-section *,
+.home-initiatives *,
+.field-stories *,
+.home-journey *,
+.home-testimonials *,
+.home-speaking *,
+.home-journal *,
+.home-cta * {
+    box-sizing: border-box;
+}
+
+.paths-section img,
+.home-about img,
+.impact-section img,
+.home-initiatives img,
+.field-stories img,
+.home-journey img,
+.home-testimonials img,
+.home-speaking img,
+.home-journal img,
+.home-cta img {
+    max-width: 100%;
+}
+
+@media (max-width: 1280px) {
+
+    /* PATHS */
+    .paths-layout {
+        grid-template-columns: 200px minmax(0, 1fr);
+    }
+
+    .paths-cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    /* ABOUT */
+    .home-about {
+        padding: 88px 0;
+    }
+
+    .home-about__layout {
+        gap: clamp(45px, 6vw, 80px);
+    }
+
+    /* IMPACT */
+    .impact-section__inner {
+        grid-template-columns: minmax(300px, .9fr) minmax(0, 1.25fr);
+        min-height: 650px;
+    }
+
+    .impact-map {
+        min-height: 650px;
+    }
+
+    .impact-section__content {
+        padding: 78px clamp(30px, 5vw, 70px);
+    }
+
+    /* SPEAKING */
+    .home-speaking {
+        padding: 88px 0;
+    }
+
+    .home-speaking__header {
+        gap: 46px;
+        margin-bottom: 44px;
+    }
+
+    .home-speaking__title {
+        font-size: clamp(38px, 4.5vw, 58px);
+    }
+}
+
+@media (max-width: 1100px) {
+
+    /* PATHS */
+    .paths-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .paths-intro {
+        max-width: 620px;
+        padding-right: 0;
+    }
+
+    .paths-intro p {
+        max-width: 560px;
+    }
+
+    .paths-cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    /* ABOUT */
+    .home-about__layout {
+        grid-template-columns: minmax(280px, .8fr) minmax(0, 1fr);
+        gap: 44px;
+    }
+
+    .home-about__visual {
+        min-height: 470px;
+    }
+
+    .home-about__portrait-wrap {
+        width: min(100%, 320px);
+    }
+
+    .home-about__features {
+        gap: 18px;
+    }
+
+    /* IMPACT */
+    .impact-section__inner {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .impact-section__content {
+        padding: 72px clamp(28px, 6vw, 64px);
+    }
+
+    .impact-stats {
+        max-width: 720px;
+        margin-top: 48px;
+    }
+
+    .impact-map {
+        min-height: 540px;
+    }
+
+    .impact-map__fade {
+        display: none;
+    }
+
+    .impact-map__world {
+        inset: 3% -2% 0;
+    }
+
+    /* INITIATIVES */
+    .home-initiatives__header {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .home-initiatives__intro {
+        max-width: 620px;
+    }
+
+    /* STORIES */
+    .field-stories__slider {
+        grid-template-columns: 42px minmax(0, 1fr) 42px;
+        gap: 12px;
+    }
+
+    /* JOURNEY */
+    .journey-timeline {
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* TESTIMONIALS */
+    .home-testimonials {
+        padding: 82px 0;
+    }
+
+    .home-testimonials__heading {
+        margin-bottom: 42px;
+    }
+
+    /* SPEAKING */
+    .home-speaking__header {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .home-speaking__intro {
+        max-width: 640px;
+    }
+
+    .home-speaking__grid {
+        overflow-x: auto;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(235px, 28vw);
+        grid-template-columns: none;
+        overscroll-behavior-inline: contain;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        padding-bottom: 8px;
+    }
+
+    .speaking-card {
+        scroll-snap-align: start;
+    }
+
+    /* JOURNAL */
+    .home-journal .journal-editorial-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .home-journal .journal-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: none;
+    }
+
+    .home-journal .journal-list-card {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* FOOTER */
+    .site-footer__main {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .site-footer__newsletter {
+        grid-column: 2 / 4;
+    }
+}
+
+@media (max-width: 900px) {
+
+    /* SECTION SPACING */
+    .paths-section {
+        padding: 56px 0;
+    }
+
+    .home-about {
+        padding: 70px 0;
+    }
+
+    .home-initiatives,
+    .field-stories,
+    .home-journey,
+    .home-speaking,
+    .home-journal {
+        padding-top: 58px;
+        padding-bottom: 62px;
+    }
+
+    /* PATHS */
+    .paths-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .path-card-image {
+        height: 175px;
+    }
+
+    .path-card-content {
+        min-height: 195px;
+    }
+
+    /* ABOUT */
+    .home-about__layout {
+        grid-template-columns: 1fr;
+        gap: 46px;
+    }
+
+    .home-about__visual {
+        min-height: auto;
+    }
+
+    .home-about__portrait-wrap {
+        width: min(72vw, 350px);
+    }
+
+    .home-about__content {
+        max-width: none;
+    }
+
+    .home-about__title {
+        font-size: clamp(38px, 7vw, 54px);
+    }
+
+    .home-about__features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    /* IMPACT */
+    .impact-section__content {
+        padding: 62px 28px 56px;
+    }
+
+    .impact-map {
+        min-height: 480px;
+    }
+
+    .impact-map__placeholder {
+        inset: 5% -5% 2%;
+    }
+
+    .impact-location__label {
+        font-size: 10px;
+        padding: 5px 8px;
+    }
+
+    /* INITIATIVES */
+    .home-initiatives__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .home-initiatives .initiative-card__media,
+    .home-initiatives .initiative-card--1 .initiative-card__media,
+    .home-initiatives .initiative-card--2 .initiative-card__media,
+    .home-initiatives .initiative-card--3 .initiative-card__media {
+        height: 180px;
+    }
+
+    /* STORIES */
+    .field-stories__slider {
+        display: block;
+    }
+
+    .field-stories__arrow {
+        display: none;
+    }
+
+    .field-stories__track {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(220px, 42vw);
+        grid-template-columns: none;
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        padding-bottom: 8px;
+    }
+
+    .field-story-card {
+        scroll-snap-align: start;
+    }
+
+    /* TESTIMONIALS */
+    .home-testimonials__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: none;
+    }
+
+    /* JOURNAL */
+    .home-journal .journal-featured {
+        grid-template-columns: 40% minmax(0, 1fr);
+        min-height: 290px;
+    }
+
+    .home-journal .journal-featured__image,
+    .home-journal .journal-featured__image-file,
+    .home-journal .journal-featured__placeholder {
+        min-height: 290px;
+    }
+
+    /* CTA */
+    .home-cta__panel {
+        width: 94%;
+        min-height: 250px;
+        padding: 54px 56px 48px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* GLOBAL MOBILE TYPE RHYTHM */
+    .paths-intro h2,
+    .home-about__title,
+    .impact-section__title,
+    .home-initiatives__title,
+    .home-speaking__title {
+        overflow-wrap: anywhere;
+    }
+
+    /* PATHS */
+    .paths-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .path-card-image {
+        height: clamp(180px, 52vw, 230px);
+    }
+
+    .path-card-content {
+        min-height: 0;
+        padding: 30px 18px 18px;
+    }
+
+    .path-card h3 {
+        min-height: 0;
+        font-size: 20px;
+    }
+
+    .path-card p {
+        font-size: 13px;
+    }
+
+    /* ABOUT */
+    .home-about__portrait-wrap {
+        width: min(82vw, 330px);
+    }
+
+    .home-about__features {
+        grid-template-columns: 1fr;
+    }
+
+    .home-about__lead {
+        font-size: 17px;
+    }
+
+    .home-about__description {
+        font-size: 13px;
+    }
+
+    /* IMPACT */
+    .impact-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px 16px;
+        margin-top: 38px;
+    }
+
+    .impact-stat__number {
+        font-size: 30px;
+    }
+
+    .impact-map {
+        min-height: 420px;
+    }
+
+    .impact-map__world {
+        inset: 7% -12% 4%;
+    }
+
+    .impact-location {
+        font-size: 9px;
+        gap: 6px;
+    }
+
+    .impact-location__label {
+        max-width: 105px;
+        white-space: normal;
+        line-height: 1.2;
+    }
+
+    /* INITIATIVES */
+    .home-initiatives__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .home-initiatives .initiative-card__media,
+    .home-initiatives .initiative-card--1 .initiative-card__media,
+    .home-initiatives .initiative-card--2 .initiative-card__media,
+    .home-initiatives .initiative-card--3 .initiative-card__media {
+        height: clamp(175px, 48vw, 225px);
+    }
+
+    /* STORIES */
+    .field-stories__heading {
+        gap: 10px;
+        margin-bottom: 24px;
+    }
+
+    .field-stories__line {
+        max-width: 50px;
+    }
+
+    .field-stories__title {
+        white-space: normal;
+        text-align: center;
+        font-size: 13px;
+    }
+
+    .field-stories__track {
+        grid-auto-columns: minmax(210px, 72vw);
+    }
+
+    .field-story-card__media {
+        height: 155px;
+    }
+
+    /* JOURNEY */
+    .home-journey__heading {
+        margin-bottom: 28px;
+    }
+
+    .home-journey__heading-line {
+        max-width: 55px;
+    }
+
+    .journey-timeline__items {
+        grid-template-columns: repeat(6, 145px);
+        gap: 10px;
+        padding-inline: 8px;
+    }
+
+    .journey-timeline__line {
+        width: 890px;
+    }
+
+    /* TESTIMONIALS */
+    .home-testimonials {
+        padding: 62px 0;
+    }
+
+    .home-testimonials__heading {
+        gap: 12px;
+        margin-bottom: 30px;
+    }
+
+    .home-testimonials__line {
+        max-width: 55px;
+    }
+
+    .home-testimonials__title {
+        font-size: 15px;
+        letter-spacing: .14em;
+        text-align: center;
+    }
+
+    .home-testimonials__grid {
+        grid-template-columns: 1fr;
+        max-width: 620px;
+        margin-inline: auto;
+    }
+
+    /* SPEAKING */
+    .home-speaking__header {
+        margin-bottom: 34px;
+    }
+
+    .home-speaking__title {
+        font-size: clamp(32px, 9vw, 44px);
+        line-height: 1.05;
+    }
+
+    .home-speaking__intro p {
+        font-size: 14px;
+    }
+
+    .home-speaking__grid {
+        grid-auto-columns: minmax(225px, 74vw);
+        gap: 16px;
+    }
+
+    .speaking-card__media {
+        height: 185px;
+    }
+
+    .speaking-card__content {
+        padding: 17px;
+    }
+
+    .speaking-card__title {
+        font-size: 19px;
+    }
+
+    /* JOURNAL */
+    .home-journal .journal-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .home-journal .journal-featured {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .home-journal .journal-featured__image,
+    .home-journal .journal-featured__image-file,
+    .home-journal .journal-featured__placeholder {
+        min-height: 210px;
+    }
+
+    .home-journal .journal-featured__content {
+        padding: 22px 20px;
+    }
+
+    .home-journal .journal-featured__content h2 {
+        font-size: 24px;
+    }
+
+    .home-journal .journal-list {
+        grid-template-columns: 1fr;
+    }
+
+    .home-journal .journal-list-card {
+        display: grid;
+        grid-template-columns: 100px minmax(0, 1fr);
+    }
+
+    .home-journal .journal-list-card__image,
+    .home-journal .journal-list-card__image-file,
+    .home-journal .journal-list-card__placeholder {
+        min-height: 110px;
+    }
+
+    /* CTA */
+    .home-cta__landscape {
+        min-height: 320px;
+        padding-bottom: 70px;
+    }
+
+    .home-cta__panel {
+        width: 94%;
+        min-height: 0;
+        padding: 46px 24px 42px;
+        border-top-left-radius: 24px;
+        border-top-right-radius: 24px;
+        border-bottom-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+    }
+
+    .home-cta__title {
+        font-size: clamp(26px, 7vw, 32px);
+    }
+
+    .home-cta__subtitle {
+        font-size: clamp(20px, 5.5vw, 24px);
+    }
+
+    /* FOOTER */
+    .site-footer {
+        margin-top: -24px;
+        padding: 58px 0 24px;
+    }
+
+    .site-footer__main {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 22px;
+    }
+
+    .site-footer__brand {
+        grid-column: 1 / -1;
+    }
+
+    .site-footer__column,
+    .site-footer__newsletter {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .site-footer__newsletter {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 560px) {
+
+    /* SECTION SPACING */
+    .paths-section,
+    .home-about,
+    .home-initiatives,
+    .field-stories,
+    .home-journey,
+    .home-speaking,
+    .home-journal {
+        padding-top: 48px;
+        padding-bottom: 52px;
+    }
+
+    /* PATHS */
+    .paths-intro h2 {
+        font-size: 34px;
+    }
+
+    .paths-label {
+        font-size: 10px;
+    }
+
+    /* ABOUT */
+    .home-about__layout {
+        gap: 38px;
+    }
+
+    .home-about__portrait-wrap {
+        width: min(86vw, 300px);
+    }
+
+    .home-about__portrait {
+        border-width: 5px;
+    }
+
+    .home-about__portrait-wrap::before {
+        right: -10px;
+    }
+
+    .home-about__portrait-wrap::after {
+        left: -12px;
+    }
+
+    .home-about__title {
+        font-size: 36px;
+    }
+
+    .home-about__features {
+        margin-top: 26px;
+        padding-top: 24px;
+    }
+
+    .home-about__button {
+        margin-top: 28px;
+    }
+
+    /* IMPACT */
+    .impact-section__content {
+        padding: 50px 20px 46px;
+    }
+
+    .impact-section__title {
+        font-size: 34px;
+    }
+
+    .impact-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .impact-stat__label {
+        max-width: none;
+    }
+
+    .impact-map {
+        min-height: 360px;
+    }
+
+    .impact-map__placeholder {
+        inset: 7% -20% 3% -16%;
+        transform: scale(.9);
+    }
+
+    .impact-location__label {
+        display: none;
+    }
+
+    .impact-location__dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    /* INITIATIVES */
+    .home-initiatives__title {
+        font-size: 29px;
+    }
+
+    .home-initiatives__intro p {
+        font-size: 12px;
+    }
+
+    .home-initiatives .initiative-card__content,
+    .home-initiatives .initiative-card--1 .initiative-card__content {
+        padding: 15px 16px 17px;
+    }
+
+    /* STORIES */
+    .field-stories__track {
+        grid-auto-columns: minmax(205px, 82vw);
+    }
+
+    .field-story-card__title {
+        font-size: 16px;
+    }
+
+    /* JOURNEY */
+    .home-journey__title {
+        font-size: 13px;
+        letter-spacing: .1em;
+    }
+
+    .journey-timeline__items {
+        grid-template-columns: repeat(6, 138px);
+    }
+
+    .journey-item__description {
+        font-size: 10px;
+    }
+
+    /* SPEAKING */
+    .home-speaking__grid {
+        grid-auto-columns: minmax(215px, 84vw);
+    }
+
+    /* JOURNAL */
+    .home-journal .journal-featured__image,
+    .home-journal .journal-featured__image-file,
+    .home-journal .journal-featured__placeholder {
+        min-height: 190px;
+    }
+
+    .home-journal .journal-featured__content h2 {
+        font-size: 22px;
+    }
+
+    .home-journal .journal-list-card {
+        grid-template-columns: 92px minmax(0, 1fr);
+    }
+
+    .home-journal .journal-list-card__content h3 {
+        font-size: 14px;
+    }
+
+    /* CTA */
+    .home-cta__landscape {
+        padding-bottom: 56px;
+    }
+
+    .home-cta__panel {
+        width: 96%;
+        padding: 40px 18px 36px;
+        clip-path: none;
+        border-radius: 26px;
+    }
+
+    .home-cta__button {
+        min-width: 160px;
+        min-height: 48px;
+        padding: 12px 22px;
+    }
+
+    .home-cta__leaf {
+        width: 72px;
+    }
+
+    /* FOOTER */
+    .site-footer__main {
+        grid-template-columns: 1fr;
+    }
+
+    .site-footer__brand,
+    .site-footer__newsletter {
+        grid-column: auto;
+    }
+
+    .site-footer__column {
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .site-footer__bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .site-footer__legal {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .paths-section,
+    .home-about,
+    .home-initiatives,
+    .field-stories,
+    .home-journey,
+    .home-speaking,
+    .home-journal {
+        padding-top: 44px;
+        padding-bottom: 48px;
+    }
+
+    .home-about__title,
+    .impact-section__title {
+        font-size: 32px;
+    }
+
+    .home-initiatives__title {
+        font-size: 27px;
+    }
+
+    .field-stories__track {
+        grid-auto-columns: 86vw;
+    }
+
+    .home-speaking__grid {
+        grid-auto-columns: 86vw;
+    }
+
+    .home-journal .journal-list-card {
+        grid-template-columns: 84px minmax(0, 1fr);
+    }
+
+    .home-cta__title {
+        font-size: 25px;
+    }
+
+    .home-cta__subtitle {
+        font-size: 20px;
+    }
+
+    .site-footer__form {
+        grid-template-columns: minmax(0, 1fr) 48px;
+    }
+
+    .site-footer__form button {
+        width: 48px;
+    }
+}
+
+/* ---------- Horizontal scroll polish ---------- */
+
+@media (max-width: 1200px) {
+
+    .field-stories__track,
+    .journey-timeline,
+    .home-speaking__grid {
+        scrollbar-width: none;
+    }
+
+    .field-stories__track::-webkit-scrollbar,
+    .journey-timeline::-webkit-scrollbar,
+    .home-speaking__grid::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .path-card,
+    .path-card-image img,
+    .home-about__portrait img,
+    .initiative-card,
+    .initiative-card__image,
+    .field-story-card,
+    .field-story-card__image,
+    .testimonial-card,
+    .speaking-card,
+    .speaking-card__image,
+    .home-journal .journal-featured,
+    .home-journal .journal-list-card,
+    .home-cta__button {
+        transition: none !important;
+        transform: none !important;
+    }
+
+    .impact-location__pulse {
+        animation: none !important;
     }
 }
