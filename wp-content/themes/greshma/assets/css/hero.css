@@ -88,7 +88,7 @@
     bottom: 0;
     display: block;
     width: auto;
-    height: min(82vh, 850px);
+    height: min(96vh, 980px);
     max-width: none;
     object-fit: contain;
     object-position: bottom center;

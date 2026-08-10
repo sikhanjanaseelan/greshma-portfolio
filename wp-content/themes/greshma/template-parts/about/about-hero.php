@@ -22,32 +22,31 @@ defined( 'ABSPATH' ) || exit;
 
 <section class="about-hero">
 
-    <!-- ==================================================
-         BACKGROUND IMAGE PLACEHOLDER
-
-         FINAL IMAGE:
-         assets/images/about/about-hero-bg.png
-
-         Replace this placeholder when the final
-         mountain / nature image is available.
-    =================================================== -->
+    <!-- FULL HERO BACKGROUND -->
     <div class="about-hero__background">
 
-        <div class="about-hero__image-placeholder">
-            <span>about-hero-bg.png</span>
-        </div>
+        <img
+            src="<?php echo esc_url(
+                get_template_directory_uri() .
+                '/assets/images/about/about-hero-person.png'
+            ); ?>"
+            alt=""
+            class="about-hero__background-image"
+            loading="eager"
+            decoding="async"
+        >
 
     </div>
 
+
+    <!-- CREAM / IMAGE BLEND -->
     <div
         class="about-hero__fade"
         aria-hidden="true"
     ></div>
 
 
-    <!-- ==================================================
-         SOCIAL LINKS
-    =================================================== -->
+    <!-- SOCIAL LINKS -->
     <div class="about-hero__social">
 
         <a href="#" aria-label="Instagram">
@@ -93,9 +92,8 @@ defined( 'ABSPATH' ) || exit;
         <div class="about-hero__layout">
 
 
-            <!-- ==================================================
-                 LEFT CONTENT
-            =================================================== -->
+            <!-- LEFT CONTENT -->
+
             <div class="about-hero__content">
 
                 <div class="about-hero__eyebrow">
@@ -130,20 +128,21 @@ defined( 'ABSPATH' ) || exit;
 
 
                 <p class="about-hero__intro">
-                    I am a peacebuilder, connector and nature lover
-                    with a passion for building bridges between people
-                    and the planet. I believe in the power of dialogue,
-                    learning and collective action to create lasting
-                    change.
+                    I am Greshma Pious Raju, an international
+                    development practitioner working at the
+                    intersection of climate action, peacebuilding,
+                    youth leadership, and transformative education.
+                    I design and lead community-centred initiatives
+                    that foster dialogue, ecological leadership,
+                    and social change. Through collaborative
+                    partnerships and innovative learning experiences,
+                    I empower young people and communities to become
+                    ethical leaders and active changemakers,
+                    advancing peace, sustainability, and resilient
+                    futures.
                 </p>
 
 
-                <!-- ==============================================
-                     SIGNATURE PLACEHOLDER
-
-                     FINAL IMAGE:
-                     assets/images/about/about-signature.png
-                =============================================== -->
                 <div class="about-hero__signature-placeholder">
                     Greshma Pious Raju
                 </div>
@@ -151,32 +150,10 @@ defined( 'ABSPATH' ) || exit;
             </div>
 
 
-            <!-- ==================================================
-                 RIGHT VISUAL
-            =================================================== -->
+            <!-- RIGHT AREA — ONLY QUOTE -->
+
             <div class="about-hero__visual">
 
-
-                <!-- ==============================================
-                     PERSON IMAGE PLACEHOLDER
-
-                     FINAL IMAGE:
-                     assets/images/about/about-hero-person.png
-
-                     Transparent PNG preferred.
-                =============================================== -->
-                <div class="about-hero__person-placeholder">
-
-                    <span>
-                        about-hero-person.png
-                    </span>
-
-                </div>
-
-
-                <!-- ==============================================
-                     QUOTE CARD
-                =============================================== -->
                 <blockquote class="about-hero__quote">
 
                     <span
@@ -202,6 +179,7 @@ defined( 'ABSPATH' ) || exit;
                 </blockquote>
 
             </div>
+
 
         </div>
 

@@ -102,9 +102,10 @@ defined( 'ABSPATH' ) || exit;
                         projects-hero__photo--1
                     "
                 >
-                    <span>
-                        projects-hero-01.png
-                    </span>
+                     <img
+        src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/projects/projects-hero-01.png' ); ?>"
+        alt="ecopeace"
+        loading="lazy">
                 </div>
 
 
@@ -120,9 +121,10 @@ defined( 'ABSPATH' ) || exit;
                         projects-hero__photo--2
                     "
                 >
-                    <span>
-                        projects-hero-02.png
-                    </span>
+                       <img
+        src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/projects/projects-hero-02.png' ); ?>"
+        alt="ecopeace"
+        loading="lazy">
                 </div>
 
 
@@ -138,9 +140,10 @@ defined( 'ABSPATH' ) || exit;
                         projects-hero__photo--3
                     "
                 >
-                    <span>
-                        projects-hero-03.png
-                    </span>
+                       <img
+        src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/projects/projects-hero-03.png' ); ?>"
+        alt="ecopeace"
+        loading="lazy">
                 </div>
 
 

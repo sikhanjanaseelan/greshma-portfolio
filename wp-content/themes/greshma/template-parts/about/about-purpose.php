@@ -73,9 +73,16 @@ $purpose_testimonials = new WP_Query(
 
 			<div class="about-purpose__main-image">
 
-				<span>
-					about-purpose-main.png
-				</span>
+			<img
+            src="<?php echo esc_url(
+                get_template_directory_uri() .
+                '/assets/images/about/about-purpose-main.png'
+            ); ?>"
+            alt=""
+            class="about-purpose__main-photo"
+            loading="eager"
+            decoding="async"
+        >
 
 			</div>
 
@@ -328,27 +335,48 @@ $purpose_testimonials = new WP_Query(
 
 				<div class="about-purpose__gallery-image">
 
-					<span>
-						about-purpose-01.png
-					</span>
+				<img
+            src="<?php echo esc_url(
+                get_template_directory_uri() .
+                '/assets/images/about/about-purpose-01.png'
+            ); ?>"
+            alt=""
+    class="about-purpose__gallery-photo"
+            loading="eager"
+            decoding="async"
+        >
+					
 
 				</div>
 
 
 				<div class="about-purpose__gallery-image">
 
-					<span>
-						about-purpose-02.png
-					</span>
-
+							<img
+            src="<?php echo esc_url(
+                get_template_directory_uri() .
+                '/assets/images/about/about-purpose-02.png'
+            ); ?>"
+            alt=""
+    class="about-purpose__gallery-photo"
+            loading="eager"
+            decoding="async"
+        >
 				</div>
 
 
 				<div class="about-purpose__gallery-image">
 
-					<span>
-						about-purpose-03.png
-					</span>
+									<img
+            src="<?php echo esc_url(
+                get_template_directory_uri() .
+                '/assets/images/about/about-purpose-03.png'
+            ); ?>"
+            alt=""
+    class="about-purpose__gallery-photo"
+            loading="eager"
+            decoding="async"
+        >
 
 				</div>
 

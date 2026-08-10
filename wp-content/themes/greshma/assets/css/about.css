@@ -9,95 +9,31 @@
 
 /* ==========================================================
    ABOUT HERO
+   Desktop: content left / image right
+   Mobile: image first / quote overlay / content below
 ========================================================== */
 
 .about-hero {
     position: relative;
     min-height: 650px;
+    margin-top: 90px;
     overflow: hidden;
     background: #f8f5ee;
 }
 
 
 /* ==========================================================
-   BACKGROUND IMAGE AREA
-
-   FINAL IMAGE:
-   assets/images/about/about-hero-bg.png
-========================================================== */
-
-.about-hero__background {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 62%;
-}
-
-
-.about-hero__image-placeholder {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #9baa91;
-}
-
-
-.about-hero__image-placeholder span {
-    padding: 8px 14px;
-
-    color: #ffffff;
-
-    background: rgba(12, 59, 46, 0.65);
-
-    border-radius: 30px;
-
-    font-size: 11px;
-
-    letter-spacing: 0.08em;
-}
-
-
-/* Fade background into cream content area */
-
-.about-hero__fade {
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            #f8f5ee 0%,
-            #f8f5ee 34%,
-            rgba(248, 245, 238, 0.96) 42%,
-            rgba(248, 245, 238, 0.55) 55%,
-            rgba(248, 245, 238, 0.08) 72%,
-            transparent 100%
-        );
-
-    pointer-events: none;
-}
-
-
-/* ==========================================================
-   LAYOUT
+   DESKTOP HERO LAYOUT
 ========================================================== */
 
 .about-hero__layout {
     position: relative;
-    z-index: 3;
+    z-index: 4;
 
     min-height: 650px;
 
     display: grid;
-
-    grid-template-columns:
-        46%
-        54%;
+    grid-template-columns: 46% 54%;
 }
 
 
@@ -106,13 +42,15 @@
 ========================================================== */
 
 .about-hero__content {
+    position: relative;
+    z-index: 5;
+
     align-self: center;
 
     max-width: 510px;
 
     padding: 60px 0;
 }
-
 
 .about-hero__eyebrow {
     display: flex;
@@ -131,7 +69,6 @@
 
     text-transform: uppercase;
 }
-
 
 .about-hero__eyebrow-icon {
     color: var(--secondary);
@@ -165,7 +102,6 @@
     letter-spacing: -0.04em;
 }
 
-
 .about-hero__title em {
     display: block;
 
@@ -173,7 +109,6 @@
 
     font-weight: 400;
 }
-
 
 .about-hero__title span {
     color: var(--primary);
@@ -183,7 +118,7 @@
 
 
 /* ==========================================================
-   SMALL GOLD LINE
+   DIVIDER
 ========================================================== */
 
 .about-hero__divider {
@@ -214,10 +149,7 @@
 
 
 /* ==========================================================
-   SIGNATURE PLACEHOLDER
-
-   FINAL:
-   assets/images/about/about-signature.png
+   SIGNATURE
 ========================================================== */
 
 .about-hero__signature-placeholder {
@@ -244,49 +176,129 @@
     position: relative;
 
     min-height: 650px;
+
+    overflow: hidden;
 }
 
 
 /* ==========================================================
-   PERSON PLACEHOLDER
-
-   FINAL:
-   assets/images/about/about-hero-person.png
+   REAL PERSON / EVENT IMAGE
+   Supports the current .about-hero__image markup
 ========================================================== */
 
-.about-hero__person-placeholder {
+.about-hero__image {
     position: absolute;
 
-    left: 43%;
-    bottom: 0;
+    inset: 0;
 
-    width: 320px;
-    height: 500px;
+    z-index: 2;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
 
-    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
 
-    border: 2px dashed rgba(255, 255, 255, 0.75);
+    overflow: hidden;
 
-    background: rgba(255, 255, 255, 0.20);
+    background: #d8cfb7;
+
+    -webkit-mask-image:
+        linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.22) 7%,
+            rgba(0, 0, 0, 0.70) 15%,
+            #000 25%,
+            #000 100%
+        );
+
+    mask-image:
+        linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.22) 7%,
+            rgba(0, 0, 0, 0.70) 15%,
+            #000 25%,
+            #000 100%
+        );
+}
+
+.about-hero__image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: none;
+    max-height: none;
+
+    object-fit: cover;
+    object-position: 68% center;
 }
 
 
-.about-hero__person-placeholder span {
-    padding: 8px 12px;
+/* ==========================================================
+   OPTIONAL BACKGROUND IMAGE SUPPORT
+   Keeps working if the PHP was changed to
+   .about-hero__background-image instead.
+========================================================== */
 
-    color: #ffffff;
+.about-hero__background {
+    position: absolute;
 
-    background: rgba(12, 59, 46, 0.72);
+    top: 0;
+    right: 0;
+    bottom: 0;
 
-    border-radius: 30px;
+    z-index: 1;
 
-    font-size: 10px;
+    width: 58%;
+    height: 100%;
 
-    letter-spacing: 0.06em;
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+.about-hero__background-image {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: none;
+
+    object-fit: cover;
+    object-position: 68% center;
+
+    -webkit-mask-image:
+        linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.25) 10%,
+            rgba(0, 0, 0, 0.70) 18%,
+            #000 28%,
+            #000 100%
+        );
+
+    mask-image:
+        linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.25) 10%,
+            rgba(0, 0, 0, 0.70) 18%,
+            #000 28%,
+            #000 100%
+        );
+}
+
+/* Hide only the OLD placeholder text, not a real background image. */
+.about-hero__image-placeholder {
+    display: none;
+}
+
+.about-hero__fade {
+    display: none;
 }
 
 
@@ -297,8 +309,10 @@
 .about-hero__quote {
     position: absolute;
 
-    right: 0;
-    bottom: 72px;
+    right: 20px;
+    bottom: 42px;
+
+    z-index: 10;
 
     width: 355px;
 
@@ -314,7 +328,7 @@
 
     padding: 25px 27px;
 
-    background: #fffdf8;
+    background: rgba(255, 253, 248, 0.97);
 
     border:
         1px solid rgba(12, 59, 46, 0.12);
@@ -322,14 +336,16 @@
     border-radius: 12px;
 
     box-shadow:
-        0 18px 40px rgba(12, 59, 46, 0.12);
+        0 18px 40px
+        rgba(12, 59, 46, 0.12);
 }
-
 
 .about-hero__quote-mark {
     color: var(--secondary);
 
-    font-family: Georgia, serif;
+    font-family:
+        Georgia,
+        serif;
 
     font-size: 40px;
 
@@ -337,7 +353,6 @@
 
     line-height: 0.8;
 }
-
 
 .about-hero__quote-content p {
     margin: 0;
@@ -355,7 +370,6 @@
 
     line-height: 1.55;
 }
-
 
 .about-hero__quote-content cite {
     display: block;
@@ -378,14 +392,12 @@
 /* ==========================================================
    SOCIAL BAR
 ========================================================== */
-/* ==========================================================
-   ABOUT HERO SOCIAL ICON FIX
-   Prevent global SVG styles from enlarging social icons
-========================================================== */
 
 .about-hero__social {
     position: absolute;
+
     z-index: 20;
+
     left: 20px;
     top: 50%;
 
@@ -396,14 +408,18 @@
 
     padding: 4px;
 
-    background: rgba(255, 253, 248, 0.95);
+    background:
+        rgba(255, 253, 248, 0.95);
 
-    border: 1px solid rgba(12, 59, 46, 0.18);
+    border:
+        1px solid
+        rgba(12, 59, 46, 0.18);
+
     border-radius: 8px;
 
-    transform: translateY(-50%);
+    transform:
+        translateY(-50%);
 }
-
 
 .about-hero__social a {
     width: 34px;
@@ -417,18 +433,16 @@
 
     overflow: hidden;
 
-    color: #0C3B2E;
+    color: #0c3b2e;
 
-    border-bottom: 1px solid rgba(12, 59, 46, 0.10);
+    border-bottom:
+        1px solid
+        rgba(12, 59, 46, 0.10);
 }
-
 
 .about-hero__social a:last-child {
     border-bottom: 0;
 }
-
-
-/* IMPORTANT: force SVG dimensions */
 
 .about-hero__social a svg,
 .about-hero__social svg.icon {
@@ -448,45 +462,25 @@
     overflow: visible;
 }
 
-
-/* Instagram */
-
-.about-hero__social .icon-instagram {
-    fill: none !important;
-    stroke: currentColor !important;
-    stroke-width: 1.7 !important;
-}
-
-
-/* Email */
-
+.about-hero__social .icon-instagram,
 .about-hero__social .icon-email {
     fill: none !important;
     stroke: currentColor !important;
     stroke-width: 1.7 !important;
 }
 
-
-/* LinkedIn */
-
-.about-hero__social .icon-linkedin {
-    fill: currentColor !important;
-    stroke: none !important;
-}
-
-
-/* YouTube */
-
+.about-hero__social .icon-linkedin,
 .about-hero__social .icon-youtube {
     fill: currentColor !important;
     stroke: none !important;
 }
 
-
 .about-hero__social a:hover {
     color: #ffffff;
-    background: #0C3B2E;
+
+    background: #0c3b2e;
 }
+
 
 /* ==========================================================
    ABOUT PAGE — MY STORY
@@ -715,7 +709,7 @@
         repeat(2, minmax(0, 1fr));
 
     grid-template-rows:
-        repeat(2, 1fr);
+        repeat(2, 177px);
 
     gap: 6px;
 }
@@ -736,7 +730,17 @@
 
     border-radius: 8px;
 }
+.about-story__photo img {
+    width: 100%;
+    height: 100%;
 
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: 8px;
+}
 
 /* Different placeholder shades only so
    the four future images are easy to identify */
@@ -2216,7 +2220,6 @@ ABOUT LEADERSHIP
 
 /* ==========================================================
    ABOUT PAGE — RESPONSIVE
-   Desktop CSS above remains unchanged.
 ========================================================== */
 
 
@@ -2227,9 +2230,7 @@ ABOUT LEADERSHIP
 
 @media (max-width: 1200px) {
 
-    /* ------------------------------------------------------
-       HERO
-    ------------------------------------------------------ */
+    /* HERO */
 
     .about-hero {
         min-height: 610px;
@@ -2263,23 +2264,16 @@ ABOUT LEADERSHIP
         min-height: 610px;
     }
 
-    .about-hero__person-placeholder {
-        width: 285px;
-        height: 455px;
-    }
-
     .about-hero__quote {
         width: 320px;
 
-        right: 5px;
+        right: 10px;
 
         padding: 22px 23px;
     }
 
 
-    /* ------------------------------------------------------
-       STORY
-    ------------------------------------------------------ */
+    /* STORY */
 
     .about-story__layout {
         grid-template-columns:
@@ -2304,18 +2298,14 @@ ABOUT LEADERSHIP
     }
 
 
-    /* ------------------------------------------------------
-       VALUES
-    ------------------------------------------------------ */
+    /* VALUES */
 
     .about-values__item {
         padding-inline: 18px;
     }
 
 
-    /* ------------------------------------------------------
-       JOURNEY
-    ------------------------------------------------------ */
+    /* JOURNEY */
 
     .about-journey__items {
         gap: 8px;
@@ -2326,18 +2316,14 @@ ABOUT LEADERSHIP
     }
 
 
-    /* ------------------------------------------------------
-       IMPACT
-    ------------------------------------------------------ */
+    /* IMPACT */
 
     .about-impact__stat {
         padding-inline: 16px;
     }
 
 
-    /* ------------------------------------------------------
-       LEADERSHIP
-    ------------------------------------------------------ */
+    /* LEADERSHIP */
 
     .about-leadership__grid {
         grid-template-columns:
@@ -2346,13 +2332,12 @@ ABOUT LEADERSHIP
 
     .about-leadership__quote {
         grid-column: span 3;
+
         min-height: 110px;
     }
 
 
-    /* ------------------------------------------------------
-       PURPOSE
-    ------------------------------------------------------ */
+    /* PURPOSE */
 
     .about-purpose__layout {
         grid-template-columns:
@@ -2394,100 +2379,237 @@ ABOUT LEADERSHIP
 }
 
 
-
 /* ==========================================================
-   TABLET
-   900px and below
+   TABLET / MOBILE HERO
+   Image → Quote → Content
 ========================================================== */
 
 @media (max-width: 900px) {
 
-    /* ------------------------------------------------------
-       HERO
-    ------------------------------------------------------ */
-
     .about-hero {
-        min-height: auto;
+        min-height: 0;
 
-        padding-bottom: 0;
+        margin-top: 0;
+
+        overflow: visible;
+
+        background: #f8f5ee;
     }
 
-    .about-hero__background {
-        top: auto;
-        bottom: 0;
-
+    .about-hero > .container {
         width: 100%;
-        height: 53%;
-    }
+        max-width: none;
 
-    .about-hero__fade {
-        background:
-            linear-gradient(
-                180deg,
-                #f8f5ee 0%,
-                #f8f5ee 42%,
-                rgba(248,245,238,.94) 53%,
-                rgba(248,245,238,.34) 73%,
-                rgba(248,245,238,.05) 100%
-            );
+        margin: 0;
+        padding: 0;
     }
 
     .about-hero__layout {
-        min-height: auto;
+        display: flex;
+        flex-direction: column;
 
-        grid-template-columns: 1fr;
+        width: 100%;
+
+        min-height: 0;
     }
 
-    .about-hero__content {
-        max-width: 620px;
+    /*
+     * If the PHP uses the separate background image,
+     * show it as the mobile image area.
+     */
+    .about-hero__background:has(.about-hero__background-image) {
+        position: relative;
 
-        padding:
-            75px
-            0
-            45px;
+        order: 1;
+
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+
+        display: block;
+
+        width: 100%;
+        height: 560px;
+
+        -webkit-mask-image: none;
+        mask-image: none;
+
+        pointer-events: auto;
     }
 
-    .about-hero__title {
-        max-width: 580px;
+    .about-hero__background-image {
+        width: 100%;
+        height: 100%;
 
-        font-size: 58px;
+        object-fit: cover;
+        object-position: 68% center;
+
+        -webkit-mask-image: none;
+        mask-image: none;
     }
 
-    .about-hero__intro {
-        max-width: 520px;
-
-        font-size: 14px;
-    }
-
+    /*
+     * Current PHP uses .about-hero__image inside visual.
+     * Visual becomes the first mobile block.
+     */
     .about-hero__visual {
-        min-height: 520px;
+        position: relative;
+
+        order: 1;
+
+        width: 100%;
+        height: 560px;
+
+        min-height: 560px;
+
+        overflow: hidden;
+
+        background: #d8cfb7;
     }
 
-    .about-hero__person-placeholder {
-        left: 46%;
+    .about-hero__image {
+        position: absolute;
 
-        width: 310px;
-        height: 465px;
+        inset: 0;
+
+        display: block;
+
+        width: 100%;
+        height: 100%;
+
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+
+    .about-hero__image img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+        object-position: 68% center;
     }
 
     .about-hero__quote {
-        right: 20px;
-        bottom: 55px;
+        left: 24px;
+        right: auto;
+        bottom: 28px;
+
+        z-index: 10;
+
+        width:
+            min(
+                340px,
+                calc(100% - 48px)
+            );
+
+        display: block;
+
+        margin: 0;
+
+        padding:
+            22px
+            22px
+            22px
+            58px;
+
+        transform: none;
+    }
+
+    .about-hero__quote-mark {
+        position: absolute;
+
+        top: 20px;
+        left: 20px;
+
+        font-size: 36px;
+
+        line-height: 1;
+    }
+
+    .about-hero__quote-content p {
+        font-size: 16px;
+
+        line-height: 1.45;
+    }
+
+    .about-hero__quote-content cite {
+        margin-top: 10px;
+
+        font-size: 11px;
+    }
+
+    .about-hero__content {
+        order: 2;
+
+        width: 100%;
+        max-width: none;
+
+        padding:
+            48px
+            32px
+            58px;
+
+        background: #f8f5ee;
+    }
+
+    .about-hero__eyebrow {
+        margin-bottom: 22px;
+
+        font-size: 11px;
+    }
+
+    .about-hero__title {
+        width: 100%;
+        max-width: 620px;
+
+        margin: 0;
+
+        font-size:
+            clamp(
+                44px,
+                8vw,
+                58px
+            );
+
+        line-height: .99;
+    }
+
+    .about-hero__divider {
+        width: 58px;
+
+        margin:
+            24px
+            0
+            20px;
+    }
+
+    .about-hero__intro {
+        width: 100%;
+        max-width: 620px;
+
+        margin: 0;
+
+        font-size: 14px;
+
+        line-height: 1.75;
+    }
+
+    .about-hero__signature-placeholder {
+        margin-top: 28px;
+
+        font-size: 27px;
     }
 
     .about-hero__social {
-        left: 10px;
+        display: none;
     }
 
 
-    /* ------------------------------------------------------
-       STORY
-    ------------------------------------------------------ */
+    /* STORY */
 
     .about-story {
-        padding:
-            60px
-            0;
+        padding: 60px 0;
     }
 
     .about-story__layout {
@@ -2521,15 +2643,10 @@ ABOUT LEADERSHIP
     }
 
 
-    /* ------------------------------------------------------
-       VALUES
-    ------------------------------------------------------ */
+    /* VALUES */
 
     .about-values {
-        padding:
-            44px
-            0;
-            
+        padding: 44px 0;
     }
 
     .about-values__grid {
@@ -2548,15 +2665,8 @@ ABOUT LEADERSHIP
         display: none;
     }
 
-    .about-values__item:nth-child(4),
-    .about-values__item:nth-child(5) {
-        grid-column: span 1;
-    }
 
-
-    /* ------------------------------------------------------
-       JOURNEY
-    ------------------------------------------------------ */
+    /* JOURNEY */
 
     .about-journey {
         padding:
@@ -2592,9 +2702,7 @@ ABOUT LEADERSHIP
     }
 
 
-    /* ------------------------------------------------------
-       IMPACT
-    ------------------------------------------------------ */
+    /* IMPACT */
 
     .about-impact {
         min-height: auto;
@@ -2603,9 +2711,7 @@ ABOUT LEADERSHIP
     .about-impact__inner {
         min-height: auto;
 
-        padding:
-            55px
-            0;
+        padding: 55px 0;
     }
 
     .about-impact__intro {
@@ -2623,15 +2729,8 @@ ABOUT LEADERSHIP
         display: none;
     }
 
-    .about-impact__stat:nth-child(4),
-    .about-impact__stat:nth-child(5) {
-        padding-top: 10px;
-    }
 
-
-    /* ------------------------------------------------------
-       LEADERSHIP
-    ------------------------------------------------------ */
+    /* LEADERSHIP */
 
     .about-leadership {
         padding:
@@ -2652,9 +2751,7 @@ ABOUT LEADERSHIP
     }
 
 
-    /* ------------------------------------------------------
-       PURPOSE
-    ------------------------------------------------------ */
+    /* PURPOSE */
 
     .about-purpose__layout {
         grid-template-columns:
@@ -2689,7 +2786,6 @@ ABOUT LEADERSHIP
 }
 
 
-
 /* ==========================================================
    MOBILE
    700px and below
@@ -2697,93 +2793,82 @@ ABOUT LEADERSHIP
 
 @media (max-width: 700px) {
 
-    /* ------------------------------------------------------
-       GLOBAL ABOUT
-    ------------------------------------------------------ */
-
     .about-page {
         overflow: hidden;
     }
 
+    .about-hero__visual {
+        height: 520px;
+        min-height: 520px;
+    }
 
-    /* ------------------------------------------------------
-       HERO
-    ------------------------------------------------------ */
+    .about-hero__image img,
+    .about-hero__background-image {
+        object-position: 68% center;
+    }
 
     .about-hero__content {
         padding:
-            60px
-            0
-            35px;
-    }
-
-    .about-hero__eyebrow {
-        font-size: 10px;
+            44px
+            24px
+            54px;
     }
 
     .about-hero__title {
-        max-width: 100%;
-
-        font-size: 46px;
-
-        line-height: 1.02;
-    }
-
-    .about-hero__divider {
-        margin:
-            20px
-            0
-            16px;
+        font-size:
+            clamp(
+                40px,
+                11vw,
+                50px
+            );
     }
 
     .about-hero__intro {
-        max-width: 100%;
-
         font-size: 13px;
+
+        line-height: 1.72;
     }
 
     .about-hero__signature-placeholder {
-        font-size: 24px;
-    }
-
-    .about-hero__visual {
-        min-height: 450px;
-    }
-
-    .about-hero__person-placeholder {
-        left: 50%;
-
-        width: 260px;
-        height: 390px;
+        font-size: 25px;
     }
 
     .about-hero__quote {
-        left: 50%;
-        right: auto;
-        bottom: 20px;
+        left: 18px;
+        bottom: 22px;
 
-        width: min(330px, 92%);
+        width:
+            calc(
+                100% - 36px
+            );
 
-        transform: translateX(-50%);
+        padding:
+            19px
+            18px
+            19px
+            52px;
+    }
+
+    .about-hero__quote-mark {
+        top: 17px;
+        left: 17px;
+
+        font-size: 31px;
     }
 
     .about-hero__quote-content p {
         font-size: 14px;
     }
 
-    .about-hero__social {
-        display: none;
+    .about-hero__quote-content cite {
+        font-size: 10px;
     }
 
 
-    /* ------------------------------------------------------
-       STORY
-    ------------------------------------------------------ */
+    /* STORY */
 
     .about-story {
-        padding:
-            50px
-            0;
+        padding: 50px 0;
     }
 
     .about-story__title {
@@ -2815,9 +2900,7 @@ ABOUT LEADERSHIP
     }
 
 
-    /* ------------------------------------------------------
-       VALUES
-    ------------------------------------------------------ */
+    /* VALUES */
 
     .about-values__heading {
         gap: 12px;
@@ -2856,18 +2939,8 @@ ABOUT LEADERSHIP
         margin-inline: auto;
     }
 
-    .about-values__item h3 {
-        font-size: 17px;
-    }
 
-    .about-values__item p {
-        font-size: 11px;
-    }
-
-
-    /* ------------------------------------------------------
-       JOURNEY
-    ------------------------------------------------------ */
+    /* JOURNEY */
 
     .about-journey__heading {
         margin-bottom: 26px;
@@ -2885,14 +2958,10 @@ ABOUT LEADERSHIP
     }
 
 
-    /* ------------------------------------------------------
-       IMPACT
-    ------------------------------------------------------ */
+    /* IMPACT */
 
     .about-impact__inner {
-        padding:
-            48px
-            0;
+        padding: 48px 0;
     }
 
     .about-impact__intro {
@@ -2931,9 +3000,7 @@ ABOUT LEADERSHIP
     }
 
 
-    /* ------------------------------------------------------
-       LEADERSHIP
-    ------------------------------------------------------ */
+    /* LEADERSHIP */
 
     .about-leadership__grid {
         grid-template-columns: 1fr;
@@ -2954,9 +3021,7 @@ ABOUT LEADERSHIP
     }
 
 
-    /* ------------------------------------------------------
-       PURPOSE
-    ------------------------------------------------------ */
+    /* PURPOSE */
 
     .about-purpose {
         padding:
@@ -3025,16 +3090,10 @@ ABOUT LEADERSHIP
         min-height: 190px;
     }
 
-
-    /* ------------------------------------------------------
-       SPACE BEFORE FOOTER
-    ------------------------------------------------------ */
-
     .about-page + .site-footer {
         margin-top: 30px;
     }
 }
-
 
 
 /* ==========================================================
@@ -3044,58 +3103,104 @@ ABOUT LEADERSHIP
 
 @media (max-width: 480px) {
 
-    /* ------------------------------------------------------
-       HERO
-    ------------------------------------------------------ */
+    .about-hero__visual {
+        height: 455px;
+
+        min-height: 455px;
+    }
+
+    .about-hero__image img,
+    .about-hero__background-image {
+        object-position: 69% center;
+    }
 
     .about-hero__content {
-        padding-top: 48px;
+        padding:
+            38px
+            16px
+            48px;
+    }
+
+    .about-hero__eyebrow {
+        margin-bottom: 18px;
+
+        font-size: 10px;
     }
 
     .about-hero__title {
-        font-size: 39px;
+        font-size:
+            clamp(
+                36px,
+                10.7vw,
+                44px
+            );
+
+        line-height: 1;
+
+        letter-spacing: -.04em;
+    }
+
+    .about-hero__divider {
+        margin:
+            20px
+            0
+            17px;
     }
 
     .about-hero__intro {
         font-size: 12px;
 
-        line-height: 1.7;
+        line-height: 1.68;
     }
 
-    .about-hero__visual {
-        min-height: 420px;
-    }
+    .about-hero__signature-placeholder {
+        margin-top: 24px;
 
-    .about-hero__person-placeholder {
-        width: 235px;
-        height: 355px;
+        font-size: 23px;
     }
 
     .about-hero__quote {
-        width: calc(100% - 20px);
+        left: 14px;
+        bottom: 16px;
+
+        width:
+            calc(
+                100% - 28px
+            );
 
         padding:
-            20px
-            18px;
+            17px
+            15px
+            17px
+            46px;
 
-        grid-template-columns:
-            25px
-            1fr;
+        border-radius: 12px;
     }
 
     .about-hero__quote-mark {
-        font-size: 34px;
+        top: 15px;
+        left: 14px;
+
+        font-size: 28px;
+    }
+
+    .about-hero__quote-content p {
+        font-size: 13px;
+
+        line-height: 1.42;
+    }
+
+    .about-hero__quote-content cite {
+        margin-top: 8px;
+
+        font-size: 9px;
     }
 
 
-    /* ------------------------------------------------------
-       STORY
-    ------------------------------------------------------ */
+    /* STORY */
 
     .about-story {
-        padding:
-            44px
-            0;
+        padding: 44px 0;
     }
 
     .about-story__title {
@@ -3119,14 +3224,10 @@ ABOUT LEADERSHIP
     }
 
 
-    /* ------------------------------------------------------
-       VALUES
-    ------------------------------------------------------ */
+    /* VALUES */
 
     .about-values {
-        padding:
-            40px
-            0;
+        padding: 40px 0;
     }
 
     .about-values__heading h2 {
@@ -3152,9 +3253,7 @@ ABOUT LEADERSHIP
     }
 
 
-    /* ------------------------------------------------------
-       JOURNEY
-    ------------------------------------------------------ */
+    /* JOURNEY */
 
     .about-journey__heading {
         font-size: 10px;
@@ -3170,9 +3269,7 @@ ABOUT LEADERSHIP
     }
 
 
-    /* ------------------------------------------------------
-       IMPACT
-    ------------------------------------------------------ */
+    /* IMPACT */
 
     .about-impact__title {
         font-size: 28px;
@@ -3189,9 +3286,7 @@ ABOUT LEADERSHIP
     }
 
 
-    /* ------------------------------------------------------
-       LEADERSHIP
-    ------------------------------------------------------ */
+    /* LEADERSHIP */
 
     .about-leadership {
         padding:
@@ -3215,9 +3310,7 @@ ABOUT LEADERSHIP
     }
 
 
-    /* ------------------------------------------------------
-       PURPOSE
-    ------------------------------------------------------ */
+    /* PURPOSE */
 
     .about-purpose__main-image {
         min-height: 330px;
@@ -3232,17 +3325,298 @@ ABOUT LEADERSHIP
     }
 }
 
+
+/* ==========================================================
+   PURPOSE AVATAR IMAGE
+========================================================== */
+
 .about-purpose__avatar {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .about-purpose__avatar img {
-	display: block;
+    display: block;
 
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 
-	object-fit: cover;
+    object-fit: cover;
 
-	border-radius: 50%;
+    border-radius: 50%;
+}
+
+/* ==========================================================
+   ABOUT HERO — FINAL MOBILE FIX
+   Desktop remains unchanged
+========================================================== */
+
+@media (max-width: 700px) {
+
+    .about-hero {
+        margin-top: 0 !important;
+    }
+
+    .about-hero__layout {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* IMAGE SECTION */
+    .about-hero__visual {
+        position: relative !important;
+
+        order: 1 !important;
+
+        width: 100% !important;
+
+        /* IMPORTANT: remove the huge empty area */
+        height: auto !important;
+        min-height: 0 !important;
+
+        overflow: visible !important;
+
+        background: transparent !important;
+    }
+
+    /* REAL IMAGE */
+    .about-hero__image {
+        position: relative !important;
+
+        inset: auto !important;
+
+        width: 100% !important;
+        height: auto !important;
+
+        overflow: hidden !important;
+
+        background: transparent !important;
+
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
+    }
+
+    .about-hero__image img {
+        display: block !important;
+
+        width: 100% !important;
+        height: auto !important;
+
+        aspect-ratio: 4 / 5 !important;
+
+        object-fit: cover !important;
+
+        /*
+         * Moves Greshma slightly toward centre
+         * while retaining some audience.
+         */
+        object-position: 68% center !important;
+    }
+
+
+    /* QUOTE OVER IMAGE */
+    .about-hero__quote {
+        position: absolute !important;
+
+        left: 18px !important;
+        right: 18px !important;
+        bottom: 18px !important;
+
+        width: auto !important;
+
+        z-index: 20 !important;
+
+        margin: 0 !important;
+
+        padding:
+            18px
+            18px
+            18px
+            50px !important;
+
+        background:
+            rgba(255, 253, 248, 0.96) !important;
+
+        border-radius: 12px !important;
+
+        box-shadow:
+            0 10px 30px
+            rgba(12, 59, 46, 0.12) !important;
+    }
+
+    .about-hero__quote-mark {
+        position: absolute !important;
+
+        left: 16px !important;
+        top: 15px !important;
+
+        font-size: 30px !important;
+    }
+
+    .about-hero__quote-content p {
+        font-size: 13px !important;
+        line-height: 1.45 !important;
+    }
+
+    .about-hero__quote-content cite {
+        margin-top: 8px !important;
+
+        font-size: 9px !important;
+    }
+
+
+    /* CONTENT BELOW IMAGE */
+    .about-hero__content {
+        position: relative !important;
+
+        order: 2 !important;
+
+        width: 100% !important;
+        max-width: none !important;
+
+        padding:
+            38px
+            22px
+            48px !important;
+
+        background: #f8f5ee !important;
+    }
+
+    .about-hero__title {
+        font-size:
+            clamp(
+                38px,
+                10.5vw,
+                48px
+            ) !important;
+
+        line-height: 1 !important;
+    }
+
+    .about-hero__intro {
+        font-size: 12px !important;
+
+        line-height: 1.7 !important;
+    }
+
+    .about-hero__signature-placeholder {
+        margin-top: 24px !important;
+
+        font-size: 24px !important;
+    }
+
+}
+
+
+/* ==========================================================
+   iPHONE / SMALL MOBILE
+========================================================== */
+
+@media (max-width: 480px) {
+
+    .about-hero__image img {
+        /*
+         * At 412px this produces roughly a
+         * 515px image area instead of the
+         * current image + giant blank block.
+         */
+        aspect-ratio: 4 / 5 !important;
+
+        object-position: 68% center !important;
+    }
+
+    .about-hero__quote {
+        left: 14px !important;
+        right: 14px !important;
+        bottom: 14px !important;
+    }
+
+    .about-hero__content {
+        padding:
+            36px
+            16px
+            46px !important;
+    }
+
+}
+/* ==========================================================
+   ABOUT HERO — DESKTOP CENTER GAP FIX
+========================================================== */
+
+@media (min-width: 901px) {
+
+    .about-hero__layout {
+        grid-template-columns:
+            42%
+            58%;
+    }
+
+    .about-hero__content {
+        max-width: 520px;
+    }
+
+    .about-hero__visual {
+        margin-left: -105px;
+        width: calc(100% + 105px);
+    }
+
+    .about-hero__image img {
+        object-position: 60% center;
+    }
+
+    .about-hero__quote {
+        right: 18px;
+    }
+}
+
+/* ================================
+   PURPOSE MAIN IMAGE
+================================ */
+
+.about-purpose__main-image {
+    height: 430px;
+    min-height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.about-purpose__main-photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* ================================
+   PURPOSE RIGHT IMAGE STACK
+================================ */
+
+.about-purpose__gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 135px);
+    gap: 10px;
+
+    align-content: start;
+    min-height: 0;
+}
+
+.about-purpose__gallery-image {
+    width: 100%;
+    height: 135px;
+    min-height: 0;
+
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.about-purpose__gallery-photo {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
 }

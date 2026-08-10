@@ -105,9 +105,11 @@ defined( 'ABSPATH' ) || exit;
                         about-story__photo
                         about-story__photo--1
                     ">
-                        <span>
-                            about-story-speaking.png
-                        </span>
+                        <img
+        src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/about/about-story-speaking.png' ); ?>"
+        alt="A meaningful moment of connection"
+        loading="lazy"
+    >
                     </div>
 
 
@@ -122,9 +124,13 @@ defined( 'ABSPATH' ) || exit;
                         about-story__photo
                         about-story__photo--2
                     ">
-                        <span>
-                            about-story-connection.png
-                        </span>
+                        
+    <img
+        src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/about/about-story-connection.png' ); ?>"
+        alt="A meaningful moment of connection"
+        loading="lazy"
+    >
+
                     </div>
 
 
@@ -139,9 +145,10 @@ defined( 'ABSPATH' ) || exit;
                         about-story__photo
                         about-story__photo--3
                     ">
-                        <span>
-                            about-story-youth.png
-                        </span>
+                          <img
+        src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/about/about-story-youth.png' ); ?>"
+        alt="A meaningful moment of connection"
+        loading="lazy">
                     </div>
 
 
@@ -155,9 +162,10 @@ defined( 'ABSPATH' ) || exit;
                         about-story__photo
                         about-story__photo--4
                     ">
-                        <span>
-                            about-story-nature.png
-                        </span>
+                        <img
+        src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/about/about-story-nature.png' ); ?>"
+        alt="A meaningful moment of connection"
+        loading="lazy">
                     </div>
 
                 </div>
